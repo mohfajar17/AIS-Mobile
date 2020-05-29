@@ -14,13 +14,15 @@ public class SharedPrefManager {
     public static final String KEY_USERGROUP_ID  = "usergroup_id";
     public static final String KEY_USERGROUP_NAME  = "usergroup_name";
     public static final String KEY_USER_PWD  = "user_pwd";
-    public static final String KEY_TOKEN  = "user_pwd";
+    public static final String KEY_TOKEN  = "token";
     public static final String KEY_EMPLOYEE_NUMBER  = "employee_number";
+    public static final String KEY_GENDER  = "gender";
     public static final String KEY_PLACE_BIRTHDAY  = "place_birthday";
     public static final String KEY_BIRTHDAY  = "birthday";
     public static final String KEY_ADDRESS  = "address";
     public static final String KEY_MOBILE_PHONE  = "mobile_phone";
     public static final String KEY_EMAIL  = "email";
+    public static final String KEY_FILE_NAME  = "employee_file_name";
 
     public SharedPrefManager(Context context){
         this.mContext = context;
@@ -115,6 +117,14 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public void setGender(String gender){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_GENDER, gender);
+        editor.apply();
+    }
+
     public void setPlaceBirthday(String placeBirthday){
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -152,6 +162,14 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(KEY_EMAIL, email);
+        editor.apply();
+    }
+
+    public void setFileName(String fileName){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_FILE_NAME, fileName);
         editor.apply();
     }
 
@@ -195,6 +213,11 @@ public class SharedPrefManager {
         return sharedPreferences.getString(KEY_EMPLOYEE_NUMBER,null);
     }
 
+    public String getGender(){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_GENDER,null);
+    }
+
     public String getPlaceBirthday(){
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_PLACE_BIRTHDAY,null);
@@ -218,5 +241,10 @@ public class SharedPrefManager {
     public String getEmail(){
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_EMAIL,null);
+    }
+
+    public String getFileName(){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_FILE_NAME,null);
     }
 }

@@ -50,8 +50,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
 
     private SharedPrefManager sharedPrefManager;
-    private ProgressDialog progressDialog;
-    private String stringPilihFoto;
 
     private CircleImageView imageAkun;
     private TextView textViewEmployeeId;
@@ -72,11 +70,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Process");
-        progressDialog.setMessage("Please wait");
-        progressDialog.setCancelable(false);
 
         imageAkun = (CircleImageView) findViewById(R.id.imageAkun);
         textViewEmployeeId = (TextView) findViewById(R.id.textViewEmployeeId);
@@ -101,18 +94,6 @@ public class ProfileActivity extends AppCompatActivity {
         textViewAddress.setText(sharedPrefManager.getAddress());
         textViewMobilePhone.setText(sharedPrefManager.getMobilePhone());
         textViewEmail.setText(sharedPrefManager.getEmail());
-
-        imageAkun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GalleryConfig config = new GalleryConfig.Build()
-                        .limitPickPhoto(1)
-                        .singlePhoto(true)
-                        .hintOfPick("Choose image")
-                        .build();
-                GalleryActivity.openActivity(ProfileActivity.this,10,config);
-            }
-        });
 
         textViewEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,70 +120,5 @@ public class ProfileActivity extends AppCompatActivity {
         Intent bukaActivity = new Intent(ProfileActivity.this, MainActivity.class);
         startActivity(bukaActivity);
         finish();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if(resultCode == RESULT_OK && data!=null && requestCode == 10){
-            String compressed = ((List<String>)data.getSerializableExtra(GalleryActivity.PHOTOS)).get(0);
-
-            //imageBase64 = fileHandler.saveTempImage(compressed);
-            Uri uri = Uri.fromFile(new File(compressed));
-            Picasso.get()
-                    .load(uri)
-                    .resize(100, 100)
-                    .centerCrop()
-                    .into(imageAkun);
-            Bitmap bm = BitmapFactory.decodeFile(compressed);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
-            byte[] byteArrayImage = baos.toByteArray();
-            progressDialog.show();
-
-            stringPilihFoto = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
-
-            StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_UPDATE_PHOTO_PROFILE,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                int status=jsonObject.getInt("status");
-                                if(status==1){
-                                    //new DownloadImageTask(ProfileActivity.this).execute(Config.DATA_URL_PROFIL_PHOTO+"/"+sharedPrefManager.getPhoto());
-                                    progressDialog.dismiss();
-                                    Toast.makeText(ProfileActivity.this, "Success upload photo", Toast.LENGTH_LONG).show();
-                                } else {
-                                    progressDialog.dismiss();
-                                    Toast.makeText(ProfileActivity.this, "Failed upload foto", Toast.LENGTH_LONG).show();
-                                }
-                            } catch (JSONException e) {
-                                progressDialog.dismiss();
-                                Toast.makeText(ProfileActivity.this, "Failed", Toast.LENGTH_LONG).show();
-                                Log.v("TAG String Photo => ", stringPilihFoto);
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            error.printStackTrace();
-                            progressDialog.dismiss();
-                            Toast.makeText(ProfileActivity.this, "terjadi kesalahan jaringan, coba periksa jaringan internet ada", Toast.LENGTH_LONG).show();
-                        }
-                    }){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> param=new HashMap<>();
-                    param.put("employee_id", sharedPrefManager.getEmployeeId());
-                    param.put("photoProfile", stringPilihFoto);
-                    return param;
-                }
-            };
-            Volley.newRequestQueue(ProfileActivity.this).add(request);
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

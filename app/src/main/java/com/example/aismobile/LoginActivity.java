@@ -133,11 +133,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
                         JSONObject jsonData = jsonObject.getJSONObject("data");
 
                         sharedPrefManager.setEmployeeNumber(jsonData.getString("employee_number"));
+                        sharedPrefManager.setGender(jsonData.getString("gender"));
                         sharedPrefManager.setPlaceBirthday(jsonData.getString("place_birthday"));
                         sharedPrefManager.setBirthday(jsonData.getString("birthday"));
                         sharedPrefManager.setAddress(jsonData.getString("address"));
                         sharedPrefManager.setMobilePhone(jsonData.getString("mobile_phone"));
                         sharedPrefManager.setEmail(jsonData.getString("email1"));
+                        sharedPrefManager.setFileName(jsonData.getString("employee_file_name"));
                     }
                     sharedPrefManager.login();
                     Intent bukaMainActivity = new Intent(LoginActivity.this, MainActivity.class);

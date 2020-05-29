@@ -1,10 +1,13 @@
 package com.example.aismobile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
@@ -87,7 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
         calendarView.setFirstDayOfWeek(2);
 
-        Picasso.get().load(Config.DATA_URL_PHOTO_PROFILE+sharedPrefManager.getEmployeeId()+".jpg").into(imageAkun); //get photo profile
+        if (sharedPrefManager.getFileName().equals("null")){
+            if (Integer.valueOf(sharedPrefManager.getGender())!=1)
+                imageAkun.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.akun_female));
+            else imageAkun.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.akun_male));
+        } else Picasso.get().load(Config.DATA_URL_PHOTO_PROFILE+sharedPrefManager.getFileName()).into(imageAkun); //get photo profile
 
         textViewUserGroup.setText(sharedPrefManager.getUserGroupName());
         textName.setText(sharedPrefManager.getUserDisplayName());

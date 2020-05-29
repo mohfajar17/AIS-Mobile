@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_supplier"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Supplier Data List" />
+        <item
+            android:id="@+id/nav_perusahaan"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Perusahaan" />
+        <item
+            android:id="@+id/nav_access"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Access Request" />
+    </group>
+</menu>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_monitoring"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Monitoring" />
+        <item
+            android:id="@+id/nav_leads"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Leads" />
+        <item
+            android:id="@+id/nav_events"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Events" />
+    </group>
+
+    <item android:title="-------------------------">
+        <menu>
+            <item
+                android:id="@+id/nav_schedule_visit"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Schedule Visits" />
+        </menu>
+    </item>
+</menu>

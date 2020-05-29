@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Project.ProjectMenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@color/colorAsukaBlue"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:padding="5dp"
+            android:src="@drawable/icon_project"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:text="PROJECT"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewJobOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Job Order"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewWorkCompletion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Work Completion"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Material Requests / SRR"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewTools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tools Request"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewWork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Work Request"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewPengambilan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pengambilan"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewSpkl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Surat Perintah Kerja Lembut"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaBlue"/>
+
+    <TextView
+        android:id="@+id/textViewProposed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proposed Budget"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewCashProject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cash Project Report"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaBlue"/>
+
+    <TextView
+        android:id="@+id/textViewTunjanganKaryawan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tunjangan Karyawan"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewTunjanganTemporary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tunjangan Temporary"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaBlue"/>
+</LinearLayout>

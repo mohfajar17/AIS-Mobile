@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_customerinvoice"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Customer Invoice" />
+        <item
+            android:id="@+id/nav_banktransaction"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Bank Transaction" />
+        <item
+            android:id="@+id/nav_expenses"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Expenses" />
+        <item
+            android:id="@+id/nav_cashadvance"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Cash Advance" />
+        <item
+            android:id="@+id/nav_budgeting"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Budgeting" />
+        <item
+            android:id="@+id/nav_paymentsuppliers"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Payment Suppliers" />
+    </group>
+
+    <item android:title="-------------------------">
+        <menu>
+            <item
+                android:id="@+id/nav_daftarakun"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Daftar Akun" />
+        </menu>
+    </item>
+</menu>

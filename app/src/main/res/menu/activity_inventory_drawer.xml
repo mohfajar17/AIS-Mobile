@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Item" />
+        <item
+            android:id="@+id/nav_aset"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Aset" />
+        <item
+            android:id="@+id/nav_aset_rental"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Aset Rental" />
+        <item
+            android:id="@+id/nav_stock"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Stock Adjustment" />
+        <item
+            android:id="@+id/nav_harga"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Daftar Harga" />
+        <item
+            android:id="@+id/nav_material_req"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Material Returns" />
+    </group>
+</menu>

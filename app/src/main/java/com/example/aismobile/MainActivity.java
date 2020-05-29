@@ -90,10 +90,10 @@ public class MainActivity extends AppCompatActivity {
 
         calendarView.setFirstDayOfWeek(2);
 
-        if (sharedPrefManager.getFileName().equals("null")){
-            if (Integer.valueOf(sharedPrefManager.getGender())!=1)
-                imageAkun.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.akun_female));
-            else imageAkun.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.akun_male));
+        if (sharedPrefManager.getFileName().equals("")){
+            if (sharedPrefManager.getGender().equals("1"))
+                imageAkun.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.akun_male));
+            else imageAkun.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.akun_female));
         } else Picasso.get().load(Config.DATA_URL_PHOTO_PROFILE+sharedPrefManager.getFileName()).into(imageAkun); //get photo profile
 
         textViewUserGroup.setText(sharedPrefManager.getUserGroupName());

@@ -2,6 +2,7 @@ package com.example.aismobile.Profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -84,7 +85,12 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEditProfile = (LinearLayout) findViewById(R.id.textViewEditProfile);
         textViewLogout = (LinearLayout) findViewById(R.id.textViewLogout);
 
-        Picasso.get().load(Config.DATA_URL_PHOTO_PROFILE+sharedPrefManager.getEmployeeId()+".jpg").into(imageAkun);
+        if (sharedPrefManager.getFileName().equals("")){
+            if (sharedPrefManager.getGender().equals("1"))
+                imageAkun.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.akun_male));
+            else imageAkun.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.akun_female));
+        } else Picasso.get().load(Config.DATA_URL_PHOTO_PROFILE+sharedPrefManager.getFileName()).into(imageAkun); //get photo profile
+
         textViewEmployeeId.setText(sharedPrefManager.getEmployeeNumber());
         textViewUsername.setText(sharedPrefManager.getUserName());
         textViewEmployeeName.setText(sharedPrefManager.getUserDisplayName());

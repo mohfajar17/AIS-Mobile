@@ -140,6 +140,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
                         sharedPrefManager.setMobilePhone(jsonData.getString("mobile_phone"));
                         sharedPrefManager.setEmail(jsonData.getString("email1"));
                         sharedPrefManager.setFileName(jsonData.getString("employee_file_name"));
+                    } else {
+                        sharedPrefManager.setEmployeeNumber("");
+                        sharedPrefManager.setGender("");
+                        sharedPrefManager.setPlaceBirthday("");
+                        sharedPrefManager.setBirthday("");
+                        sharedPrefManager.setAddress("");
+                        sharedPrefManager.setMobilePhone("");
+                        sharedPrefManager.setEmail("");
+                        sharedPrefManager.setFileName("");
                     }
                     sharedPrefManager.login();
                     Intent bukaMainActivity = new Intent(LoginActivity.this, MainActivity.class);

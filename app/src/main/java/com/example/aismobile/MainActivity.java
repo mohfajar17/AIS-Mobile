@@ -33,9 +33,12 @@ import com.example.aismobile.Report.ReportActivity;
 import com.example.aismobile.Setup.SetupActivity;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewMoneybox;
     private TextView textName;
     private TextView textViewUserGroup;
+    private TextView textViewCustomerInvoice;
+    private TextView textViewSupplierInvoice;
+    private TextView textViewBankAccount;
+    private TextView textViewSalesQuotation;
+    private TextView textViewInventoryPrice;
 
     private LinearLayout menuFinance;
     private LinearLayout menuInventory;
@@ -79,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
         textName = (TextView) findViewById(R.id.textViewNameDisplay);
         textViewCuti = (TextView) findViewById(R.id.textViewCuti);
         textViewMoneybox = (TextView) findViewById(R.id.textViewMoneybox);
+        textViewCustomerInvoice = (TextView) findViewById(R.id.textViewCustomerInvoice);
+        textViewSupplierInvoice = (TextView) findViewById(R.id.textViewSupplierInvoice);
+        textViewBankAccount = (TextView) findViewById(R.id.textViewBankAccount);
+        textViewSalesQuotation = (TextView) findViewById(R.id.textViewSalesQuotation);
+        textViewInventoryPrice = (TextView) findViewById(R.id.textViewInventoryPrice);
         menuFinance = (LinearLayout) findViewById(R.id.menuFinance);
         menuInventory = (LinearLayout) findViewById(R.id.menuInventory);
         menuProject = (LinearLayout) findViewById(R.id.menuProject);
@@ -101,6 +114,11 @@ public class MainActivity extends AppCompatActivity {
 
         getDataLeave(sharedPrefManager.getEmployeeId());
         getDataMoneybox(sharedPrefManager.getEmployeeNumber());
+        getDataCustomerInvoice();
+        getDataSupplierInvoice();
+        getDataBank();
+        getDataSalesQuotation();
+        getDataInventoryPrice();
 
         imageAkun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +204,149 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void getDataInventoryPrice() {
+        StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_INVENTORY,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int status = jsonObject.getInt("status");
+                            if (status == 1) {
+                                JSONObject jsonData = jsonObject.getJSONObject("data");
+                                textViewInventoryPrice.setText("Rp. "+formatMoney(jsonData.getLong("item")));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }){
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void getDataSalesQuotation() {
+        StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_SALES_QUOTATION,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int status = jsonObject.getInt("status");
+                            if (status == 1) {
+                                JSONObject jsonData = jsonObject.getJSONObject("data");
+                                long result = jsonData.getLong("amount")-jsonData.getLong("wo_amount");
+                                textViewSalesQuotation.setText("Rp. "+formatMoney(result));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }){
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void getDataBank() {
+        StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_BANK,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int status = jsonObject.getInt("status");
+                            if (status == 1) {
+                                JSONObject jsonData = jsonObject.getJSONObject("data");
+                                textViewBankAccount.setText("Rp. "+formatMoney(jsonData.getLong("ending_reconcile_balance")));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }){
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void getDataSupplierInvoice() {
+        StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_SUPPLIER_INVOICE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int status = jsonObject.getInt("status");
+                            if (status == 1) {
+                                JSONObject jsonData = jsonObject.getJSONObject("data");
+                                long result = jsonData.getLong("amount")-jsonData.getLong("discount")+jsonData.getLong("ppn")+jsonData.getLong("adjustment_value");
+                                textViewSupplierInvoice.setText("Rp. "+formatMoney(result));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }){
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void getDataCustomerInvoice() {
+        StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_CUSTOMER_INVOICE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int status = jsonObject.getInt("status");
+                            if (status == 1) {
+                                JSONObject jsonData = jsonObject.getJSONObject("data");
+                                long result = jsonData.getLong("SOI_amount")+jsonData.getLong("SOI_service_amount")+jsonData.getLong("SOI_ppn")+jsonData.getLong("SOI_service_ppn");
+                                textViewCustomerInvoice.setText("Rp. "+formatMoney(result));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }){
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private String formatMoney(long money){
+        NumberFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(money);
+    }
+
     private void getDataMoneybox(final String employeeNumber) {
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_EMPLOYEE_MONEYBOX, new Response.Listener<String>() {
             @Override
@@ -195,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
                     int status = jsonObject.getInt("status");
                     if(status==1){
                         JSONObject jsonData = jsonObject.getJSONObject("data");
-                        textViewMoneybox.setText(jsonData.getString("money_box"));
+                        textViewMoneybox.setText(formatMoney(jsonData.getLong("money_box")));
                     } else textViewMoneybox.setText("0");
                 } catch (JSONException e) {
                     e.printStackTrace();

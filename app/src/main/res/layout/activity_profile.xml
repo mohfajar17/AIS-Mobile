@@ -56,7 +56,7 @@
                     android:layout_marginTop="3dp"
                     android:text="-"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                     android:layout_marginTop="3dp"
                     android:text="-"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                     android:layout_marginTop="3dp"
                     android:text="-"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -152,7 +152,7 @@
                     android:layout_marginTop="3dp"
                     android:text="-"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -189,7 +189,7 @@
                         android:layout_marginTop="3dp"
                         android:text="- "
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                         android:layout_marginTop="3dp"
                         android:text=", "
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/textViewBirthday"
@@ -206,7 +206,7 @@
                         android:layout_marginTop="3dp"
                         android:text="-"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <ImageView
@@ -239,7 +239,7 @@
                     android:layout_marginTop="3dp"
                     android:text="-"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -271,7 +271,7 @@
                     android:layout_marginTop="3dp"
                     android:text="-"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -303,7 +303,7 @@
                     android:layout_marginTop="3dp"
                     android:text="-"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -332,7 +332,7 @@
                     android:gravity="center"
                     android:text="  Edit Profile"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -357,7 +357,7 @@
                     android:gravity="center"
                     android:text="  Logout Account"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

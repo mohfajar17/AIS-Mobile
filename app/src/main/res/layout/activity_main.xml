@@ -99,11 +99,11 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/layoutDashbord"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="10dp"
-                        android:layout_marginBottom="10dp"
                         android:background="@color/colorWhite">
 
                         <LinearLayout
@@ -240,25 +240,78 @@
                             android:layout_marginBottom="10dp"
                             android:src="@color/colorLightGray"/>
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:src="@drawable/ic_inventory"/>
-
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Inventory Price"
-                            android:gravity="center"
-                            android:textColor="@color/colorBlack" />
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/textViewInventoryPrice"
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_inventory"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Inventory Price"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack" />
+
+                                <TextView
+                                    android:id="@+id/textViewInventoryPrice"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="-"
+                                    android:textColor="@color/colorAsukaRed" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <Button
+                                    android:id="@+id/buttonChart"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Grafik" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutDashbordChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:paddingTop="5dp"
+                        android:background="@color/colorWhite">
+
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/barChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="268dp"
+                            android:layout_above="@+id/seekBar1" />
+
+                        <Button
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="-5dp"
+                            android:id="@+id/buttonDetailChart"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="-"
-                            android:textColor="@color/colorAsukaRed" />
+                            android:text="Data Detail" />
                     </LinearLayout>
 
                     <CalendarView

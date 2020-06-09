@@ -12,8 +12,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +32,8 @@ import com.example.aismobile.Chart.MyMarkerView;
 import com.example.aismobile.Contact.ContactMenuActivity;
 import com.example.aismobile.Inventory.InventoryMenuActivity;
 import com.example.aismobile.Finance.FinanceMenuActivity;
+import com.example.aismobile.Kalender.HomeCollection;
+import com.example.aismobile.Kalender.HwAdapter;
 import com.example.aismobile.Profile.ProfileActivity;
 import com.example.aismobile.Project.ProjectMenuActivity;
 import com.example.aismobile.Marketing.MarketingMenuActivity;
@@ -56,6 +61,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     private CircleImageView imageAkun;
     private LinearLayout buttonDetailInfo;
     private LinearLayout layoutDetailInfo;
-    private CalendarView calendarView;
+//    private CalendarView calendarView;
     private TextView textViewCuti;
     private TextView textViewMoneybox;
     private TextView textName;
@@ -103,6 +109,10 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     private long ip;
     private int count=0;
 
+    public GregorianCalendar cal_month, cal_month_copy;
+    private HwAdapter hwAdapter;
+    private TextView tv_month;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         imageAkun = (CircleImageView) findViewById(R.id.imageAkun);
         buttonDetailInfo = (LinearLayout) findViewById(R.id.buttonDetailInfo);
         layoutDetailInfo = (LinearLayout) findViewById(R.id.layoutDetailInfo);
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
+//        calendarView = (CalendarView) findViewById(R.id.calendarView);
         textViewUserGroup = (TextView) findViewById(R.id.textViewUserGroup);
         textName = (TextView) findViewById(R.id.textViewNameDisplay);
         textViewCuti = (TextView) findViewById(R.id.textViewCuti);
@@ -137,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         layoutDashbord = (LinearLayout) findViewById(R.id.layoutDashbord);
         layoutDashbordChart = (LinearLayout) findViewById(R.id.layoutDashbordChart);
 
-        calendarView.setFirstDayOfWeek(2);
+//        calendarView.setFirstDayOfWeek(2);
 
         if (sharedPrefManager.getFileName().equals("")){
             if (sharedPrefManager.getGender().equals("1"))
@@ -264,6 +274,112 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 layoutDashbordChart.setLayoutParams(params);
             }
         });
+
+        HomeCollection.date_collection_arr=new ArrayList<HomeCollection>();
+        getHoliday();
+    }
+
+    private void setCalendar(){
+        cal_month = (GregorianCalendar) GregorianCalendar.getInstance();
+        cal_month_copy = (GregorianCalendar) cal_month.clone();
+        hwAdapter = new HwAdapter(this, cal_month,HomeCollection.date_collection_arr);
+
+        tv_month = (TextView) findViewById(R.id.tv_month);
+        tv_month.setText(android.text.format.DateFormat.format("MMMM yyyy", cal_month));
+
+        ImageButton previous = (ImageButton) findViewById(R.id.ib_prev);
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cal_month.get(GregorianCalendar.MONTH) == 4&&cal_month.get(GregorianCalendar.YEAR)==2017) {
+                    //cal_month.set((cal_month.get(GregorianCalendar.YEAR) - 1), cal_month.getActualMaximum(GregorianCalendar.MONTH), 1);
+                    Toast.makeText(MainActivity.this, "Event Detail is available for current session only.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    setPreviousMonth();
+                    refreshCalendar();
+                }
+
+
+            }
+        });
+        ImageButton next = (ImageButton) findViewById(R.id.Ib_next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cal_month.get(GregorianCalendar.MONTH) == 5&&cal_month.get(GregorianCalendar.YEAR)==2018) {
+                    //cal_month.set((cal_month.get(GregorianCalendar.YEAR) + 1), cal_month.getActualMinimum(GregorianCalendar.MONTH), 1);
+                    Toast.makeText(MainActivity.this, "Event Detail is available for current session only.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    setNextMonth();
+                    refreshCalendar();
+                }
+            }
+        });
+        GridView gridview = (GridView) findViewById(R.id.gv_calendar);
+        gridview.setAdapter(hwAdapter);
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                String selectedGridDate = HwAdapter.day_string.get(position);
+                ((HwAdapter) parent.getAdapter()).getPositionList(selectedGridDate, MainActivity.this);
+            }
+
+        });
+    }
+
+    protected void setNextMonth() {
+        if (cal_month.get(GregorianCalendar.MONTH) == cal_month.getActualMaximum(GregorianCalendar.MONTH)) {
+            cal_month.set((cal_month.get(GregorianCalendar.YEAR) + 1), cal_month.getActualMinimum(GregorianCalendar.MONTH), 1);
+        } else {
+            cal_month.set(GregorianCalendar.MONTH,
+                    cal_month.get(GregorianCalendar.MONTH) + 1);
+        }
+    }
+
+    protected void setPreviousMonth() {
+        if (cal_month.get(GregorianCalendar.MONTH) == cal_month.getActualMinimum(GregorianCalendar.MONTH)) {
+            cal_month.set((cal_month.get(GregorianCalendar.YEAR) - 1), cal_month.getActualMaximum(GregorianCalendar.MONTH), 1);
+        } else {
+            cal_month.set(GregorianCalendar.MONTH, cal_month.get(GregorianCalendar.MONTH) - 1);
+        }
+    }
+
+    public void refreshCalendar() {
+        hwAdapter.refreshDays();
+        hwAdapter.notifyDataSetChanged();
+        tv_month.setText(android.text.format.DateFormat.format("MMMM yyyy", cal_month));
+    }
+
+    private void getHoliday() {
+        StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_CALENDAR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int status = jsonObject.getInt("status");
+                            if (status == 1) {
+                                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                                for(int i=0;i<jsonArray.length();i++){
+                                    HomeCollection.date_collection_arr.add( new HomeCollection(jsonArray.getJSONObject(i).getString("holiday_date"),jsonArray.getJSONObject(i).getString("holiday_date"),jsonArray.getJSONObject(i).getString("holiday_name"),jsonArray.getJSONObject(i).getString("description")));
+                                }
+                                setCalendar();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }){
+        };
+        Volley.newRequestQueue(this).add(request);
     }
 
     private void getDataInventoryPrice() {

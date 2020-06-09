@@ -15,6 +15,7 @@ public class Config {
     public static final String DATA_URL_INVENTORY = DATA_URL+"getInventory";
     public static final String DATA_URL_EDIT_ACCOUNT = DATA_URL+"editAccount";
     public static final String DATA_URL_EDIT_PERSONAL = DATA_URL+"editPersonalData";
+    public static final String DATA_URL_CALENDAR = DATA_URL+"getHoliday";
     public static final String DATA_URL_LIST_SALES_QUOTATION = DATA_URL+"listSalesQuotation";
     public static final String DATA_URL_LIST_EMPLOYEE = DATA_URL+"listEmployee";
     public static final String DATA_URL_LIST_WORKBASE = DATA_URL+"listWorkbase";

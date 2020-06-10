@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    tools:context=".Purchasing.PurchasingMenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@color/colorAsukaBlue"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:padding="5dp"
+            android:src="@drawable/icon_purchasing"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:text="Purchasing"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewPurchaseOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Purchase Orders"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewWorkOrders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Work Orders"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewCOD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cash On Delivery"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewKontrakPerjanjian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kontrak Perjanjian"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewGRN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Goods Recived Note"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewWorkHandover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Work Handover"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewServicesReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Services Receipt"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+</LinearLayout>

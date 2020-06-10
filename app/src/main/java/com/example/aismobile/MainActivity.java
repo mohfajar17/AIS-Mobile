@@ -29,11 +29,14 @@ import com.example.aismobile.Inventory.InventoryMenuActivity;
 import com.example.aismobile.Finance.FinanceMenuActivity;
 import com.example.aismobile.Kalender.HomeCollection;
 import com.example.aismobile.Kalender.HwAdapter;
+import com.example.aismobile.Personalia.PersonaliaMenuActivity;
 import com.example.aismobile.Profile.ProfileActivity;
 import com.example.aismobile.Project.ProjectMenuActivity;
 import com.example.aismobile.Marketing.MarketingMenuActivity;
 import com.example.aismobile.Crm.CrmMenuActivity;
+import com.example.aismobile.Purchasing.PurchasingMenuActivity;
 import com.example.aismobile.Report.ReportActivity;
+import com.example.aismobile.Safety.SafetyMenuActivity;
 import com.example.aismobile.Setup.SetupActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -264,8 +267,8 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             @Override
             public void onClick(View v) {
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("hrga".toLowerCase())) {
-//                    Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
-//                    startActivityForResult(bukaMenuActivity,1);
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, PersonaliaMenuActivity.class);
+                    startActivityForResult(bukaMenuActivity,1);
                 } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
@@ -274,8 +277,8 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             @Override
             public void onClick(View v) {
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("purchasing".toLowerCase())) {
-//                    Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
-//                    startActivityForResult(bukaMenuActivity,1);
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, PurchasingMenuActivity.class);
+                    startActivityForResult(bukaMenuActivity,1);
                 } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
@@ -284,8 +287,8 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             @Override
             public void onClick(View v) {
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("hse".toLowerCase())) {
-//                    Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
-//                    startActivityForResult(bukaMenuActivity,1);
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, SafetyMenuActivity.class);
+                    startActivityForResult(bukaMenuActivity,1);
                 } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
@@ -400,11 +403,6 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     }
 
     private void getHoliday() {
-//        Date date = Calendar.getInstance().getTime();
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        String thisDay = simpleDateFormat.format(date);
-//
-//        HomeCollection.date_collection_arr.add( new HomeCollection(thisDay, thisDay, "This Day", ""));
         StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_CALENDAR,
                 new Response.Listener<String>() {
                     @Override

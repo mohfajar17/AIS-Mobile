@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    tools:context=".Safety.SafetyMenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@color/colorAsukaBlue"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:padding="5dp"
+            android:src="@drawable/icon_safety"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:text="Safety"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewWorkAccidents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Work Accidents"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewGenbaSafety"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Genba Safety"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewFileReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Safety File Report"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+</LinearLayout>

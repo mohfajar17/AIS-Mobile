@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Personalia.PersonaliaMenuActivity"></activity>
         <activity android:name=".Setup.SetupActivity" />
         <activity android:name=".Report.ReportActivity" />
         <activity

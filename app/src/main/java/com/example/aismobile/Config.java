@@ -5,6 +5,7 @@ public class Config {
 //    public static final String DATA_URL = "http://192.168.1.24/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
     public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
     public static final String DATA_URL_LOGIN = DATA_URL+"login";
+    public static final String DATA_URL_USER_ACCESS = DATA_URL+"accessAllowModul";
     public static final String DATA_URL_EMPLOYEE_DATA = DATA_URL+"employeeData";
     public static final String DATA_URL_EMPLOYEE_LEAVE = DATA_URL+"employeeLeave";
     public static final String DATA_URL_EMPLOYEE_MONEYBOX = DATA_URL+"employeeMoneybox";

@@ -5,19 +5,15 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +24,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.aismobile.Chart.MyMarkerView;
 import com.example.aismobile.Contact.ContactMenuActivity;
 import com.example.aismobile.Inventory.InventoryMenuActivity;
 import com.example.aismobile.Finance.FinanceMenuActivity;
@@ -75,8 +70,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     private CircleImageView imageAkun;
     private LinearLayout buttonDetailInfo;
     private LinearLayout layoutDetailInfo;
-//    private CalendarView calendarView;
-    private TextView textViewCuti;
+    public TextView textViewCuti;
     private TextView textViewMoneybox;
     private TextView textName;
     private TextView textViewUserGroup;
@@ -94,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     private LinearLayout menuContact;
     private LinearLayout menuSetup;
     private LinearLayout menuReport;
+    private LinearLayout menuPersonalia;
+    private LinearLayout menuPurchasing;
+    private LinearLayout menuSafety;
+    private LinearLayout menuNews;
 
     private LinearLayout layoutDashbord;
     private LinearLayout layoutDashbordChart;
@@ -123,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         imageAkun = (CircleImageView) findViewById(R.id.imageAkun);
         buttonDetailInfo = (LinearLayout) findViewById(R.id.buttonDetailInfo);
         layoutDetailInfo = (LinearLayout) findViewById(R.id.layoutDetailInfo);
-//        calendarView = (CalendarView) findViewById(R.id.calendarView);
         textViewUserGroup = (TextView) findViewById(R.id.textViewUserGroup);
         textName = (TextView) findViewById(R.id.textViewNameDisplay);
         textViewCuti = (TextView) findViewById(R.id.textViewCuti);
@@ -141,13 +138,15 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         menuContact = (LinearLayout) findViewById(R.id.menuContact);
         menuSetup = (LinearLayout) findViewById(R.id.menuSetup);
         menuReport = (LinearLayout) findViewById(R.id.menuReport);
+        menuPersonalia = (LinearLayout) findViewById(R.id.menuPersonalia);
+        menuPurchasing = (LinearLayout) findViewById(R.id.menuPurchasing);
+        menuSafety = (LinearLayout) findViewById(R.id.menuSafety);
+        menuNews = (LinearLayout) findViewById(R.id.menuNews);
         barChart = (BarChart) findViewById(R.id.barChart);
         buttonChart = (Button) findViewById(R.id.buttonChart);
         buttonDetailChart = (Button) findViewById(R.id.buttonDetailChart);
         layoutDashbord = (LinearLayout) findViewById(R.id.layoutDashbord);
         layoutDashbordChart = (LinearLayout) findViewById(R.id.layoutDashbordChart);
-
-//        calendarView.setFirstDayOfWeek(2);
 
         if (sharedPrefManager.getFileName().equals("")){
             if (sharedPrefManager.getGender().equals("1"))
@@ -189,47 +188,59 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         menuFinance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaMenuActivity = new Intent(MainActivity.this, FinanceMenuActivity.class);
-                startActivityForResult(bukaMenuActivity,1);
+                if (sharedPrefManager.getAccessModul().toLowerCase().contains("finance".toLowerCase())) {
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, FinanceMenuActivity.class);
+                    startActivityForResult(bukaMenuActivity, 1);
+                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
         menuInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaMenuActivity = new Intent(MainActivity.this, InventoryMenuActivity.class);
-                startActivityForResult(bukaMenuActivity,1);
+                if (sharedPrefManager.getAccessModul().toLowerCase().contains("inventory".toLowerCase())) {
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, InventoryMenuActivity.class);
+                    startActivityForResult(bukaMenuActivity,1);
+                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
         menuProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaMenuActivity = new Intent(MainActivity.this, ProjectMenuActivity.class);
-                startActivityForResult(bukaMenuActivity,1);
+                if (sharedPrefManager.getAccessModul().toLowerCase().contains("project".toLowerCase())) {
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, ProjectMenuActivity.class);
+                    startActivityForResult(bukaMenuActivity,1);
+                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
         menuMarketing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaMenuActivity = new Intent(MainActivity.this, MarketingMenuActivity.class);
-                startActivityForResult(bukaMenuActivity,1);
+                if (sharedPrefManager.getAccessModul().toLowerCase().contains("marketing".toLowerCase())) {
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, MarketingMenuActivity.class);
+                    startActivityForResult(bukaMenuActivity,1);
+                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
         menuCrm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaMenuActivity = new Intent(MainActivity.this, CrmMenuActivity.class);
-                startActivityForResult(bukaMenuActivity,1);
+                if (sharedPrefManager.getAccessModul().toLowerCase().contains("crm".toLowerCase())) {
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, CrmMenuActivity.class);
+                    startActivityForResult(bukaMenuActivity,1);
+                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
         menuContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
-                startActivityForResult(bukaMenuActivity,1);
+                if (sharedPrefManager.getAccessModul().toLowerCase().contains("contact".toLowerCase())) {
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
+                    startActivityForResult(bukaMenuActivity,1);
+                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -246,6 +257,44 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             public void onClick(View v) {
                 Intent bukaMenuActivity = new Intent(MainActivity.this, ReportActivity.class);
                 startActivityForResult(bukaMenuActivity,1);
+            }
+        });
+
+        menuPersonalia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sharedPrefManager.getAccessModul().toLowerCase().contains("hrga".toLowerCase())) {
+//                    Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
+//                    startActivityForResult(bukaMenuActivity,1);
+                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        menuPurchasing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sharedPrefManager.getAccessModul().toLowerCase().contains("purchasing".toLowerCase())) {
+//                    Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
+//                    startActivityForResult(bukaMenuActivity,1);
+                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        menuSafety.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sharedPrefManager.getAccessModul().toLowerCase().contains("hse".toLowerCase())) {
+//                    Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
+//                    startActivityForResult(bukaMenuActivity,1);
+                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        menuNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
+//                startActivityForResult(bukaMenuActivity,1);
             }
         });
 
@@ -294,8 +343,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (cal_month.get(GregorianCalendar.MONTH) == 4&&cal_month.get(GregorianCalendar.YEAR)==2017) {
                     //cal_month.set((cal_month.get(GregorianCalendar.YEAR) - 1), cal_month.getActualMaximum(GregorianCalendar.MONTH), 1);
                     Toast.makeText(MainActivity.this, "Event Detail is available for current session only.", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     setPreviousMonth();
                     refreshCalendar();
                 }
@@ -325,7 +373,6 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 String selectedGridDate = HwAdapter.day_string.get(position);
                 ((HwAdapter) parent.getAdapter()).getPositionList(selectedGridDate, MainActivity.this);
             }
-
         });
     }
 
@@ -353,6 +400,11 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     }
 
     private void getHoliday() {
+//        Date date = Calendar.getInstance().getTime();
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        String thisDay = simpleDateFormat.format(date);
+//
+//        HomeCollection.date_collection_arr.add( new HomeCollection(thisDay, thisDay, "This Day", ""));
         StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_CALENDAR,
                 new Response.Listener<String>() {
                     @Override

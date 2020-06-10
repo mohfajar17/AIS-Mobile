@@ -8,6 +8,7 @@ public class SharedPrefManager {
 
     public static final String KEY_ISLOGGEDIN = "is_logged_in";
     public static final String PREF_NAME  = "ais_pref";
+    public static final String KEY_USER_ID  = "user_id";
     public static final String KEY_EMPLOYEE_ID  = "employee_id";
     public static final String KEY_USER_NAME  = "user_name";
     public static final String KEY_USER_DISPLAYNAME  = "user_displayname";
@@ -23,6 +24,7 @@ public class SharedPrefManager {
     public static final String KEY_MOBILE_PHONE  = "mobile_phone";
     public static final String KEY_EMAIL  = "email";
     public static final String KEY_FILE_NAME  = "employee_file_name";
+    public static final String KEY_ACCESS_MODUL  = "access_modul";
 
     public SharedPrefManager(Context context){
         this.mContext = context;
@@ -50,6 +52,14 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
+        editor.apply();
+    }
+
+    public void setUserId(String userId){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_USER_ID, userId);
         editor.apply();
     }
 
@@ -173,6 +183,19 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public void setAcessModul(String access){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_ACCESS_MODUL, access);
+        editor.apply();
+    }
+
+    public String getUserId(){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_ID,null);
+    }
+
     public String getEmployeeId(){
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_EMPLOYEE_ID,null);
@@ -246,5 +269,10 @@ public class SharedPrefManager {
     public String getFileName(){
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_FILE_NAME,null);
+    }
+
+    public String getAccessModul(){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_ACCESS_MODUL,null);
     }
 }

@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
             Toast.makeText(LoginActivity.this, "Please enter username and password", Toast.LENGTH_LONG).show();
         } else {
             WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-            final String ipAddress = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
+            final String ipAddress = "0.0.0.0";//Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
 
             progressDialog.show();
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_LOGIN, new Response.Listener<String>() {
@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
                         if(status==1){
                             JSONObject jsonData = jsonObject.getJSONObject("data");
 
+                            sharedPrefManager.setUserId(jsonData.getString("user_id"));
                             sharedPrefManager.setEmployeeId(jsonData.getString("employee_id"));
                             sharedPrefManager.setUserName(jsonData.getString("user_name"));
                             sharedPrefManager.setUserDisplayName(jsonData.getString("user_displayname"));
@@ -150,6 +151,59 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
                         sharedPrefManager.setEmail("");
                         sharedPrefManager.setFileName("");
                     }
+                    getAccessModul();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("employee_id", employeeId);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void getAccessModul() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_USER_ACCESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    if(status==1){
+                        JSONObject jsonData = jsonObject.getJSONObject("data");
+                        if (Integer.valueOf(jsonData.getString("modul_contact")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"contact, ");
+                        if (Integer.valueOf(jsonData.getString("modul_crm")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"crm, ");
+                        if (Integer.valueOf(jsonData.getString("modul_fa")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"finance, ");
+                        if (Integer.valueOf(jsonData.getString("modul_hr")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"hrga, ");
+                        if (Integer.valueOf(jsonData.getString("modul_hse")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"hse, ");
+                        if (Integer.valueOf(jsonData.getString("modul_inventory")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"inventory, ");
+                        if (Integer.valueOf(jsonData.getString("modul_marketing")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"marketing, ");
+                        if (Integer.valueOf(jsonData.getString("modul_project")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"project, ");
+                        if (Integer.valueOf(jsonData.getString("modul_purchasing")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"purchasing, ");
+                    } else {
+                        sharedPrefManager.setAcessModul("");
+                    }
                     sharedPrefManager.login();
                     Intent bukaMainActivity = new Intent(LoginActivity.this, MainActivity.class);
                     startActivityForResult(bukaMainActivity,1);
@@ -169,7 +223,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
-                param.put("employee_id", employeeId);
+                param.put("user_id", sharedPrefManager.getUserId());
                 return param;
             }
         };

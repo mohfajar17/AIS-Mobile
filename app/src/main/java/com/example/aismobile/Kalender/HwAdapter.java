@@ -18,8 +18,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +66,6 @@ public class HwAdapter extends BaseAdapter {
         df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         curentDateString = df.format(selectedDate.getTime());
         refreshDays();
-
     }
 
     public int getCount() {
@@ -99,23 +101,33 @@ public class HwAdapter extends BaseAdapter {
             dayView.setTextColor(Color.parseColor("#A9A9A9"));
             dayView.setClickable(false);
             dayView.setFocusable(false);
-        } else if ((Integer.parseInt(gridvalue) < 7) && (position > 28)) {
+        } else if ((Integer.parseInt(gridvalue) < 8) && (position > 29)) {
             dayView.setTextColor(Color.parseColor("#A9A9A9"));
             dayView.setClickable(false);
             dayView.setFocusable(false);
-        } else {
-            // setting curent month's days in blue color.
-            dayView.setTextColor(Color.parseColor("#696969"));
+        } else { // setting curent month's days in blue color.
+            //check date is weekend
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date dateWeekend = format.parse(day_string.get(position));
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dateWeekend);
+                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
+                    dayView.setTextColor(Color.parseColor("#e60000"));
+                } else {
+                    dayView.setTextColor(Color.parseColor("#262626"));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
-
+        //set curent date
         if (day_string.get(position).equals(curentDateString)) {
-
-            v.setBackgroundColor(Color.parseColor("#ffffff"));
+            v.setBackgroundColor(Color.parseColor("#d9d9d9"));
         } else {
             v.setBackgroundColor(Color.parseColor("#ffffff"));
         }
-
 
         dayView.setText(gridvalue);
 
@@ -130,7 +142,7 @@ public class HwAdapter extends BaseAdapter {
             monthStr = "0" + monthStr;
         }
 
-        setEventView(v, position,dayView);
+        setEventView(v, position, dayView);
 
         return v;
     }
@@ -142,7 +154,7 @@ public class HwAdapter extends BaseAdapter {
         Locale.setDefault(Locale.US);
         pmonth = (GregorianCalendar) month.clone();
         // month start day. ie; sun, mon, etc
-        firstDay = month.get(GregorianCalendar.DAY_OF_WEEK);
+        firstDay = month.get(GregorianCalendar.DAY_OF_WEEK)-1;
         // finding number of weeks in current month.
         maxWeeknumber = month.getActualMaximum(GregorianCalendar.WEEK_OF_MONTH);
         // allocating maximum row number for the gridview.
@@ -165,23 +177,19 @@ public class HwAdapter extends BaseAdapter {
 
     private int getMaxP() {
         int maxP;
-        if (month.get(GregorianCalendar.MONTH) == month
-                .getActualMinimum(GregorianCalendar.MONTH)) {
-            pmonth.set((month.get(GregorianCalendar.YEAR) - 1),
-                    month.getActualMaximum(GregorianCalendar.MONTH), 1);
+        if (month.get(GregorianCalendar.MONTH) == month.getActualMinimum(GregorianCalendar.MONTH)) {
+            pmonth.set((month.get(GregorianCalendar.YEAR) - 1), month.getActualMaximum(GregorianCalendar.MONTH), 1);
         } else {
-            pmonth.set(GregorianCalendar.MONTH,
-                    month.get(GregorianCalendar.MONTH) - 1);
+            pmonth.set(GregorianCalendar.MONTH, month.get(GregorianCalendar.MONTH) - 1);
         }
         maxP = pmonth.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
-
         return maxP;
     }
 
 
 
 
-    public void setEventView(View v,int pos,TextView txt){
+    public void setEventView(View v, int pos, TextView txt){
 
         int len=HomeCollection.date_collection_arr.size();
         for (int i = 0; i < len; i++) {
@@ -198,7 +206,7 @@ public class HwAdapter extends BaseAdapter {
                     } else {
                         v.setBackgroundColor(Color.parseColor("#343434"));
                         v.setBackgroundResource(R.drawable.rounded_calender);
-                        txt.setTextColor(Color.parseColor("#696969"));
+                        txt.setTextColor(Color.parseColor("#262626"));
                     }
 
                 }

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    tools:context=".Personalia.PersonaliaMenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@color/colorAsukaBlue"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:padding="5dp"
+            android:src="@drawable/icon_personalia"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:text="Personalia"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewKerja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kerja"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewPenggajian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Penggajian"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewKalender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Klender"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewKaryawan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Karyawan"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewDepartemen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Departemen"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewJenjangKaryawan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jenjang Karyawan"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewPangkat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pangkat"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewJabatan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jabatan"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewNews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="News"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaBlue"/>
+
+    <TextView
+        android:id="@+id/textViewReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Report"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaBlue"/>
+</LinearLayout>

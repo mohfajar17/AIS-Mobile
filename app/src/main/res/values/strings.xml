@@ -24,4 +24,6 @@
     <string name="title_activity_marketing">MarketingActivity</string>
     <string name="title_activity_crm">CrmActivity</string>
     <string name="title_activity_contact">ContactActivity</string>
+    <string name="title_activity_purchasing">PurchasingActivity</string>
+    <string name="title_activity_safety">SafetyActivity</string>
 </resources>

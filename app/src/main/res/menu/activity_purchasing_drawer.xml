@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_purchaseorder"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Purchase Orders" />
+        <item
+            android:id="@+id/nav_workorder"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Work Orders" />
+        <item
+            android:id="@+id/nav_cod"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Cash On Delivery" />
+        <item
+            android:id="@+id/nav_kontrakperjanjian"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Konrak Perjanjian" />
+        <item
+            android:id="@+id/nav_goodsrecivednote"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Goods Recived Note" />
+        <item
+            android:id="@+id/nav_workhandover"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Work Handovers" />
+        <item
+            android:id="@+id/nav_servicesreceipt"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Services Receipt" />
+    </group>
+</menu>

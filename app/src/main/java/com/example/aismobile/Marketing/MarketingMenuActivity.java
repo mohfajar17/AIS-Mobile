@@ -25,20 +25,21 @@ public class MarketingMenuActivity extends AppCompatActivity {
         textViewSalesQuot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(MarketingMenuActivity.this, MarketingActivity.class);
-                bukaInventoryActivity.putExtra("menu", "0");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("0");
             }
         });
         textViewSalesOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(MarketingMenuActivity.this, MarketingActivity.class);
-                bukaInventoryActivity.putExtra("menu", "1");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("1");
             }
         });
+    }
+
+    private void bukaActivity(String menu){
+        Intent bukaInventoryActivity = new Intent(MarketingMenuActivity.this, MarketingActivity.class);
+        bukaInventoryActivity.putExtra("menu", menu);
+        startActivityForResult(bukaInventoryActivity,1);
+        finish();
     }
 }

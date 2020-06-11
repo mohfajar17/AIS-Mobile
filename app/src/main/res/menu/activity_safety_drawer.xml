@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_workaccidents"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Work Accidents" />
+        <item
+            android:id="@+id/nav_genbasafety"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Genba Safety" />
+        <item
+            android:id="@+id/nav_safetyfile"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Safety File Report" />
+    </group>
+</menu>

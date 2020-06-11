@@ -14,11 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Safety.SafetyMenuActivity"></activity>
-        <activity android:name=".Purchasing.PurchasingMenuActivity"></activity>
+        <activity
+            android:name=".Safety.SafetyActivity"
+            android:label="Safety"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
+            android:name=".Purchasing.PurchasingActivity"
+            android:label="Purchasing"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity android:name=".Safety.SafetyMenuActivity" />
+        <activity android:name=".Purchasing.PurchasingMenuActivity" />
         <activity
             android:name=".Personalia.PersonaliaActivity"
-            android:label="@string/title_activity_personalia"
+            android:label="Personalia"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity android:name=".Personalia.PersonaliaMenuActivity" />
         <activity android:name=".Setup.SetupActivity" />

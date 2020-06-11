@@ -35,65 +35,51 @@ public class FinanceMenuActivity extends AppCompatActivity {
         textViewCustomerInvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaPersonaliaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
-                bukaPersonaliaActivity.putExtra("menu", "0");
-                startActivityForResult(bukaPersonaliaActivity,1);
-                finish();
+                bukaActivity("0");
             }
         });
         textViewBankTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaPersonaliaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
-                bukaPersonaliaActivity.putExtra("menu", "1");
-                startActivityForResult(bukaPersonaliaActivity,1);
-                finish();
+                bukaActivity("1");
             }
         });
         textViewExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaPersonaliaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
-                bukaPersonaliaActivity.putExtra("menu", "2");
-                startActivityForResult(bukaPersonaliaActivity,1);
-                finish();
+                bukaActivity("2");
             }
         });
         textViewCashAdvance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaPersonaliaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
-                bukaPersonaliaActivity.putExtra("menu", "3");
-                startActivityForResult(bukaPersonaliaActivity,1);
-                finish();
+                bukaActivity("3");
             }
         });
         textViewBudgeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaPersonaliaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
-                bukaPersonaliaActivity.putExtra("menu", "4");
-                startActivityForResult(bukaPersonaliaActivity,1);
-                finish();
+                bukaActivity("4");
             }
         });
         textViewPaymentSuppliers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaPersonaliaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
-                bukaPersonaliaActivity.putExtra("menu", "5");
-                startActivityForResult(bukaPersonaliaActivity,1);
-                finish();
+                bukaActivity("5");
             }
         });
         textViewDaftarAkun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaPersonaliaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
-                bukaPersonaliaActivity.putExtra("menu", "6");
-                startActivityForResult(bukaPersonaliaActivity,1);
-                finish();
+                bukaActivity("6");
             }
         });
+    }
+
+    private void bukaActivity(String menu){
+        Intent bukaPersonaliaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
+        bukaPersonaliaActivity.putExtra("menu", menu);
+        startActivityForResult(bukaPersonaliaActivity,1);
+        finish();
     }
 }

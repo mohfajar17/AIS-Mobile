@@ -29,41 +29,36 @@ public class CrmMenuActivity extends AppCompatActivity {
         textViewMonitoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(CrmMenuActivity.this, CrmActivity.class);
-                bukaInventoryActivity.putExtra("menu", "0");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("0");
             }
         });
 
         textViewLeads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(CrmMenuActivity.this, CrmActivity.class);
-                bukaInventoryActivity.putExtra("menu", "1");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("1");
             }
         });
 
         textViewEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(CrmMenuActivity.this, CrmActivity.class);
-                bukaInventoryActivity.putExtra("menu", "2");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("2");
             }
         });
 
         textViewSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(CrmMenuActivity.this, CrmActivity.class);
-                bukaInventoryActivity.putExtra("menu", "3");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("3");
             }
         });
+    }
+
+    private void bukaActivity(String menu){
+        Intent bukaInventoryActivity = new Intent(CrmMenuActivity.this, CrmActivity.class);
+        bukaInventoryActivity.putExtra("menu", menu);
+        startActivityForResult(bukaInventoryActivity,1);
+        finish();
     }
 }

@@ -3,8 +3,10 @@ package com.example.aismobile;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     private SharedPrefManager sharedPrefManager;
     private boolean doubleBackToExitPressedOnce = false;
 
+    private Dialog myDialog;
     private CircleImageView imageAkun;
     private LinearLayout buttonDetailInfo;
     private LinearLayout layoutDetailInfo;
@@ -188,13 +191,14 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             }
         });
 
+        myDialog = new Dialog(MainActivity.this);
         menuFinance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("finance".toLowerCase())) {
                     Intent bukaMenuActivity = new Intent(MainActivity.this, FinanceMenuActivity.class);
                     startActivityForResult(bukaMenuActivity, 1);
-                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+                } else ShowPopup("Finance Accounting");// Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -204,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("inventory".toLowerCase())) {
                     Intent bukaMenuActivity = new Intent(MainActivity.this, InventoryMenuActivity.class);
                     startActivityForResult(bukaMenuActivity,1);
-                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+                } else ShowPopup("Inventory");// Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -214,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("project".toLowerCase())) {
                     Intent bukaMenuActivity = new Intent(MainActivity.this, ProjectMenuActivity.class);
                     startActivityForResult(bukaMenuActivity,1);
-                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+                } else ShowPopup("Project");// Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -224,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("marketing".toLowerCase())) {
                     Intent bukaMenuActivity = new Intent(MainActivity.this, MarketingMenuActivity.class);
                     startActivityForResult(bukaMenuActivity,1);
-                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+                } else ShowPopup("Marketing");// Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
         menuCrm.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("crm".toLowerCase())) {
                     Intent bukaMenuActivity = new Intent(MainActivity.this, CrmMenuActivity.class);
                     startActivityForResult(bukaMenuActivity,1);
-                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+                } else ShowPopup("CRM");// Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -243,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("contact".toLowerCase())) {
                     Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
                     startActivityForResult(bukaMenuActivity,1);
-                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+                } else ShowPopup("Contact");// Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -269,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("hrga".toLowerCase())) {
                     Intent bukaMenuActivity = new Intent(MainActivity.this, PersonaliaMenuActivity.class);
                     startActivityForResult(bukaMenuActivity,1);
-                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+                } else ShowPopup("Personalia");// Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -279,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("purchasing".toLowerCase())) {
                     Intent bukaMenuActivity = new Intent(MainActivity.this, PurchasingMenuActivity.class);
                     startActivityForResult(bukaMenuActivity,1);
-                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+                } else ShowPopup("Purchasing");// Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -289,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (sharedPrefManager.getAccessModul().toLowerCase().contains("hse".toLowerCase())) {
                     Intent bukaMenuActivity = new Intent(MainActivity.this, SafetyMenuActivity.class);
                     startActivityForResult(bukaMenuActivity,1);
-                } else Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
+                } else ShowPopup("Safety");// Toast.makeText(MainActivity.this, "You cannot access to this module", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -300,6 +304,13 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 //                startActivityForResult(bukaMenuActivity,1);
             }
         });
+
+        if (sharedPrefManager.getAccessModul().toLowerCase().contains("dashboard".toLowerCase())){
+            ViewGroup.LayoutParams params;
+            params = layoutDashbord.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutDashbord.setLayoutParams(params);
+        }
 
         buttonChart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -798,5 +809,14 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         barChart.getXAxis().setAxisMaximum(startYear + barChart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
         barChart.groupBars(startYear, groupSpace, barSpace);
         barChart.invalidate();
+    }
+
+    public void ShowPopup(String massage) {
+        TextView textViewWarning;
+        myDialog.setContentView(R.layout.custom_popup);
+        textViewWarning = (TextView) myDialog.findViewById(R.id.textViewWarning);
+        textViewWarning.setText("You can't access modul " + massage);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightGray"
     tools:context=".MainActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -100,7 +101,7 @@
                     <LinearLayout
                         android:id="@+id/layoutDashbord"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:orientation="vertical"
                         android:padding="10dp"
                         android:background="@color/colorWhite">
@@ -396,7 +397,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="M "
+                                    android:text="S "
                                     android:textColor="#4b4a4a" />
 
                                 <TextView
@@ -405,7 +406,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="T "
+                                    android:text="S "
                                     android:textColor="#4b4a4a" />
 
                                 <TextView
@@ -414,7 +415,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="W"
+                                    android:text="R"
                                     android:textColor="#4b4a4a" />
 
                                 <TextView
@@ -423,7 +424,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="T "
+                                    android:text="K "
                                     android:textColor="#4b4a4a" />
 
                                 <TextView
@@ -432,7 +433,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="F "
+                                    android:text="J "
                                     android:textColor="#4b4a4a" />
 
                                 <TextView
@@ -450,7 +451,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="S "
+                                    android:text="M "
                                     android:textColor="#e60000" />
 
                             </TableRow>
@@ -821,7 +822,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@drawable/icon_news"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

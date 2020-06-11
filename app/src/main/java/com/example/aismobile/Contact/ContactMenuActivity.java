@@ -27,31 +27,29 @@ public class ContactMenuActivity extends AppCompatActivity {
         textViewSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(ContactMenuActivity.this, ContactActivity.class);
-                bukaInventoryActivity.putExtra("menu", "0");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("0");
             }
         });
 
         textViewPerusahaan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(ContactMenuActivity.this, ContactActivity.class);
-                bukaInventoryActivity.putExtra("menu", "1");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("1");
             }
         });
 
         textViewAccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(ContactMenuActivity.this, ContactActivity.class);
-                bukaInventoryActivity.putExtra("menu", "2");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("2");
             }
         });
+    }
+
+    private void bukaActivity(String menu){
+        Intent bukaInventoryActivity = new Intent(ContactMenuActivity.this, ContactActivity.class);
+        bukaInventoryActivity.putExtra("menu", menu);
+        startActivityForResult(bukaInventoryActivity,1);
+        finish();
     }
 }

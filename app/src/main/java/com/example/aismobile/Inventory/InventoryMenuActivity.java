@@ -33,61 +33,50 @@ public class InventoryMenuActivity extends AppCompatActivity {
         textViewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(InventoryMenuActivity.this, InventoryActivity.class);
-                bukaInventoryActivity.putExtra("menu", "0");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("0");
             }
         });
 
         textViewAset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(InventoryMenuActivity.this, InventoryActivity.class);
-                bukaInventoryActivity.putExtra("menu", "1");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("1");
             }
         });
 
         textViewAsetRental.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(InventoryMenuActivity.this, InventoryActivity.class);
-                bukaInventoryActivity.putExtra("menu", "2");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("2");
             }
         });
 
         textViewStock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(InventoryMenuActivity.this, InventoryActivity.class);
-                bukaInventoryActivity.putExtra("menu", "3");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("3");
             }
         });
 
         textViewHarga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(InventoryMenuActivity.this, InventoryActivity.class);
-                bukaInventoryActivity.putExtra("menu", "4");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("4");
             }
         });
 
         textViewMaterial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaInventoryActivity = new Intent(InventoryMenuActivity.this, InventoryActivity.class);
-                bukaInventoryActivity.putExtra("menu", "5");
-                startActivityForResult(bukaInventoryActivity,1);
-                finish();
+                bukaActivity("5");
             }
         });
+    }
+
+    private void bukaActivity(String menu){
+        Intent bukaInventoryActivity = new Intent(InventoryMenuActivity.this, InventoryActivity.class);
+        bukaInventoryActivity.putExtra("menu", menu);
+        startActivityForResult(bukaInventoryActivity,1);
+        finish();
     }
 }

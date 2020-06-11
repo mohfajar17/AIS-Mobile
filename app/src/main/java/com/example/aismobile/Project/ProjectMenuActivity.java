@@ -43,101 +43,74 @@ public class ProjectMenuActivity extends AppCompatActivity {
         textViewJobOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "0");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("0");
             }
         });
         textViewWorkCompletion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "1");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("1");
             }
         });
         textViewMaterial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "2");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("2");
             }
         });
         textViewTools.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "3");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("3");
             }
         });
         textViewWork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "4");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("4");
             }
         });
         textViewPengambilan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "5");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("5");
             }
         });
         textViewSpkl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "6");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("6");
             }
         });
         textViewProposed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "7");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("7");
             }
         });
         textViewCashProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "8");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("8");
             }
         });
         textViewTunjanganKaryawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "9");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("9");
             }
         });
         textViewTunjanganTemporary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-                bukaProjectActivity.putExtra("menu", "10");
-                startActivityForResult(bukaProjectActivity,1);
-                finish();
+                bukaActivity("10");
             }
         });
+    }
+    private void bukaActivity(String menu){
+        Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
+        bukaProjectActivity.putExtra("menu", menu);
+        startActivityForResult(bukaProjectActivity,1);
+        finish();
     }
 }

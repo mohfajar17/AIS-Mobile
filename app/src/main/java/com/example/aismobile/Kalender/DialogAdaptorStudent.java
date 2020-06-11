@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import com.example.aismobile.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 class DialogAdaptorStudent extends BaseAdapter {
     Activity activity;
@@ -52,13 +55,20 @@ class DialogAdaptorStudent extends BaseAdapter {
         TextView tvTitle=(TextView)listViewItem.findViewById(R.id.tv_name);
         TextView tvSubject=(TextView)listViewItem.findViewById(R.id.tv_type);
         TextView tvDuedate=(TextView)listViewItem.findViewById(R.id.tv_desc);
-//        TextView tvDescription=(TextView)listViewItem.findViewById(R.id.tv_class);
 
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
 
-        tvTitle.setText(alCustom.get(position).getTitles());
+        try {
+            Date date = input.parse(alCustom.get(position).getTitles());    // parse input
+            tvTitle.setText(output.format(date));                           // format output
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+//        tvTitle.setText(alCustom.get(position).getTitles());
         tvSubject.setText(alCustom.get(position).getSubjects());
         tvDuedate.setText("Due Date : "+alCustom.get(position).getDuedates());
-//        tvDescription.setText("Description : "+alCustom.get(position).getDescripts());
 
         return  listViewItem;
     }

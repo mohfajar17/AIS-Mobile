@@ -201,6 +201,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
                             sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"project, ");
                         if (Integer.valueOf(jsonData.getString("modul_purchasing")) == 1)
                             sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"purchasing, ");
+                        if (Integer.valueOf(jsonData.getString("modul_dashboard")) == 1)
+                            sharedPrefManager.setAcessModul(sharedPrefManager.getAccessModul()+"dashboard, ");
                     } else {
                         sharedPrefManager.setAcessModul("");
                     }

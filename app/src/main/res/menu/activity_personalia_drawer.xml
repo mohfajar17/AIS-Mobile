@@ -5,16 +5,54 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_kerja"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:title="Kerja" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_penggajian"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="Penggajian" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_kalender"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="Kalender" />
+        <item
+            android:id="@+id/nav_karyawan"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Karyawan" />
+        <item
+            android:id="@+id/nav_departemen"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Departemen" />
+        <item
+            android:id="@+id/nav_jenjangkaryawan"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Jenjang Karyawan" />
+        <item
+            android:id="@+id/nav_pangkat"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Pangkat" />
+        <item
+            android:id="@+id/nav_jabatan"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Jabatan" />
     </group>
+
+    <item android:title="-------------------------">
+        <menu>
+            <item
+                android:id="@+id/nav_news"
+                android:icon="@drawable/ic_menu_send"
+                android:title="News" />
+        </menu>
+    </item>
+
+    <item android:title="-------------------------">
+        <menu>
+            <item
+                android:id="@+id/nav_report"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Report" />
+        </menu>
+    </item>
 </menu>

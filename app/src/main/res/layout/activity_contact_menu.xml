@@ -30,6 +30,20 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textViewContacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Contacts"
+        android:textColor="@color/colorBlack" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaBlue"/>
+
+    <TextView
         android:id="@+id/textViewSupplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

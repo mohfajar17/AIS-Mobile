@@ -44,23 +44,48 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
 
         int menu = Integer.valueOf(getIntent().getStringExtra("menu"));
         if (menu == 0)
-            swapFragment(R.id.nav_monitoring);
+            swapFragment(R.id.nav_customerfeedback);
         else if (menu == 1)
-            swapFragment(R.id.nav_leads);
+            swapFragment(R.id.nav_question);
         else if (menu == 2)
-            swapFragment(R.id.nav_events);
+            swapFragment(R.id.nav_kuesioner);
         else if (menu == 3)
+            swapFragment(R.id.nav_grafikkuesioner);
+        else if (menu == 4)
+            swapFragment(R.id.nav_monitoring);
+        else if (menu == 5)
+            swapFragment(R.id.nav_leads);
+        else if (menu == 6)
+            swapFragment(R.id.nav_followup);
+        else if (menu == 7)
+            swapFragment(R.id.nav_events);
+        else if (menu == 8)
             swapFragment(R.id.nav_schedule_visit);
-        else swapFragment(R.id.nav_monitoring);
+        else swapFragment(R.id.nav_customerfeedback);
     }
 
     private void swapFragment(int id) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if (id == R.id.nav_monitoring) {
+        if (id == R.id.nav_customerfeedback) {
+            CustomerFeedbackFragment mainFragment = CustomerFeedbackFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_question) {
+            QuestionFragment mainFragment = QuestionFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_kuesioner) {
+            KuesionerFragment mainFragment = KuesionerFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_grafikkuesioner) {
+            GrafikKuesionerFragment mainFragment = GrafikKuesionerFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_monitoring) {
             MonitoringFragment mainFragment = MonitoringFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_leads) {
             LeadsFragment mainFragment = LeadsFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_followup) {
+            FollowupsFragment mainFragment = FollowupsFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_events) {
             EventsFragment mainFragment = EventsFragment.newInstance();
@@ -69,7 +94,7 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
             ScheduleFragment mainFragment = ScheduleFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else {
-            MonitoringFragment mainFragment = MonitoringFragment.newInstance();
+            CustomerFeedbackFragment mainFragment = CustomerFeedbackFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         }
         fragmentTransaction.disallowAddToBackStack();

@@ -231,14 +231,14 @@ public class HwAdapter extends BaseAdapter {
             final Dialog dialogs = new Dialog(context);
             dialogs.setContentView(R.layout.dialog_inform);
             listTeachers = (ListView) dialogs.findViewById(R.id.list_teachers);
-//            ImageView imgCross = (ImageView) dialogs.findViewById(R.id.img_cross);
+            TextView tv_close = (TextView) dialogs.findViewById(R.id.tv_close);
             listTeachers.setAdapter(new DialogAdaptorStudent(context, getMatchList(jbarrays + "")));
-//            imgCross.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    dialogs.dismiss();
-//                }
-//            });
+            tv_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialogs.dismiss();
+                }
+            });
             dialogs.show();
 
         }

@@ -30,6 +30,62 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textViewCustomerFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customer Feedback"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Question"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewKuesioner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kuesioner"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:src="@color/colorAsukaBlue"/>
+
+    <TextView
+        android:id="@+id/textViewGrafikKuesioner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grafik Kuesioner"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:src="@color/colorAsukaBlue"/>
+
+    <TextView
         android:id="@+id/textViewMonitoring"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,6 +114,20 @@
         android:src="@color/colorAsukaRed"/>
 
     <TextView
+        android:id="@+id/textViewFollowups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Followups"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
         android:id="@+id/textViewEvents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,7 +138,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3dp"
         android:src="@color/colorAsukaBlue"/>
 
     <TextView
@@ -82,6 +152,6 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3dp"
         android:src="@color/colorAsukaBlue"/>
 </LinearLayout>

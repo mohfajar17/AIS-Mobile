@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_supplierinvoice"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Supplier Invoices" />
+        <item
             android:id="@+id/nav_customerinvoice"
             android:icon="@drawable/ic_menu_camera"
             android:title="Customer Invoice" />
@@ -28,14 +32,30 @@
             android:id="@+id/nav_paymentsuppliers"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Payment Suppliers" />
+        <item
+            android:id="@+id/nav_installment"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Installment" />
     </group>
 
     <item android:title="-------------------------">
         <menu>
             <item
+                android:id="@+id/nav_bankaccount"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Bank Accounts" />
+            <item
+                android:id="@+id/nav_taxreports"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Tax Reports" />
+            <item
                 android:id="@+id/nav_daftarakun"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Daftar Akun" />
+            <item
+                android:id="@+id/nav_employeesalary"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Employee Salary" />
         </menu>
     </item>
 </menu>

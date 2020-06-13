@@ -17,11 +17,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 class DialogAdaptorStudent extends BaseAdapter {
-    Activity activity;
-
     private Activity context;
     private ArrayList<Dialogpojo> alCustom;
-    private String sturl;
 
 
     public DialogAdaptorStudent(Activity context, ArrayList<Dialogpojo> alCustom) {
@@ -49,8 +46,8 @@ class DialogAdaptorStudent extends BaseAdapter {
     @TargetApi(Build.VERSION_CODES.O)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.row_addapt, null, true);
+        final LayoutInflater inflater = context.getLayoutInflater();
+        final View listViewItem = inflater.inflate(R.layout.row_addapt, null, true);
 
         TextView tvTitle=(TextView)listViewItem.findViewById(R.id.tv_name);
         TextView tvSubject=(TextView)listViewItem.findViewById(R.id.tv_type);
@@ -66,11 +63,10 @@ class DialogAdaptorStudent extends BaseAdapter {
             e.printStackTrace();
         }
 
-//        tvTitle.setText(alCustom.get(position).getTitles());
         tvSubject.setText(alCustom.get(position).getSubjects());
         tvDuedate.setText("Due Date : "+alCustom.get(position).getDuedates());
 
-        return  listViewItem;
+        return listViewItem;
     }
 
 }

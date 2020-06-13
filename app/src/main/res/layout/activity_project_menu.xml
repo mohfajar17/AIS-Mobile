@@ -124,7 +124,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3dp"
         android:src="@color/colorAsukaBlue"/>
 
     <TextView
@@ -152,7 +152,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3dp"
         android:src="@color/colorAsukaBlue"/>
 
     <TextView
@@ -180,6 +180,6 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3dp"
         android:src="@color/colorAsukaBlue"/>
 </LinearLayout>

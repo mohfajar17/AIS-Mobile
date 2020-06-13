@@ -44,25 +44,38 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
 
         int menu = Integer.valueOf(getIntent().getStringExtra("menu"));
         if (menu == 0)
-            swapFragment(R.id.nav_customerinvoice);
+            swapFragment(R.id.nav_supplierinvoice);
         else if (menu == 1)
-            swapFragment(R.id.nav_banktransaction);
+            swapFragment(R.id.nav_customerinvoice);
         else if (menu == 2)
-            swapFragment(R.id.nav_expenses);
+            swapFragment(R.id.nav_banktransaction);
         else if (menu == 3)
-            swapFragment(R.id.nav_cashadvance);
+            swapFragment(R.id.nav_expenses);
         else if (menu == 4)
-            swapFragment(R.id.nav_budgeting);
+            swapFragment(R.id.nav_cashadvance);
         else if (menu == 5)
-            swapFragment(R.id.nav_paymentsuppliers);
+            swapFragment(R.id.nav_budgeting);
         else if (menu == 6)
+            swapFragment(R.id.nav_paymentsuppliers);
+        else if (menu == 7)
+            swapFragment(R.id.nav_installment);
+        else if (menu == 8)
+            swapFragment(R.id.nav_bankaccount);
+        else if (menu == 9)
+            swapFragment(R.id.nav_taxreports);
+        else if (menu == 10)
             swapFragment(R.id.nav_daftarakun);
-        else swapFragment(R.id.nav_customerinvoice);
+        else if (menu == 11)
+            swapFragment(R.id.nav_employeesalary);
+        else swapFragment(R.id.nav_supplierinvoice);
     }
 
     private void swapFragment(int id) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if (id == R.id.nav_customerinvoice) {
+        if (id == R.id.nav_supplierinvoice) {
+            SupplierInvoiceFragment mainFragment = SupplierInvoiceFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_customerinvoice) {
             CustomerInvoiceFragment mainFragment = CustomerInvoiceFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_banktransaction) {
@@ -80,8 +93,20 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
         } else if (id == R.id.nav_paymentsuppliers) {
             PaymentSuppliersFragment mainFragment = PaymentSuppliersFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_installment) {
+            InstallmentFragment mainFragment = InstallmentFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_bankaccount) {
+            BankAccountsFragment mainFragment = BankAccountsFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_taxreports) {
+            TaxReportsFragment mainFragment = TaxReportsFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_daftarakun) {
             DaftarAkunFragment mainFragment = DaftarAkunFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_employeesalary) {
+            EmployeeSalaryFragment mainFragment = EmployeeSalaryFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else {
             CustomerInvoiceFragment mainFragment = CustomerInvoiceFragment.newInstance();

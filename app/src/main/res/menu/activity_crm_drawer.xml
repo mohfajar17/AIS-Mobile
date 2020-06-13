@@ -5,18 +5,48 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_monitoring"
+            android:id="@+id/nav_customerfeedback"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Monitoring" />
+            android:title="Customer Feedback" />
         <item
-            android:id="@+id/nav_leads"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Leads" />
+            android:id="@+id/nav_question"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Question" />
         <item
-            android:id="@+id/nav_events"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Events" />
+            android:id="@+id/nav_kuesioner"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Kuesioner" />
     </group>
+
+    <item android:title="-------------------------">
+        <menu>
+            <item
+                android:id="@+id/nav_grafikkuesioner"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="Grafik Kuesioner" />
+        </menu>
+    </item>
+
+    <item android:title="-------------------------">
+        <menu>
+            <item
+                android:id="@+id/nav_monitoring"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="Monitoring" />
+            <item
+                android:id="@+id/nav_leads"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="Leads" />
+            <item
+                android:id="@+id/nav_followup"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="Followups" />
+            <item
+                android:id="@+id/nav_events"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Events" />
+        </menu>
+    </item>
 
     <item android:title="-------------------------">
         <menu>

@@ -76,9 +76,10 @@ public class MarketingMenuActivity extends AppCompatActivity {
     }
 
     private void bukaActivity(String menu){
-        Intent bukaInventoryActivity = new Intent(MarketingMenuActivity.this, MarketingActivity.class);
-        bukaInventoryActivity.putExtra("menu", menu);
-        startActivityForResult(bukaInventoryActivity,1);
+        Intent bukaActivity = new Intent(MarketingMenuActivity.this, MarketingActivity.class);
+        bukaActivity.putExtra("menu", menu);
+        bukaActivity.putExtra("access", access);
+        startActivityForResult(bukaActivity,1);
         finish();
     }
 

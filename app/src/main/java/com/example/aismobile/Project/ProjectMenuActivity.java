@@ -166,9 +166,10 @@ public class ProjectMenuActivity extends AppCompatActivity {
     }
 
     private void bukaActivity(String menu){
-        Intent bukaProjectActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
-        bukaProjectActivity.putExtra("menu", menu);
-        startActivityForResult(bukaProjectActivity,1);
+        Intent bukaActivity = new Intent(ProjectMenuActivity.this, ProjectActivity.class);
+        bukaActivity.putExtra("menu", menu);
+        bukaActivity.putExtra("access", access);
+        startActivityForResult(bukaActivity,1);
         finish();
     }
 

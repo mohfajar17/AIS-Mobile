@@ -116,9 +116,10 @@ public class InventoryMenuActivity extends AppCompatActivity {
     }
 
     private void bukaActivity(String menu){
-        Intent bukaInventoryActivity = new Intent(InventoryMenuActivity.this, InventoryActivity.class);
-        bukaInventoryActivity.putExtra("menu", menu);
-        startActivityForResult(bukaInventoryActivity,1);
+        Intent bukaActivity = new Intent(InventoryMenuActivity.this, InventoryActivity.class);
+        bukaActivity.putExtra("menu", menu);
+        bukaActivity.putExtra("access", access);
+        startActivityForResult(bukaActivity,1);
         finish();
     }
 

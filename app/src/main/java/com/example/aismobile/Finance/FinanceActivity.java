@@ -1,5 +1,8 @@
 package com.example.aismobile.Finance;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.example.aismobile.Finance.CustomerInvoice.CustomerInvoiceFragment;
@@ -20,10 +23,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 public class FinanceActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentTransaction fragmentTransaction;
+    String access = "";
+    private Dialog myDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,8 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
 
         Toolbar toolbar = findViewById(R.id.toolbar_finance);
         setSupportActionBar(toolbar);
+
+        myDialog = new Dialog(this);
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_finance);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -42,6 +51,7 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
         NavigationView navigationView = findViewById(R.id.nav_view_finance);
         navigationView.setNavigationItemSelectedListener(this);
 
+        access = getIntent().getStringExtra("access");
         int menu = Integer.valueOf(getIntent().getStringExtra("menu"));
         if (menu == 0)
             swapFragment(R.id.nav_supplierinvoice);
@@ -72,45 +82,44 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
 
     private void swapFragment(int id) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if (id == R.id.nav_supplierinvoice) {
+        if (id == R.id.nav_supplierinvoice && access.toLowerCase().contains("supplier_invoice".toLowerCase())) {
             SupplierInvoiceFragment mainFragment = SupplierInvoiceFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_customerinvoice) {
+        } else if (id == R.id.nav_customerinvoice && access.toLowerCase().contains("sales_invoice".toLowerCase())) {
             CustomerInvoiceFragment mainFragment = CustomerInvoiceFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_banktransaction) {
+        } else if (id == R.id.nav_banktransaction && access.toLowerCase().contains("bank_transaction".toLowerCase())) {
             BankTransactionFragment mainFragment = BankTransactionFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_expenses) {
+        } else if (id == R.id.nav_expenses && access. toLowerCase().contains("expenses".toLowerCase())) {
             ExpensesFragment mainFragment = ExpensesFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_cashadvance) {
+        } else if (id == R.id.nav_cashadvance && access.toLowerCase().contains("advanced".toLowerCase())) {
             CashAdvanceFragment mainFragment = CashAdvanceFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_budgeting) {
+        } else if (id == R.id.nav_budgeting && access.toLowerCase().contains("budgeting".toLowerCase())) {
             BudgetingFragment mainFragment = BudgetingFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_paymentsuppliers) {
+        } else if (id == R.id.nav_paymentsuppliers && access.toLowerCase().contains("payment_supplier".toLowerCase())) {
             PaymentSuppliersFragment mainFragment = PaymentSuppliersFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_installment) {
+        } else if (id == R.id.nav_installment && access.toLowerCase().contains("installment".toLowerCase())) {
             InstallmentFragment mainFragment = InstallmentFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_bankaccount) {
+        } else if (id == R.id.nav_bankaccount && access.toLowerCase().contains("bank_account".toLowerCase())) {
             BankAccountsFragment mainFragment = BankAccountsFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_taxreports) {
+        } else if (id == R.id.nav_taxreports && access.toLowerCase().contains("tax_report".toLowerCase())) {
             TaxReportsFragment mainFragment = TaxReportsFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_daftarakun) {
+        } else if (id == R.id.nav_daftarakun && access.toLowerCase().contains("chart_of_account".toLowerCase())) {
             DaftarAkunFragment mainFragment = DaftarAkunFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_employeesalary) {
+        } else if (id == R.id.nav_employeesalary && access.toLowerCase().contains("employee_salary".toLowerCase())) {
             EmployeeSalaryFragment mainFragment = EmployeeSalaryFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else {
-            CustomerInvoiceFragment mainFragment = CustomerInvoiceFragment.newInstance();
-            fragmentTransaction.replace(R.id.containerFragment,mainFragment);
+            ShowPopup();
         }
         fragmentTransaction.disallowAddToBackStack();
         fragmentTransaction.commit();
@@ -130,5 +139,22 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_finance);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void ShowPopup() {
+        TextView textViewWarning;
+        TextView closeDialog;
+        myDialog.setContentView(R.layout.custom_popup);
+        textViewWarning = (TextView) myDialog.findViewById(R.id.textViewWarning);
+        closeDialog = (TextView) myDialog.findViewById(R.id.closeDialog);
+        closeDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        textViewWarning.setText("You can't access this menu");
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }

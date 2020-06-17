@@ -126,9 +126,10 @@ public class PurchasingMenuActivity extends AppCompatActivity {
     }
 
     private void bukaActivity(String menu){
-        Intent bukaPersonaliaActivity = new Intent(PurchasingMenuActivity.this, PurchasingActivity.class);
-        bukaPersonaliaActivity.putExtra("menu", menu);
-        startActivityForResult(bukaPersonaliaActivity,1);
+        Intent bukaActivity = new Intent(PurchasingMenuActivity.this, PurchasingActivity.class);
+        bukaActivity.putExtra("menu", menu);
+        bukaActivity.putExtra("access", access);
+        startActivityForResult(bukaActivity,1);
         finish();
     }
 

@@ -26,7 +26,6 @@ public class ContactActivity extends AppCompatActivity implements NavigationView
 
     FragmentTransaction fragmentTransaction;
     String access = "";
-
     private Dialog myDialog;
 
     @Override

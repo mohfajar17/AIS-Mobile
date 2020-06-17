@@ -1,9 +1,13 @@
 package com.example.aismobile.Safety;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +29,8 @@ import androidx.appcompat.widget.Toolbar;
 public class SafetyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentTransaction fragmentTransaction;
+    private String access = "";
+    private Dialog myDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,8 @@ public class SafetyActivity extends AppCompatActivity implements NavigationView.
         Toolbar toolbar = findViewById(R.id.toolbar_safety);
         setSupportActionBar(toolbar);
 
+        myDialog = new Dialog(this);
+
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_safety);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -42,6 +50,7 @@ public class SafetyActivity extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = findViewById(R.id.nav_view_safety);
         navigationView.setNavigationItemSelectedListener(this);
 
+        access = getIntent().getStringExtra("access");
         int menu = Integer.valueOf(getIntent().getStringExtra("menu"));
         if (menu == 0)
             swapFragment(R.id.nav_workaccidents);
@@ -54,18 +63,17 @@ public class SafetyActivity extends AppCompatActivity implements NavigationView.
 
     private void swapFragment(int id) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if (id == R.id.nav_workaccidents) {
+        if (id == R.id.nav_workaccidents && access.toLowerCase().contains("work_accident".toLowerCase())) {
             WorkAccidentsFragment mainFragment = WorkAccidentsFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_genbasafety) {
+        } else if (id == R.id.nav_genbasafety && access.toLowerCase().contains("genba_safety".toLowerCase())) {
             GenbaSafetyFragment mainFragment = GenbaSafetyFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_safetyfile) {
+        } else if (id == R.id.nav_safetyfile && access.toLowerCase().contains("safety_file_report".toLowerCase())) {
             SafetyFileReportFragment mainFragment = SafetyFileReportFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else {
-            WorkAccidentsFragment mainFragment = WorkAccidentsFragment.newInstance();
-            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+            ShowPopup();
         }
         fragmentTransaction.disallowAddToBackStack();
         fragmentTransaction.commit();
@@ -86,5 +94,22 @@ public class SafetyActivity extends AppCompatActivity implements NavigationView.
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_marketing);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void ShowPopup() {
+        TextView textViewWarning;
+        TextView closeDialog;
+        myDialog.setContentView(R.layout.custom_popup);
+        textViewWarning = (TextView) myDialog.findViewById(R.id.textViewWarning);
+        closeDialog = (TextView) myDialog.findViewById(R.id.closeDialog);
+        closeDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        textViewWarning.setText("You can't access this menu");
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }

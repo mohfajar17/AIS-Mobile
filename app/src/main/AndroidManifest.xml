@@ -14,10 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".DashboardActivity"></activity>
         <activity
             android:name=".Safety.SafetyActivity"
             android:label="Safety"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Purchasing.PurchasingActivity"
             android:label="Purchasing"
@@ -74,6 +75,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+
+        <service android:name=".AppService" />
     </application>
 
 </manifest>

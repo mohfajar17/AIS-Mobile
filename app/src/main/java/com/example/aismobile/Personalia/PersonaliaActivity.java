@@ -1,8 +1,13 @@
 package com.example.aismobile.Personalia;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
@@ -21,6 +26,8 @@ import androidx.appcompat.widget.Toolbar;
 public class PersonaliaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentTransaction fragmentTransaction;
+    String access = "";
+    private Dialog myDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,8 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
 
         Toolbar toolbar = findViewById(R.id.toolbar_personalia);
         setSupportActionBar(toolbar);
+
+        myDialog = new Dialog(this);
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_personalia);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -39,6 +48,7 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
         NavigationView navigationView = findViewById(R.id.nav_view_personalia);
         navigationView.setNavigationItemSelectedListener(this);
 
+        access = getIntent().getStringExtra("access");
         int menu = Integer.valueOf(getIntent().getStringExtra("menu"));
         if (menu == 0)
             swapFragment(R.id.nav_kerja);
@@ -65,34 +75,34 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
 
     private void swapFragment(int id) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if (id == R.id.nav_kerja) {
+        if (id == R.id.nav_kerja && access.toLowerCase().contains("attendance".toLowerCase())) {
             KerjaFragment mainFragment = KerjaFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_penggajian) {
+        } else if (id == R.id.nav_penggajian && access.toLowerCase().contains("payroll".toLowerCase())) {
             PenggajianFragment mainFragment = PenggajianFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_kalender) {
+        } else if (id == R.id.nav_kalender && access.toLowerCase().contains("calendar".toLowerCase())) {
             KalenderFragment mainFragment = KalenderFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_karyawan) {
+        } else if (id == R.id.nav_karyawan && access.toLowerCase().contains("employee".toLowerCase())) {
             KaryawanFragment mainFragment = KaryawanFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_departemen) {
+        } else if (id == R.id.nav_departemen && access.toLowerCase().contains("department".toLowerCase())) {
             DepartemenFragment mainFragment = DepartemenFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_jenjangkaryawan) {
+        } else if (id == R.id.nav_jenjangkaryawan && access.toLowerCase().contains("employee_grade".toLowerCase())) {
             JenjangKaryawanFragment mainFragment = JenjangKaryawanFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_pangkat) {
+        } else if (id == R.id.nav_pangkat && access.toLowerCase().contains("job_title".toLowerCase())) {
             PangkatFragment mainFragment = PangkatFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_jabatan) {
+        } else if (id == R.id.nav_jabatan && access.toLowerCase().contains("job_grade".toLowerCase())) {
             JabatanFragment mainFragment = JabatanFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_news) {
+        } else if (id == R.id.nav_news && access.toLowerCase().contains("news".toLowerCase())) {
             NewsFragment mainFragment = NewsFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_report) {
+        } else if (id == R.id.nav_report && access.toLowerCase().contains("employee_report".toLowerCase())) {
             ReportFragment mainFragment = ReportFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else {
@@ -117,5 +127,22 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_personalia);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void ShowPopup() {
+        TextView textViewWarning;
+        TextView closeDialog;
+        myDialog.setContentView(R.layout.custom_popup);
+        textViewWarning = (TextView) myDialog.findViewById(R.id.textViewWarning);
+        closeDialog = (TextView) myDialog.findViewById(R.id.closeDialog);
+        closeDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        textViewWarning.setText("You can't access this menu");
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }

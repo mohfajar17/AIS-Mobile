@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
             Toast.makeText(LoginActivity.this, "Please enter username and password", Toast.LENGTH_LONG).show();
         } else {
             WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-            final String ipAddress = "0.0.0.0";//Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
+            final String ipAddress = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
 
             progressDialog.show();
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_LOGIN, new Response.Listener<String>() {
@@ -264,7 +264,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
+            System.exit(0);
             return;
         }
 

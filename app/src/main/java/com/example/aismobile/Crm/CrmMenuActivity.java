@@ -146,9 +146,10 @@ public class CrmMenuActivity extends AppCompatActivity {
     }
 
     private void bukaActivity(String menu){
-        Intent bukaInventoryActivity = new Intent(CrmMenuActivity.this, CrmActivity.class);
-        bukaInventoryActivity.putExtra("menu", menu);
-        startActivityForResult(bukaInventoryActivity,1);
+        Intent bukaActivity = new Intent(CrmMenuActivity.this, CrmActivity.class);
+        bukaActivity.putExtra("menu", menu);
+        bukaActivity.putExtra("access", access);
+        startActivityForResult(bukaActivity,1);
         finish();
     }
 

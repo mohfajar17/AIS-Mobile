@@ -94,10 +94,10 @@ public class ContactMenuActivity extends AppCompatActivity {
     }
 
     private void bukaActivity(String menu){
-        Intent bukaInventoryActivity = new Intent(ContactMenuActivity.this, ContactActivity.class);
-        bukaInventoryActivity.putExtra("menu", menu);
-        bukaInventoryActivity.putExtra("access", access);
-        startActivityForResult(bukaInventoryActivity,1);
+        Intent bukaActivity = new Intent(ContactMenuActivity.this, ContactActivity.class);
+        bukaActivity.putExtra("menu", menu);
+        bukaActivity.putExtra("access", access);
+        startActivityForResult(bukaActivity,1);
         finish();
     }
 

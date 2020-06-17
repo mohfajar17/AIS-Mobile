@@ -88,6 +88,7 @@ public class SafetyMenuActivity extends AppCompatActivity {
     private void bukaActivity(String menu){
         Intent bukaActivity = new Intent(SafetyMenuActivity.this, SafetyActivity.class);
         bukaActivity.putExtra("menu", menu);
+        bukaActivity.putExtra("access", access);
         startActivityForResult(bukaActivity,1);
         finish();
     }

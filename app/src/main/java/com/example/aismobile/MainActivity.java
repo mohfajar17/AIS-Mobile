@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     private TextView textViewSalesQuotation;
     private TextView textViewInventoryPrice;
 
+    private LinearLayout menuDashboard;
     private LinearLayout menuFinance;
     private LinearLayout menuInventory;
     private LinearLayout menuProject;
@@ -122,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        stopService(new Intent(getBaseContext(), AppService.class));
+        startService(new Intent(getBaseContext(), AppService.class));
+
         sharedPrefManager = SharedPrefManager.getInstance(this);
 
         imageAkun = (CircleImageView) findViewById(R.id.imageAkun);
@@ -136,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         textViewBankAccount = (TextView) findViewById(R.id.textViewBankAccount);
         textViewSalesQuotation = (TextView) findViewById(R.id.textViewSalesQuotation);
         textViewInventoryPrice = (TextView) findViewById(R.id.textViewInventoryPrice);
+        menuDashboard = (LinearLayout) findViewById(R.id.menuDashboard);
         menuFinance = (LinearLayout) findViewById(R.id.menuFinance);
         menuInventory = (LinearLayout) findViewById(R.id.menuInventory);
         menuProject = (LinearLayout) findViewById(R.id.menuProject);
@@ -192,6 +197,13 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         });
 
         myDialog = new Dialog(MainActivity.this);
+        menuDashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent bukaActivity = new Intent(MainActivity.this, DashboardActivity.class);
+                startActivityForResult(bukaActivity, 1);
+            }
+        });
         menuFinance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -361,8 +373,6 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                     setPreviousMonth();
                     refreshCalendar();
                 }
-
-
             }
         });
         ImageButton next = (ImageButton) findViewById(R.id.Ib_next);

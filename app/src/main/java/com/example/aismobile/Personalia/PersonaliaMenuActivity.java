@@ -156,9 +156,10 @@ public class PersonaliaMenuActivity extends AppCompatActivity {
     }
 
     private void bukaActivity(String menu){
-        Intent bukaPersonaliaActivity = new Intent(PersonaliaMenuActivity.this, PersonaliaActivity.class);
-        bukaPersonaliaActivity.putExtra("menu", menu);
-        startActivityForResult(bukaPersonaliaActivity,1);
+        Intent bukaActivity = new Intent(PersonaliaMenuActivity.this, PersonaliaActivity.class);
+        bukaActivity.putExtra("menu", menu);
+        bukaActivity.putExtra("access", access);
+        startActivityForResult(bukaActivity,1);
         finish();
     }
 

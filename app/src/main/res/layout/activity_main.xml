@@ -575,6 +575,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/menuDashboard"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"

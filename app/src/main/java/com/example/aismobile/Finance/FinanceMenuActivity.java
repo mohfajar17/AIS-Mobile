@@ -176,9 +176,10 @@ public class FinanceMenuActivity extends AppCompatActivity {
     }
 
     private void bukaActivity(String menu){
-        Intent bukaPersonaliaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
-        bukaPersonaliaActivity.putExtra("menu", menu);
-        startActivityForResult(bukaPersonaliaActivity,1);
+        Intent bukaActivity = new Intent(FinanceMenuActivity.this, FinanceActivity.class);
+        bukaActivity.putExtra("menu", menu);
+        bukaActivity.putExtra("access", access);
+        startActivityForResult(bukaActivity,1);
         finish();
     }
 

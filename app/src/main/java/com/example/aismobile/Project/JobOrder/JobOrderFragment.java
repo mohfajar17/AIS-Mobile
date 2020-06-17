@@ -199,10 +199,11 @@ public class JobOrderFragment extends Fragment {
             holder.JOTipeJob.setText(""+mValues.get(position).getJob_order_type());
             holder.JOKeterangan.setText(""+mValues.get(position).getJob_order_description());
             holder.JONilai.setText(""+mValues.get(position).getAmount());
+            holder.JOStatus.setText(""+mValues.get(position).getJob_order_status());
 
             if (position%2==0)
-                holder.layoutJobOrderColor.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
-            else holder.layoutJobOrderColor.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                holder.layoutJobOrderColor.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.layoutJobOrderColor.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -224,6 +225,7 @@ public class JobOrderFragment extends Fragment {
             public final TextView JOTipeJob;
             public final TextView JOKeterangan;
             public final TextView JONilai;
+            public final TextView JOStatus;
             public final LinearLayout layoutJobOrderColor;
 
             public ViewHolder(View view) {
@@ -236,6 +238,7 @@ public class JobOrderFragment extends Fragment {
                 JOTipeJob = (TextView) view.findViewById(R.id.JOTipeJob);
                 JOKeterangan = (TextView) view.findViewById(R.id.JOKeterangan);
                 JONilai = (TextView) view.findViewById(R.id.JONilai);
+                JOStatus = (TextView) view.findViewById(R.id.JOStatus);
                 layoutJobOrderColor = (LinearLayout) view.findViewById(R.id.layoutJobOrderColor);
             }
         }

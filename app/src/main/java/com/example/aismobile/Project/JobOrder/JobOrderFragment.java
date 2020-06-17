@@ -124,11 +124,11 @@ public class JobOrderFragment extends Fragment {
                                 progressDialog.dismiss();
                             } else {
                                 progressDialog.dismiss();
-                                Toast.makeText(getActivity(), "gagal", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             progressDialog.dismiss();
-                            Toast.makeText(getActivity(), "gagal", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                     }
@@ -138,7 +138,7 @@ public class JobOrderFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "terjadi kesalahan jaringan, coba periksa jaringan internet ada", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Network is broken, please check your network", Toast.LENGTH_LONG).show();
                     }
                 }){
         };

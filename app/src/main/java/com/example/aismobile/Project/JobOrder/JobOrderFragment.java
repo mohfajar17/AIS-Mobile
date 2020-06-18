@@ -15,8 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +35,7 @@ import com.example.aismobile.Config;
 import com.example.aismobile.Data.JobOrder;
 import com.example.aismobile.Project.ProjectActivity;
 import com.example.aismobile.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,12 +46,19 @@ import java.util.List;
 
 public class JobOrderFragment extends Fragment {
 
-    public Button buatJobOrder;
+    public EditText editTextSearchJO;
+    public ImageView imageSearchJO;
     public RecyclerView recyclerView;
+    public FloatingActionButton fabAddJO;
+    private Spinner spinnerSearchJO;
+
     public ProgressDialog progressDialog;
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
+    public JobOrderFragment.MyRecyclerViewAdapter adapter;
+    public ArrayAdapter<String> spinnerAdapter;
+    public String[] JOSpinnerSearch = {"Semua Job Order", "Nomor Job Order", "Departemen", "PIC", "Tipe Job Order", "Keterangan Job Order", "Nilai Job Order", "Status Job Order"};
 
     public JobOrderFragment() {
     }
@@ -60,7 +74,6 @@ public class JobOrderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Loading data");
         progressDialog.setMessage("Silahkan tunggu...");
@@ -76,8 +89,6 @@ public class JobOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_job_order, container, false);
 
-        buatJobOrder = (Button) view.findViewById(R.id.buatJobOrder);
-
         // Set the adapter
         Context context = view.getContext();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerJobOrder);
@@ -87,7 +98,22 @@ public class JobOrderFragment extends Fragment {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
 
-        buatJobOrder.setOnClickListener(new View.OnClickListener() {
+        fabAddJO = (FloatingActionButton) view.findViewById(R.id.fabAddJO);
+        editTextSearchJO = (EditText) view.findViewById(R.id.editTextSearchJO);
+        imageSearchJO = (ImageView) view.findViewById(R.id.imageSearchJO);
+        spinnerSearchJO = (Spinner) view.findViewById(R.id.spinnerSearchJO);
+
+        spinnerAdapter = new ArrayAdapter<String>(JobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOSpinnerSearch);
+        spinnerSearchJO.setAdapter(spinnerAdapter);
+
+        imageSearchJO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.getFilter().filter(String.valueOf(editTextSearchJO.getText()));
+            }
+        });
+
+        fabAddJO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new BuatJobOrderFragment();
@@ -120,7 +146,8 @@ public class JobOrderFragment extends Fragment {
                                 for(int i=0;i<jsonArray.length();i++){
                                     jobOrders.add(new JobOrder(jsonArray.getJSONObject(i)));
                                 }
-                                recyclerView.setAdapter(new JobOrderFragment.MyRecyclerViewAdapter(jobOrders, mListener));
+                                adapter = new JobOrderFragment.MyRecyclerViewAdapter(jobOrders, mListener);
+                                recyclerView.setAdapter(adapter);
                                 progressDialog.dismiss();
                             } else {
                                 progressDialog.dismiss();
@@ -174,14 +201,16 @@ public class JobOrderFragment extends Fragment {
         void onListFragmentInteraction(JobOrder item);
     }
 
-    private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+    private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
         private final List<JobOrder> mValues;
+        private final List<JobOrder> values;
         private final OnListFragmentInteractionListener mListener;
 
         private MyRecyclerViewAdapter(List<JobOrder> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
+            values = new ArrayList<>(mValues);
         }
 
         @Override
@@ -215,6 +244,84 @@ public class JobOrderFragment extends Fragment {
         public int getItemCount() {
             return mValues.size();
         }
+
+        @Override
+        public Filter getFilter() {
+            return exampleFilter;
+        }
+
+        private Filter exampleFilter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<JobOrder> filteredList = new ArrayList<>();
+
+                if (constraint == null || constraint.length() == 0){
+                    filteredList.add((JobOrder) values);
+                } else {
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+
+                    for (JobOrder item : values){
+                        if (spinnerSearchJO.getSelectedItemPosition()==0){
+                            if (item.getJob_order_number().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getDepartment_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getSupervisor().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getJob_order_type().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getJob_order_description().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getAmount().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getJob_order_status().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearchJO.getSelectedItemPosition()==1){
+                            if (item.getJob_order_number().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearchJO.getSelectedItemPosition()==2){
+                            if (item.getDepartment_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearchJO.getSelectedItemPosition()==3){
+                            if (item.getSupervisor().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearchJO.getSelectedItemPosition()==4){
+                            if (item.getJob_order_type().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearchJO.getSelectedItemPosition()==5){
+                            if (item.getJob_order_description().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearchJO.getSelectedItemPosition()==6){
+                            if (item.getAmount().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearchJO.getSelectedItemPosition()==7){
+                            if (item.getJob_order_status().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        }
+                    }
+                }
+
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mValues.clear();
+                mValues.addAll((List) results.values);
+                notifyDataSetChanged();
+            }
+        };
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;

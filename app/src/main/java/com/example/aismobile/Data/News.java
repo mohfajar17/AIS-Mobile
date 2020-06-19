@@ -11,16 +11,19 @@ public class News implements Parcelable {
     private int news_id;
     private String news_title;
     private String image_name;
+    private String news_contents;
 
-    public News (int news_id, String news_title, String image_name){
+    public News (int news_id, String news_title, String image_name, String news_contents){
         this.news_id = news_id;
         this.news_title = news_title;
         this.image_name = image_name;
+        this.image_name = news_contents;
     }
     protected News(Parcel in) {
         news_id = in.readInt();
         news_title = in.readString();
         image_name = in.readString();
+        news_contents = in.readString();
     }
 
     public News(JSONObject jsonObject){
@@ -28,6 +31,7 @@ public class News implements Parcelable {
             this.news_id = jsonObject.getInt("news_id");
             this.news_title = jsonObject.getString("news_title");
             this.image_name = jsonObject.getString("image_name");
+            this.image_name = jsonObject.getString("news_contents");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -55,6 +59,7 @@ public class News implements Parcelable {
         dest.writeInt(news_id);
         dest.writeString(news_title);
         dest.writeString(image_name);
+        dest.writeString(news_contents);
     }
 
     public int getNews_id() {
@@ -67,5 +72,9 @@ public class News implements Parcelable {
 
     public String getImage_name() {
         return image_name;
+    }
+
+    public String getNews_contents() {
+        return news_contents;
     }
 }

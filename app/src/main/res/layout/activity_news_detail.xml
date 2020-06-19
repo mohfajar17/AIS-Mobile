@@ -37,6 +37,7 @@
                 app:srcCompat="@drawable/no_image" />
 
             <TextView
+                android:id="@+id/newsContents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"

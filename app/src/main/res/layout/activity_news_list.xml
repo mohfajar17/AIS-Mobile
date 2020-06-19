@@ -38,7 +38,7 @@
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/newsDescription"
+                android:id="@+id/newsContents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top|left"

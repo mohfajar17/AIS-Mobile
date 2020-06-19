@@ -123,10 +123,12 @@ public class NewsActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
             holder.newsTitle.setText(mValues.get(position).getNews_title());
+            holder.newsContents.setText(mValues.get(position).getNews_contents());
             Picasso.get().load(Config.DATA_URL_IMAGE+mValues.get(position).getImage_name()).into(holder.imageNews);
 
-            if (holder.imageNews.getDrawable() == null)
+            if (holder.imageNews.getDrawable() == null) {
                 holder.imageNews.setImageResource(R.drawable.no_image);
+            }
 
             if (position%2==0)
                 holder.layoutNews.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
@@ -150,6 +152,7 @@ public class NewsActivity extends AppCompatActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView newsTitle;
+            public final TextView newsContents;
             public final ImageView imageNews;
             public final LinearLayout layoutNews;
 
@@ -158,6 +161,7 @@ public class NewsActivity extends AppCompatActivity {
 
                 mView = itemView;
                 newsTitle = (TextView) itemView.findViewById(R.id.newsTitle);
+                newsContents = (TextView) itemView.findViewById(R.id.newsContents);
                 imageNews = (ImageView) itemView.findViewById(R.id.imageNews);
                 layoutNews = (LinearLayout) itemView.findViewById(R.id.layuotNews);
             }

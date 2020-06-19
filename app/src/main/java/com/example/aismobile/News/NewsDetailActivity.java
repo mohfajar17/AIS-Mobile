@@ -11,7 +11,7 @@ import com.example.aismobile.R;
 public class NewsDetailActivity extends AppCompatActivity {
 
     private TextView textViewTitle;
-    private TextView imageDetailInfo;
+    private ImageView imageDetailInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

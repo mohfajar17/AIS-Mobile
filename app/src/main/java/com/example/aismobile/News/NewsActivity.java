@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -134,7 +135,9 @@ public class NewsActivity extends AppCompatActivity {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(NewsActivity.this, NewsDetailActivity.class);
+                    intent.putExtra("detailNews", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         }

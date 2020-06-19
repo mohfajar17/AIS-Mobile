@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorLightGray"
+    tools:context=".Project.JobOrder.JobOrderDetailActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="@color/colorAsukaBlue"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:text="Job Order Detail"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textViewNamaJO"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:layout_marginTop="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="18dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Nomer Job Order"
+                    android:textStyle="bold"
+                    android:background="@drawable/bubble_sub"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/textViewDepartemen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:layout_marginTop="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="18dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Departemen"
+                    android:textStyle="bold"
+                    android:background="@drawable/bubble_sub"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/textViewPIC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:layout_marginTop="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="18dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="PIC"
+                    android:textStyle="bold"
+                    android:background="@drawable/bubble_sub"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/textViewTipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:layout_marginTop="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="18dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Tipe"
+                    android:textStyle="bold"
+                    android:background="@drawable/bubble_sub"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/textViewKeteranganJO"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:layout_marginTop="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="18dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Keterangan Job Order"
+                    android:textStyle="bold"
+                    android:background="@drawable/bubble_sub"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/textViewNilai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:layout_marginTop="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="18dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Nilai"
+                    android:textStyle="bold"
+                    android:background="@drawable/bubble_sub"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/textViewStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:layout_marginTop="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="18dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Status"
+                    android:textStyle="bold"
+                    android:background="@drawable/bubble_sub"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

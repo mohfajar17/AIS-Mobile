@@ -31,6 +31,7 @@ import com.example.aismobile.Inventory.InventoryMenuActivity;
 import com.example.aismobile.Finance.FinanceMenuActivity;
 import com.example.aismobile.Kalender.HomeCollection;
 import com.example.aismobile.Kalender.HwAdapter;
+import com.example.aismobile.News.NewsActivity;
 import com.example.aismobile.Personalia.PersonaliaMenuActivity;
 import com.example.aismobile.Profile.ProfileActivity;
 import com.example.aismobile.Project.ProjectMenuActivity;
@@ -312,8 +313,8 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         menuNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent bukaMenuActivity = new Intent(MainActivity.this, ContactMenuActivity.class);
-//                startActivityForResult(bukaMenuActivity,1);
+                Intent bukaMenuActivity = new Intent(MainActivity.this, NewsActivity.class);
+                startActivityForResult(bukaMenuActivity,1);
             }
         });
 

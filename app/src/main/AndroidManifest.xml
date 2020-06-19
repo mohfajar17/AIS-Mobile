@@ -14,7 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".DashboardActivity"></activity>
+        <activity android:name=".News.NewsDetailActivity"></activity>
+        <activity android:name=".Project.JobOrder.JobOrderDetailActivity" />
+        <activity android:name=".News.NewsActivity" />
+        <activity android:name=".DashboardActivity" />
         <activity
             android:name=".Safety.SafetyActivity"
             android:label="Safety"

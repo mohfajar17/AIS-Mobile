@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Project.JobOrder.JobOrderFragment">
 
     <LinearLayout
@@ -50,6 +50,44 @@
                 android:padding="5dp"
                 android:src="@drawable/ic_search"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonShowAllList"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Show all"
+            android:background="@color/colorAsukaRed"
+            android:textColor="@color/colorWhite"/>
+
+        <LinearLayout
+            android:id="@+id/layoutListJO"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/buttonBefore"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_navigate_before" />
+
+            <TextView
+                android:id="@+id/textViewList"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="1"/>
+
+            <ImageButton
+                android:id="@+id/buttonNext"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_navigate_next" />
+        </LinearLayout>
+
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -167,7 +205,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerJobOrder"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>

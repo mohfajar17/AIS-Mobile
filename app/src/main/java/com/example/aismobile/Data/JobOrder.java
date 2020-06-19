@@ -195,9 +195,7 @@ public class JobOrder implements Parcelable {
         }
     };
 
-    public JobOrder() {
-
-    }
+    public JobOrder() { }
 
     @Override
     public int describeContents() {

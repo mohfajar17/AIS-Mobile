@@ -20,12 +20,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,7 +35,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
 import com.example.aismobile.Data.JobOrder;
-import com.example.aismobile.Project.ProjectActivity;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -42,15 +43,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JobOrderFragment extends Fragment {
 
+    public TextView textViewList;
     public EditText editTextSearchJO;
     public ImageView imageSearchJO;
     public RecyclerView recyclerView;
     public FloatingActionButton fabAddJO;
-    private Spinner spinnerSearchJO;
+    public Spinner spinnerSearchJO;
+    public Button buttonShowAllList;
+    public ImageButton buttonNext;
+    public ImageButton buttonBefore;
+    public LinearLayout layoutListJO;
 
     public ProgressDialog progressDialog;
     public int mColumnCount = 1;
@@ -59,6 +67,9 @@ public class JobOrderFragment extends Fragment {
     public JobOrderFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
     public String[] JOSpinnerSearch = {"Semua Job Order", "Nomor Job Order", "Departemen", "PIC", "Tipe Job Order", "Keterangan Job Order", "Nilai Job Order", "Status Job Order"};
+    public boolean loadAll = false;
+    public List<JobOrder> jobOrders;
+    public int counter=0;
 
     public JobOrderFragment() {
     }
@@ -76,8 +87,10 @@ public class JobOrderFragment extends Fragment {
         super.onCreate(savedInstanceState);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Loading data");
-        progressDialog.setMessage("Silahkan tunggu...");
+        progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
+
+        jobOrders = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -90,20 +103,73 @@ public class JobOrderFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_job_order, container, false);
 
         // Set the adapter
-        Context context = view.getContext();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerJobOrder);
         if (mColumnCount <= 1) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
         fabAddJO = (FloatingActionButton) view.findViewById(R.id.fabAddJO);
         editTextSearchJO = (EditText) view.findViewById(R.id.editTextSearchJO);
+        textViewList = (TextView) view.findViewById(R.id.textViewList);
         imageSearchJO = (ImageView) view.findViewById(R.id.imageSearchJO);
         spinnerSearchJO = (Spinner) view.findViewById(R.id.spinnerSearchJO);
+        buttonShowAllList = (Button) view.findViewById(R.id.buttonShowAllList);
+        buttonNext = (ImageButton) view.findViewById(R.id.buttonNext);
+        buttonBefore = (ImageButton) view.findViewById(R.id.buttonBefore);
+        layoutListJO = (LinearLayout) view.findViewById(R.id.layoutListJO);
 
-        spinnerAdapter = new ArrayAdapter<String>(JobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOSpinnerSearch);
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counter = 15*Integer.valueOf(String.valueOf(textViewList.getText()));
+                loadJobOrder();
+                int textValue = Integer.valueOf(String.valueOf(textViewList.getText()))+1;
+                textViewList.setText(""+textValue);
+            }
+        });
+        buttonBefore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Integer.valueOf(String.valueOf(textViewList.getText())) > 1) {
+                    counter = 15*(Integer.valueOf(String.valueOf(textViewList.getText()))-2);
+                    loadJobOrder();
+                    int textValue = Integer.valueOf(String.valueOf(textViewList.getText()))-1;
+                    textViewList.setText(""+textValue);
+                }
+            }
+        });
+
+        buttonShowAllList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (loadAll==false){
+                    counter = -1;
+                    recyclerView.setAdapter(null);
+                    jobOrders.clear();
+                    loadJobOrderAll();
+                    loadAll = true;
+                    ViewGroup.LayoutParams params = layoutListJO.getLayoutParams();
+                    params.height = 0;
+                    layoutListJO.setLayoutParams(params);
+                    buttonShowAllList.setText("Show Half");
+                } else {
+                    textViewList.setText("1");
+                    counter = 0;
+                    recyclerView.setAdapter(null);
+                    jobOrders.clear();
+                    loadJobOrder();
+                    loadAll = false;
+                    ViewGroup.LayoutParams params = layoutListJO.getLayoutParams();
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
+                    layoutListJO.setLayoutParams(params);
+                    buttonShowAllList.setText("Show All");
+                }
+            }
+        });
+
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, JOSpinnerSearch);
         spinnerSearchJO.setAdapter(spinnerAdapter);
 
         imageSearchJO.setOnClickListener(new View.OnClickListener() {
@@ -130,44 +196,93 @@ public class JobOrderFragment extends Fragment {
         return view;
     }
 
-    private void loadJobOrder() {
+    private void loadJobOrderAll() {
         progressDialog.show();
-        final List<JobOrder> jobOrders = new ArrayList<>();
 
-        StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_JOB_ORDER_LIST,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            int status=jsonObject.getInt("status");
-                            if(status==1){
-                                JSONArray jsonArray = jsonObject.getJSONArray("data");
-                                for(int i=0;i<jsonArray.length();i++){
-                                    jobOrders.add(new JobOrder(jsonArray.getJSONObject(i)));
-                                }
-                                adapter = new JobOrderFragment.MyRecyclerViewAdapter(jobOrders, mListener);
-                                recyclerView.setAdapter(adapter);
-                                progressDialog.dismiss();
-                            } else {
-                                progressDialog.dismiss();
-                                Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_JOB_ORDER_LIST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for(int i=0;i<jsonArray.length();i++){
+                            jobOrders.add(new JobOrder(jsonArray.getJSONObject(i)));
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
+                        adapter = new JobOrderFragment.MyRecyclerViewAdapter(jobOrders, mListener);
+                        recyclerView.setAdapter(adapter);
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "Network is broken, please check your network", Toast.LENGTH_LONG).show();
+                    } else {
+                        progressDialog.dismiss();
+                        Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
-                }){
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "Emboh karepmu", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("counter", "" + counter);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(getActivity()).add(request);
+    }
+
+    public void loadJobOrder(){
+        progressDialog.show();
+        recyclerView.setAdapter(null);
+        jobOrders.clear();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_JOB_ORDER_LIST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for(int i=0;i<jsonArray.length();i++){
+                            jobOrders.add(new JobOrder(jsonArray.getJSONObject(i)));
+                        }
+                        adapter = new JobOrderFragment.MyRecyclerViewAdapter(jobOrders, mListener);
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("counter", "" + counter);
+                return param;
+            }
         };
         Volley.newRequestQueue(getActivity()).add(request);
     }
@@ -221,7 +336,7 @@ public class JobOrderFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, int position) {
+        public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
             holder.JONomor.setText(""+mValues.get(position).getJob_order_number());
             holder.JODepartemen.setText(""+mValues.get(position).getDepartment_id());
             holder.JOPic.setText(""+mValues.get(position).getSupervisor());
@@ -236,7 +351,11 @@ public class JobOrderFragment extends Fragment {
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {}
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
+                    intent.putExtra("detailJO", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
+                }
             });
         }
 

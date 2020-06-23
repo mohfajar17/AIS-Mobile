@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +44,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +59,7 @@ public class JobOrderFragment extends Fragment {
     public RecyclerView recyclerView;
     public FloatingActionButton fabAddJO;
     public Spinner spinnerSearchJO;
+    public Spinner spinnerSortJO;
     public Button buttonShowAllList;
     public ImageButton buttonNext;
     public ImageButton buttonBefore;
@@ -66,10 +71,12 @@ public class JobOrderFragment extends Fragment {
     public OnListFragmentInteractionListener mListener;
     public JobOrderFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] JOSpinnerSearch = {"Semua Job Order", "Nomor Job Order", "Departemen", "PIC", "Tipe Job Order", "Keterangan Job Order", "Nilai Job Order", "Status Job Order"};
+    public String[] JOSpinnerSearch = {"Semua Data", "Nomor Job Order", "Departemen", "PIC", "Tipe Job Order", "Keterangan Job Order", "Nilai Job Order", "Status Job Order"};
+    public String[] JOSpinnerSort = {"Berdasarkan Nomor Job Order", "Berdasarkan Departemen", "Berdasarkan PIC", "Berdasarkan Tipe", "Berdasarkan Nilai", "Berdasarkan Status"};
     public boolean loadAll = false;
     public List<JobOrder> jobOrders;
-    public int counter=0;
+    public int counter = 0;
+    public ViewGroup.LayoutParams params;
 
     public JobOrderFragment() {
     }
@@ -85,6 +92,7 @@ public class JobOrderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Loading data");
         progressDialog.setMessage("Please wait...");
@@ -115,6 +123,7 @@ public class JobOrderFragment extends Fragment {
         textViewList = (TextView) view.findViewById(R.id.textViewList);
         imageSearchJO = (ImageView) view.findViewById(R.id.imageSearchJO);
         spinnerSearchJO = (Spinner) view.findViewById(R.id.spinnerSearchJO);
+        spinnerSortJO = (Spinner) view.findViewById(R.id.spinnerSortJO);
         buttonShowAllList = (Button) view.findViewById(R.id.buttonShowAllList);
         buttonNext = (ImageButton) view.findViewById(R.id.buttonNext);
         buttonBefore = (ImageButton) view.findViewById(R.id.buttonBefore);
@@ -150,9 +159,12 @@ public class JobOrderFragment extends Fragment {
                     jobOrders.clear();
                     loadJobOrderAll();
                     loadAll = true;
-                    ViewGroup.LayoutParams params = layoutListJO.getLayoutParams();
+                    params = layoutListJO.getLayoutParams();
                     params.height = 0;
                     layoutListJO.setLayoutParams(params);
+                    params = spinnerSortJO.getLayoutParams();
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
+                    spinnerSortJO.setLayoutParams(params);
                     buttonShowAllList.setText("Show Half");
                 } else {
                     textViewList.setText("1");
@@ -161,9 +173,12 @@ public class JobOrderFragment extends Fragment {
                     jobOrders.clear();
                     loadJobOrder();
                     loadAll = false;
-                    ViewGroup.LayoutParams params = layoutListJO.getLayoutParams();
+                    params = layoutListJO.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
                     layoutListJO.setLayoutParams(params);
+                    params = spinnerSortJO.getLayoutParams();
+                    params.height = 0;;
+                    spinnerSortJO.setLayoutParams(params);
                     buttonShowAllList.setText("Show All");
                 }
             }
@@ -172,10 +187,39 @@ public class JobOrderFragment extends Fragment {
         spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, JOSpinnerSearch);
         spinnerSearchJO.setAdapter(spinnerAdapter);
 
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, JOSpinnerSort);
+        spinnerSortJO.setAdapter(spinnerAdapter);
+
+        spinnerSortJO.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0)
+                    Collections.sort(jobOrders, new ComparatorId());
+                if(position == 1)
+                    Collections.sort(jobOrders, new ComparatorDepartemen());
+                if(position == 2)
+                    Collections.sort(jobOrders, new ComparatorSupervisor());
+                if(position == 3)
+                    Collections.sort(jobOrders, new ComparatorTipe());
+                if(position == 4)
+                    Collections.sort(jobOrders, new ComparatorAmount());
+                if(position == 5)
+                    Collections.sort(jobOrders, new ComparatorStatus());
+
+                setAdapterList();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
         imageSearchJO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.getFilter().filter(String.valueOf(editTextSearchJO.getText()));
+                if (editTextSearchJO.getText().toString().matches("")){
+                    spinnerSearchJO.setSelection(0);
+                    adapter.getFilter().filter("-");
+                } else adapter.getFilter().filter(String.valueOf(editTextSearchJO.getText()));
             }
         });
 
@@ -196,6 +240,11 @@ public class JobOrderFragment extends Fragment {
         return view;
     }
 
+    private void setAdapterList(){
+        adapter = new JobOrderFragment.MyRecyclerViewAdapter(jobOrders, mListener);
+        recyclerView.setAdapter(adapter);
+    }
+
     private void loadJobOrderAll() {
         progressDialog.show();
 
@@ -210,16 +259,14 @@ public class JobOrderFragment extends Fragment {
                         for(int i=0;i<jsonArray.length();i++){
                             jobOrders.add(new JobOrder(jsonArray.getJSONObject(i)));
                         }
-                        adapter = new JobOrderFragment.MyRecyclerViewAdapter(jobOrders, mListener);
-                        recyclerView.setAdapter(adapter);
-                        progressDialog.dismiss();
+                        setAdapterList();
                     } else {
-                        progressDialog.dismiss();
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
+                    progressDialog.dismiss();
                 } catch (JSONException e) {
                     progressDialog.dismiss();
-                    Toast.makeText(getActivity(), "Emboh karepmu", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Error load data", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
@@ -257,8 +304,7 @@ public class JobOrderFragment extends Fragment {
                         for(int i=0;i<jsonArray.length();i++){
                             jobOrders.add(new JobOrder(jsonArray.getJSONObject(i)));
                         }
-                        adapter = new JobOrderFragment.MyRecyclerViewAdapter(jobOrders, mListener);
-                        recyclerView.setAdapter(adapter);
+                        setAdapterList();
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
@@ -467,6 +513,49 @@ public class JobOrderFragment extends Fragment {
                 JOStatus = (TextView) view.findViewById(R.id.JOStatus);
                 layoutJobOrderColor = (LinearLayout) view.findViewById(R.id.layoutJobOrderColor);
             }
+        }
+    }
+
+    private class ComparatorId implements Comparator<JobOrder>{
+
+        @Override
+        public int compare(JobOrder o1, JobOrder o2) {
+            return o1.getJob_order_number().compareTo(o2.getJob_order_number());
+        }
+    }
+    private class ComparatorDepartemen implements Comparator<JobOrder>{
+
+        @Override
+        public int compare(JobOrder o1, JobOrder o2) {
+            return o1.getDepartment_id().compareTo(o2.getDepartment_id());
+        }
+    }
+    private class ComparatorSupervisor implements Comparator<JobOrder>{
+
+        @Override
+        public int compare(JobOrder o1, JobOrder o2) {
+            return o1.getSupervisor().compareTo(o2.getSupervisor());
+        }
+    }
+    private class ComparatorTipe implements Comparator<JobOrder>{
+
+        @Override
+        public int compare(JobOrder o1, JobOrder o2) {
+            return o1.getJob_order_type().compareTo(o2.getJob_order_type());
+        }
+    }
+    private class ComparatorAmount implements Comparator<JobOrder>{
+
+        @Override
+        public int compare(JobOrder o1, JobOrder o2) {
+            return o1.getAmount().compareTo(o2.getAmount());
+        }
+    }
+    private class ComparatorStatus implements Comparator<JobOrder>{
+
+        @Override
+        public int compare(JobOrder o1, JobOrder o2) {
+            return o1.getJob_order_status().compareTo(o2.getJob_order_status());
         }
     }
 }

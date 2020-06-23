@@ -6,13 +6,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.aismobile.Data.JobOrder;
+import com.example.aismobile.Data.WorkCompletion;
 import com.example.aismobile.OnFragmentInteractionListener;
 import com.example.aismobile.Project.JobOrder.JobOrderFragment;
+import com.example.aismobile.Project.WorkCompletion.WorkCompletionFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,7 +27,8 @@ import androidx.appcompat.widget.Toolbar;
 
 public class ProjectActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnFragmentInteractionListener,
-        JobOrderFragment.OnListFragmentInteractionListener{
+        JobOrderFragment.OnListFragmentInteractionListener,
+        WorkCompletionFragment.OnListFragmentInteractionListener{
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -51,7 +53,7 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
         NavigationView navigationView = findViewById(R.id.nav_view_project);
         navigationView.setNavigationItemSelectedListener(this);
 
-        access = getIntent().getStringExtra("access");
+        access = access + getIntent().getStringExtra("access");
         int menu = Integer.valueOf(getIntent().getStringExtra("menu"));
         if (menu == 0)
             swapFragment(R.id.nav_job_order);
@@ -149,17 +151,22 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
     }
 
     @Override
-    public void onListFragmentInteraction(JobOrder item) {
-
-    }
-
-    @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
     @Override
     public void onFragmentChanged(int id) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(JobOrder item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(WorkCompletion item) {
 
     }
 }

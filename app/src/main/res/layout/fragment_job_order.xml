@@ -25,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:layout_gravity="bottom"
             android:orientation="horizontal">
 
@@ -51,6 +50,13 @@
                 android:src="@drawable/ic_search"/>
         </LinearLayout>
 
+        <Spinner
+            android:id="@+id/spinnerSortJO"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:spinnerMode="dialog" />
+
         <Button
             android:id="@+id/buttonShowAllList"
             android:layout_width="match_parent"
@@ -63,7 +69,6 @@
             android:id="@+id/layoutListJO"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3.5dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -88,12 +93,6 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_navigate_next" />
         </LinearLayout>
-
-        <Spinner
-            android:id="@+id/spinnerSortJO"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:spinnerMode="dialog" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -181,7 +180,7 @@
                         android:src="@color/colorWhite"/>
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Nilai"
@@ -212,7 +211,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerJobOrder"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:isScrollContainer="false" />
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>

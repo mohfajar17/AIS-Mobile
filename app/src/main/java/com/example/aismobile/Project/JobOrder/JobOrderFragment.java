@@ -43,6 +43,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -71,8 +73,12 @@ public class JobOrderFragment extends Fragment {
     public OnListFragmentInteractionListener mListener;
     public JobOrderFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] JOSpinnerSearch = {"Semua Data", "Nomor Job Order", "Departemen", "PIC", "Tipe Job Order", "Keterangan Job Order", "Nilai Job Order", "Status Job Order"};
-    public String[] JOSpinnerSort = {"Berdasarkan Nomor Job Order", "Berdasarkan Departemen", "Berdasarkan PIC", "Berdasarkan Tipe", "Berdasarkan Nilai", "Berdasarkan Status"};
+    public String[] JOSpinnerSearch = {"Semua Data", "Nomor Job Order", "Departemen", "PIC", "Tipe Job Order",
+            "Keterangan Job Order", "Nilai Job Order", "Status Job Order"};
+    public String[] JOSpinnerSort = {"Berdasarkan Nomor Job Order ASC", "Berdasarkan Nomor Job Order DESC",
+            "Berdasarkan Departemen ASC", "Berdasarkan Departemen DESC", "Berdasarkan PIC ASC", "Berdasarkan PIC DESC",
+            "Berdasarkan Tipe ASC", "Berdasarkan Tipe DESC", "Berdasarkan Nilai ASC", "Berdasarkan Nilai DESC",
+            "Berdasarkan Status ASC", "Berdasarkan Status DESC"};
     public boolean loadAll = false;
     public List<JobOrder> jobOrders;
     public int counter = 0;
@@ -133,7 +139,7 @@ public class JobOrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 counter = 15*Integer.valueOf(String.valueOf(textViewList.getText()));
-                loadJobOrder();
+                setSortHalf(spinnerSortJO.getSelectedItemPosition());
                 int textValue = Integer.valueOf(String.valueOf(textViewList.getText()))+1;
                 textViewList.setText(""+textValue);
             }
@@ -143,7 +149,7 @@ public class JobOrderFragment extends Fragment {
             public void onClick(View v) {
                 if (Integer.valueOf(String.valueOf(textViewList.getText())) > 1) {
                     counter = 15*(Integer.valueOf(String.valueOf(textViewList.getText()))-2);
-                    loadJobOrder();
+                    setSortHalf(spinnerSortJO.getSelectedItemPosition());
                     int textValue = Integer.valueOf(String.valueOf(textViewList.getText()))-1;
                     textViewList.setText(""+textValue);
                 }
@@ -155,30 +161,20 @@ public class JobOrderFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    recyclerView.setAdapter(null);
-                    jobOrders.clear();
-                    loadJobOrderAll();
+                    loadJobOrderAll("job_order_id DESC");
                     loadAll = true;
                     params = layoutListJO.getLayoutParams();
                     params.height = 0;
                     layoutListJO.setLayoutParams(params);
-                    params = spinnerSortJO.getLayoutParams();
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
-                    spinnerSortJO.setLayoutParams(params);
                     buttonShowAllList.setText("Show Half");
                 } else {
                     textViewList.setText("1");
                     counter = 0;
-                    recyclerView.setAdapter(null);
-                    jobOrders.clear();
-                    loadJobOrder();
+                    loadJobOrder("job_order_id DESC");
                     loadAll = false;
                     params = layoutListJO.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
                     layoutListJO.setLayoutParams(params);
-                    params = spinnerSortJO.getLayoutParams();
-                    params.height = 0;;
-                    spinnerSortJO.setLayoutParams(params);
                     buttonShowAllList.setText("Show All");
                 }
             }
@@ -193,20 +189,11 @@ public class JobOrderFragment extends Fragment {
         spinnerSortJO.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0)
-                    Collections.sort(jobOrders, new ComparatorId());
-                if(position == 1)
-                    Collections.sort(jobOrders, new ComparatorDepartemen());
-                if(position == 2)
-                    Collections.sort(jobOrders, new ComparatorSupervisor());
-                if(position == 3)
-                    Collections.sort(jobOrders, new ComparatorTipe());
-                if(position == 4)
-                    Collections.sort(jobOrders, new ComparatorAmount());
-                if(position == 5)
-                    Collections.sort(jobOrders, new ComparatorStatus());
-
-                setAdapterList();
+                if (counter<0){
+                    setSortAll(position);
+                } else {
+                    setSortHalf(position);
+                }
             }
 
             @Override
@@ -235,9 +222,63 @@ public class JobOrderFragment extends Fragment {
             }
         });
 
-        loadJobOrder();
+        loadJobOrder("job_order_id DESC");
 
         return view;
+    }
+
+    private void setSortAll(int position){
+        if(position == 0)
+            loadJobOrderAll("job_order_number ASC");
+        else if(position == 1)
+            loadJobOrderAll("job_order_number DESC");
+        else if(position == 2)
+            loadJobOrderAll("department_id ASC");
+        else if(position == 3)
+            loadJobOrderAll("department_id DESC");
+        else if(position == 4)
+            loadJobOrderAll("supervisor ASC");
+        else if(position == 5)
+            loadJobOrderAll("supervisor DESC");
+        else if(position == 6)
+            loadJobOrderAll("job_order_type ASC");
+        else if(position == 7)
+            loadJobOrderAll("job_order_type DESC");
+        else if(position == 8)
+            loadJobOrderAll("amount ASC");
+        else if(position == 9)
+            loadJobOrderAll("amount DESC");
+        else if(position == 10)
+            loadJobOrderAll("job_order_status ASC");
+        else if(position == 11)
+            loadJobOrderAll("job_order_status DESC");
+    }
+
+    private void setSortHalf(int position){
+        if(position == 0)
+            loadJobOrder("job_order_number ASC");
+        else if(position == 1)
+            loadJobOrder("job_order_number DESC");
+        else if(position == 2)
+            loadJobOrder("department_id ASC");
+        else if(position == 3)
+            loadJobOrder("department_id DESC");
+        else if(position == 4)
+            loadJobOrder("supervisor ASC");
+        else if(position == 5)
+            loadJobOrder("supervisor DESC");
+        else if(position == 6)
+            loadJobOrder("job_order_type ASC");
+        else if(position == 7)
+            loadJobOrder("job_order_type DESC");
+        else if(position == 8)
+            loadJobOrder("amount ASC");
+        else if(position == 9)
+            loadJobOrder("amount DESC");
+        else if(position == 10)
+            loadJobOrder("job_order_status ASC");
+        else if(position == 11)
+            loadJobOrder("job_order_status DESC");
     }
 
     private void setAdapterList(){
@@ -245,8 +286,10 @@ public class JobOrderFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-    private void loadJobOrderAll() {
+    private void loadJobOrderAll(final String sortBy) {
         progressDialog.show();
+        recyclerView.setAdapter(null);
+        jobOrders.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_JOB_ORDER_LIST, new Response.Listener<String>() {
             @Override
@@ -282,13 +325,14 @@ public class JobOrderFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
                 param.put("counter", "" + counter);
+                param.put("sortBy", "" + sortBy);
                 return param;
             }
         };
         Volley.newRequestQueue(getActivity()).add(request);
     }
 
-    public void loadJobOrder(){
+    public void loadJobOrder(final String sortBy){
         progressDialog.show();
         recyclerView.setAdapter(null);
         jobOrders.clear();
@@ -327,6 +371,7 @@ public class JobOrderFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
                 param.put("counter", "" + counter);
+                param.put("sortBy", "" + sortBy);
                 return param;
             }
         };
@@ -336,7 +381,7 @@ public class JobOrderFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==10 && resultCode == getActivity().RESULT_OK ){
-            loadJobOrder();
+//            loadJobOrder();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -388,8 +433,10 @@ public class JobOrderFragment extends Fragment {
             holder.JOPic.setText(""+mValues.get(position).getSupervisor());
             holder.JOTipeJob.setText(""+mValues.get(position).getJob_order_type());
             holder.JOKeterangan.setText(""+mValues.get(position).getJob_order_description());
-            holder.JONilai.setText(""+mValues.get(position).getAmount());
             holder.JOStatus.setText(""+mValues.get(position).getJob_order_status());
+
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.JONilai.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getAmount())));
 
             if (position%2==0)
                 holder.layoutJobOrderColor.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -513,49 +560,6 @@ public class JobOrderFragment extends Fragment {
                 JOStatus = (TextView) view.findViewById(R.id.JOStatus);
                 layoutJobOrderColor = (LinearLayout) view.findViewById(R.id.layoutJobOrderColor);
             }
-        }
-    }
-
-    private class ComparatorId implements Comparator<JobOrder>{
-
-        @Override
-        public int compare(JobOrder o1, JobOrder o2) {
-            return o1.getJob_order_number().compareTo(o2.getJob_order_number());
-        }
-    }
-    private class ComparatorDepartemen implements Comparator<JobOrder>{
-
-        @Override
-        public int compare(JobOrder o1, JobOrder o2) {
-            return o1.getDepartment_id().compareTo(o2.getDepartment_id());
-        }
-    }
-    private class ComparatorSupervisor implements Comparator<JobOrder>{
-
-        @Override
-        public int compare(JobOrder o1, JobOrder o2) {
-            return o1.getSupervisor().compareTo(o2.getSupervisor());
-        }
-    }
-    private class ComparatorTipe implements Comparator<JobOrder>{
-
-        @Override
-        public int compare(JobOrder o1, JobOrder o2) {
-            return o1.getJob_order_type().compareTo(o2.getJob_order_type());
-        }
-    }
-    private class ComparatorAmount implements Comparator<JobOrder>{
-
-        @Override
-        public int compare(JobOrder o1, JobOrder o2) {
-            return o1.getAmount().compareTo(o2.getAmount());
-        }
-    }
-    private class ComparatorStatus implements Comparator<JobOrder>{
-
-        @Override
-        public int compare(JobOrder o1, JobOrder o2) {
-            return o1.getJob_order_status().compareTo(o2.getJob_order_status());
         }
     }
 }

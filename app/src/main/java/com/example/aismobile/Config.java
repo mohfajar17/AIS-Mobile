@@ -35,6 +35,7 @@ public class Config {
     public static final String DATA_URL_ACCESS_CONTACT = DATA_URL+"accessAllowContact";
     public static final String DATA_URL_JOB_ORDER_LIST = DATA_URL+"getJobOrder";
     public static final String DATA_URL_WORK_COMPLETION_LIST = DATA_URL+"getWorkCompletion";
+    public static final String DATA_URL_MATERIAL_REQUISITION_LIST = DATA_URL+"getMaterialRequisition";
     public static final String DATA_URL_NEWS_LIST = DATA_URL+"getNews";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";

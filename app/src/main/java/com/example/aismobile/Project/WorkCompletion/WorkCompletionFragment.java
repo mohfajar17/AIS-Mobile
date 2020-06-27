@@ -69,8 +69,13 @@ public class WorkCompletionFragment extends Fragment {
     public OnListFragmentInteractionListener mListener;
     public WorkCompletionFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] WCSpinnerSearch = {"Semua Data", "Work Completion", "Job Order", "SQ Number", "Start Work", "End Work", "Diterima Oleh", "Dibuat Oleh"};
-    public String[] WCSpinnerSort = {"Berdasarkan Work Completion", "Berdasarkan Job Order", "Berdasarkan SQ Number", "Berdasarkan Start Work", "Berdasarkan End Work", "Berdasarkan Diterima Oleh", "Berdasarkan Dibuat Oleh"};
+    public String[] WCSpinnerSearch = {"Semua Data", "Work Completion", "Job Order", "SQ Number", "Start Work",
+            "End Work", "Diterima Oleh", "Dibuat Oleh"};
+    public String[] WCSpinnerSort = {"Berdasarkan Work Completion ASC", "Berdasarkan Work Completion DESC",
+            "Berdasarkan Job Order ASC", "Berdasarkan Job Order DESC", "Berdasarkan SQ Number ASC",
+            "Berdasarkan SQ Number DESC", "Berdasarkan Start Work ASC", "Berdasarkan Start Work DESC",
+            "Berdasarkan End Work ASC", "Berdasarkan End Work DESC", "Berdasarkan Diterima Oleh ASC",
+            "Berdasarkan Diterima Oleh DESC", "Berdasarkan Dibuat Oleh ASC", "Berdasarkan Dibuat Oleh DESC"};
     public boolean loadAll = false;
     public List<WorkCompletion> workCompletions;
     public int counter = 0;
@@ -108,7 +113,6 @@ public class WorkCompletionFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_work_completion, container, false);
 
-
         // Set the adapter
         pwcRecycler = (RecyclerView) view.findViewById(R.id.pwcRecycler);
         if (mColumnCount <= 1) {
@@ -132,7 +136,7 @@ public class WorkCompletionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 counter = 15*Integer.valueOf(String.valueOf(pwcTextPaging.getText()));
-                loadWorkCompletion();
+                setSortHalf(pwcSpinnerSort.getSelectedItemPosition());
                 int textValue = Integer.valueOf(String.valueOf(pwcTextPaging.getText()))+1;
                 pwcTextPaging.setText(""+textValue);
             }
@@ -142,7 +146,7 @@ public class WorkCompletionFragment extends Fragment {
             public void onClick(View v) {
                 if (Integer.valueOf(String.valueOf(pwcTextPaging.getText())) > 1) {
                     counter = 15*(Integer.valueOf(String.valueOf(pwcTextPaging.getText()))-2);
-                    loadWorkCompletion();
+                    setSortHalf(pwcSpinnerSort.getSelectedItemPosition());
                     int textValue = Integer.valueOf(String.valueOf(pwcTextPaging.getText()))-1;
                     pwcTextPaging.setText(""+textValue);
                 }
@@ -154,30 +158,20 @@ public class WorkCompletionFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    pwcRecycler.setAdapter(null);
-                    workCompletions.clear();
-                    loadWorkCompletionAll();
+                    loadWorkCompletionAll("job_order_id DESC");
                     loadAll = true;
                     params = pwcLayoutPaging.getLayoutParams();
                     params.height = 0;
                     pwcLayoutPaging.setLayoutParams(params);
-                    params = pwcSpinnerSort.getLayoutParams();
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
-                    pwcSpinnerSort.setLayoutParams(params);
                     pwcBtnShowList.setText("Show Half");
                 } else {
                     pwcTextPaging.setText("1");
                     counter = 0;
-                    pwcRecycler.setAdapter(null);
-                    workCompletions.clear();
-                    loadWorkCompletion();
+                    loadWorkCompletion("job_order_id DESC");
                     loadAll = false;
                     params = pwcLayoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
                     pwcLayoutPaging.setLayoutParams(params);
-                    params = pwcSpinnerSort.getLayoutParams();
-                    params.height = 0;;
-                    pwcSpinnerSort.setLayoutParams(params);
                     pwcBtnShowList.setText("Show All");
                 }
             }
@@ -192,22 +186,11 @@ public class WorkCompletionFragment extends Fragment {
         pwcSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0)
-                    Collections.sort(workCompletions, new ComparatorJobProgressReportNumber());
-                else if (position == 1)
-                    Collections.sort(workCompletions, new ComparatorJobOrder());
-                else if (position == 2)
-                    Collections.sort(workCompletions, new ComparatorSQNumber());
-                else if (position == 3)
-                    Collections.sort(workCompletions, new ComparatorStart());
-                else if (position == 4)
-                    Collections.sort(workCompletions, new ComparatorEnd());
-                else if (position == 5)
-                    Collections.sort(workCompletions, new ComparatorDiterima());
-                else if (position == 6)
-                    Collections.sort(workCompletions, new ComparatorDibuat());
-
-                setAdapterList();
+                if (counter<0){
+                    setSortAll(position);
+                } else {
+                    setSortHalf(position);
+                }
             }
 
             @Override
@@ -226,9 +209,71 @@ public class WorkCompletionFragment extends Fragment {
             }
         });
 
-        loadWorkCompletion();
+        loadWorkCompletion("job_order_id DESC");
 
         return view;
+    }
+
+    private void setSortAll(int position){
+        if (position == 0)
+            loadWorkCompletionAll("job_progress_report_id ASC");
+        else if (position == 1)
+            loadWorkCompletionAll("job_progress_report_id DESC");
+        else if (position == 2)
+            loadWorkCompletionAll("job_order_id ASC");
+        else if (position == 3)
+            loadWorkCompletionAll("job_order_id DESC");
+        else if (position == 4)
+            loadWorkCompletionAll("sales_quotation_id ASC");
+        else if (position == 5)
+            loadWorkCompletionAll("sales_quotation_id DESC");
+        else if (position == 6)
+            loadWorkCompletionAll("start_work ASC");
+        else if (position == 7)
+            loadWorkCompletionAll("start_work DESC");
+        else if (position == 8)
+            loadWorkCompletionAll("end_work ASC");
+        else if (position == 9)
+            loadWorkCompletionAll("end_work DESC");
+        else if (position == 10)
+            loadWorkCompletionAll("accepted_by ASC");
+        else if (position == 11)
+            loadWorkCompletionAll("accepted_by DESC");
+        else if (position == 12)
+            loadWorkCompletionAll("created_by ASC");
+        else if (position == 13)
+            loadWorkCompletionAll("created_by DESC");
+    }
+
+    private void setSortHalf(int position){
+        if (position == 0)
+            loadWorkCompletion("job_progress_report_id ASC");
+        else if (position == 1)
+            loadWorkCompletion("job_progress_report_id DESC");
+        else if (position == 2)
+            loadWorkCompletion("job_order_id ASC");
+        else if (position == 3)
+            loadWorkCompletion("job_order_id DESC");
+        else if (position == 4)
+            loadWorkCompletion("sales_quotation_id ASC");
+        else if (position == 5)
+            loadWorkCompletion("sales_quotation_id DESC");
+        else if (position == 6)
+            loadWorkCompletion("start_work ASC");
+        else if (position == 7)
+            loadWorkCompletion("start_work DESC");
+        else if (position == 8)
+            loadWorkCompletion("end_work ASC");
+        else if (position == 9)
+            loadWorkCompletion("end_work DESC");
+        else if (position == 10)
+            loadWorkCompletion("accepted_by ASC");
+        else if (position == 11)
+            loadWorkCompletion("accepted_by DESC");
+        else if (position == 12)
+            loadWorkCompletion("created_by ASC");
+        else if (position == 13)
+            loadWorkCompletion("created_by DESC");
     }
 
     private void setAdapterList(){
@@ -236,8 +281,10 @@ public class WorkCompletionFragment extends Fragment {
         pwcRecycler.setAdapter(adapter);
     }
 
-    private void loadWorkCompletionAll() {
+    private void loadWorkCompletionAll(final String sortBy) {
         progressDialog.show();
+        pwcRecycler.setAdapter(null);
+        workCompletions.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_WORK_COMPLETION_LIST, new Response.Listener<String>() {
             @Override
@@ -273,13 +320,14 @@ public class WorkCompletionFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
                 param.put("counter", "" + counter);
+                param.put("sortBy", "" + sortBy);
                 return param;
             }
         };
         Volley.newRequestQueue(getActivity()).add(request);
     }
 
-    public void loadWorkCompletion(){
+    public void loadWorkCompletion(final String sortBy){
         progressDialog.show();
         pwcRecycler.setAdapter(null);
         workCompletions.clear();
@@ -318,6 +366,7 @@ public class WorkCompletionFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
                 param.put("counter", "" + counter);
+                param.put("sortBy", "" + sortBy);
                 return param;
             }
         };
@@ -509,56 +558,6 @@ public class WorkCompletionFragment extends Fragment {
 
                 pwcLayoutList = (LinearLayout) view.findViewById(R.id.pwcLayoutList);
             }
-        }
-    }
-
-    private class ComparatorJobProgressReportNumber implements Comparator<WorkCompletion> {
-
-        @Override
-        public int compare(WorkCompletion o1, WorkCompletion o2) {
-            return o1.getJob_progress_report_number().compareTo(o2.getJob_progress_report_number());
-        }
-    }
-    private class ComparatorJobOrder implements Comparator<WorkCompletion> {
-
-        @Override
-        public int compare(WorkCompletion o1, WorkCompletion o2) {
-            return o1.getJob_order_id().compareTo(o2.getJob_order_id());
-        }
-    }
-    private class ComparatorSQNumber implements Comparator<WorkCompletion> {
-
-        @Override
-        public int compare(WorkCompletion o1, WorkCompletion o2) {
-            return o1.getSales_quotation_id().compareTo(o2.getSales_quotation_id());
-        }
-    }
-    private class ComparatorStart implements Comparator<WorkCompletion> {
-
-        @Override
-        public int compare(WorkCompletion o1, WorkCompletion o2) {
-            return o1.getStart_work().compareTo(o2.getStart_work());
-        }
-    }
-    private class ComparatorEnd implements Comparator<WorkCompletion> {
-
-        @Override
-        public int compare(WorkCompletion o1, WorkCompletion o2) {
-            return o1.getEnd_work().compareTo(o2.getEnd_work());
-        }
-    }
-    private class ComparatorDiterima implements Comparator<WorkCompletion> {
-
-        @Override
-        public int compare(WorkCompletion o1, WorkCompletion o2) {
-            return o1.getAccepted_by().compareTo(o2.getAccepted_by());
-        }
-    }
-    private class ComparatorDibuat implements Comparator<WorkCompletion> {
-
-        @Override
-        public int compare(WorkCompletion o1, WorkCompletion o2) {
-            return o1.getCreated_by().compareTo(o2.getCreated_by());
         }
     }
 }

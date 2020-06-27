@@ -4,25 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:id="@+id/layoutJobOrderColor"
-    tools:context=".Project.JobOrder.JobOrderFragment">
+    android:id="@+id/pmrLayoutList"
+    tools:context=".Project.MaterialRequest.MaterialReqFragment">
 
     <TextView
-        android:id="@+id/JONomor"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:gravity="top|center"
-        android:text="-"
-        android:padding="5dp"
-        android:textColor="@android:color/black" />
-
-    <ImageView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:src="@color/colorGray"/>
-
-    <TextView
-        android:id="@+id/JODepartemen"
+        android:id="@+id/pmrTextNomorMaterial"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -36,10 +22,10 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/JOPic"
+        android:id="@+id/pmrTextJobCode"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:gravity="top|left"
+        android:gravity="top|center"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -50,7 +36,21 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/JOTipeJob"
+        android:id="@+id/pmrTextTglPermintaan"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pmrStatus"
         android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -64,8 +64,8 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/JOKeterangan"
-        android:layout_width="200dp"
+        android:id="@+id/pmrTextDibuat"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|left"
         android:text="-"
@@ -78,10 +78,10 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/JONilai"
-        android:layout_width="140dp"
+        android:id="@+id/pmrTextApproval1"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:gravity="top|right"
+        android:gravity="top|left"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -92,8 +92,36 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/JOStatus"
-        android:layout_width="80dp"
+        android:id="@+id/pmrTextApproval2"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pmrTextApproval3"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pmrTextPriority"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
         android:text="-"

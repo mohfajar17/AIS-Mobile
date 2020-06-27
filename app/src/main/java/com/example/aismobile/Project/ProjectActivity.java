@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.aismobile.Data.JobOrder;
+import com.example.aismobile.Data.MaterialRequest;
 import com.example.aismobile.Data.WorkCompletion;
 import com.example.aismobile.OnFragmentInteractionListener;
 import com.example.aismobile.Project.JobOrder.JobOrderFragment;
+import com.example.aismobile.Project.MaterialRequest.MaterialReqFragment;
 import com.example.aismobile.Project.WorkCompletion.WorkCompletionFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
@@ -28,7 +30,8 @@ import androidx.appcompat.widget.Toolbar;
 public class ProjectActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnFragmentInteractionListener,
         JobOrderFragment.OnListFragmentInteractionListener,
-        WorkCompletionFragment.OnListFragmentInteractionListener{
+        WorkCompletionFragment.OnListFragmentInteractionListener,
+        MaterialReqFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -167,6 +170,11 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(WorkCompletion item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(MaterialRequest item) {
 
     }
 }

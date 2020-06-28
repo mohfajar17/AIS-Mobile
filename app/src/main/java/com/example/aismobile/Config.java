@@ -3,8 +3,8 @@ package com.example.aismobile;
 public class Config {
 //    public static final String DATA_URL = "http://192.168.43.119/ais_web_service/apiAis.php?apicall=";   //IP thetering hp
 //    public static final String DATA_URL = "http://192.168.1.24/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
-//    public static final String DATA_URL = "http://192.168.0.107/ais_web_service/apiAis.php?apicall=";   //IP home wifi
-    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
+    public static final String DATA_URL = "http://192.168.0.105/ais_web_service/apiAis.php?apicall=";   //IP home wifi
+//    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
     public static final String DATA_URL_LOGIN = DATA_URL+"login";
     public static final String DATA_URL_USER_ACCESS = DATA_URL+"accessAllowModul";
     public static final String DATA_URL_USER_ISMOBILE = DATA_URL+"userActiveMobile";
@@ -36,6 +36,9 @@ public class Config {
     public static final String DATA_URL_JOB_ORDER_LIST = DATA_URL+"getJobOrder";
     public static final String DATA_URL_WORK_COMPLETION_LIST = DATA_URL+"getWorkCompletion";
     public static final String DATA_URL_MATERIAL_REQUISITION_LIST = DATA_URL+"getMaterialRequisition";
+    public static final String DATA_URL_WORK_ORDER_LIST = DATA_URL+"getWorkOrder";
+    public static final String DATA_URL_PICKUP_LIST = DATA_URL+"getPickup";
+    public static final String DATA_URL_SPKL_LIST = DATA_URL+"getSpkl";
     public static final String DATA_URL_NEWS_LIST = DATA_URL+"getNews";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";

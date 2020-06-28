@@ -1,4 +1,4 @@
-package com.example.aismobile.Project;
+package com.example.aismobile.Project.ToolsRequests;
 
 import android.os.Bundle;
 
@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 
 import com.example.aismobile.R;
 
-public class SpklFragment extends Fragment {
-    public SpklFragment() {
+public class ToolsReqFragment extends Fragment {
+
+    public ToolsReqFragment() {
         // Required empty public constructor
     }
 
-    public static SpklFragment newInstance() {
-        SpklFragment fragment = new SpklFragment();
+    public static ToolsReqFragment newInstance() {
+        ToolsReqFragment fragment = new ToolsReqFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -32,7 +33,7 @@ public class SpklFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_spkl, container, false);
+        View view = inflater.inflate(R.layout.fragment_tools_req, container, false);
+        return view;
     }
 }

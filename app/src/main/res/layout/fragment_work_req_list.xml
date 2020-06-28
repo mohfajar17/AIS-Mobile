@@ -1,0 +1,116 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/pwrLayoutList"
+    tools:context=".Project.MaterialRequest.MaterialReqFragment">
+
+    <TextView
+        android:id="@+id/pwrTextNomorWorkReq"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pwrTextJobOrder"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pwrTextTglAwal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pwrTextDibuat"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pwrTextCheckedBy"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pwrTextApproval1"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pwrTextApproval2"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pwrTextApproval3"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+</LinearLayout>

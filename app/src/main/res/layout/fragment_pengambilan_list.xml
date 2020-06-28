@@ -1,0 +1,81 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/ppLayoutList"
+    tools:context=".Project.Pengambilan.PengambilanFragment">
+
+    <TextView
+        android:id="@+id/ppTextNomorPengambilan"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/ppTextMaterialReq"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/ppTextDibuatOleh"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/ppTextDiambilOleh"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/ppTextDiakuiOleh"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/ppTextTglPengambilan"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/ppTextCatatan"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/ppTextDiakui"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+</LinearLayout>

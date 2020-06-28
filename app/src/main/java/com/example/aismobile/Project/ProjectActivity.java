@@ -11,11 +11,18 @@ import android.widget.TextView;
 
 import com.example.aismobile.Data.JobOrder;
 import com.example.aismobile.Data.MaterialRequest;
+import com.example.aismobile.Data.Pickup;
+import com.example.aismobile.Data.Spkl;
 import com.example.aismobile.Data.WorkCompletion;
+import com.example.aismobile.Data.WorkOrder;
 import com.example.aismobile.OnFragmentInteractionListener;
 import com.example.aismobile.Project.JobOrder.JobOrderFragment;
 import com.example.aismobile.Project.MaterialRequest.MaterialReqFragment;
+import com.example.aismobile.Project.Pengambilan.PengambilanFragment;
+import com.example.aismobile.Project.Spkl.SpklFragment;
+import com.example.aismobile.Project.ToolsRequests.ToolsReqFragment;
 import com.example.aismobile.Project.WorkCompletion.WorkCompletionFragment;
+import com.example.aismobile.Project.WorkRequests.WorkReqFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -31,7 +38,10 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
         OnFragmentInteractionListener,
         JobOrderFragment.OnListFragmentInteractionListener,
         WorkCompletionFragment.OnListFragmentInteractionListener,
-        MaterialReqFragment.OnListFragmentInteractionListener {
+        MaterialReqFragment.OnListFragmentInteractionListener,
+        WorkReqFragment.OnListFragmentInteractionListener,
+        PengambilanFragment.OnListFragmentInteractionListener,
+        SpklFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -175,6 +185,21 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(MaterialRequest item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(WorkOrder item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Pickup item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Spkl item) {
 
     }
 }

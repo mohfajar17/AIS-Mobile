@@ -1,4 +1,4 @@
-package com.example.aismobile.Data;
+package com.example.aismobile.Data.Project;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -10,7 +10,7 @@ public class TunjanganTemporary implements Parcelable {
 
     private int employee_allowance_id;
     private String employee_allowance_number;
-    private String employee_name;
+    private String employee_id;
     private String additional_allowance_type;
     private String kab_id;
     private String job_order_id;
@@ -40,7 +40,7 @@ public class TunjanganTemporary implements Parcelable {
     private String modified_by;
     private String modified_date;
 
-    public TunjanganTemporary(int employee_allowance_id, String employee_allowance_number, String employee_name,
+    public TunjanganTemporary(int employee_allowance_id, String employee_allowance_number, String employee_id,
                               String additional_allowance_type, String kab_id, String job_order_id, String begin_date,
                               String end_date, String days, String notes, String amount_perday, String employee_grade_id,
                               String approval1_status, String approval2_status, String requested_by, String approval1_by,
@@ -50,7 +50,7 @@ public class TunjanganTemporary implements Parcelable {
                               String modified_by, String modified_date){
         this.employee_allowance_id = employee_allowance_id;
         this.employee_allowance_number = employee_allowance_number;
-        this.employee_name = employee_name;
+        this.employee_id = employee_id;
         this.additional_allowance_type = additional_allowance_type;
         this.kab_id = kab_id;
         this.job_order_id = job_order_id;
@@ -84,7 +84,7 @@ public class TunjanganTemporary implements Parcelable {
     protected TunjanganTemporary(Parcel in) {
         employee_allowance_id = in.readInt();
         employee_allowance_number = in.readString();
-        employee_name = in.readString();
+        employee_id = in.readString();
         additional_allowance_type = in.readString();
         kab_id = in.readString();
         job_order_id = in.readString();
@@ -119,7 +119,7 @@ public class TunjanganTemporary implements Parcelable {
         try {
             this.employee_allowance_id = jsonObject.getInt("employee_allowance_id");
             this.employee_allowance_number = jsonObject.getString("employee_allowance_number");
-            this.employee_name = jsonObject.getString("employee_name");
+            this.employee_id = jsonObject.getString("employee_name");
             this.additional_allowance_type = jsonObject.getString("additional_allowance_type");
             this.kab_id = jsonObject.getString("kab_id");
             this.job_order_id = jsonObject.getString("job_order_id");
@@ -133,11 +133,11 @@ public class TunjanganTemporary implements Parcelable {
             this.approval2_status = jsonObject.getString("approval2_status");
             this.requested_by = jsonObject.getString("requested_by");
             this.approval1_by = jsonObject.getString("approval1_by");
-            this.approval_date1 = jsonObject.getString("approval_date1");
-            this.approval_comment1 = jsonObject.getString("approval_comment1");
+            this.approval_date1 = jsonObject.getString("approval1_date");
+            this.approval_comment1 = jsonObject.getString("approval1_comment");
             this.approval2_by = jsonObject.getString("approval2_by");
-            this.approval_date2 = jsonObject.getString("approval_date2");
-            this.approval_comment2 = jsonObject.getString("approval_comment2");
+            this.approval_date2 = jsonObject.getString("approval2_date");
+            this.approval_comment2 = jsonObject.getString("approval2_comment");
             this.verified_by = jsonObject.getString("verified_by");
             this.verified_date = jsonObject.getString("verified_date");
             this.checked_by = jsonObject.getString("checked_by");
@@ -174,7 +174,7 @@ public class TunjanganTemporary implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(employee_allowance_id);
         dest.writeString(employee_allowance_number);
-        dest.writeString(employee_name);
+        dest.writeString(employee_id);
         dest.writeString(additional_allowance_type);
         dest.writeString(kab_id);
         dest.writeString(job_order_id);
@@ -213,8 +213,8 @@ public class TunjanganTemporary implements Parcelable {
         return employee_allowance_number;
     }
 
-    public String getEmployee_name() {
-        return employee_name;
+    public String getEmployee_id() {
+        return employee_id;
     }
 
     public String getAdditional_allowance_type() {

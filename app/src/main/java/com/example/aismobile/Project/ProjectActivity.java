@@ -9,18 +9,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.aismobile.Data.JobOrder;
-import com.example.aismobile.Data.MaterialRequest;
-import com.example.aismobile.Data.Pickup;
-import com.example.aismobile.Data.Spkl;
-import com.example.aismobile.Data.WorkCompletion;
-import com.example.aismobile.Data.WorkOrder;
+import com.example.aismobile.Data.Project.CashProjectReport;
+import com.example.aismobile.Data.Project.JobOrder;
+import com.example.aismobile.Data.Project.MaterialRequest;
+import com.example.aismobile.Data.Project.Pickup;
+import com.example.aismobile.Data.Project.ProposedBudget;
+import com.example.aismobile.Data.Project.Spkl;
+import com.example.aismobile.Data.Project.TunjanganKaryawan;
+import com.example.aismobile.Data.Project.TunjanganTemporary;
+import com.example.aismobile.Data.Project.WorkCompletion;
+import com.example.aismobile.Data.Project.WorkOrder;
 import com.example.aismobile.OnFragmentInteractionListener;
+import com.example.aismobile.Project.CashProject.CashProjectFragment;
 import com.example.aismobile.Project.JobOrder.JobOrderFragment;
 import com.example.aismobile.Project.MaterialRequest.MaterialReqFragment;
 import com.example.aismobile.Project.Pengambilan.PengambilanFragment;
+import com.example.aismobile.Project.ProposedBudget.ProposedBudgetFragment;
 import com.example.aismobile.Project.Spkl.SpklFragment;
 import com.example.aismobile.Project.ToolsRequests.ToolsReqFragment;
+import com.example.aismobile.Project.TunjanganKaryawan.TunKaryawanFragment;
+import com.example.aismobile.Project.TunjanganTemporary.TunTemporaryFragment;
 import com.example.aismobile.Project.WorkCompletion.WorkCompletionFragment;
 import com.example.aismobile.Project.WorkRequests.WorkReqFragment;
 import com.example.aismobile.R;
@@ -41,7 +49,11 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
         MaterialReqFragment.OnListFragmentInteractionListener,
         WorkReqFragment.OnListFragmentInteractionListener,
         PengambilanFragment.OnListFragmentInteractionListener,
-        SpklFragment.OnListFragmentInteractionListener {
+        SpklFragment.OnListFragmentInteractionListener,
+        ProposedBudgetFragment.OnListFragmentInteractionListener,
+        CashProjectFragment.OnListFragmentInteractionListener,
+        TunKaryawanFragment.OnListFragmentInteractionListener,
+        TunTemporaryFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -200,6 +212,26 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(Spkl item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(ProposedBudget item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(CashProjectReport item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(TunjanganKaryawan item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(TunjanganTemporary item) {
 
     }
 }

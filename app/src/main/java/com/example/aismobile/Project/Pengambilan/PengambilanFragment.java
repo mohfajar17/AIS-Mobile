@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Pickup;
+import com.example.aismobile.Data.Project.Pickup;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -55,6 +55,7 @@ public class PengambilanFragment extends Fragment {
     public FloatingActionButton ppFabAdd;
     public Spinner ppSpinnerSearch;
     public Spinner ppSpinnerSort;
+    public Spinner ppSpinnerSortAD;
     public Button ppBtnShowList;
     public ImageButton ppBtnBefore;
     public ImageButton ppBtnNext;
@@ -68,16 +69,15 @@ public class PengambilanFragment extends Fragment {
     public ArrayAdapter<String> spinnerAdapter;
     public String[] PSpinnerSearch = {"Semua Data", "Nomor Pengambilan", "Material Request", "Dibuat Oleh",
             "Diambil Oleh", "Diakui Oleh", "Tanggal Pengambilan", "Catatan", "Diakui"};
-    public String[] PSpinnerSort = {"Berdasarkan Nomor Pengambilan ASC", "Berdasarkan Nomor Pengambilan DESC",
-            "Berdasarkan Material Request ASC", "Berdasarkan Material Request DESC", "Berdasarkan Dibuat Oleh ASC",
-            "Berdasarkan Dibuat Oleh DESC", "Berdasarkan Diambil Oleh ASC", "Berdasarkan Diambil Oleh DESC",
-            "Berdasarkan Diakui Oleh ASC", "Berdasarkan Diakui Oleh DESC", "Berdasarkan Tanggal Pengambilan ASC",
-            "Berdasarkan Tanggal Pengambilan DESC", "Berdasarkan Catatan ASC", "Berdasarkan Catatan DESC",
-            "Berdasarkan Diakui ASC", "Berdasarkan Diakui DESC"};
+    public String[] PSpinnerSort = {"-- Sort By --", "Berdasarkan Nomor Pengambilan", "Berdasarkan Material Request",
+            "Berdasarkan Dibuat Oleh", "Berdasarkan Diambil Oleh", "Berdasarkan Diakui Oleh", "Berdasarkan Tanggal Pengambilan",
+            "Berdasarkan Catatan", "Berdasarkan Diakui"};
+    public String[] PSADpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
     public List<Pickup> pickups;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
+    public boolean filter;
 
     public PengambilanFragment() {
         // Required empty public constructor
@@ -126,6 +126,7 @@ public class PengambilanFragment extends Fragment {
         ppBtnSearch = (ImageView) view.findViewById(R.id.ppBtnSearch);
         ppSpinnerSearch = (Spinner) view.findViewById(R.id.ppSpinnerSearch);
         ppSpinnerSort = (Spinner) view.findViewById(R.id.ppSpinnerSort);
+        ppSpinnerSortAD = (Spinner) view.findViewById(R.id.ppSpinnerSortAD);
         ppBtnShowList = (Button) view.findViewById(R.id.ppBtnShowList);
         ppBtnBefore = (ImageButton) view.findViewById(R.id.ppBtnBefore);
         ppBtnNext = (ImageButton) view.findViewById(R.id.ppBtnNext);
@@ -135,9 +136,10 @@ public class PengambilanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 counter = 15*Integer.valueOf(String.valueOf(ppTextPaging.getText()));
-                setSortHalf(ppSpinnerSort.getSelectedItemPosition());
+                setSortHalf(ppSpinnerSort.getSelectedItemPosition(), ppSpinnerSortAD.getSelectedItemPosition());
                 int textValue = Integer.valueOf(String.valueOf(ppTextPaging.getText()))+1;
                 ppTextPaging.setText(""+textValue);
+                filter = true;
             }
         });
         ppBtnBefore.setOnClickListener(new View.OnClickListener() {
@@ -145,9 +147,10 @@ public class PengambilanFragment extends Fragment {
             public void onClick(View v) {
                 if (Integer.valueOf(String.valueOf(ppTextPaging.getText())) > 1) {
                     counter = 15*(Integer.valueOf(String.valueOf(ppTextPaging.getText()))-2);
-                    setSortHalf(ppSpinnerSort.getSelectedItemPosition());
+                    setSortHalf(ppSpinnerSort.getSelectedItemPosition(), ppSpinnerSortAD.getSelectedItemPosition());
                     int textValue = Integer.valueOf(String.valueOf(ppTextPaging.getText()))-1;
                     ppTextPaging.setText(""+textValue);
+                    filter = true;
                 }
             }
         });
@@ -157,7 +160,7 @@ public class PengambilanFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("pickup_number DESC");
+                    loadDataAll("pickup_id DESC");
                     loadAll = true;
                     params = ppLayoutPaging.getLayoutParams();
                     params.height = 0;
@@ -166,7 +169,7 @@ public class PengambilanFragment extends Fragment {
                 } else {
                     ppTextPaging.setText("1");
                     counter = 0;
-                    loadData("pickup_number DESC");
+                    loadData("pickup_id DESC");
                     loadAll = false;
                     params = ppLayoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -182,13 +185,16 @@ public class PengambilanFragment extends Fragment {
         spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, PSpinnerSort);
         ppSpinnerSort.setAdapter(spinnerAdapter);
 
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, PSADpinnerSort);
+        ppSpinnerSortAD.setAdapter(spinnerAdapter);
+
         ppSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (counter<0){
-                    setSortAll(position);
+                    setSortAll(position, ppSpinnerSortAD.getSelectedItemPosition());
                 } else {
-                    setSortHalf(position);
+                    setSortHalf(position, ppSpinnerSortAD.getSelectedItemPosition());
                 }
             }
 
@@ -208,81 +214,81 @@ public class PengambilanFragment extends Fragment {
             }
         });
 
-        loadData("pickup_number DESC");
+        loadData("pickup_id DESC");
 
         return view;
     }
 
-    private void setSortAll(int position){
-        if (position == 0)
-            loadDataAll("pickup_number ASC");
-        else if (position == 1)
-            loadDataAll("pickup_number DESC");
-        else if (position == 2)
+    private void setSortAll(int position, int posAD){
+        if (position == 1 && posAD == 0)
+            loadDataAll("pickup_id ASC");
+        else if (position == 1 && posAD == 1)
+            loadDataAll("pickup_id DESC");
+        else if (position == 2 && posAD == 0)
             loadDataAll("material_request_number ASC");
-        else if (position == 3)
+        else if (position == 2 && posAD == 1)
             loadDataAll("material_request_number DESC");
-        else if (position == 4)
+        else if (position == 3 && posAD == 0)
             loadDataAll("created_by ASC");
-        else if (position == 5)
+        else if (position == 3 && posAD == 1)
             loadDataAll("created_by DESC");
-        else if (position == 6)
+        else if (position == 4 && posAD == 0)
             loadDataAll("pickup_by ASC");
-        else if (position == 7)
+        else if (position == 4 && posAD == 1)
             loadDataAll("pickup_by DESC");
-        else if (position == 8)
+        else if (position == 5 && posAD == 0)
             loadDataAll("recognized_by ASC");
-        else if (position == 9)
+        else if (position == 5 && posAD == 1)
             loadDataAll("recognized_by DESC");
-        else if (position == 10)
+        else if (position == 6 && posAD == 0)
             loadDataAll("taken_date ASC");
-        else if (position == 11)
+        else if (position == 6 && posAD == 1)
             loadDataAll("taken_date DESC");
-        else if (position == 12)
+        else if (position == 7 && posAD == 0)
             loadDataAll("notes ASC");
-        else if (position == 13)
+        else if (position == 7 && posAD == 1)
             loadDataAll("notes DESC");
-        else if (position == 14)
+        else if (position == 8 && posAD == 0)
             loadDataAll("recognized ASC");
-        else if (position == 15)
+        else if (position == 8 && posAD == 1)
             loadDataAll("recognized DESC");
-        else loadDataAll("pickup_number DESC");
+        else loadDataAll("pickup_id DESC");
     }
 
-    private void setSortHalf(int position){
-        if (position == 0)
-            loadData("pickup_number ASC");
-        else if (position == 1)
-            loadData("pickup_number DESC");
-        else if (position == 2)
+    private void setSortHalf(int position, int posAD){
+        if (position == 1 && posAD == 0)
+            loadData("pickup_id ASC");
+        else if (position == 1 && posAD == 1)
+            loadData("pickup_id DESC");
+        else if (position == 2 && posAD == 0)
             loadData("material_request_number ASC");
-        else if (position == 3)
+        else if (position == 2 && posAD == 1)
             loadData("material_request_number DESC");
-        else if (position == 4)
+        else if (position == 3 && posAD == 0)
             loadData("created_by ASC");
-        else if (position == 5)
+        else if (position == 3 && posAD == 1)
             loadData("created_by DESC");
-        else if (position == 6)
+        else if (position == 4 && posAD == 0)
             loadData("pickup_by ASC");
-        else if (position == 7)
+        else if (position == 4 && posAD == 1)
             loadData("pickup_by DESC");
-        else if (position == 8)
+        else if (position == 5 && posAD == 0)
             loadData("recognized_by ASC");
-        else if (position == 9)
+        else if (position == 5 && posAD == 1)
             loadData("recognized_by DESC");
-        else if (position == 10)
+        else if (position == 6 && posAD == 0)
             loadData("taken_date ASC");
-        else if (position == 11)
+        else if (position == 6 && posAD == 1)
             loadData("taken_date DESC");
-        else if (position == 12)
+        else if (position == 7 && posAD == 0)
             loadData("notes ASC");
-        else if (position == 13)
+        else if (position == 7 && posAD == 1)
             loadData("notes DESC");
-        else if (position == 14)
+        else if (position == 8 && posAD == 0)
             loadData("recognized ASC");
-        else if (position == 15)
+        else if (position == 8 && posAD == 1)
             loadData("recognized DESC");
-        else loadData("pickup_number DESC");
+        else loadData("pickup_id DESC");
     }
 
     private void setAdapterList(){
@@ -307,6 +313,14 @@ public class PengambilanFragment extends Fragment {
                             pickups.add(new Pickup(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
+
+                        if (filter){
+                            if (ppEditSearch.getText().toString().matches("")){
+                                ppSpinnerSearch.setSelection(0);
+                                adapter.getFilter().filter("-");
+                            } else adapter.getFilter().filter(String.valueOf(ppEditSearch.getText()));
+                            filter = false;
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
@@ -353,6 +367,14 @@ public class PengambilanFragment extends Fragment {
                             pickups.add(new Pickup(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
+
+                        if (filter){
+                            if (ppEditSearch.getText().toString().matches("")){
+                                ppSpinnerSearch.setSelection(0);
+                                adapter.getFilter().filter("-");
+                            } else adapter.getFilter().filter(String.valueOf(ppEditSearch.getText()));
+                            filter = false;
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
@@ -438,7 +460,10 @@ public class PengambilanFragment extends Fragment {
             holder.ppTextDiakuiOleh.setText(""+mValues.get(position).getRecognized_by());
             holder.ppTextTglPengambilan.setText(""+mValues.get(position).getTaken_date());
             holder.ppTextCatatan.setText(""+mValues.get(position).getNotes());
-            holder.ppTextDiakui.setText(""+mValues.get(position).getRecognized());
+
+            if (Integer.valueOf(mValues.get(position).getRecognized())==2)
+                holder.ppTextDiakui.setText("Tidak");
+            else holder.ppTextDiakui.setText("Ya");
 
             if (position%2==0)
                 holder.ppLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

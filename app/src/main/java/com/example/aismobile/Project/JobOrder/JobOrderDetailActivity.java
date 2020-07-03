@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.aismobile.Data.JobOrder;
+import com.example.aismobile.Data.Project.JobOrder;
 import com.example.aismobile.R;
 
 public class JobOrderDetailActivity extends AppCompatActivity {

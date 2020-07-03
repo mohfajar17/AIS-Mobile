@@ -35,7 +35,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.JobOrder;
+import com.example.aismobile.Data.Project.JobOrder;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,9 +46,6 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +59,7 @@ public class JobOrderFragment extends Fragment {
     public FloatingActionButton fabAddJO;
     public Spinner spinnerSearchJO;
     public Spinner spinnerSortJO;
+    public Spinner spinnerSortADJO;
     public Button buttonShowAllList;
     public ImageButton buttonNext;
     public ImageButton buttonBefore;
@@ -75,14 +73,14 @@ public class JobOrderFragment extends Fragment {
     public ArrayAdapter<String> spinnerAdapter;
     public String[] JOSpinnerSearch = {"Semua Data", "Nomor Job Order", "Departemen", "PIC", "Tipe Job Order",
             "Keterangan Job Order", "Nilai Job Order", "Status Job Order"};
-    public String[] JOSpinnerSort = {"Berdasarkan Nomor Job Order ASC", "Berdasarkan Nomor Job Order DESC",
-            "Berdasarkan Departemen ASC", "Berdasarkan Departemen DESC", "Berdasarkan PIC ASC", "Berdasarkan PIC DESC",
-            "Berdasarkan Tipe ASC", "Berdasarkan Tipe DESC", "Berdasarkan Nilai ASC", "Berdasarkan Nilai DESC",
-            "Berdasarkan Status ASC", "Berdasarkan Status DESC"};
+    public String[] JOSpinnerSort = {"-- Sort By --", "Berdasarkan Nomor Job Order", "Berdasarkan Departemen",
+            "Berdasarkan PIC", "Berdasarkan Tipe", "Berdasarkan Nilai", "Berdasarkan Status"};
+    public String[] JOADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
     public List<JobOrder> jobOrders;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
+    public boolean filter = false;
 
     public JobOrderFragment() {
     }
@@ -130,6 +128,7 @@ public class JobOrderFragment extends Fragment {
         imageSearchJO = (ImageView) view.findViewById(R.id.imageSearchJO);
         spinnerSearchJO = (Spinner) view.findViewById(R.id.spinnerSearchJO);
         spinnerSortJO = (Spinner) view.findViewById(R.id.spinnerSortJO);
+        spinnerSortADJO = (Spinner) view.findViewById(R.id.spinnerSortADJO);
         buttonShowAllList = (Button) view.findViewById(R.id.buttonShowAllList);
         buttonNext = (ImageButton) view.findViewById(R.id.buttonNext);
         buttonBefore = (ImageButton) view.findViewById(R.id.buttonBefore);
@@ -139,9 +138,10 @@ public class JobOrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 counter = 15*Integer.valueOf(String.valueOf(textViewList.getText()));
-                setSortHalf(spinnerSortJO.getSelectedItemPosition());
+                setSortHalf(spinnerSortJO.getSelectedItemPosition(), spinnerSortADJO.getSelectedItemPosition());
                 int textValue = Integer.valueOf(String.valueOf(textViewList.getText()))+1;
                 textViewList.setText(""+textValue);
+                filter = true;
             }
         });
         buttonBefore.setOnClickListener(new View.OnClickListener() {
@@ -149,9 +149,10 @@ public class JobOrderFragment extends Fragment {
             public void onClick(View v) {
                 if (Integer.valueOf(String.valueOf(textViewList.getText())) > 1) {
                     counter = 15*(Integer.valueOf(String.valueOf(textViewList.getText()))-2);
-                    setSortHalf(spinnerSortJO.getSelectedItemPosition());
+                    setSortHalf(spinnerSortJO.getSelectedItemPosition(), spinnerSortADJO.getSelectedItemPosition());
                     int textValue = Integer.valueOf(String.valueOf(textViewList.getText()))-1;
                     textViewList.setText(""+textValue);
+                    filter = true;
                 }
             }
         });
@@ -186,13 +187,16 @@ public class JobOrderFragment extends Fragment {
         spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, JOSpinnerSort);
         spinnerSortJO.setAdapter(spinnerAdapter);
 
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, JOADSpinnerSort);
+        spinnerSortADJO.setAdapter(spinnerAdapter);
+
         spinnerSortJO.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (counter<0){
-                    setSortAll(position);
+                    setSortAll(position, spinnerSortADJO.getSelectedItemPosition());
                 } else {
-                    setSortHalf(position);
+                    setSortHalf(position, spinnerSortADJO.getSelectedItemPosition());
                 }
             }
 
@@ -227,58 +231,60 @@ public class JobOrderFragment extends Fragment {
         return view;
     }
 
-    private void setSortAll(int position){
-        if(position == 0)
-            loadJobOrderAll("job_order_number ASC");
-        else if(position == 1)
-            loadJobOrderAll("job_order_number DESC");
-        else if(position == 2)
+    private void setSortAll(int position, int posAD){
+        if(position == 1 && posAD == 0)
+            loadJobOrderAll("job_order_id ASC");
+        else if(position == 1 && posAD == 1)
+            loadJobOrderAll("job_order_id DESC");
+        else if(position == 2 && posAD == 0)
             loadJobOrderAll("department_id ASC");
-        else if(position == 3)
+        else if(position == 2 && posAD == 1)
             loadJobOrderAll("department_id DESC");
-        else if(position == 4)
+        else if(position == 3 && posAD == 0)
             loadJobOrderAll("supervisor ASC");
-        else if(position == 5)
+        else if(position == 3 && posAD == 1)
             loadJobOrderAll("supervisor DESC");
-        else if(position == 6)
+        else if(position == 4 && posAD == 0)
             loadJobOrderAll("job_order_type ASC");
-        else if(position == 7)
+        else if(position == 4 && posAD == 1)
             loadJobOrderAll("job_order_type DESC");
-        else if(position == 8)
+        else if(position == 5 && posAD == 0)
             loadJobOrderAll("amount ASC");
-        else if(position == 9)
+        else if(position == 5 && posAD == 1)
             loadJobOrderAll("amount DESC");
-        else if(position == 10)
+        else if(position == 6 && posAD == 0)
             loadJobOrderAll("job_order_status ASC");
-        else if(position == 11)
+        else if(position == 6 && posAD == 1)
             loadJobOrderAll("job_order_status DESC");
+        else loadJobOrderAll("job_order_id DESC");
     }
 
-    private void setSortHalf(int position){
-        if(position == 0)
-            loadJobOrder("job_order_number ASC");
-        else if(position == 1)
-            loadJobOrder("job_order_number DESC");
-        else if(position == 2)
+    private void setSortHalf(int position, int posAD){
+        if(position == 1 && posAD == 0)
+            loadJobOrder("job_order_id ASC");
+        else if(position == 1 && posAD == 1)
+            loadJobOrder("job_order_id DESC");
+        else if(position == 2 && posAD == 0)
             loadJobOrder("department_id ASC");
-        else if(position == 3)
+        else if(position == 2 && posAD == 1)
             loadJobOrder("department_id DESC");
-        else if(position == 4)
+        else if(position == 3 && posAD == 0)
             loadJobOrder("supervisor ASC");
-        else if(position == 5)
+        else if(position == 3 && posAD == 1)
             loadJobOrder("supervisor DESC");
-        else if(position == 6)
+        else if(position == 4 && posAD == 0)
             loadJobOrder("job_order_type ASC");
-        else if(position == 7)
+        else if(position == 4 && posAD == 1)
             loadJobOrder("job_order_type DESC");
-        else if(position == 8)
+        else if(position == 5 && posAD == 0)
             loadJobOrder("amount ASC");
-        else if(position == 9)
+        else if(position == 5 && posAD == 1)
             loadJobOrder("amount DESC");
-        else if(position == 10)
+        else if(position == 6 && posAD == 0)
             loadJobOrder("job_order_status ASC");
-        else if(position == 11)
+        else if(position == 6 && posAD == 1)
             loadJobOrder("job_order_status DESC");
+        else loadJobOrder("job_order_id DESC");
     }
 
     private void setAdapterList(){
@@ -303,6 +309,14 @@ public class JobOrderFragment extends Fragment {
                             jobOrders.add(new JobOrder(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
+
+                        if (filter){
+                            if (editTextSearchJO.getText().toString().matches("")){
+                                spinnerSearchJO.setSelection(0);
+                                adapter.getFilter().filter("-");
+                            } else adapter.getFilter().filter(String.valueOf(editTextSearchJO.getText()));
+                            filter = false;
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
@@ -349,6 +363,14 @@ public class JobOrderFragment extends Fragment {
                             jobOrders.add(new JobOrder(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
+
+                        if (filter){
+                            if (editTextSearchJO.getText().toString().matches("")){
+                                spinnerSearchJO.setSelection(0);
+                                adapter.getFilter().filter("-");
+                            } else adapter.getFilter().filter(String.valueOf(editTextSearchJO.getText()));
+                            filter = false;
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }

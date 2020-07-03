@@ -117,7 +117,7 @@
         android:id="@+id/textViewSpkl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Surat Perintah Kerja Lembut"
+        android:text="Surat Perintah Kerja Lembur"
         android:padding="10dp"
         android:gravity="center"
         android:textColor="@color/colorBlack"/>

@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:id="@+id/ppLayoutList"
-    tools:context=".Project.Pengambilan.PengambilanFragment">
+    android:id="@+id/pcpLayoutList"
+    tools:context=".Project.CashProject.CashProjectFragment">
 
     <TextView
-        android:id="@+id/ppTextNomorPengambilan"
+        android:id="@+id/pcpTextNomorCashProject"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -22,7 +22,7 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextMaterialReq"
+        android:id="@+id/pcpTextProposedBudget"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -36,7 +36,21 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextDibuatOleh"
+        android:id="@+id/pcpTextKetJobOrder"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/pcpTextDibuat"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -50,10 +64,10 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextDiambilOleh"
+        android:id="@+id/pcpTextApproval1"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
+        android:gravity="top|left"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -64,10 +78,10 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextDiakuiOleh"
+        android:id="@+id/pcpTextApproval2"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
+        android:gravity="top|left"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -78,10 +92,10 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextTglPengambilan"
-        android:layout_width="90dp"
+        android:id="@+id/pcpTextApproval3"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
+        android:gravity="top|left"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -92,21 +106,7 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextCatatan"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:gravity="top|center"
-        android:text="-"
-        android:padding="5dp"
-        android:textColor="@android:color/black" />
-
-    <ImageView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:src="@color/colorGray"/>
-
-    <TextView
-        android:id="@+id/ppTextDiakui"
+        android:id="@+id/pcpTextDone"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"

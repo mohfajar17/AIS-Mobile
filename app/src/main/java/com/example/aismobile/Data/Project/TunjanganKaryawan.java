@@ -1,4 +1,4 @@
-package com.example.aismobile.Data;
+package com.example.aismobile.Data.Project;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -129,11 +129,11 @@ public class TunjanganKaryawan implements Parcelable {
             this.approval2_status = jsonObject.getString("approval2_status");
             this.requested_by = jsonObject.getString("requested_by");
             this.approval1_by = jsonObject.getString("approval1_by");
-            this.approval_date1 = jsonObject.getString("approval_date1");
-            this.approval_comment1 = jsonObject.getString("approval_comment1");
+            this.approval_date1 = jsonObject.getString("approval1_date");
+            this.approval_comment1 = jsonObject.getString("approval1_comment");
             this.approval2_by = jsonObject.getString("approval2_by");
-            this.approval_date2 = jsonObject.getString("approval_date2");
-            this.approval_comment2 = jsonObject.getString("approval_comment2");
+            this.approval_date2 = jsonObject.getString("approval2_date");
+            this.approval_comment2 = jsonObject.getString("approval2_comment");
             this.verified_by = jsonObject.getString("verified_by");
             this.verified_date = jsonObject.getString("verified_date");
             this.checked_by = jsonObject.getString("checked_by");

@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aismobile.Data.Purchasing.PurchaseOrder;
+import com.example.aismobile.Purchasing.PurchaseOrder.PurchaseOrdersFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -20,7 +22,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class PurchasingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class PurchasingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        PurchaseOrdersFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -125,5 +128,10 @@ public class PurchasingActivity extends AppCompatActivity implements NavigationV
         textViewWarning.setText("You can't access this menu");
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+    }
+
+    @Override
+    public void onListFragmentInteraction(PurchaseOrder item) {
+
     }
 }

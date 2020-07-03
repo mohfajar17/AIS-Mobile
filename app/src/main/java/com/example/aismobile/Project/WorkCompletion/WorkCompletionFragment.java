@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.WorkCompletion;
+import com.example.aismobile.Data.Project.WorkCompletion;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -42,14 +42,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class WorkCompletionFragment extends Fragment {
-
 
     public TextView pwcTextPaging;
     public EditText pwcEditSearch;
@@ -58,6 +55,7 @@ public class WorkCompletionFragment extends Fragment {
     public FloatingActionButton pwcFabAdd;
     public Spinner pwcSpinnerSearch;
     public Spinner pwcSpinnerSort;
+    public Spinner pwcSpinnerSortAD;
     public Button pwcBtnShowList;
     public ImageButton pwcBtnBefore;
     public ImageButton pwcBtnNext;
@@ -69,17 +67,17 @@ public class WorkCompletionFragment extends Fragment {
     public OnListFragmentInteractionListener mListener;
     public WorkCompletionFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] WCSpinnerSearch = {"Semua Data", "Work Completion", "Job Order", "SQ Number", "Start Work",
+    public String[] WCSpinnerSearch = {"Semua Data", "Work Completion", "Job Order", "Keterangan Job Code", "SQ Number", "Start Work",
             "End Work", "Diterima Oleh", "Dibuat Oleh"};
-    public String[] WCSpinnerSort = {"Berdasarkan Work Completion ASC", "Berdasarkan Work Completion DESC",
-            "Berdasarkan Job Order ASC", "Berdasarkan Job Order DESC", "Berdasarkan SQ Number ASC",
-            "Berdasarkan SQ Number DESC", "Berdasarkan Start Work ASC", "Berdasarkan Start Work DESC",
-            "Berdasarkan End Work ASC", "Berdasarkan End Work DESC", "Berdasarkan Diterima Oleh ASC",
-            "Berdasarkan Diterima Oleh DESC", "Berdasarkan Dibuat Oleh ASC", "Berdasarkan Dibuat Oleh DESC"};
+    public String[] WCSpinnerSort = {"-- Sort By --", "Berdasarkan Work Completion", "Berdasarkan Job Order",
+            "Berdasarkan SQ Number", "Berdasarkan Start Work", "Berdasarkan End Work", "Berdasarkan Diterima Oleh",
+            "Berdasarkan Dibuat Oleh"};
+    public String[] WCADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
     public List<WorkCompletion> workCompletions;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
+    public boolean filter = false;
 
     public WorkCompletionFragment() {
     }
@@ -127,6 +125,7 @@ public class WorkCompletionFragment extends Fragment {
         pwcBtnSearch = (ImageView) view.findViewById(R.id.pwcBtnSearch);
         pwcSpinnerSearch = (Spinner) view.findViewById(R.id.pwcSpinnerSearch);
         pwcSpinnerSort = (Spinner) view.findViewById(R.id.pwcSpinnerSort);
+        pwcSpinnerSortAD = (Spinner) view.findViewById(R.id.pwcSpinnerSortAD);
         pwcBtnShowList = (Button) view.findViewById(R.id.pwcBtnShowList);
         pwcBtnBefore = (ImageButton) view.findViewById(R.id.pwcBtnBefore);
         pwcBtnNext = (ImageButton) view.findViewById(R.id.pwcBtnNext);
@@ -139,6 +138,7 @@ public class WorkCompletionFragment extends Fragment {
                 setSortHalf(pwcSpinnerSort.getSelectedItemPosition());
                 int textValue = Integer.valueOf(String.valueOf(pwcTextPaging.getText()))+1;
                 pwcTextPaging.setText(""+textValue);
+                filter = true;
             }
         });
         pwcBtnBefore.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +149,7 @@ public class WorkCompletionFragment extends Fragment {
                     setSortHalf(pwcSpinnerSort.getSelectedItemPosition());
                     int textValue = Integer.valueOf(String.valueOf(pwcTextPaging.getText()))-1;
                     pwcTextPaging.setText(""+textValue);
+                    filter = true;
                 }
             }
         });
@@ -158,7 +159,7 @@ public class WorkCompletionFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadWorkCompletionAll("job_order_id DESC");
+                    loadWorkCompletionAll("job_progress_report_id DESC");
                     loadAll = true;
                     params = pwcLayoutPaging.getLayoutParams();
                     params.height = 0;
@@ -167,7 +168,7 @@ public class WorkCompletionFragment extends Fragment {
                 } else {
                     pwcTextPaging.setText("1");
                     counter = 0;
-                    loadWorkCompletion("job_order_id DESC");
+                    loadWorkCompletion("job_progress_report_id DESC");
                     loadAll = false;
                     params = pwcLayoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -182,6 +183,9 @@ public class WorkCompletionFragment extends Fragment {
 
         spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, WCSpinnerSort);
         pwcSpinnerSort.setAdapter(spinnerAdapter);
+
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, WCADSpinnerSort);
+        pwcSpinnerSortAD.setAdapter(spinnerAdapter);
 
         pwcSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -215,65 +219,67 @@ public class WorkCompletionFragment extends Fragment {
     }
 
     private void setSortAll(int position){
-        if (position == 0)
+        if (position == 1 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletionAll("job_progress_report_id ASC");
-        else if (position == 1)
+        else if (position == 1 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletionAll("job_progress_report_id DESC");
-        else if (position == 2)
+        else if (position == 2 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletionAll("job_order_id ASC");
-        else if (position == 3)
+        else if (position == 2 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletionAll("job_order_id DESC");
-        else if (position == 4)
+        else if (position == 3 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletionAll("sales_quotation_id ASC");
-        else if (position == 5)
+        else if (position == 3 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletionAll("sales_quotation_id DESC");
-        else if (position == 6)
+        else if (position == 4 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletionAll("start_work ASC");
-        else if (position == 7)
+        else if (position == 4 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletionAll("start_work DESC");
-        else if (position == 8)
+        else if (position == 5 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletionAll("end_work ASC");
-        else if (position == 9)
+        else if (position == 5 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletionAll("end_work DESC");
-        else if (position == 10)
+        else if (position == 6 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletionAll("accepted_by ASC");
-        else if (position == 11)
+        else if (position == 6 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletionAll("accepted_by DESC");
-        else if (position == 12)
+        else if (position == 7 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletionAll("created_by ASC");
-        else if (position == 13)
+        else if (position == 7 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletionAll("created_by DESC");
+        else loadWorkCompletionAll("job_progress_report_id DESC");
     }
 
     private void setSortHalf(int position){
-        if (position == 0)
+        if (position == 1 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletion("job_progress_report_id ASC");
-        else if (position == 1)
+        else if (position == 1 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletion("job_progress_report_id DESC");
-        else if (position == 2)
+        else if (position == 2 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletion("job_order_id ASC");
-        else if (position == 3)
+        else if (position == 2 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletion("job_order_id DESC");
-        else if (position == 4)
+        else if (position == 3 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletion("sales_quotation_id ASC");
-        else if (position == 5)
+        else if (position == 3 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletion("sales_quotation_id DESC");
-        else if (position == 6)
+        else if (position == 4 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletion("start_work ASC");
-        else if (position == 7)
+        else if (position == 4 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletion("start_work DESC");
-        else if (position == 8)
+        else if (position == 5 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletion("end_work ASC");
-        else if (position == 9)
+        else if (position == 5 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletion("end_work DESC");
-        else if (position == 10)
+        else if (position == 6 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletion("accepted_by ASC");
-        else if (position == 11)
+        else if (position == 6 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletion("accepted_by DESC");
-        else if (position == 12)
+        else if (position == 7 && pwcSpinnerSortAD.getSelectedItemPosition() == 0)
             loadWorkCompletion("created_by ASC");
-        else if (position == 13)
+        else if (position == 7 && pwcSpinnerSortAD.getSelectedItemPosition() == 1)
             loadWorkCompletion("created_by DESC");
+        else loadWorkCompletion("job_progress_report_id DESC");
     }
 
     private void setAdapterList(){
@@ -298,6 +304,14 @@ public class WorkCompletionFragment extends Fragment {
                             workCompletions.add(new WorkCompletion(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
+
+                        if (filter){
+                            if (pwcEditSearch.getText().toString().matches("")){
+                                pwcSpinnerSearch.setSelection(0);
+                                adapter.getFilter().filter("-");
+                            } else adapter.getFilter().filter(String.valueOf(pwcEditSearch.getText()));
+                            filter = false;
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
@@ -344,6 +358,14 @@ public class WorkCompletionFragment extends Fragment {
                             workCompletions.add(new WorkCompletion(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
+
+                        if (filter){
+                            if (pwcEditSearch.getText().toString().matches("")){
+                                pwcSpinnerSearch.setSelection(0);
+                                adapter.getFilter().filter("-");
+                            } else adapter.getFilter().filter(String.valueOf(pwcEditSearch.getText()));
+                            filter = false;
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
@@ -424,7 +446,7 @@ public class WorkCompletionFragment extends Fragment {
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
             holder.pwcTextWorkCompletion.setText(""+mValues.get(position).getJob_progress_report_number());
             holder.pwcTextJobOrder.setText(""+mValues.get(position).getJob_order_id());
-            holder.pwcTextKeterangan.setText(""+mValues.get(position).getDescription());
+            holder.pwcTextKeterangan.setText(""+mValues.get(position).getJob_order_description());
             holder.pwcSqNumber.setText(""+mValues.get(position).getSales_quotation_id());
             holder.pwcTextStart.setText(""+mValues.get(position).getStart_work());
             holder.pwcTextEnd.setText(""+mValues.get(position).getEnd_work());
@@ -472,6 +494,8 @@ public class WorkCompletionFragment extends Fragment {
                                 filteredList.add(item);
                             } else if (item.getJob_order_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
+                            } else if (item.getJob_order_description().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
                             } else if (item.getSales_quotation_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getStart_work().toLowerCase().contains(filterPattern)){
@@ -492,22 +516,26 @@ public class WorkCompletionFragment extends Fragment {
                                 filteredList.add(item);
                             }
                         } else if (pwcSpinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getSales_quotation_id().toLowerCase().contains(filterPattern)){
+                            if (item.getJob_order_description().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (pwcSpinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getStart_work().toLowerCase().contains(filterPattern)){
+                            if (item.getSales_quotation_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (pwcSpinnerSearch.getSelectedItemPosition()==5){
-                            if (item.getEnd_work().toLowerCase().contains(filterPattern)){
+                            if (item.getStart_work().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (pwcSpinnerSearch.getSelectedItemPosition()==6){
-                            if (item.getAccepted_by().toLowerCase().contains(filterPattern)){
+                            if (item.getEnd_work().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (pwcSpinnerSearch.getSelectedItemPosition()==7){
+                            if (item.getAccepted_by().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (pwcSpinnerSearch.getSelectedItemPosition()==8){
                             if (item.getCreated_by().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }

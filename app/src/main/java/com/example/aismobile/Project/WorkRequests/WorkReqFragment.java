@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.WorkOrder;
+import com.example.aismobile.Data.Project.WorkOrder;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -55,6 +55,7 @@ public class WorkReqFragment extends Fragment {
     public FloatingActionButton pwrFabAdd;
     public Spinner pwrSpinnerSearch;
     public Spinner pwrSpinnerSort;
+    public Spinner pwrSpinnerSortAD;
     public Button pwrBtnShowList;
     public ImageButton pwrBtnBefore;
     public ImageButton pwrBtnNext;
@@ -68,16 +69,15 @@ public class WorkReqFragment extends Fragment {
     public ArrayAdapter<String> spinnerAdapter;
     public String[] WRSpinnerSearch = {"Semua Data", "Nomor Work Request", "Job Order", "Tanggal Awal",
             "Dibuat Oleh", "Checked By", "Approval 1", "Approval 2", "Approval 3"};
-    public String[] WRSpinnerSort = {"Berdasarkan Nomor Work Request ASC", "Berdasarkan Nomor Work Request DESC",
-            "Berdasarkan Job Order ASC", "Berdasarkan Job Order DESC", "Berdasarkan Tanggal Awal ASC",
-            "Berdasarkan Tanggal Awal DESC", "Berdasarkan Dibuat Oleh ASC", "Berdasarkan Dibuat Oleh DESC",
-            "Berdasarkan Checked By ASC", "Berdasarkan Checked By DESC", "Berdasarkan Approval 1 ASC",
-            "Berdasarkan Approval 1 DESC", "Berdasarkan Approval 2 ASC", "Berdasarkan Approval 2 DESC",
-            "Berdasarkan Approval 3 ASC", "Berdasarkan Approval 3 DESC"};
+    public String[] WRSpinnerSort = {"-- Sort By --", "Berdasarkan Nomor Work Request", "Berdasarkan Job Order",
+            "Berdasarkan Tanggal Awal", "Berdasarkan Dibuat Oleh", "Berdasarkan Checked By", "Berdasarkan Approval 1",
+            "Berdasarkan Approval 2", "Berdasarkan Approval 3"};
+    public String[] WRADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
     public List<WorkOrder> workOrders;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
+    public boolean filter = false;
 
     public WorkReqFragment() {
         // Required empty public constructor
@@ -126,6 +126,7 @@ public class WorkReqFragment extends Fragment {
         pwrBtnSearch = (ImageView) view.findViewById(R.id.pwrBtnSearch);
         pwrSpinnerSearch = (Spinner) view.findViewById(R.id.pwrSpinnerSearch);
         pwrSpinnerSort = (Spinner) view.findViewById(R.id.pwrSpinnerSort);
+        pwrSpinnerSortAD = (Spinner) view.findViewById(R.id.pwrSpinnerSortAD);
         pwrBtnShowList = (Button) view.findViewById(R.id.pwrBtnShowList);
         pwrBtnBefore = (ImageButton) view.findViewById(R.id.pwrBtnBefore);
         pwrBtnNext = (ImageButton) view.findViewById(R.id.pwrBtnNext);
@@ -135,9 +136,10 @@ public class WorkReqFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 counter = 15*Integer.valueOf(String.valueOf(pwrTextPaging.getText()));
-                setSortHalf(pwrSpinnerSort.getSelectedItemPosition());
+                setSortHalf(pwrSpinnerSort.getSelectedItemPosition(), pwrSpinnerSortAD.getSelectedItemPosition());
                 int textValue = Integer.valueOf(String.valueOf(pwrTextPaging.getText()))+1;
                 pwrTextPaging.setText(""+textValue);
+                filter = true;
             }
         });
         pwrBtnBefore.setOnClickListener(new View.OnClickListener() {
@@ -145,9 +147,10 @@ public class WorkReqFragment extends Fragment {
             public void onClick(View v) {
                 if (Integer.valueOf(String.valueOf(pwrTextPaging.getText())) > 1) {
                     counter = 15*(Integer.valueOf(String.valueOf(pwrTextPaging.getText()))-2);
-                    setSortHalf(pwrSpinnerSort.getSelectedItemPosition());
+                    setSortHalf(pwrSpinnerSort.getSelectedItemPosition(), pwrSpinnerSortAD.getSelectedItemPosition());
                     int textValue = Integer.valueOf(String.valueOf(pwrTextPaging.getText()))-1;
                     pwrTextPaging.setText(""+textValue);
+                    filter = true;
                 }
             }
         });
@@ -182,13 +185,16 @@ public class WorkReqFragment extends Fragment {
         spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, WRSpinnerSort);
         pwrSpinnerSort.setAdapter(spinnerAdapter);
 
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, WRADSpinnerSort);
+        pwrSpinnerSortAD.setAdapter(spinnerAdapter);
+
         pwrSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (counter<0){
-                    setSortAll(position);
+                    setSortAll(position, pwrSpinnerSortAD.getSelectedItemPosition());
                 } else {
-                    setSortHalf(position);
+                    setSortHalf(position, pwrSpinnerSortAD.getSelectedItemPosition());
                 }
             }
 
@@ -213,74 +219,74 @@ public class WorkReqFragment extends Fragment {
         return view;
     }
 
-    private void setSortAll(int position){
-        if (position == 0)
+    private void setSortAll(int position, int posAD){
+        if (position == 1 && posAD == 0)
             loadDataAll("work_order_id ASC");
-        else if (position == 1)
+        else if (position == 1 && posAD == 1)
             loadDataAll("work_order_id DESC");
-        else if (position == 2)
+        else if (position == 2 && posAD == 0)
             loadDataAll("job_order_id ASC");
-        else if (position == 3)
+        else if (position == 2 && posAD == 1)
             loadDataAll("job_order_id DESC");
-        else if (position == 4)
+        else if (position == 3 && posAD == 0)
             loadDataAll("begin_date ASC");
-        else if (position == 5)
+        else if (position == 3 && posAD == 1)
             loadDataAll("begin_date DESC");
-        else if (position == 6)
+        else if (position == 4 && posAD == 0)
             loadDataAll("created_by ASC");
-        else if (position == 7)
+        else if (position == 4 && posAD == 1)
             loadDataAll("created_by DESC");
-        else if (position == 8)
+        else if (position == 5 && posAD == 0)
             loadDataAll("checked_by ASC");
-        else if (position == 9)
+        else if (position == 5 && posAD == 1)
             loadDataAll("checked_by DESC");
-        else if (position == 10)
+        else if (position == 6 && posAD == 0)
             loadDataAll("approval1 ASC");
-        else if (position == 11)
+        else if (position == 6 && posAD == 1)
             loadDataAll("approval1 DESC");
-        else if (position == 12)
+        else if (position == 7 && posAD == 0)
             loadDataAll("approval2 ASC");
-        else if (position == 13)
+        else if (position == 7 && posAD == 1)
             loadDataAll("approval2 DESC");
-        else if (position == 14)
+        else if (position == 8 && posAD == 0)
             loadDataAll("approval3 ASC");
-        else if (position == 15)
+        else if (position == 8 && posAD == 1)
             loadDataAll("approval3 DESC");
         else loadDataAll("work_order_id DESC");
     }
 
-    private void setSortHalf(int position){
-        if (position == 0)
+    private void setSortHalf(int position, int posAD){
+        if (position == 1 && posAD == 0)
             loadData("work_order_id ASC");
-        else if (position == 1)
+        else if (position == 1 && posAD == 1)
             loadData("work_order_id DESC");
-        else if (position == 2)
+        else if (position == 2 && posAD == 0)
             loadData("job_order_id ASC");
-        else if (position == 3)
+        else if (position == 2 && posAD == 1)
             loadData("job_order_id DESC");
-        else if (position == 4)
+        else if (position == 3 && posAD == 0)
             loadData("begin_date ASC");
-        else if (position == 5)
+        else if (position == 3 && posAD == 1)
             loadData("begin_date DESC");
-        else if (position == 6)
+        else if (position == 4 && posAD == 0)
             loadData("created_by ASC");
-        else if (position == 7)
+        else if (position == 4 && posAD == 1)
             loadData("created_by DESC");
-        else if (position == 8)
+        else if (position == 5 && posAD == 0)
             loadData("checked_by ASC");
-        else if (position == 9)
+        else if (position == 5 && posAD == 1)
             loadData("checked_by DESC");
-        else if (position == 10)
+        else if (position == 6 && posAD == 0)
             loadData("approval1 ASC");
-        else if (position == 11)
+        else if (position == 6 && posAD == 1)
             loadData("approval1 DESC");
-        else if (position == 12)
+        else if (position == 7 && posAD == 0)
             loadData("approval2 ASC");
-        else if (position == 13)
+        else if (position == 7 && posAD == 1)
             loadData("approval2 DESC");
-        else if (position == 14)
+        else if (position == 8 && posAD == 0)
             loadData("approval3 ASC");
-        else if (position == 15)
+        else if (position == 8 && posAD == 1)
             loadData("approval3 DESC");
         else loadData("work_order_id DESC");
     }
@@ -307,6 +313,14 @@ public class WorkReqFragment extends Fragment {
                             workOrders.add(new WorkOrder(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
+
+                        if (filter){
+                            if (pwrEditSearch.getText().toString().matches("")){
+                                pwrSpinnerSearch.setSelection(0);
+                                adapter.getFilter().filter("-");
+                            } else adapter.getFilter().filter(String.valueOf(pwrEditSearch.getText()));
+                            filter = false;
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
@@ -353,6 +367,14 @@ public class WorkReqFragment extends Fragment {
                             workOrders.add(new WorkOrder(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
+
+                        if (filter){
+                            if (pwrEditSearch.getText().toString().matches("")){
+                                pwrSpinnerSearch.setSelection(0);
+                                adapter.getFilter().filter("-");
+                            } else adapter.getFilter().filter(String.valueOf(pwrEditSearch.getText()));
+                            filter = false;
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }

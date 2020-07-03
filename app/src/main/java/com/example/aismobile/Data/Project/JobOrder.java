@@ -1,4 +1,4 @@
-package com.example.aismobile.Data;
+package com.example.aismobile.Data.Project;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,4 +1,4 @@
-package com.example.aismobile.Data;
+package com.example.aismobile.Data.Project;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -14,6 +14,7 @@ public class ProposedBudget implements Parcelable {
     private String person_in_charge;
     private String requisition_date;
     private String due_date;
+    private String payment_date;
     private String rest_value;
     private String rest_from;
     private String notes;
@@ -40,7 +41,7 @@ public class ProposedBudget implements Parcelable {
     private String bank_transaction_type_id;
 
     public ProposedBudget(int cash_advance_id, String cash_advance_number, String job_order_id, String person_in_charge,
-                          String requisition_date, String due_date, String rest_value, String rest_from, String notes,
+                          String requisition_date, String due_date, String payment_date, String rest_value, String rest_from, String notes,
                           String created_by, String created_date, String modified_by, String modified_date, String approval1,
                           String approval_date1, String approval_comment1, String approval1_status, String approval2,
                           String approval_date2, String approval_comment2, String approval2_status, String approval3,
@@ -52,6 +53,7 @@ public class ProposedBudget implements Parcelable {
         this.person_in_charge = person_in_charge;
         this.requisition_date = requisition_date;
         this.due_date = due_date;
+        this.payment_date = payment_date;
         this.rest_value = rest_value;
         this.rest_from = rest_from;
         this.notes = notes;
@@ -85,6 +87,7 @@ public class ProposedBudget implements Parcelable {
         person_in_charge = in.readString();
         requisition_date = in.readString();
         due_date = in.readString();
+        payment_date = in.readString();
         rest_value = in.readString();
         rest_from = in.readString();
         notes = in.readString();
@@ -119,9 +122,10 @@ public class ProposedBudget implements Parcelable {
             this.person_in_charge = jsonObject.getString("person_in_charge");
             this.requisition_date = jsonObject.getString("requisition_date");
             this.due_date = jsonObject.getString("due_date");
+            this.payment_date = jsonObject.getString("payment_date");
             this.rest_value = jsonObject.getString("rest_value");
             this.rest_from = jsonObject.getString("rest_from");
-            this.notes = jsonObject.getString("notes");
+//            this.notes = jsonObject.getString("notes");
             this.created_by = jsonObject.getString("created_by");
             this.created_date = jsonObject.getString("created_date");
             this.modified_by = jsonObject.getString("modified_by");
@@ -173,6 +177,7 @@ public class ProposedBudget implements Parcelable {
         dest.writeString(person_in_charge);
         dest.writeString(requisition_date);
         dest.writeString(due_date);
+        dest.writeString(payment_date);
         dest.writeString(rest_value);
         dest.writeString(rest_from);
         dest.writeString(notes);
@@ -221,6 +226,10 @@ public class ProposedBudget implements Parcelable {
 
     public String getDue_date() {
         return due_date;
+    }
+
+    public String getPayment_date() {
+        return payment_date;
     }
 
     public String getRest_value() {

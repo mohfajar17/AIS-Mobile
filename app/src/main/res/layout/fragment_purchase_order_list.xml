@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:id="@+id/ppLayoutList"
-    tools:context=".Project.Pengambilan.PengambilanFragment">
+    android:id="@+id/poLayoutList"
+    tools:context=".Purchasing.PurchaseOrder.PurchaseOrdersFragment">
 
     <TextView
-        android:id="@+id/ppTextNomorPengambilan"
+        android:id="@+id/poTextNomor"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -22,8 +22,8 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextMaterialReq"
-        android:layout_width="130dp"
+        android:id="@+id/poTextSupplier"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
         android:text="-"
@@ -36,7 +36,63 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextDibuatOleh"
+        android:id="@+id/poTextfile"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/poTextTglKedatangan"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/poTextJobOrder"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/poTextTermPembayaran"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/poTextDibuat"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -50,7 +106,7 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextDiambilOleh"
+        android:id="@+id/poTextCheckedBy"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -64,7 +120,7 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextDiakuiOleh"
+        android:id="@+id/poTextPersetujuan"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -78,8 +134,8 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextTglPengambilan"
-        android:layout_width="90dp"
+        android:id="@+id/poTextApproval1"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
         android:text="-"
@@ -92,21 +148,7 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextCatatan"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:gravity="top|center"
-        android:text="-"
-        android:padding="5dp"
-        android:textColor="@android:color/black" />
-
-    <ImageView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:src="@color/colorGray"/>
-
-    <TextView
-        android:id="@+id/ppTextDiakui"
+        android:id="@+id/poTextStatus"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"

@@ -1,4 +1,4 @@
-package com.example.aismobile.Data;
+package com.example.aismobile.Data.Project;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -11,6 +11,7 @@ public class WorkCompletion implements Parcelable {
     private int job_progress_report_id;
     private String job_progress_report_number;
     private String job_order_id;
+    private String job_order_description;
     private String sales_quotation_id;
     private String company_id;
     private String progress_percentage;
@@ -31,13 +32,14 @@ public class WorkCompletion implements Parcelable {
     private String client_po_number;
     private String is_delete;
 
-    public WorkCompletion(int job_progress_report_id, String job_progress_report_number, String job_order_id, String sales_quotation_id, String company_id,
+    public WorkCompletion(int job_progress_report_id, String job_progress_report_number, String job_order_id, String job_order_description, String sales_quotation_id, String company_id,
                     String progress_percentage, String start_work, String end_work, String payment_term_id, String description, String notes,
                     String created_by, String created_date, String modified_by, String modified_date, String prepared_by, String prepared_date,
                     String accepted_by, String accepted_by2, String accepted_by3, String client_po_number, String is_delete) {
         this.job_progress_report_id = job_progress_report_id;
         this.job_progress_report_number = job_progress_report_number;
         this.job_order_id = job_order_id;
+        this.job_order_description = job_order_description;
         this.sales_quotation_id = sales_quotation_id;
         this.company_id = company_id;
         this.progress_percentage = progress_percentage;
@@ -63,6 +65,7 @@ public class WorkCompletion implements Parcelable {
         job_progress_report_id = in.readInt();
         job_progress_report_number = in.readString();
         job_order_id = in.readString();
+        job_order_description = in.readString();
         sales_quotation_id = in.readString();
         company_id = in.readString();
         progress_percentage = in.readString();
@@ -89,13 +92,13 @@ public class WorkCompletion implements Parcelable {
             this.job_progress_report_id = jsonObject.getInt("job_progress_report_id");
             this.job_progress_report_number = jsonObject.getString("job_progress_report_number");
             this.job_order_id = jsonObject.getString("job_order_id");
+            this.job_order_description = jsonObject.getString("job_order_description");
             this.sales_quotation_id = jsonObject.getString("sales_quotation_id");
             this.company_id = jsonObject.getString("company_id");
             this.progress_percentage = jsonObject.getString("progress_percentage");
             this.start_work = jsonObject.getString("start_work");
             this.end_work = jsonObject.getString("end_work");
             this.payment_term_id = jsonObject.getString("payment_term_id");
-//            this.description = jsonObject.getString("description");
             this.notes = jsonObject.getString("notes");
             this.created_by = jsonObject.getString("created_by");
             this.created_date = jsonObject.getString("created_date");
@@ -137,6 +140,7 @@ public class WorkCompletion implements Parcelable {
         dest.writeInt(job_progress_report_id);
         dest.writeString(job_progress_report_number);
         dest.writeString(job_order_id);
+        dest.writeString(job_order_description);
         dest.writeString(sales_quotation_id);
         dest.writeString(company_id);
         dest.writeString(progress_percentage);
@@ -168,6 +172,10 @@ public class WorkCompletion implements Parcelable {
 
     public String getJob_order_id() {
         return job_order_id;
+    }
+
+    public String getJob_order_description() {
+        return job_order_description;
     }
 
     public String getSales_quotation_id() {

@@ -1,4 +1,4 @@
-package com.example.aismobile.Data;
+package com.example.aismobile.Data.Project;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -11,6 +11,7 @@ public class CashProjectReport implements Parcelable {
     private int responsbility_advance_id;
     private String responsbility_advance_number;
     private String cash_advance_id;
+    private String job_order_id;
     private String begin_date;
     private String end_date;
     private String notes;
@@ -36,7 +37,7 @@ public class CashProjectReport implements Parcelable {
     private String bank_transaction_type_id;
     private String ra_discount_type;
 
-    public CashProjectReport(int responsbility_advance_id, String responsbility_advance_number, String cash_advance_id,
+    public CashProjectReport(int responsbility_advance_id, String responsbility_advance_number, String cash_advance_id, String job_order_id,
                              String begin_date, String end_date, String notes, String created_by, String created_date,
                              String modified_by, String modified_date, String approval1, String approval_date1,
                              String approval_comment1, String approval2, String approval_date2, String approval_comment2,
@@ -46,6 +47,7 @@ public class CashProjectReport implements Parcelable {
         this.responsbility_advance_id = responsbility_advance_id;
         this.responsbility_advance_number = responsbility_advance_number;
         this.cash_advance_id = cash_advance_id;
+        this.job_order_id = job_order_id;
         this.begin_date = begin_date;
         this.end_date = end_date;
         this.notes = notes;
@@ -76,6 +78,7 @@ public class CashProjectReport implements Parcelable {
         responsbility_advance_id = in.readInt();
         responsbility_advance_number = in.readString();
         cash_advance_id = in.readString();
+        job_order_id = in.readString();
         notes = in.readString();
         begin_date = in.readString();
         end_date = in.readString();
@@ -108,6 +111,7 @@ public class CashProjectReport implements Parcelable {
             this.responsbility_advance_id = jsonObject.getInt("responsbility_advance_id");
             this.responsbility_advance_number = jsonObject.getString("responsbility_advance_number");
             this.cash_advance_id = jsonObject.getString("cash_advance_id");
+            this.job_order_id = jsonObject.getString("job_order_id");
             this.begin_date = jsonObject.getString("begin_date");
             this.end_date = jsonObject.getString("end_date");
             this.notes = jsonObject.getString("notes");
@@ -159,6 +163,7 @@ public class CashProjectReport implements Parcelable {
         dest.writeInt(responsbility_advance_id);
         dest.writeString(responsbility_advance_number);
         dest.writeString(cash_advance_id);
+        dest.writeString(job_order_id);
         dest.writeString(begin_date);
         dest.writeString(end_date);
         dest.writeString(notes);
@@ -195,6 +200,10 @@ public class CashProjectReport implements Parcelable {
 
     public String getCash_advance_id() {
         return cash_advance_id;
+    }
+
+    public String getJob_order_id() {
+        return job_order_id;
     }
 
     public String getBegin_date() {

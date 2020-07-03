@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:id="@+id/ppLayoutList"
-    tools:context=".Project.Pengambilan.PengambilanFragment">
+    android:id="@+id/ptkLayoutList"
+    tools:context=".Project.TunjanganKaryawan.TunKaryawanFragment">
 
     <TextView
-        android:id="@+id/ppTextNomorPengambilan"
+        android:id="@+id/ptkTextNomor"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -22,21 +22,7 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextMaterialReq"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:gravity="top|center"
-        android:text="-"
-        android:padding="5dp"
-        android:textColor="@android:color/black" />
-
-    <ImageView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:src="@color/colorGray"/>
-
-    <TextView
-        android:id="@+id/ppTextDibuatOleh"
+        android:id="@+id/ptkTextKaryawan"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -50,7 +36,77 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextDiambilOleh"
+        android:id="@+id/ptkTextType"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/ptkTextKabupaten"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/ptkTextJobOrder"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/ptkTextTglAwal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/ptkTextTglAkhir"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/ptkTextVerifiedBy"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -64,7 +120,7 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextDiakuiOleh"
+        android:id="@+id/ptkTextApproval1"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
@@ -78,8 +134,8 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextTglPengambilan"
-        android:layout_width="90dp"
+        android:id="@+id/ptkTextApproval2"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
         android:text="-"
@@ -92,21 +148,7 @@
         android:src="@color/colorGray"/>
 
     <TextView
-        android:id="@+id/ppTextCatatan"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:gravity="top|center"
-        android:text="-"
-        android:padding="5dp"
-        android:textColor="@android:color/black" />
-
-    <ImageView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:src="@color/colorGray"/>
-
-    <TextView
-        android:id="@+id/ppTextDiakui"
+        android:id="@+id/ptkTextPaid"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"

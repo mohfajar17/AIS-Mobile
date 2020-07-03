@@ -50,12 +50,34 @@
                 android:src="@drawable/ic_search"/>
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinnerSortJO"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/colorLightGray"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:spinnerMode="dialog" />
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinnerSortJO"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:spinnerMode="dialog" />
+
+            <Spinner
+                android:id="@+id/spinnerSortADJO"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:spinnerMode="dialog" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/buttonShowAllList"

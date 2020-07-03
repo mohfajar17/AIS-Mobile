@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.aismobile.Data.Purchasing.PurchaseOrder;
+import com.example.aismobile.Data.Purchasing.PurchaseService;
 import com.example.aismobile.Purchasing.PurchaseOrder.PurchaseOrdersFragment;
+import com.example.aismobile.Purchasing.WorkOrder.WorkOrdersFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -23,7 +25,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class PurchasingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        PurchaseOrdersFragment.OnListFragmentInteractionListener {
+        PurchaseOrdersFragment.OnListFragmentInteractionListener,
+        WorkOrdersFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -132,6 +135,11 @@ public class PurchasingActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onListFragmentInteraction(PurchaseOrder item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(PurchaseService item) {
 
     }
 }

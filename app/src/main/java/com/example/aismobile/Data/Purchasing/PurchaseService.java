@@ -114,7 +114,7 @@ public class PurchaseService implements Parcelable {
             this.tax_type_id = jsonObject.getString("tax_type_id");
             this.purchase_order_status_id = jsonObject.getString("purchase_order_status_id");
             this.contract_agreement_id = jsonObject.getString("contract_agreement_id");
-            this.supplier_id = jsonObject.getString("contract_agreement_id");
+            this.supplier_id = jsonObject.getString("supplier_id");
             this.purchase_quotation_number = jsonObject.getString("purchase_quotation_number");
             this.purchase_quotation_date = jsonObject.getString("purchase_quotation_date");
             this.begin_date = jsonObject.getString("begin_date");
@@ -188,5 +188,117 @@ public class PurchaseService implements Parcelable {
         dest.writeString(purchase_service_file_name);
         dest.writeString(purchase_service_file_type);
         dest.writeString(purchase_service_discount_type);
+    }
+
+    public int getPurchase_service_id() {
+        return purchase_service_id;
+    }
+
+    public String getPurchase_service_number() {
+        return purchase_service_number;
+    }
+
+    public String getPurchase_order_type_id() {
+        return purchase_order_type_id;
+    }
+
+    public String getTax_type_id() {
+        return tax_type_id;
+    }
+
+    public String getPurchase_order_status_id() {
+        return purchase_order_status_id;
+    }
+
+    public String getContract_agreement_id() {
+        return contract_agreement_id;
+    }
+
+    public String getSupplier_id() {
+        return supplier_id;
+    }
+
+    public String getPurchase_quotation_number() {
+        return purchase_quotation_number;
+    }
+
+    public String getPurchase_quotation_date() {
+        return purchase_quotation_date;
+    }
+
+    public String getBegin_date() {
+        return begin_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public String getPayment_term_id() {
+        return payment_term_id;
+    }
+
+    public String getPayment_desc() {
+        return payment_desc;
+    }
+
+    public String getApproval_assign_id() {
+        return approval_assign_id;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
+    }
+
+    public String getPo_approval1() {
+        return po_approval1;
+    }
+
+    public String getPo_approval_date1() {
+        return po_approval_date1;
+    }
+
+    public String getPo_comment1() {
+        return po_comment1;
+    }
+
+    public String getChecked_by() {
+        return checked_by;
+    }
+
+    public String getChecked_date() {
+        return checked_date;
+    }
+
+    public String getPurchase_service_archive() {
+        return purchase_service_archive;
+    }
+
+    public String getPurchase_service_file_name() {
+        return purchase_service_file_name;
+    }
+
+    public String getPurchase_service_file_type() {
+        return purchase_service_file_type;
+    }
+
+    public String getPurchase_service_discount_type() {
+        return purchase_service_discount_type;
     }
 }

@@ -489,7 +489,7 @@ public class ProposedBudgetFragment extends Fragment {
             holder.ppbTextNomorProposedBudget.setText(""+mValues.get(position).getCash_advance_number());
             holder.ppbTextRest.setText(""+mValues.get(position).getRest_from());
             holder.ppbTextJobOrder.setText(""+mValues.get(position).getJob_order_id());
-            holder.ppbTextPenanggungJwb.setText(""+mValues.get(position).getRecipient_by());
+            holder.ppbTextPenanggungJwb.setText(""+mValues.get(position).getPerson_in_charge());
             holder.ppbTextTglPermintaan.setText(""+mValues.get(position).getRequisition_date());
             holder.ppbTextDueDate.setText(""+mValues.get(position).getDue_date());
             holder.ppbTextPaymentDate.setText(""+mValues.get(position).getPayment_date());
@@ -545,7 +545,7 @@ public class ProposedBudgetFragment extends Fragment {
                                 filteredList.add(item);
                             } else if (item.getJob_order_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getRecipient_by().toLowerCase().contains(filterPattern)){
+                            } else if (item.getPerson_in_charge().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getRequisition_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
@@ -577,7 +577,7 @@ public class ProposedBudgetFragment extends Fragment {
                                 filteredList.add(item);
                             }
                         } else if (ppbSpinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getRecipient_by().toLowerCase().contains(filterPattern)){
+                            if (item.getPerson_in_charge().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (ppbSpinnerSearch.getSelectedItemPosition()==5){

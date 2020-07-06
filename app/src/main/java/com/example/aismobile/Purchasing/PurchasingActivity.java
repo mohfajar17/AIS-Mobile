@@ -4,29 +4,32 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.aismobile.Data.Purchasing.CashOnDelivery;
 import com.example.aismobile.Data.Purchasing.PurchaseOrder;
 import com.example.aismobile.Data.Purchasing.PurchaseService;
+import com.example.aismobile.Purchasing.CashOnDelivery.CashOnDeliveryFragment;
 import com.example.aismobile.Purchasing.PurchaseOrder.PurchaseOrdersFragment;
 import com.example.aismobile.Purchasing.WorkOrder.WorkOrdersFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 public class PurchasingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         PurchaseOrdersFragment.OnListFragmentInteractionListener,
-        WorkOrdersFragment.OnListFragmentInteractionListener {
+        WorkOrdersFragment.OnListFragmentInteractionListener,
+        CashOnDeliveryFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -140,6 +143,11 @@ public class PurchasingActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onListFragmentInteraction(PurchaseService item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(CashOnDelivery item) {
 
     }
 }

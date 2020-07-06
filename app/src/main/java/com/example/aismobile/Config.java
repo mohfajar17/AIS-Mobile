@@ -46,6 +46,7 @@ public class Config {
     public static final String DATA_URL_PURCHASE_ORDER_LIST = DATA_URL+"getPurchaseOrder";
     public static final String DATA_URL_PURCHASE_SERVICE_LIST = DATA_URL+"getPurchaseService";
     public static final String DATA_URL_CASH_ON_DELIVERY_LIST = DATA_URL+"getCashOnDelivery";
+    public static final String DATA_URL_CONTTRACT_AGREEMENT_LIST = DATA_URL+"getContractAgreement";
     public static final String DATA_URL_NEWS_LIST = DATA_URL+"getNews";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";

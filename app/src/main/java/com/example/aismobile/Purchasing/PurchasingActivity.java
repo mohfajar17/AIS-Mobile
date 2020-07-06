@@ -18,9 +18,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.aismobile.Data.Purchasing.CashOnDelivery;
+import com.example.aismobile.Data.Purchasing.ContractAgreement;
 import com.example.aismobile.Data.Purchasing.PurchaseOrder;
 import com.example.aismobile.Data.Purchasing.PurchaseService;
 import com.example.aismobile.Purchasing.CashOnDelivery.CashOnDeliveryFragment;
+import com.example.aismobile.Purchasing.KontrakPerjanjian.KontrakPerjanjianFragment;
 import com.example.aismobile.Purchasing.PurchaseOrder.PurchaseOrdersFragment;
 import com.example.aismobile.Purchasing.WorkOrder.WorkOrdersFragment;
 import com.example.aismobile.R;
@@ -29,7 +31,8 @@ import com.google.android.material.navigation.NavigationView;
 public class PurchasingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         PurchaseOrdersFragment.OnListFragmentInteractionListener,
         WorkOrdersFragment.OnListFragmentInteractionListener,
-        CashOnDeliveryFragment.OnListFragmentInteractionListener {
+        CashOnDeliveryFragment.OnListFragmentInteractionListener,
+        KontrakPerjanjianFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -148,6 +151,11 @@ public class PurchasingActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onListFragmentInteraction(CashOnDelivery item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(ContractAgreement item) {
 
     }
 }

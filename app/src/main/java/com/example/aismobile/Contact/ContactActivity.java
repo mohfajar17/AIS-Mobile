@@ -13,6 +13,7 @@ import com.example.aismobile.Contact.Access.AccessFragment;
 import com.example.aismobile.Contact.Contacts.ContactsFragment;
 import com.example.aismobile.Contact.Perusahaan.PerusahaanFragment;
 import com.example.aismobile.Contact.Supplier.SupplierFragment;
+import com.example.aismobile.Data.Contact.AccessRequest;
 import com.example.aismobile.Data.Contact.Company;
 import com.example.aismobile.Data.Contact.Contact;
 import com.example.aismobile.Data.Contact.Supplier;
@@ -30,7 +31,8 @@ import androidx.appcompat.widget.Toolbar;
 public class ContactActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         ContactsFragment.OnListFragmentInteractionListener,
         SupplierFragment.OnListFragmentInteractionListener,
-        PerusahaanFragment.OnListFragmentInteractionListener {
+        PerusahaanFragment.OnListFragmentInteractionListener,
+        AccessFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -134,6 +136,11 @@ public class ContactActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(Company item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(AccessRequest item) {
 
     }
 }

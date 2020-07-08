@@ -53,6 +53,7 @@ public class Config {
     public static final String DATA_URL_CONTACT_LIST = DATA_URL+"getContact";
     public static final String DATA_URL_SUPPLIER_LIST = DATA_URL+"getSupplier";
     public static final String DATA_URL_COMPANY_LIST = DATA_URL+"getCompany";
+    public static final String DATA_URL_ACCESS_REQUEST_LIST = DATA_URL+"getAccessRequest";
     public static final String DATA_URL_NEWS_LIST = DATA_URL+"getNews";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";

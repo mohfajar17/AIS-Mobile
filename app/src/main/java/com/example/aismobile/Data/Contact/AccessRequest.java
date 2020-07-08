@@ -72,4 +72,28 @@ public class AccessRequest implements Parcelable {
         dest.writeString(approval1);
         dest.writeString(employee_request);
     }
+
+    public int getAccess_request_id() {
+        return access_request_id;
+    }
+
+    public String getAccess_request_number() {
+        return access_request_number;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getRequest_date() {
+        return request_date;
+    }
+
+    public String getApproval1() {
+        return approval1;
+    }
+
+    public String getEmployee_request() {
+        return employee_request;
+    }
 }

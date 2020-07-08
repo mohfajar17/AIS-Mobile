@@ -20,30 +20,22 @@
         android:gravity="center"
         android:text="News Title" />
 
-    <ScrollView
+    <ImageView
+        android:id="@+id/imageDetailInfo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitCenter"
+        android:background="@color/colorWhite"
+        app:srcCompat="@drawable/no_image" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <WebView
+            android:id="@+id/webNews"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:id="@+id/imageDetailInfo"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/no_image" />
-
-            <TextView
-                android:id="@+id/newsContents"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/colorBlack"
-                android:textSize="14dp"
-                android:text="News detail information" />
-        </LinearLayout>
-    </ScrollView>
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite" />
+    </RelativeLayout>
 </LinearLayout>

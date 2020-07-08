@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,8 +19,8 @@ import com.squareup.picasso.Picasso;
 public class NewsDetailActivity extends AppCompatActivity {
 
     private TextView textViewTitle;
-    private TextView newsContents;
     private ImageView imageDetailInfo;
+    private WebView webNewsContent;
 
     private News news;
     private Dialog myDialog;
@@ -31,14 +32,14 @@ public class NewsDetailActivity extends AppCompatActivity {
 
         myDialog = new Dialog(this);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
-        newsContents = (TextView) findViewById(R.id.newsContents);
         imageDetailInfo = (ImageView) findViewById(R.id.imageDetailInfo);
+        webNewsContent = (WebView) findViewById(R.id.webNews);
 
         Bundle bundle = getIntent().getExtras();
         news = bundle.getParcelable("detailNews");
 
         textViewTitle.setText(news.getNews_title());
-        newsContents.setText(news.getNews_contents());
+        webNewsContent.loadData(news.getNews_contents(), "text/html", null);
         imageDetailInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

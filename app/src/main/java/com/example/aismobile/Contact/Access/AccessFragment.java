@@ -1,4 +1,4 @@
-package com.example.aismobile.Contact;
+package com.example.aismobile.Contact.Access;
 
 import android.os.Bundle;
 
@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 
 import com.example.aismobile.R;
 
-public class PerusahaanFragment extends Fragment {
+public class AccessFragment extends Fragment {
 
-    public PerusahaanFragment() {
+    public AccessFragment() {
         // Required empty public constructor
     }
 
-    public static PerusahaanFragment newInstance() {
-        PerusahaanFragment fragment = new PerusahaanFragment();
+    public static AccessFragment newInstance() {
+        AccessFragment fragment = new AccessFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -34,6 +34,6 @@ public class PerusahaanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perusahaan, container, false);
+        return inflater.inflate(R.layout.fragment_access, container, false);
     }
 }

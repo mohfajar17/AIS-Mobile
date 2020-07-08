@@ -31,7 +31,7 @@ public class News implements Parcelable {
             this.news_id = jsonObject.getInt("news_id");
             this.news_title = jsonObject.getString("news_title");
             this.image_name = jsonObject.getString("image_name");
-            this.image_name = jsonObject.getString("news_contents");
+            this.news_contents = jsonObject.getString("news_contents");
         } catch (JSONException e) {
             e.printStackTrace();
         }

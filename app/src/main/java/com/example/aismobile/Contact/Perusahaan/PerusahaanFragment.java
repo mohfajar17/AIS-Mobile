@@ -1,4 +1,4 @@
-package com.example.aismobile.Contact;
+package com.example.aismobile.Contact.Perusahaan;
 
 import android.os.Bundle;
 
@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 
 import com.example.aismobile.R;
 
-public class SupplierFragment extends Fragment {
+public class PerusahaanFragment extends Fragment {
 
-    public SupplierFragment() {
+    public PerusahaanFragment() {
         // Required empty public constructor
     }
 
-    public static SupplierFragment newInstance() {
-        SupplierFragment fragment = new SupplierFragment();
+    public static PerusahaanFragment newInstance() {
+        PerusahaanFragment fragment = new PerusahaanFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -33,7 +33,8 @@ public class SupplierFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_supplier, container, false);
+        View view = inflater.inflate(R.layout.fragment_perusahaan, container, false);
+
+        return view;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.aismobile.Contact;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,8 +9,13 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aismobile.Contact.Access.AccessFragment;
+import com.example.aismobile.Contact.Contacts.ContactsFragment;
+import com.example.aismobile.Contact.Perusahaan.PerusahaanFragment;
+import com.example.aismobile.Contact.Supplier.SupplierFragment;
+import com.example.aismobile.Data.Contact.Contact;
+import com.example.aismobile.Data.Contact.Supplier;
 import com.example.aismobile.R;
-import com.example.aismobile.SharedPrefManager;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -22,7 +26,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class ContactActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ContactActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        ContactsFragment.OnListFragmentInteractionListener,
+        SupplierFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -112,5 +118,15 @@ public class ContactActivity extends AppCompatActivity implements NavigationView
         textViewWarning.setText("You can't access this menu");
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+    }
+
+    @Override
+    public void onListFragmentInteraction(Contact item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Supplier item) {
+
     }
 }

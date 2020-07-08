@@ -1,4 +1,4 @@
-package com.example.aismobile.Purchasing.GoodReceivedNote;
+package com.example.aismobile.Purchasing.ServicesReceipt;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Purchasing.GoodReceivedNote;
+import com.example.aismobile.Data.Purchasing.ServicesReceipt;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,43 +46,43 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GoodsRecivedNoteFragment extends Fragment {
+public class ServicesReceiptFragment extends Fragment {
 
-    public TextView grnTextPaging;
-    public EditText grnEditSearch;
-    public ImageView grnBtnSearch;
-    public RecyclerView grnRecycler;
-    public FloatingActionButton grnFabAdd;
-    public Spinner grnSpinnerSearch;
-    public Spinner grnSpinnerSort;
-    public Spinner grnSpinnerSortAD;
-    public Button grnBtnShowList;
-    public ImageButton grnBtnBefore;
-    public ImageButton grnBtnNext;
-    public LinearLayout grnLayoutPaging;
+    public TextView srTextPaging;
+    public EditText srEditSearch;
+    public ImageView srBtnSearch;
+    public RecyclerView srRecycler;
+    public FloatingActionButton srFabAdd;
+    public Spinner srSpinnerSearch;
+    public Spinner srSpinnerSort;
+    public Spinner srSpinnerSortAD;
+    public Button srBtnShowList;
+    public ImageButton srBtnBefore;
+    public ImageButton srBtnNext;
+    public LinearLayout srLayoutPaging;
 
     public ProgressDialog progressDialog;
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public GoodsRecivedNoteFragment.MyRecyclerViewAdapter adapter;
+    public ServicesReceiptFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] GRNSpinnerSearch = {"Semua Data", "GRN Number", "Tanggal Penerimaan", "Purchase Order",
-            "Dibuat Oleh", "Supplier", "Diakui"};
-    public String[] GRNSpinnerSort = {"-- Sort By --", "Berdasarkan GRN Number", "Berdasarkan Tanggal Penerimaan",
-            "Berdasarkan Purchase Order", "Berdasarkan Dibuat Oleh", "Berdasarkan Supplier", "Berdasarkan Diakui"};
-    public String[] GRNADSpinnerSort = {"ASC", "DESC"};
+    public String[] SRSpinnerSearch = {"Semua Data", "Services Receipt Number", "Tanggal Penerimaan", "Cash On Delivery",
+            "Dibuat Oleh", "Catatan", "Diakui"};
+    public String[] SRSpinnerSort = {"-- Sort By --", "Berdasarkan Services Receipt Number", "Berdasarkan Tanggal Penerimaan",
+            "Berdasarkan Cash On Delivery", "Berdasarkan Dibuat Oleh", "Berdasarkan Catatan", "Berdasarkan Diakui"};
+    public String[] SRADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<GoodReceivedNote> goodReceivedNotes;
+    public List<ServicesReceipt> servicesReceipts;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public GoodsRecivedNoteFragment() {
+    public ServicesReceiptFragment() {
     }
 
-    public static GoodsRecivedNoteFragment newInstance() {
-        GoodsRecivedNoteFragment fragment = new GoodsRecivedNoteFragment();
+    public static ServicesReceiptFragment newInstance() {
+        ServicesReceiptFragment fragment = new ServicesReceiptFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -98,7 +98,7 @@ public class GoodsRecivedNoteFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        goodReceivedNotes = new ArrayList<>();
+        servicesReceipts = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -108,91 +108,91 @@ public class GoodsRecivedNoteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_goods_recived_note, container, false);
+        View view = inflater.inflate(R.layout.fragment_services_receipt, container, false);
 
         // Set the adapter
-        grnRecycler = (RecyclerView) view.findViewById(R.id.grnRecycler);
+        srRecycler = (RecyclerView) view.findViewById(R.id.srRecycler);
         if (mColumnCount <= 1) {
-            grnRecycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            srRecycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
-            grnRecycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
+            srRecycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        grnFabAdd = (FloatingActionButton) view.findViewById(R.id.grnFabAdd);
-        grnEditSearch = (EditText) view.findViewById(R.id.grnEditSearch);
-        grnTextPaging = (TextView) view.findViewById(R.id.grnTextPaging);
-        grnBtnSearch = (ImageView) view.findViewById(R.id.grnBtnSearch);
-        grnSpinnerSearch = (Spinner) view.findViewById(R.id.grnSpinnerSearch);
-        grnSpinnerSort = (Spinner) view.findViewById(R.id.grnSpinnerSort);
-        grnSpinnerSortAD = (Spinner) view.findViewById(R.id.grnSpinnerSortAD);
-        grnBtnShowList = (Button) view.findViewById(R.id.grnBtnShowList);
-        grnBtnBefore = (ImageButton) view.findViewById(R.id.grnBtnBefore);
-        grnBtnNext = (ImageButton) view.findViewById(R.id.grnBtnNext);
-        grnLayoutPaging = (LinearLayout) view.findViewById(R.id.grnLayoutPaging);
+        srFabAdd = (FloatingActionButton) view.findViewById(R.id.srFabAdd);
+        srEditSearch = (EditText) view.findViewById(R.id.srEditSearch);
+        srTextPaging = (TextView) view.findViewById(R.id.srTextPaging);
+        srBtnSearch = (ImageView) view.findViewById(R.id.srBtnSearch);
+        srSpinnerSearch = (Spinner) view.findViewById(R.id.srSpinnerSearch);
+        srSpinnerSort = (Spinner) view.findViewById(R.id.srSpinnerSort);
+        srSpinnerSortAD = (Spinner) view.findViewById(R.id.srSpinnerSortAD);
+        srBtnShowList = (Button) view.findViewById(R.id.srBtnShowList);
+        srBtnBefore = (ImageButton) view.findViewById(R.id.srBtnBefore);
+        srBtnNext = (ImageButton) view.findViewById(R.id.srBtnNext);
+        srLayoutPaging = (LinearLayout) view.findViewById(R.id.srLayoutPaging);
 
-        grnBtnNext.setOnClickListener(new View.OnClickListener() {
+        srBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter = 15*Integer.valueOf(String.valueOf(grnTextPaging.getText()));
-                setSortHalf(grnSpinnerSort.getSelectedItemPosition(), grnSpinnerSortAD.getSelectedItemPosition());
-                int textValue = Integer.valueOf(String.valueOf(grnTextPaging.getText()))+1;
-                grnTextPaging.setText(""+textValue);
+                counter = 15*Integer.valueOf(String.valueOf(srTextPaging.getText()));
+                setSortHalf(srSpinnerSort.getSelectedItemPosition(), srSpinnerSortAD.getSelectedItemPosition());
+                int textValue = Integer.valueOf(String.valueOf(srTextPaging.getText()))+1;
+                srTextPaging.setText(""+textValue);
                 filter = true;
             }
         });
-        grnBtnBefore.setOnClickListener(new View.OnClickListener() {
+        srBtnBefore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.valueOf(String.valueOf(grnTextPaging.getText())) > 1) {
-                    counter = 15*(Integer.valueOf(String.valueOf(grnTextPaging.getText()))-2);
-                    setSortHalf(grnSpinnerSort.getSelectedItemPosition(), grnSpinnerSortAD.getSelectedItemPosition());
-                    int textValue = Integer.valueOf(String.valueOf(grnTextPaging.getText()))-1;
-                    grnTextPaging.setText(""+textValue);
+                if (Integer.valueOf(String.valueOf(srTextPaging.getText())) > 1) {
+                    counter = 15*(Integer.valueOf(String.valueOf(srTextPaging.getText()))-2);
+                    setSortHalf(srSpinnerSort.getSelectedItemPosition(), srSpinnerSortAD.getSelectedItemPosition());
+                    int textValue = Integer.valueOf(String.valueOf(srTextPaging.getText()))-1;
+                    srTextPaging.setText(""+textValue);
                     filter = true;
                 }
             }
         });
 
-        grnBtnShowList.setOnClickListener(new View.OnClickListener() {
+        srBtnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("grn_id DESC");
+                    loadDataAll("services_receipt_id DESC");
                     loadAll = true;
-                    params = grnLayoutPaging.getLayoutParams();
+                    params = srLayoutPaging.getLayoutParams();
                     params.height = 0;
-                    grnLayoutPaging.setLayoutParams(params);
-                    grnBtnShowList.setText("Show Half");
+                    srLayoutPaging.setLayoutParams(params);
+                    srBtnShowList.setText("Show Half");
                 } else {
-                    grnTextPaging.setText("1");
+                    srTextPaging.setText("1");
                     counter = 0;
-                    loadData("grn_id DESC");
+                    loadData("services_receipt_id DESC");
                     loadAll = false;
-                    params = grnLayoutPaging.getLayoutParams();
+                    params = srLayoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
-                    grnLayoutPaging.setLayoutParams(params);
-                    grnBtnShowList.setText("Show All");
+                    srLayoutPaging.setLayoutParams(params);
+                    srBtnShowList.setText("Show All");
                 }
             }
         });
 
-        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, GRNSpinnerSearch);
-        grnSpinnerSearch.setAdapter(spinnerAdapter);
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, SRSpinnerSearch);
+        srSpinnerSearch.setAdapter(spinnerAdapter);
 
-        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, GRNSpinnerSort);
-        grnSpinnerSort.setAdapter(spinnerAdapter);
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, SRSpinnerSort);
+        srSpinnerSort.setAdapter(spinnerAdapter);
 
-        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, GRNADSpinnerSort);
-        grnSpinnerSortAD.setAdapter(spinnerAdapter);
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, SRADSpinnerSort);
+        srSpinnerSortAD.setAdapter(spinnerAdapter);
 
-        grnSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        srSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (counter<0){
-                    setSortAll(position, grnSpinnerSortAD.getSelectedItemPosition());
+                    setSortAll(position, srSpinnerSortAD.getSelectedItemPosition());
                 } else {
-                    setSortHalf(position, grnSpinnerSortAD.getSelectedItemPosition());
+                    setSortHalf(position, srSpinnerSortAD.getSelectedItemPosition());
                 }
             }
 
@@ -202,88 +202,88 @@ public class GoodsRecivedNoteFragment extends Fragment {
             }
         });
 
-        grnBtnSearch.setOnClickListener(new View.OnClickListener() {
+        srBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (grnEditSearch.getText().toString().matches("")){
-                    grnSpinnerSearch.setSelection(0);
+                if (srEditSearch.getText().toString().matches("")){
+                    srSpinnerSearch.setSelection(0);
                     adapter.getFilter().filter("-");
-                } else adapter.getFilter().filter(String.valueOf(grnEditSearch.getText()));
+                } else adapter.getFilter().filter(String.valueOf(srEditSearch.getText()));
             }
         });
 
-        loadData("grn_id DESC");
+        loadData("services_receipt_id DESC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("grn_id ASC");
+            loadDataAll("services_receipt_id ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("grn_id DESC");
+            loadDataAll("services_receipt_id DESC");
         else if (position == 2 && posAD == 0)
             loadDataAll("receipt_date ASC");
         else if (position == 2 && posAD == 1)
             loadDataAll("receipt_date DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("purchase_order_id ASC");
+            loadDataAll("cash_on_delivery_id ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("purchase_order_id DESC");
+            loadDataAll("cash_on_delivery_id DESC");
         else if (position == 4 && posAD == 0)
             loadDataAll("created_by ASC");
         else if (position == 4 && posAD == 1)
             loadDataAll("created_by DESC");
         else if (position == 5 && posAD == 0)
-            loadDataAll("supplier_name ASC");
+            loadDataAll("notes ASC");
         else if (position == 5 && posAD == 1)
-            loadDataAll("supplier_name DESC");
+            loadDataAll("notes DESC");
         else if (position == 6 && posAD == 0)
             loadDataAll("recognized ASC");
         else if (position == 6 && posAD == 1)
             loadDataAll("recognized DESC");
-        else loadDataAll("grn_id DESC");
+        else loadDataAll("services_receipt_id DESC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("grn_id ASC");
+            loadData("services_receipt_id ASC");
         else if (position == 1 && posAD == 1)
-            loadData("grn_id DESC");
+            loadData("services_receipt_id DESC");
         else if (position == 2 && posAD == 0)
             loadData("receipt_date ASC");
         else if (position == 2 && posAD == 1)
             loadData("receipt_date DESC");
         else if (position == 3 && posAD == 0)
-            loadData("purchase_order_id ASC");
+            loadData("cash_on_delivery_id ASC");
         else if (position == 3 && posAD == 1)
-            loadData("purchase_order_id DESC");
+            loadData("cash_on_delivery_id DESC");
         else if (position == 4 && posAD == 0)
             loadData("created_by ASC");
         else if (position == 4 && posAD == 1)
             loadData("created_by DESC");
         else if (position == 5 && posAD == 0)
-            loadData("supplier_name ASC");
+            loadData("notes ASC");
         else if (position == 5 && posAD == 1)
-            loadData("supplier_name DESC");
+            loadData("notes DESC");
         else if (position == 6 && posAD == 0)
             loadData("recognized ASC");
         else if (position == 6 && posAD == 1)
             loadData("recognized DESC");
-        else loadData("grn_id DESC");
+        else loadData("services_receipt_id DESC");
     }
 
     private void setAdapterList(){
-        adapter = new GoodsRecivedNoteFragment.MyRecyclerViewAdapter(goodReceivedNotes, mListener);
-        grnRecycler.setAdapter(adapter);
+        adapter = new ServicesReceiptFragment.MyRecyclerViewAdapter(servicesReceipts, mListener);
+        srRecycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
-        grnRecycler.setAdapter(null);
-        goodReceivedNotes.clear();
+        srRecycler.setAdapter(null);
+        servicesReceipts.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_GRN_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SERCICES_RECEIPT_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -292,15 +292,15 @@ public class GoodsRecivedNoteFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            goodReceivedNotes.add(new GoodReceivedNote(jsonArray.getJSONObject(i)));
+                            servicesReceipts.add(new ServicesReceipt(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
                         if (filter){
-                            if (grnEditSearch.getText().toString().matches("")){
-                                grnSpinnerSearch.setSelection(0);
+                            if (srEditSearch.getText().toString().matches("")){
+                                srSpinnerSearch.setSelection(0);
                                 adapter.getFilter().filter("-");
-                            } else adapter.getFilter().filter(String.valueOf(grnEditSearch.getText()));
+                            } else adapter.getFilter().filter(String.valueOf(srEditSearch.getText()));
                             filter = false;
                         }
                     } else {
@@ -334,10 +334,10 @@ public class GoodsRecivedNoteFragment extends Fragment {
 
     public void loadData(final String sortBy){
         progressDialog.show();
-        grnRecycler.setAdapter(null);
-        goodReceivedNotes.clear();
+        srRecycler.setAdapter(null);
+        servicesReceipts.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_GRN_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SERCICES_RECEIPT_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -346,14 +346,14 @@ public class GoodsRecivedNoteFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            goodReceivedNotes.add(new GoodReceivedNote(jsonArray.getJSONObject(i)));
+                            servicesReceipts.add(new ServicesReceipt(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
-                            if (grnEditSearch.getText().toString().matches("")){
-                                grnSpinnerSearch.setSelection(0);
+                            if (srEditSearch.getText().toString().matches("")){
+                                srSpinnerSearch.setSelection(0);
                                 adapter.getFilter().filter("-");
-                            } else adapter.getFilter().filter(String.valueOf(grnEditSearch.getText()));
+                            } else adapter.getFilter().filter(String.valueOf(srEditSearch.getText()));
                             filter = false;
                         }
                     } else {
@@ -410,16 +410,16 @@ public class GoodsRecivedNoteFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(GoodReceivedNote item);
+        void onListFragmentInteraction(ServicesReceipt item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<GoodReceivedNote> mValues;
-        private final List<GoodReceivedNote> values;
+        private final List<ServicesReceipt> mValues;
+        private final List<ServicesReceipt> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<GoodReceivedNote> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<ServicesReceipt> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -428,22 +428,22 @@ public class GoodsRecivedNoteFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_goods_recived_note_list, parent, false);
+                    .inflate(R.layout.fragment_services_receipt_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.grnTextNomor.setText(""+mValues.get(position).getGrn_number());
-            holder.grnTextTglPenerimaan.setText(""+mValues.get(position).getReceipt_date());
-            holder.grnTextPurchaseOrder.setText(""+mValues.get(position).getPurchase_order_id());
-            holder.grnTextDibuat.setText(""+mValues.get(position).getCreated_by());
-            holder.grnTextSupplier.setText(""+mValues.get(position).getSupplier_name());
-            holder.grnTextDiakui.setText(""+mValues.get(position).getRecognized());
+            holder.srTextNomor.setText(""+mValues.get(position).getServices_receipt_number());
+            holder.srTextTglPenerimaan.setText(""+mValues.get(position).getReceipt_date());
+            holder.srTextCOD.setText(""+mValues.get(position).getCash_on_delivery_id());
+            holder.srTextDibuat.setText(""+mValues.get(position).getCreated_by());
+            holder.srTextNote.setText(""+mValues.get(position).getNotes());
+            holder.srTextstatus.setText(""+mValues.get(position).getRecognized());
 
             if (position%2==0)
-                holder.grnLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.grnLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.srLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.srLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -469,49 +469,49 @@ public class GoodsRecivedNoteFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<GoodReceivedNote> filteredList = new ArrayList<>();
+                List<ServicesReceipt> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((GoodReceivedNote) values);
+                    filteredList.add((ServicesReceipt) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (GoodReceivedNote item : values){
-                        if (grnSpinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getGrn_number().toLowerCase().contains(filterPattern)){
+                    for (ServicesReceipt item : values){
+                        if (srSpinnerSearch.getSelectedItemPosition()==0){
+                            if (item.getServices_receipt_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getReceipt_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getPurchase_order_id().toLowerCase().contains(filterPattern)){
+                            } else if (item.getCash_on_delivery_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getCreated_by().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getSupplier_name().toLowerCase().contains(filterPattern)){
+                            } else if (item.getNotes().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getRecognized().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getGrn_number().toLowerCase().contains(filterPattern)){
+                        } else if (srSpinnerSearch.getSelectedItemPosition()==1){
+                            if (item.getServices_receipt_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==2){
+                        } else if (srSpinnerSearch.getSelectedItemPosition()==2){
                             if (item.getReceipt_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getPurchase_order_id().toLowerCase().contains(filterPattern)){
+                        } else if (srSpinnerSearch.getSelectedItemPosition()==3){
+                            if (item.getCash_on_delivery_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==4){
+                        } else if (srSpinnerSearch.getSelectedItemPosition()==4){
                             if (item.getCreated_by().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==5){
-                            if (item.getSupplier_name().toLowerCase().contains(filterPattern)){
+                        } else if (srSpinnerSearch.getSelectedItemPosition()==5){
+                            if (item.getNotes().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==6){
+                        } else if (srSpinnerSearch.getSelectedItemPosition()==6){
                             if (item.getRecognized().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
@@ -536,27 +536,27 @@ public class GoodsRecivedNoteFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView grnTextNomor;
-            public final TextView grnTextTglPenerimaan;
-            public final TextView grnTextPurchaseOrder;
-            public final TextView grnTextDibuat;
-            public final TextView grnTextSupplier;
-            public final TextView grnTextDiakui;
+            public final TextView srTextNomor;
+            public final TextView srTextTglPenerimaan;
+            public final TextView srTextCOD;
+            public final TextView srTextDibuat;
+            public final TextView srTextNote;
+            public final TextView srTextstatus;
 
-            public final LinearLayout grnLayoutList;
+            public final LinearLayout srLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                grnTextNomor = (TextView) view.findViewById(R.id.grnTextNomor);
-                grnTextTglPenerimaan = (TextView) view.findViewById(R.id.grnTextTglPenerimaan);
-                grnTextPurchaseOrder = (TextView) view.findViewById(R.id.grnTextPurchaseOrder);
-                grnTextDibuat = (TextView) view.findViewById(R.id.grnTextDibuat);
-                grnTextSupplier = (TextView) view.findViewById(R.id.grnTextSupplier);
-                grnTextDiakui = (TextView) view.findViewById(R.id.grnTextStatus);
+                srTextNomor = (TextView) view.findViewById(R.id.srTextNomor);
+                srTextTglPenerimaan = (TextView) view.findViewById(R.id.srTextTglPenerimaan);
+                srTextCOD = (TextView) view.findViewById(R.id.srTextCOD);
+                srTextDibuat = (TextView) view.findViewById(R.id.srTextDibuat);
+                srTextNote = (TextView) view.findViewById(R.id.srTextNote);
+                srTextstatus = (TextView) view.findViewById(R.id.srTextStatus);
 
-                grnLayoutList = (LinearLayout) view.findViewById(R.id.grnLayoutList);
+                srLayoutList = (LinearLayout) view.findViewById(R.id.srLayoutList);
             }
         }
     }

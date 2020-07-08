@@ -22,10 +22,14 @@ import com.example.aismobile.Data.Purchasing.ContractAgreement;
 import com.example.aismobile.Data.Purchasing.GoodReceivedNote;
 import com.example.aismobile.Data.Purchasing.PurchaseOrder;
 import com.example.aismobile.Data.Purchasing.PurchaseService;
+import com.example.aismobile.Data.Purchasing.ServicesReceipt;
+import com.example.aismobile.Data.Purchasing.WorkHandover;
 import com.example.aismobile.Purchasing.CashOnDelivery.CashOnDeliveryFragment;
 import com.example.aismobile.Purchasing.GoodReceivedNote.GoodsRecivedNoteFragment;
 import com.example.aismobile.Purchasing.KontrakPerjanjian.KontrakPerjanjianFragment;
 import com.example.aismobile.Purchasing.PurchaseOrder.PurchaseOrdersFragment;
+import com.example.aismobile.Purchasing.ServicesReceipt.ServicesReceiptFragment;
+import com.example.aismobile.Purchasing.WorkHandover.WorkHandoverFragment;
 import com.example.aismobile.Purchasing.WorkOrder.WorkOrdersFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
@@ -35,7 +39,9 @@ public class PurchasingActivity extends AppCompatActivity implements NavigationV
         WorkOrdersFragment.OnListFragmentInteractionListener,
         CashOnDeliveryFragment.OnListFragmentInteractionListener,
         KontrakPerjanjianFragment.OnListFragmentInteractionListener,
-        GoodsRecivedNoteFragment.OnListFragmentInteractionListener {
+        GoodsRecivedNoteFragment.OnListFragmentInteractionListener,
+        WorkHandoverFragment.OnListFragmentInteractionListener,
+        ServicesReceiptFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -164,6 +170,16 @@ public class PurchasingActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onListFragmentInteraction(GoodReceivedNote item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(WorkHandover item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(ServicesReceipt item) {
 
     }
 }

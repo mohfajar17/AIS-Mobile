@@ -1,4 +1,4 @@
-package com.example.aismobile.Purchasing.GoodReceivedNote;
+package com.example.aismobile.Purchasing.WorkHandover;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Purchasing.GoodReceivedNote;
+import com.example.aismobile.Data.Purchasing.WorkHandover;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,43 +46,43 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GoodsRecivedNoteFragment extends Fragment {
+public class WorkHandoverFragment extends Fragment {
 
-    public TextView grnTextPaging;
-    public EditText grnEditSearch;
-    public ImageView grnBtnSearch;
-    public RecyclerView grnRecycler;
-    public FloatingActionButton grnFabAdd;
-    public Spinner grnSpinnerSearch;
-    public Spinner grnSpinnerSort;
-    public Spinner grnSpinnerSortAD;
-    public Button grnBtnShowList;
-    public ImageButton grnBtnBefore;
-    public ImageButton grnBtnNext;
-    public LinearLayout grnLayoutPaging;
+    public TextView whTextPaging;
+    public EditText whEditSearch;
+    public ImageView whBtnSearch;
+    public RecyclerView whRecycler;
+    public FloatingActionButton whFabAdd;
+    public Spinner whSpinnerSearch;
+    public Spinner whSpinnerSort;
+    public Spinner whSpinnerSortAD;
+    public Button whBtnShowList;
+    public ImageButton whBtnBefore;
+    public ImageButton whBtnNext;
+    public LinearLayout whLayoutPaging;
 
     public ProgressDialog progressDialog;
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public GoodsRecivedNoteFragment.MyRecyclerViewAdapter adapter;
+    public WorkHandoverFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] GRNSpinnerSearch = {"Semua Data", "GRN Number", "Tanggal Penerimaan", "Purchase Order",
-            "Dibuat Oleh", "Supplier", "Diakui"};
-    public String[] GRNSpinnerSort = {"-- Sort By --", "Berdasarkan GRN Number", "Berdasarkan Tanggal Penerimaan",
-            "Berdasarkan Purchase Order", "Berdasarkan Dibuat Oleh", "Berdasarkan Supplier", "Berdasarkan Diakui"};
-    public String[] GRNADSpinnerSort = {"ASC", "DESC"};
+    public String[] WHSpinnerSearch = {"Semua Data", "Work Handover Number", "Tanggal Penerimaan", "Work Order",
+            "Supplier", "Purchase Service Notes", "Diakui"};
+    public String[] WHSpinnerSort = {"-- Sort By --", "Berdasarkan Work Handover Number", "Berdasarkan Tanggal Penerimaan",
+            "Berdasarkan Work Order", "Berdasarkan Supplier", "Berdasarkan Purchase Service Notes", "Berdasarkan Diakui"};
+    public String[] WHADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<GoodReceivedNote> goodReceivedNotes;
+    public List<WorkHandover> workHandovers;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public GoodsRecivedNoteFragment() {
+    public WorkHandoverFragment() {
     }
 
-    public static GoodsRecivedNoteFragment newInstance() {
-        GoodsRecivedNoteFragment fragment = new GoodsRecivedNoteFragment();
+    public static WorkHandoverFragment newInstance() {
+        WorkHandoverFragment fragment = new WorkHandoverFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -98,7 +98,7 @@ public class GoodsRecivedNoteFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        goodReceivedNotes = new ArrayList<>();
+        workHandovers = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -108,91 +108,91 @@ public class GoodsRecivedNoteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_goods_recived_note, container, false);
+        View view = inflater.inflate(R.layout.fragment_work_handover, container, false);
 
         // Set the adapter
-        grnRecycler = (RecyclerView) view.findViewById(R.id.grnRecycler);
+        whRecycler = (RecyclerView) view.findViewById(R.id.whRecycler);
         if (mColumnCount <= 1) {
-            grnRecycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            whRecycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
-            grnRecycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
+            whRecycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        grnFabAdd = (FloatingActionButton) view.findViewById(R.id.grnFabAdd);
-        grnEditSearch = (EditText) view.findViewById(R.id.grnEditSearch);
-        grnTextPaging = (TextView) view.findViewById(R.id.grnTextPaging);
-        grnBtnSearch = (ImageView) view.findViewById(R.id.grnBtnSearch);
-        grnSpinnerSearch = (Spinner) view.findViewById(R.id.grnSpinnerSearch);
-        grnSpinnerSort = (Spinner) view.findViewById(R.id.grnSpinnerSort);
-        grnSpinnerSortAD = (Spinner) view.findViewById(R.id.grnSpinnerSortAD);
-        grnBtnShowList = (Button) view.findViewById(R.id.grnBtnShowList);
-        grnBtnBefore = (ImageButton) view.findViewById(R.id.grnBtnBefore);
-        grnBtnNext = (ImageButton) view.findViewById(R.id.grnBtnNext);
-        grnLayoutPaging = (LinearLayout) view.findViewById(R.id.grnLayoutPaging);
+        whFabAdd = (FloatingActionButton) view.findViewById(R.id.whFabAdd);
+        whEditSearch = (EditText) view.findViewById(R.id.whEditSearch);
+        whTextPaging = (TextView) view.findViewById(R.id.whTextPaging);
+        whBtnSearch = (ImageView) view.findViewById(R.id.whBtnSearch);
+        whSpinnerSearch = (Spinner) view.findViewById(R.id.whSpinnerSearch);
+        whSpinnerSort = (Spinner) view.findViewById(R.id.whSpinnerSort);
+        whSpinnerSortAD = (Spinner) view.findViewById(R.id.whSpinnerSortAD);
+        whBtnShowList = (Button) view.findViewById(R.id.whBtnShowList);
+        whBtnBefore = (ImageButton) view.findViewById(R.id.whBtnBefore);
+        whBtnNext = (ImageButton) view.findViewById(R.id.whBtnNext);
+        whLayoutPaging = (LinearLayout) view.findViewById(R.id.whLayoutPaging);
 
-        grnBtnNext.setOnClickListener(new View.OnClickListener() {
+        whBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter = 15*Integer.valueOf(String.valueOf(grnTextPaging.getText()));
-                setSortHalf(grnSpinnerSort.getSelectedItemPosition(), grnSpinnerSortAD.getSelectedItemPosition());
-                int textValue = Integer.valueOf(String.valueOf(grnTextPaging.getText()))+1;
-                grnTextPaging.setText(""+textValue);
+                counter = 15*Integer.valueOf(String.valueOf(whTextPaging.getText()));
+                setSortHalf(whSpinnerSort.getSelectedItemPosition(), whSpinnerSortAD.getSelectedItemPosition());
+                int textValue = Integer.valueOf(String.valueOf(whTextPaging.getText()))+1;
+                whTextPaging.setText(""+textValue);
                 filter = true;
             }
         });
-        grnBtnBefore.setOnClickListener(new View.OnClickListener() {
+        whBtnBefore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.valueOf(String.valueOf(grnTextPaging.getText())) > 1) {
-                    counter = 15*(Integer.valueOf(String.valueOf(grnTextPaging.getText()))-2);
-                    setSortHalf(grnSpinnerSort.getSelectedItemPosition(), grnSpinnerSortAD.getSelectedItemPosition());
-                    int textValue = Integer.valueOf(String.valueOf(grnTextPaging.getText()))-1;
-                    grnTextPaging.setText(""+textValue);
+                if (Integer.valueOf(String.valueOf(whTextPaging.getText())) > 1) {
+                    counter = 15*(Integer.valueOf(String.valueOf(whTextPaging.getText()))-2);
+                    setSortHalf(whSpinnerSort.getSelectedItemPosition(), whSpinnerSortAD.getSelectedItemPosition());
+                    int textValue = Integer.valueOf(String.valueOf(whTextPaging.getText()))-1;
+                    whTextPaging.setText(""+textValue);
                     filter = true;
                 }
             }
         });
 
-        grnBtnShowList.setOnClickListener(new View.OnClickListener() {
+        whBtnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("grn_id DESC");
+                    loadDataAll("work_handover_id DESC");
                     loadAll = true;
-                    params = grnLayoutPaging.getLayoutParams();
+                    params = whLayoutPaging.getLayoutParams();
                     params.height = 0;
-                    grnLayoutPaging.setLayoutParams(params);
-                    grnBtnShowList.setText("Show Half");
+                    whLayoutPaging.setLayoutParams(params);
+                    whBtnShowList.setText("Show Half");
                 } else {
-                    grnTextPaging.setText("1");
+                    whTextPaging.setText("1");
                     counter = 0;
-                    loadData("grn_id DESC");
+                    loadData("work_handover_id DESC");
                     loadAll = false;
-                    params = grnLayoutPaging.getLayoutParams();
+                    params = whLayoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
-                    grnLayoutPaging.setLayoutParams(params);
-                    grnBtnShowList.setText("Show All");
+                    whLayoutPaging.setLayoutParams(params);
+                    whBtnShowList.setText("Show All");
                 }
             }
         });
 
-        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, GRNSpinnerSearch);
-        grnSpinnerSearch.setAdapter(spinnerAdapter);
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, WHSpinnerSearch);
+        whSpinnerSearch.setAdapter(spinnerAdapter);
 
-        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, GRNSpinnerSort);
-        grnSpinnerSort.setAdapter(spinnerAdapter);
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, WHSpinnerSort);
+        whSpinnerSort.setAdapter(spinnerAdapter);
 
-        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, GRNADSpinnerSort);
-        grnSpinnerSortAD.setAdapter(spinnerAdapter);
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, WHADSpinnerSort);
+        whSpinnerSortAD.setAdapter(spinnerAdapter);
 
-        grnSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        whSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (counter<0){
-                    setSortAll(position, grnSpinnerSortAD.getSelectedItemPosition());
+                    setSortAll(position, whSpinnerSortAD.getSelectedItemPosition());
                 } else {
-                    setSortHalf(position, grnSpinnerSortAD.getSelectedItemPosition());
+                    setSortHalf(position, whSpinnerSortAD.getSelectedItemPosition());
                 }
             }
 
@@ -202,26 +202,26 @@ public class GoodsRecivedNoteFragment extends Fragment {
             }
         });
 
-        grnBtnSearch.setOnClickListener(new View.OnClickListener() {
+        whBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (grnEditSearch.getText().toString().matches("")){
-                    grnSpinnerSearch.setSelection(0);
+                if (whEditSearch.getText().toString().matches("")){
+                    whSpinnerSearch.setSelection(0);
                     adapter.getFilter().filter("-");
-                } else adapter.getFilter().filter(String.valueOf(grnEditSearch.getText()));
+                } else adapter.getFilter().filter(String.valueOf(whEditSearch.getText()));
             }
         });
 
-        loadData("grn_id DESC");
+        loadData("work_handover_id DESC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("grn_id ASC");
+            loadDataAll("work_handover_id ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("grn_id DESC");
+            loadDataAll("work_handover_id DESC");
         else if (position == 2 && posAD == 0)
             loadDataAll("receipt_date ASC");
         else if (position == 2 && posAD == 1)
@@ -231,25 +231,25 @@ public class GoodsRecivedNoteFragment extends Fragment {
         else if (position == 3 && posAD == 1)
             loadDataAll("purchase_order_id DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("created_by ASC");
-        else if (position == 4 && posAD == 1)
-            loadDataAll("created_by DESC");
-        else if (position == 5 && posAD == 0)
             loadDataAll("supplier_name ASC");
-        else if (position == 5 && posAD == 1)
+        else if (position == 4 && posAD == 1)
             loadDataAll("supplier_name DESC");
+        else if (position == 5 && posAD == 0)
+            loadDataAll("notes ASC");
+        else if (position == 5 && posAD == 1)
+            loadDataAll("notes DESC");
         else if (position == 6 && posAD == 0)
             loadDataAll("recognized ASC");
         else if (position == 6 && posAD == 1)
             loadDataAll("recognized DESC");
-        else loadDataAll("grn_id DESC");
+        else loadDataAll("work_handover_id DESC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("grn_id ASC");
+            loadData("work_handover_id ASC");
         else if (position == 1 && posAD == 1)
-            loadData("grn_id DESC");
+            loadData("work_handover_id DESC");
         else if (position == 2 && posAD == 0)
             loadData("receipt_date ASC");
         else if (position == 2 && posAD == 1)
@@ -259,31 +259,31 @@ public class GoodsRecivedNoteFragment extends Fragment {
         else if (position == 3 && posAD == 1)
             loadData("purchase_order_id DESC");
         else if (position == 4 && posAD == 0)
-            loadData("created_by ASC");
-        else if (position == 4 && posAD == 1)
-            loadData("created_by DESC");
-        else if (position == 5 && posAD == 0)
             loadData("supplier_name ASC");
-        else if (position == 5 && posAD == 1)
+        else if (position == 4 && posAD == 1)
             loadData("supplier_name DESC");
+        else if (position == 5 && posAD == 0)
+            loadData("notes ASC");
+        else if (position == 5 && posAD == 1)
+            loadData("notes DESC");
         else if (position == 6 && posAD == 0)
             loadData("recognized ASC");
         else if (position == 6 && posAD == 1)
             loadData("recognized DESC");
-        else loadData("grn_id DESC");
+        else loadData("work_handover_id DESC");
     }
 
     private void setAdapterList(){
-        adapter = new GoodsRecivedNoteFragment.MyRecyclerViewAdapter(goodReceivedNotes, mListener);
-        grnRecycler.setAdapter(adapter);
+        adapter = new WorkHandoverFragment.MyRecyclerViewAdapter(workHandovers, mListener);
+        whRecycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
-        grnRecycler.setAdapter(null);
-        goodReceivedNotes.clear();
+        whRecycler.setAdapter(null);
+        workHandovers.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_GRN_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_WORK_HANDOVER_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -292,15 +292,15 @@ public class GoodsRecivedNoteFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            goodReceivedNotes.add(new GoodReceivedNote(jsonArray.getJSONObject(i)));
+                            workHandovers.add(new WorkHandover(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
                         if (filter){
-                            if (grnEditSearch.getText().toString().matches("")){
-                                grnSpinnerSearch.setSelection(0);
+                            if (whEditSearch.getText().toString().matches("")){
+                                whSpinnerSearch.setSelection(0);
                                 adapter.getFilter().filter("-");
-                            } else adapter.getFilter().filter(String.valueOf(grnEditSearch.getText()));
+                            } else adapter.getFilter().filter(String.valueOf(whEditSearch.getText()));
                             filter = false;
                         }
                     } else {
@@ -334,10 +334,10 @@ public class GoodsRecivedNoteFragment extends Fragment {
 
     public void loadData(final String sortBy){
         progressDialog.show();
-        grnRecycler.setAdapter(null);
-        goodReceivedNotes.clear();
+        whRecycler.setAdapter(null);
+        workHandovers.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_GRN_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_WORK_HANDOVER_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -346,14 +346,14 @@ public class GoodsRecivedNoteFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            goodReceivedNotes.add(new GoodReceivedNote(jsonArray.getJSONObject(i)));
+                            workHandovers.add(new WorkHandover(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
-                            if (grnEditSearch.getText().toString().matches("")){
-                                grnSpinnerSearch.setSelection(0);
+                            if (whEditSearch.getText().toString().matches("")){
+                                whSpinnerSearch.setSelection(0);
                                 adapter.getFilter().filter("-");
-                            } else adapter.getFilter().filter(String.valueOf(grnEditSearch.getText()));
+                            } else adapter.getFilter().filter(String.valueOf(whEditSearch.getText()));
                             filter = false;
                         }
                     } else {
@@ -410,16 +410,16 @@ public class GoodsRecivedNoteFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(GoodReceivedNote item);
+        void onListFragmentInteraction(WorkHandover item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<GoodReceivedNote> mValues;
-        private final List<GoodReceivedNote> values;
+        private final List<WorkHandover> mValues;
+        private final List<WorkHandover> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<GoodReceivedNote> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<WorkHandover> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -428,22 +428,22 @@ public class GoodsRecivedNoteFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_goods_recived_note_list, parent, false);
+                    .inflate(R.layout.fragment_work_handover_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.grnTextNomor.setText(""+mValues.get(position).getGrn_number());
-            holder.grnTextTglPenerimaan.setText(""+mValues.get(position).getReceipt_date());
-            holder.grnTextPurchaseOrder.setText(""+mValues.get(position).getPurchase_order_id());
-            holder.grnTextDibuat.setText(""+mValues.get(position).getCreated_by());
-            holder.grnTextSupplier.setText(""+mValues.get(position).getSupplier_name());
-            holder.grnTextDiakui.setText(""+mValues.get(position).getRecognized());
+            holder.whTextNomor.setText(""+mValues.get(position).getWork_handover_number());
+            holder.whTextTglPenerimaan.setText(""+mValues.get(position).getReceipt_date());
+            holder.whTextWorkOrder.setText(""+mValues.get(position).getPurchase_service_id());
+            holder.whTextSupplier.setText(""+mValues.get(position).getSupplier_name());
+            holder.whTextNote.setText(""+mValues.get(position).getNotes());
+            holder.whTextstatus.setText(""+mValues.get(position).getRecognized());
 
             if (position%2==0)
-                holder.grnLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.grnLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.whLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.whLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -469,49 +469,49 @@ public class GoodsRecivedNoteFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<GoodReceivedNote> filteredList = new ArrayList<>();
+                List<WorkHandover> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((GoodReceivedNote) values);
+                    filteredList.add((WorkHandover) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (GoodReceivedNote item : values){
-                        if (grnSpinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getGrn_number().toLowerCase().contains(filterPattern)){
+                    for (WorkHandover item : values){
+                        if (whSpinnerSearch.getSelectedItemPosition()==0){
+                            if (item.getWork_handover_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getReceipt_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getPurchase_order_id().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            } else if (item.getCreated_by().toLowerCase().contains(filterPattern)){
+                            } else if (item.getPurchase_service_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getSupplier_name().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getNotes().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getRecognized().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getGrn_number().toLowerCase().contains(filterPattern)){
+                        } else if (whSpinnerSearch.getSelectedItemPosition()==1){
+                            if (item.getWork_handover_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==2){
+                        } else if (whSpinnerSearch.getSelectedItemPosition()==2){
                             if (item.getReceipt_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getPurchase_order_id().toLowerCase().contains(filterPattern)){
+                        } else if (whSpinnerSearch.getSelectedItemPosition()==3){
+                            if (item.getPurchase_service_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getCreated_by().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==5){
+                        } else if (whSpinnerSearch.getSelectedItemPosition()==4){
                             if (item.getSupplier_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (grnSpinnerSearch.getSelectedItemPosition()==6){
+                        } else if (whSpinnerSearch.getSelectedItemPosition()==5){
+                            if (item.getNotes().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (whSpinnerSearch.getSelectedItemPosition()==6){
                             if (item.getRecognized().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
@@ -536,27 +536,27 @@ public class GoodsRecivedNoteFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView grnTextNomor;
-            public final TextView grnTextTglPenerimaan;
-            public final TextView grnTextPurchaseOrder;
-            public final TextView grnTextDibuat;
-            public final TextView grnTextSupplier;
-            public final TextView grnTextDiakui;
+            public final TextView whTextNomor;
+            public final TextView whTextTglPenerimaan;
+            public final TextView whTextWorkOrder;
+            public final TextView whTextSupplier;
+            public final TextView whTextNote;
+            public final TextView whTextstatus;
 
-            public final LinearLayout grnLayoutList;
+            public final LinearLayout whLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                grnTextNomor = (TextView) view.findViewById(R.id.grnTextNomor);
-                grnTextTglPenerimaan = (TextView) view.findViewById(R.id.grnTextTglPenerimaan);
-                grnTextPurchaseOrder = (TextView) view.findViewById(R.id.grnTextPurchaseOrder);
-                grnTextDibuat = (TextView) view.findViewById(R.id.grnTextDibuat);
-                grnTextSupplier = (TextView) view.findViewById(R.id.grnTextSupplier);
-                grnTextDiakui = (TextView) view.findViewById(R.id.grnTextStatus);
+                whTextNomor = (TextView) view.findViewById(R.id.whTextNomor);
+                whTextTglPenerimaan = (TextView) view.findViewById(R.id.whTextTglPenerimaan);
+                whTextWorkOrder = (TextView) view.findViewById(R.id.whTextWorkOrder);
+                whTextSupplier = (TextView) view.findViewById(R.id.whTextSupplier);
+                whTextNote = (TextView) view.findViewById(R.id.whTextNote);
+                whTextstatus = (TextView) view.findViewById(R.id.whTextStatus);
 
-                grnLayoutList = (LinearLayout) view.findViewById(R.id.grnLayoutList);
+                whLayoutList = (LinearLayout) view.findViewById(R.id.whLayoutList);
             }
         }
     }

@@ -23,7 +23,7 @@
         <item
             android:id="@+id/nav_goodsrecivednote"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Goods Recived Note" />
+            android:title="Goods Received Note" />
         <item
             android:id="@+id/nav_workhandover"
             android:icon="@drawable/ic_menu_gallery"

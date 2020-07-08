@@ -16,35 +16,19 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginRight="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/no_image" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/newsTitle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:paddingLeft="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/newsTitle"
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:gravity="top|left"
-                android:text="afdg"
-                android:padding="5dp"
-                android:textStyle="bold"
-                android:textSize="16dp"
-                android:textColor="@android:color/black" />
-
-            <TextView
-                android:id="@+id/newsContents"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="top|left"
-                android:text="-"
-                android:padding="10dp"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
+            android:gravity="top|left"
+            android:text="-"
+            android:padding="5dp"
+            android:textSize="24dp"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 </RelativeLayout>

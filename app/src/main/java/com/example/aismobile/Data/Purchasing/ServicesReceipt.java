@@ -6,77 +6,73 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class GoodReceivedNote implements Parcelable {
+public class ServicesReceipt implements Parcelable {
 
-    private int grn_id;
-    private String grn_number;
+    private int services_receipt_id;
+    private String services_receipt_number;
     private String receipt_date;
-    private String purchase_order_id;
-    private String notes;
+    private String cash_on_delivery_id;
     private String recognized;
+    private String notes;
     private String created_by;
     private String created_date;
     private String modified_by;
     private String modified_date;
-    private String supplier_name;
 
-    public GoodReceivedNote(int grn_id, String grn_number, String receipt_date, String purchase_order_id,
-                            String notes, String recognized, String created_by, String created_date,
-                            String modified_by, String modified_date, String supplier_name){
-        this.grn_id = grn_id;
-        this.grn_number = grn_number;
+    public ServicesReceipt(int services_receipt_id, String services_receipt_number, String receipt_date,
+                           String cash_on_delivery_id, String recognized, String notes, String created_by,
+                           String created_date, String modified_by, String modified_date){
+        this.services_receipt_id = services_receipt_id;
+        this.services_receipt_number = services_receipt_number;
         this.receipt_date = receipt_date;
-        this.purchase_order_id = purchase_order_id;
-        this.notes = notes;
+        this.cash_on_delivery_id = cash_on_delivery_id;
         this.recognized = recognized;
+        this.notes = notes;
         this.created_by = created_by;
         this.created_date = created_date;
         this.modified_by = modified_by;
         this.modified_date = modified_date;
-        this.supplier_name = supplier_name;
     }
 
-    protected GoodReceivedNote(Parcel in) {
-        grn_id = in.readInt();
-        grn_number = in.readString();
+    protected ServicesReceipt(Parcel in) {
+        services_receipt_id = in.readInt();
+        services_receipt_number = in.readString();
         receipt_date = in.readString();
-        purchase_order_id = in.readString();
-        notes = in.readString();
+        cash_on_delivery_id = in.readString();
         recognized = in.readString();
+        notes = in.readString();
         created_by = in.readString();
         created_date = in.readString();
         modified_by = in.readString();
         modified_date = in.readString();
-        supplier_name = in.readString();
     }
 
-    public GoodReceivedNote(JSONObject jsonObject){
+    public ServicesReceipt(JSONObject jsonObject){
         try {
-            this.grn_id = jsonObject.getInt("grn_id");
-            this.grn_number = jsonObject.getString("grn_number");
+            this.services_receipt_id = jsonObject.getInt("services_receipt_id");
+            this.services_receipt_number = jsonObject.getString("services_receipt_number");
             this.receipt_date = jsonObject.getString("receipt_date");
-            this.purchase_order_id = jsonObject.getString("purchase_order_id");
-            this.notes = jsonObject.getString("notes");
+            this.cash_on_delivery_id = jsonObject.getString("cash_on_delivery_id");
             this.recognized = jsonObject.getString("recognized");
+            this.notes = jsonObject.getString("notes");
             this.created_by = jsonObject.getString("created_by");
             this.created_date = jsonObject.getString("created_date");
             this.modified_by = jsonObject.getString("modified_by");
             this.modified_date = jsonObject.getString("modified_date");
-            this.supplier_name = jsonObject.getString("supplier_name");
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public static final Creator<GoodReceivedNote> CREATOR = new Creator<GoodReceivedNote>() {
+    public static final Creator<ServicesReceipt> CREATOR = new Creator<ServicesReceipt>() {
         @Override
-        public GoodReceivedNote createFromParcel(Parcel in) {
-            return new GoodReceivedNote(in);
+        public ServicesReceipt createFromParcel(Parcel in) {
+            return new ServicesReceipt(in);
         }
 
         @Override
-        public GoodReceivedNote[] newArray(int size) {
-            return new GoodReceivedNote[size];
+        public ServicesReceipt[] newArray(int size) {
+            return new ServicesReceipt[size];
         }
     };
 
@@ -87,41 +83,40 @@ public class GoodReceivedNote implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(grn_id);
-        dest.writeString(grn_number);
+        dest.writeInt(services_receipt_id);
+        dest.writeString(services_receipt_number);
         dest.writeString(receipt_date);
-        dest.writeString(purchase_order_id);
-        dest.writeString(notes);
+        dest.writeString(cash_on_delivery_id);
         dest.writeString(recognized);
+        dest.writeString(notes);
         dest.writeString(created_by);
         dest.writeString(created_date);
         dest.writeString(modified_by);
         dest.writeString(modified_date);
-        dest.writeString(supplier_name);
     }
 
-    public int getGrn_id() {
-        return grn_id;
+    public int getServices_receipt_id() {
+        return services_receipt_id;
     }
 
-    public String getGrn_number() {
-        return grn_number;
+    public String getServices_receipt_number() {
+        return services_receipt_number;
     }
 
     public String getReceipt_date() {
         return receipt_date;
     }
 
-    public String getPurchase_order_id() {
-        return purchase_order_id;
-    }
-
-    public String getNotes() {
-        return notes;
+    public String getCash_on_delivery_id() {
+        return cash_on_delivery_id;
     }
 
     public String getRecognized() {
         return recognized;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 
     public String getCreated_by() {
@@ -138,9 +133,5 @@ public class GoodReceivedNote implements Parcelable {
 
     public String getModified_date() {
         return modified_date;
-    }
-
-    public String getSupplier_name() {
-        return supplier_name;
     }
 }

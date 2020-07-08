@@ -75,10 +75,10 @@
         android:id="@+id/textViewTools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tools Request"
-        android:padding="10dp"
         android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+        android:padding="10dp"
+        android:text="Tools Requests"
+        android:textColor="@color/colorBlack" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -89,10 +89,10 @@
         android:id="@+id/textViewWork"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Work Request"
-        android:padding="10dp"
         android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+        android:padding="10dp"
+        android:text="Work Requests"
+        android:textColor="@color/colorBlack" />
 
     <ImageView
         android:layout_width="match_parent"

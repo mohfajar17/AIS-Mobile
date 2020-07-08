@@ -136,7 +136,49 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Name"
+                        android:text="Name Perusahaan"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Code"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Alamat"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Kota"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -150,49 +192,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Company Name"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Job Title"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Email"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Phone Number"
+                        android:text="E-Mail"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </LinearLayout>

@@ -55,6 +55,15 @@ public class Config {
     public static final String DATA_URL_COMPANY_LIST = DATA_URL+"getCompany";
     public static final String DATA_URL_ACCESS_REQUEST_LIST = DATA_URL+"getAccessRequest";
     public static final String DATA_URL_NEWS_LIST = DATA_URL+"getNews";
+    public static final String DATA_URL_SUPPLIER_INVOICE_LIST = DATA_URL+"getSupplierInvoice";
+    public static final String DATA_URL_CUSTOMER_INVOICE_LIST = DATA_URL+"getCustomerInvoices";
+    public static final String DATA_URL_BANK_TRANSACTION_LIST = DATA_URL+"getBankTransaction";
+    public static final String DATA_URL_EXPENSE_LIST = DATA_URL+"getExpense";
+    public static final String DATA_URL_CASH_ADVANCE_LIST = DATA_URL+"getCashAdvance";
+    public static final String DATA_URL_BUDGETING_LIST = DATA_URL+"getBudgeting";
+    public static final String DATA_URL_PAYMENT_SUPPLIER_LIST = DATA_URL+"getPaymentSupplier";
+    public static final String DATA_URL_BANK_ACCOUNT_LIST = DATA_URL+"getBankAccount";
+    public static final String DATA_URL_DAFTAR_AKUN_LIST = DATA_URL+"getDaftarAkun";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

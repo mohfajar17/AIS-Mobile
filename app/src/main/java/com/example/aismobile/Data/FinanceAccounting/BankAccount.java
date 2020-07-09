@@ -84,4 +84,36 @@ public class BankAccount implements Parcelable {
         dest.writeString(last_reconciled_date);
         dest.writeString(is_active);
     }
+
+    public int getBank_account_id() {
+        return bank_account_id;
+    }
+
+    public String getBank_account_name() {
+        return bank_account_name;
+    }
+
+    public String getBank_account_number() {
+        return bank_account_number;
+    }
+
+    public String getBank_name() {
+        return bank_name;
+    }
+
+    public String getCurrency_code() {
+        return currency_code;
+    }
+
+    public String getEnding_reconcile_balance() {
+        return ending_reconcile_balance;
+    }
+
+    public String getLast_reconciled_date() {
+        return last_reconciled_date;
+    }
+
+    public String getIs_active() {
+        return is_active;
+    }
 }

@@ -78,4 +78,32 @@ public class DaftarAkun implements Parcelable {
         dest.writeString(is_group);
         dest.writeString(is_active);
     }
+
+    public int getAccount_id() {
+        return account_id;
+    }
+
+    public String getChart_of_account_type_name() {
+        return chart_of_account_type_name;
+    }
+
+    public String getChart_of_account_group_code() {
+        return chart_of_account_group_code;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public String getAccount_code() {
+        return account_code;
+    }
+
+    public String getIs_group() {
+        return is_group;
+    }
+
+    public String getIs_active() {
+        return is_active;
+    }
 }

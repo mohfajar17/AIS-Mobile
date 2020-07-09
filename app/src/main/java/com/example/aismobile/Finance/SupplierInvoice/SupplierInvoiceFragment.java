@@ -1,4 +1,4 @@
-package com.example.aismobile.Finance.CustomerInvoice;
+package com.example.aismobile.Finance.SupplierInvoice;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.FinanceAccounting.CustomerInvoice;
+import com.example.aismobile.Data.FinanceAccounting.SupplierInvoice;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CustomerInvoiceFragment extends Fragment {
+public class SupplierInvoiceFragment extends Fragment {
 
     public TextView siTextPaging;
     public EditText siEditSearch;
@@ -65,26 +65,25 @@ public class CustomerInvoiceFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public CustomerInvoiceFragment.MyRecyclerViewAdapter adapter;
+    public SupplierInvoiceFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SISpinnerSearch = {"Semua Data", "Nomor Customer Invoice", "Sales Order Invoice Description",
-            "Job Order", "Sales Quotation",
-            "Work Completion", "Due Date", "Client PO Number", "Status", "Payment Late", "Grand Total"};
-    public String[] SISpinnerSort = {"-- Sort By --", "Berdasarkan Nomor Customer Invoice", "Berdasarkan Sales Order Invoice Description",
-            "Berdasarkan Job Order", "Berdasarkan Sales Quotation", "Berdasarkan Work Completion", "Berdasarkan Due Date",
-            "Berdasarkan Client PO Number", "Berdasarkan Status", "Berdasarkan Payment Late", "Berdasarkan Grand Total"};
+    public String[] SISpinnerSearch = {"Semua Data", "Supplier Invoice Number", "Supplier Name", "Supplier Invoice Date",
+            "Invoice Receipt Date", "Due Date", "Payment Date", "Late Days", "Total", "Status"};
+    public String[] SISpinnerSort = {"-- Sort By --", "Berdasarkan Supplier Invoice Number", "Berdasarkan Supplier Name",
+            "Berdasarkan Supplier Invoice Date", "Berdasarkan Invoice Receipt Date", "Berdasarkan Due Date",
+            "Berdasarkan Payment Date", "Berdasarkan Late Days", "Berdasarkan Total", "Berdasarkan Status"};
     public String[] SIADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<CustomerInvoice> customerInvoices;
+    public List<SupplierInvoice> supplierInvoices;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public CustomerInvoiceFragment() {
+    public SupplierInvoiceFragment() {
     }
 
-    public static CustomerInvoiceFragment newInstance() {
-        CustomerInvoiceFragment fragment = new CustomerInvoiceFragment();
+    public static SupplierInvoiceFragment newInstance() {
+        SupplierInvoiceFragment fragment = new SupplierInvoiceFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -100,7 +99,7 @@ public class CustomerInvoiceFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        customerInvoices = new ArrayList<>();
+        supplierInvoices = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -110,27 +109,27 @@ public class CustomerInvoiceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_customer_invoice, container, false);
+        View view = inflater.inflate(R.layout.fragment_supplier_invoice, container, false);
 
         // Set the adapter
-        siRecycler = (RecyclerView) view.findViewById(R.id.ciRecycler);
+        siRecycler = (RecyclerView) view.findViewById(R.id.siRecycler);
         if (mColumnCount <= 1) {
             siRecycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
             siRecycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        siFabAdd = (FloatingActionButton) view.findViewById(R.id.ciFabAdd);
-        siEditSearch = (EditText) view.findViewById(R.id.ciEditSearch);
-        siTextPaging = (TextView) view.findViewById(R.id.ciTextPaging);
-        siBtnSearch = (ImageView) view.findViewById(R.id.ciBtnSearch);
-        siSpinnerSearch = (Spinner) view.findViewById(R.id.ciSpinnerSearch);
-        siSpinnerSort = (Spinner) view.findViewById(R.id.ciSpinnerSort);
-        siSpinnerSortAD = (Spinner) view.findViewById(R.id.ciSpinnerSortAD);
-        siBtnShowList = (Button) view.findViewById(R.id.ciBtnShowList);
-        siBtnBefore = (ImageButton) view.findViewById(R.id.ciBtnBefore);
-        siBtnNext = (ImageButton) view.findViewById(R.id.ciBtnNext);
-        siLayoutPaging = (LinearLayout) view.findViewById(R.id.ciLayoutPaging);
+        siFabAdd = (FloatingActionButton) view.findViewById(R.id.siFabAdd);
+        siEditSearch = (EditText) view.findViewById(R.id.siEditSearch);
+        siTextPaging = (TextView) view.findViewById(R.id.siTextPaging);
+        siBtnSearch = (ImageView) view.findViewById(R.id.siBtnSearch);
+        siSpinnerSearch = (Spinner) view.findViewById(R.id.siSpinnerSearch);
+        siSpinnerSort = (Spinner) view.findViewById(R.id.siSpinnerSort);
+        siSpinnerSortAD = (Spinner) view.findViewById(R.id.siSpinnerSortAD);
+        siBtnShowList = (Button) view.findViewById(R.id.siBtnShowList);
+        siBtnBefore = (ImageButton) view.findViewById(R.id.siBtnBefore);
+        siBtnNext = (ImageButton) view.findViewById(R.id.siBtnNext);
+        siLayoutPaging = (LinearLayout) view.findViewById(R.id.siLayoutPaging);
 
         siBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +159,7 @@ public class CustomerInvoiceFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("sales_order_invoice_id DESC");
+                    loadDataAll("invoice_receipt_date DESC");
                     loadAll = true;
                     params = siLayoutPaging.getLayoutParams();
                     params.height = 0;
@@ -169,7 +168,7 @@ public class CustomerInvoiceFragment extends Fragment {
                 } else {
                     siTextPaging.setText("1");
                     counter = 0;
-                    loadData("sales_order_invoice_id DESC");
+                    loadData("invoice_receipt_date DESC");
                     loadAll = false;
                     params = siLayoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -214,53 +213,49 @@ public class CustomerInvoiceFragment extends Fragment {
             }
         });
 
-        loadData("sales_order_invoice_id DESC");
+        loadData("invoice_receipt_date DESC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("sales_order_invoice_id ASC");
+            loadDataAll("supplier_invoice_number ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("sales_order_invoice_id ASC");
+            loadDataAll("supplier_invoice_number ASC");
         else if (position == 2 && posAD == 0)
-            loadDataAll("sales_order_invoice_description ASC");
+            loadDataAll("supplier_name ASC");
         else if (position == 2 && posAD == 1)
-            loadDataAll("sales_order_invoice_description DESC");
+            loadDataAll("supplier_name DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("job_order_id ASC");
+            loadDataAll("supplier_invoice_date ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("job_order_id DESC");
+            loadDataAll("supplier_invoice_date DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("sales_quotation_id ASC");
+            loadDataAll("invoice_receipt_date ASC");
         else if (position == 4 && posAD == 1)
-            loadDataAll("sales_quotation_id DESC");
+            loadDataAll("invoice_receipt_date DESC");
         else if (position == 5 && posAD == 0)
-            loadDataAll("job_progress_report_id ASC");
-        else if (position == 5 && posAD == 1)
-            loadDataAll("job_progress_report_id DESC");
-        else if (position == 6 && posAD == 0)
             loadDataAll("due_date ASC");
-        else if (position == 6 && posAD == 1)
+        else if (position == 5 && posAD == 1)
             loadDataAll("due_date DESC");
+        else if (position == 6 && posAD == 0)
+            loadDataAll("payment_date ASC");
+        else if (position == 6 && posAD == 1)
+            loadDataAll("payment_date DESC");
         else if (position == 7 && posAD == 0)
-            loadDataAll("client_po_number ASC");
+            loadDataAll("late_days ASC");
         else if (position == 7 && posAD == 1)
-            loadDataAll("client_po_number DESC");
+            loadDataAll("late_days DESC");
         else if (position == 8 && posAD == 0)
-            loadDataAll("sales_order_invoice_status ASC");
+            loadDataAll("TotalSI ASC");
         else if (position == 8 && posAD == 1)
-            loadDataAll("sales_order_invoice_status DESC");
+            loadDataAll("TotalSI DESC");
         else if (position == 9 && posAD == 0)
-            loadDataAll("payment_late ASC");
+            loadDataAll("supplier_invoice_status ASC");
         else if (position == 9 && posAD == 1)
-            loadDataAll("payment_late DESC");
-        else if (position == 10 && posAD == 0)
-            loadDataAll("grand_total ASC");
-        else if (position == 10 && posAD == 1)
-            loadDataAll("grand_total DESC");
-        else loadDataAll("sales_order_invoice_id DESC");
+            loadDataAll("supplier_invoice_status DESC");
+        else loadDataAll("invoice_receipt_date DESC");
     }
 
     private void setSortHalf(int position, int posAD){
@@ -269,53 +264,49 @@ public class CustomerInvoiceFragment extends Fragment {
         else if (position == 1 && posAD == 1)
             loadData("supplier_invoice_number ASC");
         else if (position == 2 && posAD == 0)
-            loadData("sales_order_invoice_description ASC");
+            loadData("supplier_name ASC");
         else if (position == 2 && posAD == 1)
-            loadData("sales_order_invoice_description DESC");
+            loadData("supplier_name DESC");
         else if (position == 3 && posAD == 0)
-            loadData("job_order_id ASC");
+            loadData("supplier_invoice_date ASC");
         else if (position == 3 && posAD == 1)
-            loadData("job_order_id DESC");
+            loadData("supplier_invoice_date DESC");
         else if (position == 4 && posAD == 0)
-            loadData("sales_quotation_id ASC");
+            loadData("invoice_receipt_date ASC");
         else if (position == 4 && posAD == 1)
-            loadData("sales_quotation_id DESC");
+            loadData("invoice_receipt_date DESC");
         else if (position == 5 && posAD == 0)
-            loadData("job_progress_report_id ASC");
-        else if (position == 5 && posAD == 1)
-            loadData("job_progress_report_id DESC");
-        else if (position == 6 && posAD == 0)
             loadData("due_date ASC");
-        else if (position == 6 && posAD == 1)
+        else if (position == 5 && posAD == 1)
             loadData("due_date DESC");
+        else if (position == 6 && posAD == 0)
+            loadData("payment_date ASC");
+        else if (position == 6 && posAD == 1)
+            loadData("payment_date DESC");
         else if (position == 7 && posAD == 0)
-            loadData("client_po_number ASC");
+            loadData("late_days ASC");
         else if (position == 7 && posAD == 1)
-            loadData("client_po_number DESC");
+            loadData("late_days DESC");
         else if (position == 8 && posAD == 0)
-            loadData("sales_order_invoice_status ASC");
+            loadData("TotalSI ASC");
         else if (position == 8 && posAD == 1)
-            loadData("sales_order_invoice_status DESC");
+            loadData("TotalSI DESC");
         else if (position == 9 && posAD == 0)
-            loadData("payment_late ASC");
+            loadData("supplier_invoice_status ASC");
         else if (position == 9 && posAD == 1)
-            loadData("payment_late DESC");
-        else if (position == 10 && posAD == 0)
-            loadData("grand_total ASC");
-        else if (position == 10 && posAD == 1)
-            loadData("grand_total DESC");
+            loadData("supplier_invoice_status DESC");
         else loadData("invoice_receipt_date DESC");
     }
 
     private void setAdapterList(){
-        adapter = new CustomerInvoiceFragment.MyRecyclerViewAdapter(customerInvoices, mListener);
+        adapter = new SupplierInvoiceFragment.MyRecyclerViewAdapter(supplierInvoices, mListener);
         siRecycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         siRecycler.setAdapter(null);
-        customerInvoices.clear();
+        supplierInvoices.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SUPPLIER_INVOICE_LIST, new Response.Listener<String>() {
             @Override
@@ -326,7 +317,7 @@ public class CustomerInvoiceFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            customerInvoices.add(new CustomerInvoice(jsonArray.getJSONObject(i)));
+                            supplierInvoices.add(new SupplierInvoice(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -369,7 +360,7 @@ public class CustomerInvoiceFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         siRecycler.setAdapter(null);
-        customerInvoices.clear();
+        supplierInvoices.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SUPPLIER_INVOICE_LIST, new Response.Listener<String>() {
             @Override
@@ -380,7 +371,7 @@ public class CustomerInvoiceFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            customerInvoices.add(new CustomerInvoice(jsonArray.getJSONObject(i)));
+                            supplierInvoices.add(new SupplierInvoice(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -444,16 +435,16 @@ public class CustomerInvoiceFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(CustomerInvoice item);
+        void onListFragmentInteraction(SupplierInvoice item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<CustomerInvoice> mValues;
-        private final List<CustomerInvoice> values;
+        private final List<SupplierInvoice> mValues;
+        private final List<SupplierInvoice> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<CustomerInvoice> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<SupplierInvoice> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -462,26 +453,25 @@ public class CustomerInvoiceFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_customer_invoice_list, parent, false);
+                    .inflate(R.layout.fragment_supplier_invoice_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.ciTextNumber.setText(""+mValues.get(position).getSales_order_invoice_number());
-            holder.ciTextSoiDesk.setText(""+mValues.get(position).getSales_order_invoice_description());
-            holder.ciTextJobOrder.setText(""+mValues.get(position).getJob_order_id());
-            holder.ciTextSalesQuot.setText(""+mValues.get(position).getSales_quotation_id());
-            holder.ciTextWorkCompletion.setText(""+mValues.get(position).getJob_progress_report_id());
-            holder.ciTextDueDate.setText(""+mValues.get(position).getDue_date());
-            holder.ciTextPONumber.setText(""+mValues.get(position).getClient_po_number());
-            holder.ciTextStatus.setText(""+mValues.get(position).getSales_order_invoice_status());
-            holder.ciTextPaymentLate.setText(""+mValues.get(position).getPayment_late());
-            holder.ciTextTotal.setText(""+mValues.get(position).getGrand_total());
+            holder.siTextNumber.setText(""+mValues.get(position).getSupplier_invoice_number());
+            holder.siTextName.setText(""+mValues.get(position).getSupplier_name());
+            holder.siTextInvoiceDate.setText(""+mValues.get(position).getSupplier_invoice_date());
+            holder.siTextReceiptDate.setText(""+mValues.get(position).getInvoice_receipt_date());
+            holder.siTextDueDate.setText(""+mValues.get(position).getDue_date());
+            holder.siTextPaymentDate.setText(""+mValues.get(position).getPayment_date());
+            holder.siTextLateDays.setText(""+mValues.get(position).getLate_days());
+            holder.siTextTotalSI.setText(""+mValues.get(position).getTotalSI());
+            holder.siTextStatus.setText(""+mValues.get(position).getSupplier_invoice_status());
 
             if (position%2==0)
-                holder.ciLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.ciLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.siLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.siLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -507,74 +497,68 @@ public class CustomerInvoiceFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<CustomerInvoice> filteredList = new ArrayList<>();
+                List<SupplierInvoice> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((CustomerInvoice) values);
+                    filteredList.add((SupplierInvoice) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (CustomerInvoice item : values){
+                    for (SupplierInvoice item : values){
                         if (siSpinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getSales_order_invoice_number().toLowerCase().contains(filterPattern)){
+                            if (item.getSupplier_invoice_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getSales_order_invoice_description().toLowerCase().contains(filterPattern)){
+                            } else if (item.getSupplier_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getJob_order_id().toLowerCase().contains(filterPattern)){
+                            } else if (item.getSupplier_invoice_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getSales_quotation_id().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            } else if (item.getJob_progress_report_id().toLowerCase().contains(filterPattern)){
+                            } else if (item.getInvoice_receipt_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getDue_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getClient_po_number().toLowerCase().contains(filterPattern)){
+                            } else if (item.getPayment_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getSales_order_invoice_status().toLowerCase().contains(filterPattern)){
+                            } else if (item.getLate_days().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getPayment_late().toLowerCase().contains(filterPattern)){
+                            } else if (item.getTotalSI().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getGrand_total().toLowerCase().contains(filterPattern)){
+                            } else if (item.getSupplier_invoice_status().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (siSpinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getSales_order_invoice_number().toLowerCase().contains(filterPattern)){
+                            if (item.getSupplier_invoice_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (siSpinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getSales_order_invoice_description().toLowerCase().contains(filterPattern)){
+                            if (item.getSupplier_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (siSpinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getJob_order_id().toLowerCase().contains(filterPattern)){
+                            if (item.getSupplier_invoice_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (siSpinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getSales_quotation_id().toLowerCase().contains(filterPattern)){
+                            if (item.getInvoice_receipt_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (siSpinnerSearch.getSelectedItemPosition()==5){
-                            if (item.getJob_progress_report_id().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==6){
                             if (item.getDue_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
+                        } else if (siSpinnerSearch.getSelectedItemPosition()==6){
+                            if (item.getPayment_date().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
                         } else if (siSpinnerSearch.getSelectedItemPosition()==7){
-                            if (item.getClient_po_number().toLowerCase().contains(filterPattern)){
+                            if (item.getLate_days().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (siSpinnerSearch.getSelectedItemPosition()==8){
-                            if (item.getSales_order_invoice_status().toLowerCase().contains(filterPattern)){
+                            if (item.getTotalSI().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (siSpinnerSearch.getSelectedItemPosition()==9){
-                            if (item.getPayment_late().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==10){
-                            if (item.getGrand_total().toLowerCase().contains(filterPattern)){
+                            if (item.getSupplier_invoice_status().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         }
@@ -598,35 +582,33 @@ public class CustomerInvoiceFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView ciTextNumber;
-            public final TextView ciTextSoiDesk;
-            public final TextView ciTextJobOrder;
-            public final TextView ciTextSalesQuot;
-            public final TextView ciTextWorkCompletion;
-            public final TextView ciTextDueDate;
-            public final TextView ciTextPONumber;
-            public final TextView ciTextStatus;
-            public final TextView ciTextPaymentLate;
-            public final TextView ciTextTotal;
+            public final TextView siTextNumber;
+            public final TextView siTextName;
+            public final TextView siTextInvoiceDate;
+            public final TextView siTextReceiptDate;
+            public final TextView siTextDueDate;
+            public final TextView siTextPaymentDate;
+            public final TextView siTextLateDays;
+            public final TextView siTextTotalSI;
+            public final TextView siTextStatus;
 
-            public final LinearLayout ciLayoutList;
+            public final LinearLayout siLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                ciTextNumber = (TextView) view.findViewById(R.id.ciTextNumber);
-                ciTextSoiDesk = (TextView) view.findViewById(R.id.ciTextSoiDesk);
-                ciTextJobOrder = (TextView) view.findViewById(R.id.ciTextJobOrder);
-                ciTextSalesQuot = (TextView) view.findViewById(R.id.ciTextSalesQuot);
-                ciTextWorkCompletion = (TextView) view.findViewById(R.id.ciTextWorkCompletion);
-                ciTextDueDate = (TextView) view.findViewById(R.id.ciTextDueDate);
-                ciTextPONumber = (TextView) view.findViewById(R.id.ciTextPONumber);
-                ciTextStatus = (TextView) view.findViewById(R.id.ciTextStatus);
-                ciTextPaymentLate = (TextView) view.findViewById(R.id.ciTextPaymentLate);
-                ciTextTotal = (TextView) view.findViewById(R.id.ciTextTotal);
+                siTextNumber = (TextView) view.findViewById(R.id.siTextNumber);
+                siTextName = (TextView) view.findViewById(R.id.siTextName);
+                siTextInvoiceDate = (TextView) view.findViewById(R.id.siTextInvoiceDate);
+                siTextReceiptDate = (TextView) view.findViewById(R.id.siTextReceiptDate);
+                siTextDueDate = (TextView) view.findViewById(R.id.siTextDueDate);
+                siTextPaymentDate = (TextView) view.findViewById(R.id.siTextPaymentDate);
+                siTextLateDays = (TextView) view.findViewById(R.id.siTextLateDays);
+                siTextTotalSI = (TextView) view.findViewById(R.id.siTextTotalSI);
+                siTextStatus = (TextView) view.findViewById(R.id.siTextStatus);
 
-                ciLayoutList = (LinearLayout) view.findViewById(R.id.ciLayoutList);
+                siLayoutList = (LinearLayout) view.findViewById(R.id.siLayoutList);
             }
         }
     }

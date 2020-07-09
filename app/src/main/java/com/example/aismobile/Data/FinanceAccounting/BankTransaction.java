@@ -83,4 +83,36 @@ public class BankTransaction implements Parcelable {
         dest.writeString(status);
         dest.writeString(reconciled);
     }
+
+    public int getBank_transaction_id() {
+        return bank_transaction_id;
+    }
+
+    public String getBank_transaction_number() {
+        return bank_transaction_number;
+    }
+
+    public String getChecked_by() {
+        return checked_by;
+    }
+
+    public String getApproval1() {
+        return approval1;
+    }
+
+    public String getApproval2() {
+        return approval2;
+    }
+
+    public String getTransaction_date() {
+        return transaction_date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getReconciled() {
+        return reconciled;
+    }
 }

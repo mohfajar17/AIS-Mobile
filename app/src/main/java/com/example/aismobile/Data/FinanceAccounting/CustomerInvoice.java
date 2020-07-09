@@ -99,4 +99,48 @@ public class CustomerInvoice implements Parcelable {
         dest.writeString(payment_late);
         dest.writeString(grand_total);
     }
+
+    public int getSales_order_invoice_id() {
+        return sales_order_invoice_id;
+    }
+
+    public String getSales_order_invoice_number() {
+        return sales_order_invoice_number;
+    }
+
+    public String getSales_order_invoice_description() {
+        return sales_order_invoice_description;
+    }
+
+    public String getJob_order_id() {
+        return job_order_id;
+    }
+
+    public String getSales_quotation_id() {
+        return sales_quotation_id;
+    }
+
+    public String getJob_progress_report_id() {
+        return job_progress_report_id;
+    }
+
+    public String getDue_date() {
+        return due_date;
+    }
+
+    public String getClient_po_number() {
+        return client_po_number;
+    }
+
+    public String getSales_order_invoice_status() {
+        return sales_order_invoice_status;
+    }
+
+    public String getPayment_late() {
+        return payment_late;
+    }
+
+    public String getGrand_total() {
+        return grand_total;
+    }
 }

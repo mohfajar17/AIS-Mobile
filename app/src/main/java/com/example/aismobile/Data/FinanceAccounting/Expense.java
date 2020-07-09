@@ -98,4 +98,48 @@ public class Expense implements Parcelable {
         dest.writeString(bank_account_name);
         dest.writeString(done);
     }
+
+    public int getExpenses_id() {
+        return expenses_id;
+    }
+
+    public String getExpenses_number() {
+        return expenses_number;
+    }
+
+    public String getExpenses_desc() {
+        return expenses_desc;
+    }
+
+    public String getChecked_by() {
+        return checked_by;
+    }
+
+    public String getApproval1() {
+        return approval1;
+    }
+
+    public String getApproval2() {
+        return approval2;
+    }
+
+    public String getAdvanced_number() {
+        return advanced_number;
+    }
+
+    public String getExpenses_date() {
+        return expenses_date;
+    }
+
+    public String getTotal_amount() {
+        return total_amount;
+    }
+
+    public String getBank_account_name() {
+        return bank_account_name;
+    }
+
+    public String getDone() {
+        return done;
+    }
 }

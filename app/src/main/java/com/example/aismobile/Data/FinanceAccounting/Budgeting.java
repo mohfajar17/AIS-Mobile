@@ -94,4 +94,44 @@ public class Budgeting implements Parcelable {
         dest.writeString(approval3);
         dest.writeString(done);
     }
+
+    public int getBudget_id() {
+        return budget_id;
+    }
+
+    public String getBudget_number() {
+        return budget_number;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public String getChecked_by() {
+        return checked_by;
+    }
+
+    public String getApproval1() {
+        return approval1;
+    }
+
+    public String getApproval2() {
+        return approval2;
+    }
+
+    public String getApproval3() {
+        return approval3;
+    }
+
+    public String getDone() {
+        return done;
+    }
 }

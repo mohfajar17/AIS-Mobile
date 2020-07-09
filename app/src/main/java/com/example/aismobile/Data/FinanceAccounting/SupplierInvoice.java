@@ -94,4 +94,44 @@ public class SupplierInvoice implements Parcelable {
         dest.writeString(late_days);
         dest.writeString(TotalSI);
     }
+
+    public int getSupplier_invoice_id() {
+        return supplier_invoice_id;
+    }
+
+    public String getSupplier_invoice_number() {
+        return supplier_invoice_number;
+    }
+
+    public String getSupplier_name() {
+        return supplier_name;
+    }
+
+    public String getSupplier_invoice_date() {
+        return supplier_invoice_date;
+    }
+
+    public String getInvoice_receipt_date() {
+        return invoice_receipt_date;
+    }
+
+    public String getDue_date() {
+        return due_date;
+    }
+
+    public String getPayment_date() {
+        return payment_date;
+    }
+
+    public String getSupplier_invoice_status() {
+        return supplier_invoice_status;
+    }
+
+    public String getLate_days() {
+        return late_days;
+    }
+
+    public String getTotalSI() {
+        return TotalSI;
+    }
 }

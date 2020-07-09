@@ -77,4 +77,32 @@ public class CashAdvance implements Parcelable {
         dest.writeString(amount);
         dest.writeString(status);
     }
+
+    public int getAdvanced_id() {
+        return advanced_id;
+    }
+
+    public String getAdvanced_number() {
+        return advanced_number;
+    }
+
+    public String getAdvanced_date() {
+        return advanced_date;
+    }
+
+    public String getAdvanced_for() {
+        return advanced_for;
+    }
+
+    public String getReceived_by() {
+        return received_by;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

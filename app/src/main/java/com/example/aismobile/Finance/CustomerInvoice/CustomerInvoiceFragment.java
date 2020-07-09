@@ -48,18 +48,18 @@ import java.util.Map;
 
 public class CustomerInvoiceFragment extends Fragment {
 
-    public TextView siTextPaging;
-    public EditText siEditSearch;
-    public ImageView siBtnSearch;
-    public RecyclerView siRecycler;
-    public FloatingActionButton siFabAdd;
-    public Spinner siSpinnerSearch;
-    public Spinner siSpinnerSort;
-    public Spinner siSpinnerSortAD;
-    public Button siBtnShowList;
-    public ImageButton siBtnBefore;
-    public ImageButton siBtnNext;
-    public LinearLayout siLayoutPaging;
+    public TextView ciTextPaging;
+    public EditText ciEditSearch;
+    public ImageView ciBtnSearch;
+    public RecyclerView ciRecycler;
+    public FloatingActionButton ciFabAdd;
+    public Spinner ciSpinnerSearch;
+    public Spinner ciSpinnerSort;
+    public Spinner ciSpinnerSortAD;
+    public Button ciBtnShowList;
+    public ImageButton ciBtnBefore;
+    public ImageButton ciBtnNext;
+    public LinearLayout ciLayoutPaging;
 
     public ProgressDialog progressDialog;
     public int mColumnCount = 1;
@@ -67,13 +67,13 @@ public class CustomerInvoiceFragment extends Fragment {
     public OnListFragmentInteractionListener mListener;
     public CustomerInvoiceFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SISpinnerSearch = {"Semua Data", "Nomor Customer Invoice", "Sales Order Invoice Description",
+    public String[] CISpinnerSearch = {"Semua Data", "Nomor Customer Invoice", "Sales Order Invoice Description",
             "Job Order", "Sales Quotation",
             "Work Completion", "Due Date", "Client PO Number", "Status", "Payment Late", "Grand Total"};
-    public String[] SISpinnerSort = {"-- Sort By --", "Berdasarkan Nomor Customer Invoice", "Berdasarkan Sales Order Invoice Description",
+    public String[] CISpinnerSort = {"-- Sort By --", "Berdasarkan Nomor Customer Invoice", "Berdasarkan Sales Order Invoice Description",
             "Berdasarkan Job Order", "Berdasarkan Sales Quotation", "Berdasarkan Work Completion", "Berdasarkan Due Date",
             "Berdasarkan Client PO Number", "Berdasarkan Status", "Berdasarkan Payment Late", "Berdasarkan Grand Total"};
-    public String[] SIADSpinnerSort = {"ASC", "DESC"};
+    public String[] CIADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
     public List<CustomerInvoice> customerInvoices;
     public int counter = 0;
@@ -113,88 +113,88 @@ public class CustomerInvoiceFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_customer_invoice, container, false);
 
         // Set the adapter
-        siRecycler = (RecyclerView) view.findViewById(R.id.ciRecycler);
+        ciRecycler = (RecyclerView) view.findViewById(R.id.ciRecycler);
         if (mColumnCount <= 1) {
-            siRecycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            ciRecycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
-            siRecycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
+            ciRecycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        siFabAdd = (FloatingActionButton) view.findViewById(R.id.ciFabAdd);
-        siEditSearch = (EditText) view.findViewById(R.id.ciEditSearch);
-        siTextPaging = (TextView) view.findViewById(R.id.ciTextPaging);
-        siBtnSearch = (ImageView) view.findViewById(R.id.ciBtnSearch);
-        siSpinnerSearch = (Spinner) view.findViewById(R.id.ciSpinnerSearch);
-        siSpinnerSort = (Spinner) view.findViewById(R.id.ciSpinnerSort);
-        siSpinnerSortAD = (Spinner) view.findViewById(R.id.ciSpinnerSortAD);
-        siBtnShowList = (Button) view.findViewById(R.id.ciBtnShowList);
-        siBtnBefore = (ImageButton) view.findViewById(R.id.ciBtnBefore);
-        siBtnNext = (ImageButton) view.findViewById(R.id.ciBtnNext);
-        siLayoutPaging = (LinearLayout) view.findViewById(R.id.ciLayoutPaging);
+        ciFabAdd = (FloatingActionButton) view.findViewById(R.id.ciFabAdd);
+        ciEditSearch = (EditText) view.findViewById(R.id.ciEditSearch);
+        ciTextPaging = (TextView) view.findViewById(R.id.ciTextPaging);
+        ciBtnSearch = (ImageView) view.findViewById(R.id.ciBtnSearch);
+        ciSpinnerSearch = (Spinner) view.findViewById(R.id.ciSpinnerSearch);
+        ciSpinnerSort = (Spinner) view.findViewById(R.id.ciSpinnerSort);
+        ciSpinnerSortAD = (Spinner) view.findViewById(R.id.ciSpinnerSortAD);
+        ciBtnShowList = (Button) view.findViewById(R.id.ciBtnShowList);
+        ciBtnBefore = (ImageButton) view.findViewById(R.id.ciBtnBefore);
+        ciBtnNext = (ImageButton) view.findViewById(R.id.ciBtnNext);
+        ciLayoutPaging = (LinearLayout) view.findViewById(R.id.ciLayoutPaging);
 
-        siBtnNext.setOnClickListener(new View.OnClickListener() {
+        ciBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter = 15*Integer.valueOf(String.valueOf(siTextPaging.getText()));
-                setSortHalf(siSpinnerSort.getSelectedItemPosition(), siSpinnerSortAD.getSelectedItemPosition());
-                int textValue = Integer.valueOf(String.valueOf(siTextPaging.getText()))+1;
-                siTextPaging.setText(""+textValue);
+                counter = 15*Integer.valueOf(String.valueOf(ciTextPaging.getText()));
+                setSortHalf(ciSpinnerSort.getSelectedItemPosition(), ciSpinnerSortAD.getSelectedItemPosition());
+                int textValue = Integer.valueOf(String.valueOf(ciTextPaging.getText()))+1;
+                ciTextPaging.setText(""+textValue);
                 filter = true;
             }
         });
-        siBtnBefore.setOnClickListener(new View.OnClickListener() {
+        ciBtnBefore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.valueOf(String.valueOf(siTextPaging.getText())) > 1) {
-                    counter = 15*(Integer.valueOf(String.valueOf(siTextPaging.getText()))-2);
-                    setSortHalf(siSpinnerSort.getSelectedItemPosition(), siSpinnerSortAD.getSelectedItemPosition());
-                    int textValue = Integer.valueOf(String.valueOf(siTextPaging.getText()))-1;
-                    siTextPaging.setText(""+textValue);
+                if (Integer.valueOf(String.valueOf(ciTextPaging.getText())) > 1) {
+                    counter = 15*(Integer.valueOf(String.valueOf(ciTextPaging.getText()))-2);
+                    setSortHalf(ciSpinnerSort.getSelectedItemPosition(), ciSpinnerSortAD.getSelectedItemPosition());
+                    int textValue = Integer.valueOf(String.valueOf(ciTextPaging.getText()))-1;
+                    ciTextPaging.setText(""+textValue);
                     filter = true;
                 }
             }
         });
 
-        siBtnShowList.setOnClickListener(new View.OnClickListener() {
+        ciBtnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
                     loadDataAll("sales_order_invoice_id DESC");
                     loadAll = true;
-                    params = siLayoutPaging.getLayoutParams();
+                    params = ciLayoutPaging.getLayoutParams();
                     params.height = 0;
-                    siLayoutPaging.setLayoutParams(params);
-                    siBtnShowList.setText("Show Half");
+                    ciLayoutPaging.setLayoutParams(params);
+                    ciBtnShowList.setText("Show Half");
                 } else {
-                    siTextPaging.setText("1");
+                    ciTextPaging.setText("1");
                     counter = 0;
                     loadData("sales_order_invoice_id DESC");
                     loadAll = false;
-                    params = siLayoutPaging.getLayoutParams();
+                    params = ciLayoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
-                    siLayoutPaging.setLayoutParams(params);
-                    siBtnShowList.setText("Show All");
+                    ciLayoutPaging.setLayoutParams(params);
+                    ciBtnShowList.setText("Show All");
                 }
             }
         });
 
-        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, SISpinnerSearch);
-        siSpinnerSearch.setAdapter(spinnerAdapter);
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, CISpinnerSearch);
+        ciSpinnerSearch.setAdapter(spinnerAdapter);
 
-        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, SISpinnerSort);
-        siSpinnerSort.setAdapter(spinnerAdapter);
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, CISpinnerSort);
+        ciSpinnerSort.setAdapter(spinnerAdapter);
 
-        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, SIADSpinnerSort);
-        siSpinnerSortAD.setAdapter(spinnerAdapter);
+        spinnerAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, CIADSpinnerSort);
+        ciSpinnerSortAD.setAdapter(spinnerAdapter);
 
-        siSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ciSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (counter<0){
-                    setSortAll(position, siSpinnerSortAD.getSelectedItemPosition());
+                    setSortAll(position, ciSpinnerSortAD.getSelectedItemPosition());
                 } else {
-                    setSortHalf(position, siSpinnerSortAD.getSelectedItemPosition());
+                    setSortHalf(position, ciSpinnerSortAD.getSelectedItemPosition());
                 }
             }
 
@@ -204,13 +204,13 @@ public class CustomerInvoiceFragment extends Fragment {
             }
         });
 
-        siBtnSearch.setOnClickListener(new View.OnClickListener() {
+        ciBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (siEditSearch.getText().toString().matches("")){
-                    siSpinnerSearch.setSelection(0);
+                if (ciEditSearch.getText().toString().matches("")){
+                    ciSpinnerSearch.setSelection(0);
                     adapter.getFilter().filter("a");
-                } else adapter.getFilter().filter(String.valueOf(siEditSearch.getText()));
+                } else adapter.getFilter().filter(String.valueOf(ciEditSearch.getText()));
             }
         });
 
@@ -304,20 +304,20 @@ public class CustomerInvoiceFragment extends Fragment {
             loadData("grand_total ASC");
         else if (position == 10 && posAD == 1)
             loadData("grand_total DESC");
-        else loadData("invoice_receipt_date DESC");
+        else loadData("sales_order_invoice_id DESC");
     }
 
     private void setAdapterList(){
         adapter = new CustomerInvoiceFragment.MyRecyclerViewAdapter(customerInvoices, mListener);
-        siRecycler.setAdapter(adapter);
+        ciRecycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
-        siRecycler.setAdapter(null);
+        ciRecycler.setAdapter(null);
         customerInvoices.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SUPPLIER_INVOICE_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_CUSTOMER_INVOICE_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -331,10 +331,10 @@ public class CustomerInvoiceFragment extends Fragment {
                         setAdapterList();
 
                         if (filter){
-                            if (siEditSearch.getText().toString().matches("")){
-                                siSpinnerSearch.setSelection(0);
+                            if (ciEditSearch.getText().toString().matches("")){
+                                ciSpinnerSearch.setSelection(0);
                                 adapter.getFilter().filter("a");
-                            } else adapter.getFilter().filter(String.valueOf(siEditSearch.getText()));
+                            } else adapter.getFilter().filter(String.valueOf(ciEditSearch.getText()));
                             filter = false;
                         }
                     } else {
@@ -368,10 +368,10 @@ public class CustomerInvoiceFragment extends Fragment {
 
     public void loadData(final String sortBy){
         progressDialog.show();
-        siRecycler.setAdapter(null);
+        ciRecycler.setAdapter(null);
         customerInvoices.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SUPPLIER_INVOICE_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_CUSTOMER_INVOICE_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -384,10 +384,10 @@ public class CustomerInvoiceFragment extends Fragment {
                         }
                         setAdapterList();
                         if (filter){
-                            if (siEditSearch.getText().toString().matches("")){
-                                siSpinnerSearch.setSelection(0);
+                            if (ciEditSearch.getText().toString().matches("")){
+                                ciSpinnerSearch.setSelection(0);
                                 adapter.getFilter().filter("a");
-                            } else adapter.getFilter().filter(String.valueOf(siEditSearch.getText()));
+                            } else adapter.getFilter().filter(String.valueOf(ciEditSearch.getText()));
                             filter = false;
                         }
                     } else {
@@ -515,7 +515,7 @@ public class CustomerInvoiceFragment extends Fragment {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
                     for (CustomerInvoice item : values){
-                        if (siSpinnerSearch.getSelectedItemPosition()==0){
+                        if (ciSpinnerSearch.getSelectedItemPosition()==0){
                             if (item.getSales_order_invoice_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getSales_order_invoice_description().toLowerCase().contains(filterPattern)){
@@ -537,43 +537,43 @@ public class CustomerInvoiceFragment extends Fragment {
                             } else if (item.getGrand_total().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==1){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==1){
                             if (item.getSales_order_invoice_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==2){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==2){
                             if (item.getSales_order_invoice_description().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==3){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==3){
                             if (item.getJob_order_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==4){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==4){
                             if (item.getSales_quotation_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==5){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==5){
                             if (item.getJob_progress_report_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==6){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==6){
                             if (item.getDue_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==7){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==7){
                             if (item.getClient_po_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==8){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==8){
                             if (item.getSales_order_invoice_status().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==9){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==9){
                             if (item.getPayment_late().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (siSpinnerSearch.getSelectedItemPosition()==10){
+                        } else if (ciSpinnerSearch.getSelectedItemPosition()==10){
                             if (item.getGrand_total().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }

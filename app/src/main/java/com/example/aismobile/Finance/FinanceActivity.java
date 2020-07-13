@@ -5,11 +5,21 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import com.example.aismobile.Data.FinanceAccounting.BankAccount;
 import com.example.aismobile.Data.FinanceAccounting.BankTransaction;
+import com.example.aismobile.Data.FinanceAccounting.Budgeting;
+import com.example.aismobile.Data.FinanceAccounting.CashAdvance;
 import com.example.aismobile.Data.FinanceAccounting.CustomerInvoice;
+import com.example.aismobile.Data.FinanceAccounting.Expense;
+import com.example.aismobile.Data.FinanceAccounting.PaymentSupplier;
 import com.example.aismobile.Data.FinanceAccounting.SupplierInvoice;
+import com.example.aismobile.Finance.BankAccount.BankAccountsFragment;
 import com.example.aismobile.Finance.BankTransaction.BankTransactionFragment;
+import com.example.aismobile.Finance.Budgeting.BudgetingFragment;
+import com.example.aismobile.Finance.CashAdvance.CashAdvanceFragment;
 import com.example.aismobile.Finance.CustomerInvoice.CustomerInvoiceFragment;
+import com.example.aismobile.Finance.Expenses.ExpensesFragment;
+import com.example.aismobile.Finance.PaymentSupplier.PaymentSuppliersFragment;
 import com.example.aismobile.Finance.SupplierInvoice.SupplierInvoiceFragment;
 import com.example.aismobile.R;
 
@@ -34,7 +44,12 @@ import android.widget.TextView;
 public class FinanceActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         SupplierInvoiceFragment.OnListFragmentInteractionListener,
         CustomerInvoiceFragment.OnListFragmentInteractionListener,
-        BankTransactionFragment.OnListFragmentInteractionListener {
+        BankTransactionFragment.OnListFragmentInteractionListener,
+        ExpensesFragment.OnListFragmentInteractionListener,
+        CashAdvanceFragment.OnListFragmentInteractionListener,
+        BudgetingFragment.OnListFragmentInteractionListener,
+        PaymentSuppliersFragment.OnListFragmentInteractionListener,
+        BankAccountsFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -178,6 +193,31 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(BankTransaction item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Expense item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(CashAdvance item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Budgeting item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(PaymentSupplier item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(BankAccount item) {
 
     }
 }

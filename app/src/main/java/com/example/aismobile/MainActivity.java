@@ -383,8 +383,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 if (cal_month.get(GregorianCalendar.MONTH) == 5&&cal_month.get(GregorianCalendar.YEAR)==2018) {
                     //cal_month.set((cal_month.get(GregorianCalendar.YEAR) + 1), cal_month.getActualMinimum(GregorianCalendar.MONTH), 1);
                     Toast.makeText(MainActivity.this, "Event Detail is available for current session only.", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     setNextMonth();
                     refreshCalendar();
                 }

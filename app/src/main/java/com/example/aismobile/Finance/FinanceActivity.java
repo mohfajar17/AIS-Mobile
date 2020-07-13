@@ -5,8 +5,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import com.example.aismobile.Data.FinanceAccounting.BankTransaction;
 import com.example.aismobile.Data.FinanceAccounting.CustomerInvoice;
 import com.example.aismobile.Data.FinanceAccounting.SupplierInvoice;
+import com.example.aismobile.Finance.BankTransaction.BankTransactionFragment;
 import com.example.aismobile.Finance.CustomerInvoice.CustomerInvoiceFragment;
 import com.example.aismobile.Finance.SupplierInvoice.SupplierInvoiceFragment;
 import com.example.aismobile.R;
@@ -31,7 +33,8 @@ import android.widget.TextView;
 
 public class FinanceActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         SupplierInvoiceFragment.OnListFragmentInteractionListener,
-        CustomerInvoiceFragment.OnListFragmentInteractionListener {
+        CustomerInvoiceFragment.OnListFragmentInteractionListener,
+        BankTransactionFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -170,6 +173,11 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(CustomerInvoice item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(BankTransaction item) {
 
     }
 }

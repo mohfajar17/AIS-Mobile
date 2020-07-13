@@ -198,7 +198,7 @@ public class FinanceMenuActivity extends AppCompatActivity {
                         if (Integer.valueOf(jsonData.getString("sales_invoice")) == 1)
                             access = access+"sales_invoice, ";
                         if (Integer.valueOf(jsonData.getString("bank_transaction")) == 1)
-                            access = access+"sales_invoice, ";
+                            access = access+"bank_transaction, ";
                         if (Integer.valueOf(jsonData.getString("expenses")) == 1)
                             access = access+"expenses, ";
                         if (Integer.valueOf(jsonData.getString("advanced")) == 1)

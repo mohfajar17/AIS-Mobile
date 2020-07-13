@@ -10,6 +10,7 @@ import com.example.aismobile.Data.FinanceAccounting.BankTransaction;
 import com.example.aismobile.Data.FinanceAccounting.Budgeting;
 import com.example.aismobile.Data.FinanceAccounting.CashAdvance;
 import com.example.aismobile.Data.FinanceAccounting.CustomerInvoice;
+import com.example.aismobile.Data.FinanceAccounting.DaftarAkun;
 import com.example.aismobile.Data.FinanceAccounting.Expense;
 import com.example.aismobile.Data.FinanceAccounting.PaymentSupplier;
 import com.example.aismobile.Data.FinanceAccounting.SupplierInvoice;
@@ -18,6 +19,7 @@ import com.example.aismobile.Finance.BankTransaction.BankTransactionFragment;
 import com.example.aismobile.Finance.Budgeting.BudgetingFragment;
 import com.example.aismobile.Finance.CashAdvance.CashAdvanceFragment;
 import com.example.aismobile.Finance.CustomerInvoice.CustomerInvoiceFragment;
+import com.example.aismobile.Finance.DaftarAkun.DaftarAkunFragment;
 import com.example.aismobile.Finance.Expenses.ExpensesFragment;
 import com.example.aismobile.Finance.PaymentSupplier.PaymentSuppliersFragment;
 import com.example.aismobile.Finance.SupplierInvoice.SupplierInvoiceFragment;
@@ -49,7 +51,8 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
         CashAdvanceFragment.OnListFragmentInteractionListener,
         BudgetingFragment.OnListFragmentInteractionListener,
         PaymentSuppliersFragment.OnListFragmentInteractionListener,
-        BankAccountsFragment.OnListFragmentInteractionListener {
+        BankAccountsFragment.OnListFragmentInteractionListener,
+        DaftarAkunFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -218,6 +221,11 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(BankAccount item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(DaftarAkun item) {
 
     }
 }

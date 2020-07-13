@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.aismobile.Finance.DaftarAkunFragment;
 import com.example.aismobile.R;
 
 public class BuatCustomerInvoicesFragment extends Fragment {

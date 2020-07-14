@@ -9,6 +9,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aismobile.Data.Marketing.SalesOrder;
+import com.example.aismobile.Data.Marketing.SalesQuotation;
+import com.example.aismobile.Marketing.SalesOrder.SalesOrderFragment;
+import com.example.aismobile.Marketing.SalesQuotation.SalesQuotationsFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -20,7 +24,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MarketingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MarketingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        SalesQuotationsFragment.OnListFragmentInteractionListener,
+        SalesOrderFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -100,5 +106,15 @@ public class MarketingActivity extends AppCompatActivity implements NavigationVi
         textViewWarning.setText("You can't access this menu");
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+    }
+
+    @Override
+    public void onListFragmentInteraction(SalesQuotation item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(SalesOrder item) {
+
     }
 }

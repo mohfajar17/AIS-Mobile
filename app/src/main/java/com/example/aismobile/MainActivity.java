@@ -689,7 +689,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }

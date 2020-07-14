@@ -64,6 +64,8 @@ public class Config {
     public static final String DATA_URL_PAYMENT_SUPPLIER_LIST = DATA_URL+"getPaymentSupplier";
     public static final String DATA_URL_BANK_ACCOUNT_LIST = DATA_URL+"getBankAccount";
     public static final String DATA_URL_DAFTAR_AKUN_LIST = DATA_URL+"getDaftarAkun";
+    public static final String DATA_URL_SALES_QUOTATION_LIST = DATA_URL+"getSalesQuotation";
+    public static final String DATA_URL_SALES_ORDER_LIST = DATA_URL+"getSalesOrder";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

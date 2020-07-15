@@ -1,4 +1,4 @@
-package com.example.aismobile.Marketing.SalesOrder;
+package com.example.aismobile.Safety.WorkAccident;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Marketing.SalesOrder;
+import com.example.aismobile.Data.Safety.WorkAccident;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SalesOrderFragment extends Fragment {
+public class WorkAccidentsFragment extends Fragment {
 
     public TextView textPaging;
     public EditText editSearch;
@@ -65,24 +65,26 @@ public class SalesOrderFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public SalesOrderFragment.MyRecyclerViewAdapter adapter;
+    public WorkAccidentsFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SpinnerSearch = {"Semua Data", "Nomor Sales Order", "Penjelasan Singkat", "Sales Order Date",
-            "Due Date", "Status"};
-    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Nomor Sales Order", "Berdasarkan Penjelasan Singkat",
-            "Berdasarkan Order Date", "Berdasarkan Due Date", "Berdasarkan Status"};
+    public String[] SpinnerSearch = {"Semua Data", "Employee", "Employee Name", "Day", "Date", "Time",
+            "Job Grade", "Company Workbase", "Accident Type"};
+    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Employee", "Berdasarkan Employee Name",
+            "Berdasarkan Day", "Berdasarkan Date", "Berdasarkan Time", "Berdasarkan Job Grade", "Berdasarkan Company Workbase",
+            "Berdasarkan Accident Type"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<SalesOrder> salesQuotations;
+    public List<WorkAccident> workAccidents;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public SalesOrderFragment() {
+    public WorkAccidentsFragment() {
+        // Required empty public constructor
     }
 
-    public static SalesOrderFragment newInstance() {
-        SalesOrderFragment fragment = new SalesOrderFragment();
+    public static WorkAccidentsFragment newInstance() {
+        WorkAccidentsFragment fragment = new WorkAccidentsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -98,7 +100,7 @@ public class SalesOrderFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        salesQuotations = new ArrayList<>();
+        workAccidents = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -108,10 +110,10 @@ public class SalesOrderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sales_order, container, false);
+        View view = inflater.inflate(R.layout.fragment_work_accidents, container, false);
 
         // Set the adapter
-        recycler = (RecyclerView) view.findViewById(R.id.soRecycler);
+        recycler = (RecyclerView) view.findViewById(R.id.waRecycler);
         if (mColumnCount <= 1) {
             recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
@@ -119,16 +121,16 @@ public class SalesOrderFragment extends Fragment {
         }
 
         fabAdd = (FloatingActionButton) view.findViewById(R.id.soFabAdd);
-        editSearch = (EditText) view.findViewById(R.id.soEditSearch);
-        textPaging = (TextView) view.findViewById(R.id.soTextPaging);
-        btnSearch = (ImageView) view.findViewById(R.id.soBtnSearch);
-        spinnerSearch = (Spinner) view.findViewById(R.id.soSpinnerSearch);
-        spinnerSort = (Spinner) view.findViewById(R.id.soSpinnerSort);
-        spinnerSortAD = (Spinner) view.findViewById(R.id.soSpinnerSortAD);
-        btnShowList = (Button) view.findViewById(R.id.soBtnShowList);
-        btnBefore = (ImageButton) view.findViewById(R.id.soBtnBefore);
-        btnNext = (ImageButton) view.findViewById(R.id.soBtnNext);
-        layoutPaging = (LinearLayout) view.findViewById(R.id.soLayoutPaging);
+        editSearch = (EditText) view.findViewById(R.id.waEditSearch);
+        textPaging = (TextView) view.findViewById(R.id.waTextPaging);
+        btnSearch = (ImageView) view.findViewById(R.id.waBtnSearch);
+        spinnerSearch = (Spinner) view.findViewById(R.id.waSpinnerSearch);
+        spinnerSort = (Spinner) view.findViewById(R.id.waSpinnerSort);
+        spinnerSortAD = (Spinner) view.findViewById(R.id.waSpinnerSortAD);
+        btnShowList = (Button) view.findViewById(R.id.waBtnShowList);
+        btnBefore = (ImageButton) view.findViewById(R.id.waBtnBefore);
+        btnNext = (ImageButton) view.findViewById(R.id.waBtnNext);
+        layoutPaging = (LinearLayout) view.findViewById(R.id.waLayoutPaging);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +160,7 @@ public class SalesOrderFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("sales_order_id DESC");
+                    loadDataAll("work_accident_id DESC");
                     loadAll = true;
                     params = layoutPaging.getLayoutParams();
                     params.height = 0;
@@ -167,7 +169,7 @@ public class SalesOrderFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("sales_order_id DESC");
+                    loadData("work_accident_id DESC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -212,16 +214,16 @@ public class SalesOrderFragment extends Fragment {
             }
         });
 
-        loadData("sales_quotation_id DESC");
+        loadData("work_accident_id DESC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("sales_order_id ASC");
+            loadDataAll("work_accident_id ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("sales_order_id DESC");
+            loadDataAll("work_accident_id DESC");
         else if (position == 2 && posAD == 0)
             loadDataAll("short_description ASC");
         else if (position == 2 && posAD == 1)
@@ -238,14 +240,14 @@ public class SalesOrderFragment extends Fragment {
             loadDataAll("status ASC");
         else if (position == 5 && posAD == 1)
             loadDataAll("status DESC");
-        else loadDataAll("sales_order_id DESC");
+        else loadDataAll("work_accident_id DESC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("sales_order_id ASC");
+            loadData("work_accident_id ASC");
         else if (position == 1 && posAD == 1)
-            loadData("sales_order_id DESC");
+            loadData("work_accident_id DESC");
         else if (position == 2 && posAD == 0)
             loadData("short_description ASC");
         else if (position == 2 && posAD == 1)
@@ -262,20 +264,20 @@ public class SalesOrderFragment extends Fragment {
             loadData("status ASC");
         else if (position == 5 && posAD == 1)
             loadData("status DESC");
-        else loadData("sales_order_id DESC");
+        else loadData("work_accident_id DESC");
     }
 
     private void setAdapterList(){
-        adapter = new SalesOrderFragment.MyRecyclerViewAdapter(salesQuotations, mListener);
+        adapter = new WorkAccidentsFragment.MyRecyclerViewAdapter(workAccidents, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        salesQuotations.clear();
+        workAccidents.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SALES_ORDER_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_WORK_ACCIDENT_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -284,7 +286,7 @@ public class SalesOrderFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            salesQuotations.add(new SalesOrder(jsonArray.getJSONObject(i)));
+                            workAccidents.add(new WorkAccident(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -327,9 +329,9 @@ public class SalesOrderFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        salesQuotations.clear();
+        workAccidents.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SALES_ORDER_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_WORK_ACCIDENT_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -338,7 +340,7 @@ public class SalesOrderFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            salesQuotations.add(new SalesOrder(jsonArray.getJSONObject(i)));
+                            workAccidents.add(new WorkAccident(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -402,16 +404,16 @@ public class SalesOrderFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(SalesOrder item);
+        void onListFragmentInteraction(WorkAccident item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<SalesOrder> mValues;
-        private final List<SalesOrder> values;
+        private final List<WorkAccident> mValues;
+        private final List<WorkAccident> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<SalesOrder> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<WorkAccident> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -420,17 +422,20 @@ public class SalesOrderFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_sales_order_list, parent, false);
+                    .inflate(R.layout.fragment_work_accident_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.soTextNumber.setText(""+mValues.get(position).getSales_order_number());
-            holder.soTextDeskripsi.setText(""+mValues.get(position).getShort_description());
-            holder.soTextDate.setText(""+mValues.get(position).getSales_order_date());
-            holder.soTextDueDate.setText(""+mValues.get(position).getDue_date());
-            holder.soTextStatus.setText(""+mValues.get(position).getStatus());
+            holder.waTextEmployee.setText(""+mValues.get(position).getEmployee_id());
+            holder.waTextEmployeeName.setText(""+mValues.get(position).getEmployee_name());
+            holder.waTextDay.setText(""+mValues.get(position).getDay_accident());
+            holder.waTextDate.setText(""+mValues.get(position).getDate_accident());
+            holder.waTextTime.setText(""+mValues.get(position).getTime_accident());
+            holder.waTextJobGrade.setText(""+mValues.get(position).getJob_grade_id());
+            holder.waTextWorkbase.setText(""+mValues.get(position).getCompany_workbase_id());
+            holder.waTextType.setText(""+mValues.get(position).getAccident_type());
 
             if (position%2==0)
                 holder.soLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -460,44 +465,62 @@ public class SalesOrderFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<SalesOrder> filteredList = new ArrayList<>();
+                List<WorkAccident> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((SalesOrder) values);
+                    filteredList.add((WorkAccident) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (SalesOrder item : values){
+                    for (WorkAccident item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getSales_order_number().toLowerCase().contains(filterPattern)){
+                            if (item.getEmployee_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getShort_description().toLowerCase().contains(filterPattern)){
+                            } else if (item.getEmployee_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getSales_order_date().toLowerCase().contains(filterPattern)){
+                            } else if (item.getDay_accident().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getDue_date().toLowerCase().contains(filterPattern)){
+                            } else if (item.getDate_accident().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getStatus().toLowerCase().contains(filterPattern)){
+                            } else if (item.getTime_accident().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getJob_grade_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getCompany_workbase_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getAccident_type().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getSales_order_number().toLowerCase().contains(filterPattern)){
+                            if (item.getEmployee_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getShort_description().toLowerCase().contains(filterPattern)){
+                            if (item.getEmployee_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getSales_order_date().toLowerCase().contains(filterPattern)){
+                            if (item.getDay_accident().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getDue_date().toLowerCase().contains(filterPattern)){
+                            if (item.getDate_accident().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==5){
-                            if (item.getStatus().toLowerCase().contains(filterPattern)){
+                            if (item.getTime_accident().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==6){
+                            if (item.getJob_grade_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==7){
+                            if (item.getCompany_workbase_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==8){
+                            if (item.getAccident_type().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         }
@@ -521,11 +544,14 @@ public class SalesOrderFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView soTextNumber;
-            public final TextView soTextDeskripsi;
-            public final TextView soTextDate;
-            public final TextView soTextDueDate;
-            public final TextView soTextStatus;
+            public final TextView waTextEmployee;
+            public final TextView waTextEmployeeName;
+            public final TextView waTextDay;
+            public final TextView waTextDate;
+            public final TextView waTextTime;
+            public final TextView waTextJobGrade;
+            public final TextView waTextWorkbase;
+            public final TextView waTextType;
 
             public final LinearLayout soLayoutList;
 
@@ -533,13 +559,16 @@ public class SalesOrderFragment extends Fragment {
                 super(view);
                 mView = view;
 
-                soTextNumber = (TextView) view.findViewById(R.id.soTextNumber);
-                soTextDeskripsi = (TextView) view.findViewById(R.id.soTextDeskripsi);
-                soTextDate = (TextView) view.findViewById(R.id.soTextDate);
-                soTextDueDate = (TextView) view.findViewById(R.id.soTextDueDate);
-                soTextStatus = (TextView) view.findViewById(R.id.soTextStatus);
+                waTextEmployee = (TextView) view.findViewById(R.id.waTextEmployee);
+                waTextEmployeeName = (TextView) view.findViewById(R.id.waTextEmployeeName);
+                waTextDay = (TextView) view.findViewById(R.id.waTextDay);
+                waTextDate = (TextView) view.findViewById(R.id.waTextDate);
+                waTextTime = (TextView) view.findViewById(R.id.waTextTime);
+                waTextJobGrade = (TextView) view.findViewById(R.id.waTextJobGrade);
+                waTextWorkbase = (TextView) view.findViewById(R.id.waTextWorkbase);
+                waTextType = (TextView) view.findViewById(R.id.waTextType);
 
-                soLayoutList = (LinearLayout) view.findViewById(R.id.soLayoutList);
+                soLayoutList = (LinearLayout) view.findViewById(R.id.waLayoutList);
             }
         }
     }

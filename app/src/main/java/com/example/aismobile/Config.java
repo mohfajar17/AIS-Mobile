@@ -2,7 +2,7 @@ package com.example.aismobile;
 
 public class Config {
 //    public static final String DATA_URL = "http://192.168.43.119/ais_web_service/apiAis.php?apicall=";   //IP thetering hp
-//    public static final String DATA_URL = "http://192.168.1.24/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
+//    public static final String DATA_URL = "http://192.168.1.77/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
 //    public static final String DATA_URL = "http://192.168.0.105/ais_web_service/apiAis.php?apicall=";   //IP home wifi
     public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
     public static final String DATA_URL_LOGIN = DATA_URL+"login";
@@ -66,6 +66,9 @@ public class Config {
     public static final String DATA_URL_DAFTAR_AKUN_LIST = DATA_URL+"getDaftarAkun";
     public static final String DATA_URL_SALES_QUOTATION_LIST = DATA_URL+"getSalesQuotation";
     public static final String DATA_URL_SALES_ORDER_LIST = DATA_URL+"getSalesOrder";
+    public static final String DATA_URL_WORK_ACCIDENT_LIST = DATA_URL+"getWorkAccident";
+    public static final String DATA_URL_GENBA_SAFETY_LIST = DATA_URL+"getGenbaSafety";
+    public static final String DATA_URL_SAFETY_FILE_REPORT_LIST = DATA_URL+"getJobOrderSafety";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

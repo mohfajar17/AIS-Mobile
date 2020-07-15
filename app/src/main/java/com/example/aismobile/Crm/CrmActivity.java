@@ -9,24 +9,21 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.aismobile.Crm.Monitoring.MonitoringFragment;
+import com.example.aismobile.Data.CRM.SalesQuotationCrm;
 import com.example.aismobile.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class CrmActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CrmActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        MonitoringFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -141,5 +138,10 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
         textViewWarning.setText("You can't access this menu");
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+    }
+
+    @Override
+    public void onListFragmentInteraction(SalesQuotationCrm item) {
+
     }
 }

@@ -68,4 +68,24 @@ public class JobOrderSafety implements Parcelable {
         dest.writeString(category_id);
         dest.writeString(job_safety_file_name);
     }
+
+    public int getJob_order_safety_id() {
+        return job_order_safety_id;
+    }
+
+    public String getJob_order_id() {
+        return job_order_id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public String getJob_safety_file_name() {
+        return job_safety_file_name;
+    }
 }

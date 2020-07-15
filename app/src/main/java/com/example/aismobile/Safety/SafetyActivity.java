@@ -9,8 +9,12 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.aismobile.Data.Safety.GenbaSafety;
+import com.example.aismobile.Data.Safety.JobOrderSafety;
 import com.example.aismobile.Data.Safety.WorkAccident;
 import com.example.aismobile.R;
+import com.example.aismobile.Safety.GenbaSafety.GenbaSafetyFragment;
+import com.example.aismobile.Safety.SafetyFileReport.SafetyFileReportFragment;
 import com.example.aismobile.Safety.WorkAccident.WorkAccidentsFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -23,7 +27,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class SafetyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        WorkAccidentsFragment.OnListFragmentInteractionListener {
+        WorkAccidentsFragment.OnListFragmentInteractionListener,
+        GenbaSafetyFragment.OnListFragmentInteractionListener,
+        SafetyFileReportFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     private String access = "";
@@ -112,6 +118,16 @@ public class SafetyActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public void onListFragmentInteraction(WorkAccident item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(GenbaSafety item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(JobOrderSafety item) {
 
     }
 }

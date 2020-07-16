@@ -73,4 +73,28 @@ public class ScheduleVisit implements Parcelable {
         dest.writeString(company_id);
         dest.writeString(done);
     }
+
+    public int getSchedule_visits_id() {
+        return schedule_visits_id;
+    }
+
+    public String getVisits_number() {
+        return visits_number;
+    }
+
+    public String getVisits_date() {
+        return visits_date;
+    }
+
+    public String getLead_id() {
+        return lead_id;
+    }
+
+    public String getCompany_id() {
+        return company_id;
+    }
+
+    public String getDone() {
+        return done;
+    }
 }

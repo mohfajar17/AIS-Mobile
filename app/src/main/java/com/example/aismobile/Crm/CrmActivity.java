@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.widget.TextView;
 
 import com.example.aismobile.Crm.Monitoring.MonitoringFragment;
-import com.example.aismobile.Data.CRM.SalesQuotationCrm;
+import com.example.aismobile.Data.CRM.Monitoring;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -141,7 +141,7 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
     }
 
     @Override
-    public void onListFragmentInteraction(SalesQuotationCrm item) {
+    public void onListFragmentInteraction(Monitoring item) {
 
     }
 }

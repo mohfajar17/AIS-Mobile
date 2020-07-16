@@ -67,4 +67,24 @@ public class Event implements Parcelable {
         dest.writeString(start_date);
         dest.writeString(end_date);
     }
+
+    public int getEvent_id() {
+        return event_id;
+    }
+
+    public String getEvent_name() {
+        return event_name;
+    }
+
+    public String getEvent_location() {
+        return event_location;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
 }

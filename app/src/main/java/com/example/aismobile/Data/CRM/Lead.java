@@ -83,4 +83,36 @@ public class Lead implements Parcelable {
         dest.writeString(personal_phone);
         dest.writeString(status);
     }
+
+    public int getLead_id() {
+        return lead_id;
+    }
+
+    public String getLead_name() {
+        return lead_name;
+    }
+
+    public String getLead_phone() {
+        return lead_phone;
+    }
+
+    public String getLead_email() {
+        return lead_email;
+    }
+
+    public String getPerson() {
+        return person;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public String getPersonal_phone() {
+        return personal_phone;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

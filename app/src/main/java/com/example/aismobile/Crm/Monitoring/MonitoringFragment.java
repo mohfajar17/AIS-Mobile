@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.CRM.SalesQuotationCrm;
+import com.example.aismobile.Data.CRM.Monitoring;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -73,7 +73,7 @@ public class MonitoringFragment extends Fragment {
             "Berdasarkan Keterangan", "Berdasarkan Status"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<SalesQuotationCrm> salesQuotationCrms;
+    public List<Monitoring> salesQuotationCrms;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
@@ -276,7 +276,7 @@ public class MonitoringFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            salesQuotationCrms.add(new SalesQuotationCrm(jsonArray.getJSONObject(i)));
+                            salesQuotationCrms.add(new Monitoring(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -330,7 +330,7 @@ public class MonitoringFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            salesQuotationCrms.add(new SalesQuotationCrm(jsonArray.getJSONObject(i)));
+                            salesQuotationCrms.add(new Monitoring(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -394,16 +394,16 @@ public class MonitoringFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(SalesQuotationCrm item);
+        void onListFragmentInteraction(Monitoring item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<SalesQuotationCrm> mValues;
-        private final List<SalesQuotationCrm> values;
+        private final List<Monitoring> mValues;
+        private final List<Monitoring> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<SalesQuotationCrm> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<Monitoring> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -451,14 +451,14 @@ public class MonitoringFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<SalesQuotationCrm> filteredList = new ArrayList<>();
+                List<Monitoring> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((SalesQuotationCrm) values);
+                    filteredList.add((Monitoring) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (SalesQuotationCrm item : values){
+                    for (Monitoring item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
                             if (item.getSales_quotation_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);

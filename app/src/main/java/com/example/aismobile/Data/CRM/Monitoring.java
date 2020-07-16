@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SalesQuotationCrm implements Parcelable {
+public class Monitoring implements Parcelable {
 
     private int sales_quotation_id;
     private String sales_quotation_number;
@@ -19,9 +19,9 @@ public class SalesQuotationCrm implements Parcelable {
     private String wo_amount;
     private String status;
 
-    public SalesQuotationCrm(int sales_quotation_id, String sales_quotation_number, String company_name,
-                             String created_by, String sq_date, String department_name, String description,
-                             String amount, String wo_amount, String status){
+    public Monitoring(int sales_quotation_id, String sales_quotation_number, String company_name,
+                      String created_by, String sq_date, String department_name, String description,
+                      String amount, String wo_amount, String status){
         this.sales_quotation_id = sales_quotation_id;
         this.sales_quotation_number = sales_quotation_number;
         this.company_name = company_name;
@@ -34,7 +34,7 @@ public class SalesQuotationCrm implements Parcelable {
         this.status = status;
     }
 
-    protected SalesQuotationCrm(Parcel in) {
+    protected Monitoring(Parcel in) {
         sales_quotation_id = in.readInt();
         sales_quotation_number = in.readString();
         company_name = in.readString();
@@ -47,7 +47,7 @@ public class SalesQuotationCrm implements Parcelable {
         status = in.readString();
     }
 
-    public SalesQuotationCrm(JSONObject jsonObject){
+    public Monitoring(JSONObject jsonObject){
         try {
             this.sales_quotation_id = jsonObject.getInt("sales_quotation_id");
             this.sales_quotation_number = jsonObject.getString("sales_quotation_number");
@@ -64,15 +64,15 @@ public class SalesQuotationCrm implements Parcelable {
         }
     }
 
-    public static final Creator<SalesQuotationCrm> CREATOR = new Creator<SalesQuotationCrm>() {
+    public static final Creator<Monitoring> CREATOR = new Creator<Monitoring>() {
         @Override
-        public SalesQuotationCrm createFromParcel(Parcel in) {
-            return new SalesQuotationCrm(in);
+        public Monitoring createFromParcel(Parcel in) {
+            return new Monitoring(in);
         }
 
         @Override
-        public SalesQuotationCrm[] newArray(int size) {
-            return new SalesQuotationCrm[size];
+        public Monitoring[] newArray(int size) {
+            return new Monitoring[size];
         }
     };
 

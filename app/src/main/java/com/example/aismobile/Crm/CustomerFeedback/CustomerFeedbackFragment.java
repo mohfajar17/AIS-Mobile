@@ -1,4 +1,4 @@
-package com.example.aismobile.Crm.Monitoring;
+package com.example.aismobile.Crm.CustomerFeedback;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.CRM.Monitoring;
+import com.example.aismobile.Data.CRM.CustomerFeedback;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MonitoringFragment extends Fragment {
+public class CustomerFeedbackFragment extends Fragment {
 
     public TextView textPaging;
     public EditText editSearch;
@@ -65,24 +65,25 @@ public class MonitoringFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public MonitoringFragment.MyRecyclerViewAdapter adapter;
+    public CustomerFeedbackFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SpinnerSearch = {"Semua Data", "Sales Quotation Number", "Sales Quotation Date", "Keterangan",
-            "Status"};
-    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Sales Quotation Number", "Berdasarkan Sales Quotation Date",
-            "Berdasarkan Keterangan", "Berdasarkan Status"};
+    public String[] SpinnerSearch = {"Semua Data", "Feedback Number", "Feedback Date", "Feedback Subject",
+            "Company Name", "Contact", "Contact Personal", "Marketing Aspect", "Feedback Category", "Feedback Status"};
+    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Feedback Number", "Berdasarkan Feedback Date",
+            "Berdasarkan Feedback Subject", "Berdasarkan Company Name", "Berdasarkan Contact", "Berdasarkan Contact Personal",
+            "Berdasarkan Marketing Aspect", "Berdasarkan Feedback Category", "Berdasarkan Feedback Status"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<Monitoring> monitorings;
+    public List<CustomerFeedback> customerFeedbacks;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public MonitoringFragment() {
+    public CustomerFeedbackFragment() {
     }
 
-    public static MonitoringFragment newInstance() {
-        MonitoringFragment fragment = new MonitoringFragment();
+    public static CustomerFeedbackFragment newInstance() {
+        CustomerFeedbackFragment fragment = new CustomerFeedbackFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -98,7 +99,7 @@ public class MonitoringFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        monitorings = new ArrayList<>();
+        customerFeedbacks = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -108,27 +109,27 @@ public class MonitoringFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_monitoring, container, false);
+        View view = inflater.inflate(R.layout.fragment_customer_feedback, container, false);
 
         // Set the adapter
-        recycler = (RecyclerView) view.findViewById(R.id.mRecycler);
+        recycler = (RecyclerView) view.findViewById(R.id.cfRecycler);
         if (mColumnCount <= 1) {
             recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
             recycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        fabAdd = (FloatingActionButton) view.findViewById(R.id.mFabAdd);
-        editSearch = (EditText) view.findViewById(R.id.mEditSearch);
-        textPaging = (TextView) view.findViewById(R.id.mTextPaging);
-        btnSearch = (ImageView) view.findViewById(R.id.mBtnSearch);
-        spinnerSearch = (Spinner) view.findViewById(R.id.mSpinnerSearch);
-        spinnerSort = (Spinner) view.findViewById(R.id.mSpinnerSort);
-        spinnerSortAD = (Spinner) view.findViewById(R.id.mSpinnerSortAD);
-        btnShowList = (Button) view.findViewById(R.id.mBtnShowList);
-        btnBefore = (ImageButton) view.findViewById(R.id.mBtnBefore);
-        btnNext = (ImageButton) view.findViewById(R.id.mBtnNext);
-        layoutPaging = (LinearLayout) view.findViewById(R.id.mLayoutPaging);
+        fabAdd = (FloatingActionButton) view.findViewById(R.id.cfFabAdd);
+        editSearch = (EditText) view.findViewById(R.id.cfEditSearch);
+        textPaging = (TextView) view.findViewById(R.id.cfTextPaging);
+        btnSearch = (ImageView) view.findViewById(R.id.cfBtnSearch);
+        spinnerSearch = (Spinner) view.findViewById(R.id.cfSpinnerSearch);
+        spinnerSort = (Spinner) view.findViewById(R.id.cfSpinnerSort);
+        spinnerSortAD = (Spinner) view.findViewById(R.id.cfSpinnerSortAD);
+        btnShowList = (Button) view.findViewById(R.id.cfBtnShowList);
+        btnBefore = (ImageButton) view.findViewById(R.id.cfBtnBefore);
+        btnNext = (ImageButton) view.findViewById(R.id.cfBtnNext);
+        layoutPaging = (LinearLayout) view.findViewById(R.id.cfLayoutPaging);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +159,7 @@ public class MonitoringFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("sales_quotation_id DESC");
+                    loadDataAll("feedback_id DESC");
                     loadAll = true;
                     params = layoutPaging.getLayoutParams();
                     params.height = 0;
@@ -167,7 +168,7 @@ public class MonitoringFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("sales_quotation_id DESC");
+                    loadData("feedback_id DESC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -212,62 +213,102 @@ public class MonitoringFragment extends Fragment {
             }
         });
 
-        loadData("sales_quotation_id DESC");
+        loadData("feedback_id DESC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("sales_quotation_id ASC");
+            loadDataAll("feedback_id ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("sales_quotation_id DESC");
+            loadDataAll("feedback_id DESC");
         else if (position == 2 && posAD == 0)
-            loadDataAll("sq_date ASC");
+            loadDataAll("feedback_date ASC");
         else if (position == 2 && posAD == 1)
-            loadDataAll("sq_date DESC");
+            loadDataAll("feedback_date DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("description ASC");
+            loadDataAll("feedback_subject ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("description DESC");
+            loadDataAll("feedback_subject DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("status ASC");
+            loadDataAll("company_name ASC");
         else if (position == 4 && posAD == 1)
-            loadDataAll("status DESC");
-        else loadDataAll("sales_quotation_id DESC");
+            loadDataAll("company_name DESC");
+        else if (position == 5 && posAD == 0)
+            loadDataAll("contact_id ASC");
+        else if (position == 5 && posAD == 1)
+            loadDataAll("contact_id DESC");
+        else if (position == 6 && posAD == 0)
+            loadDataAll("contact_personal ASC");
+        else if (position == 6 && posAD == 1)
+            loadDataAll("contact_personal DESC");
+        else if (position == 7 && posAD == 0)
+            loadDataAll("marketing_aspect_id ASC");
+        else if (position == 7 && posAD == 1)
+            loadDataAll("marketing_aspect_id DESC");
+        else if (position == 8 && posAD == 0)
+            loadDataAll("feedback_category_id ASC");
+        else if (position == 8 && posAD == 1)
+            loadDataAll("feedback_category_id DESC");
+        else if (position == 9 && posAD == 0)
+            loadDataAll("feedback_status ASC");
+        else if (position == 9 && posAD == 1)
+            loadDataAll("feedback_status DESC");
+        else loadDataAll("feedback_id DESC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("sales_quotation_id ASC");
+            loadData("feedback_id ASC");
         else if (position == 1 && posAD == 1)
-            loadData("sales_quotation_id DESC");
+            loadData("feedback_id DESC");
         else if (position == 2 && posAD == 0)
-            loadData("sq_date ASC");
+            loadData("feedback_date ASC");
         else if (position == 2 && posAD == 1)
-            loadData("sq_date DESC");
+            loadData("feedback_date DESC");
         else if (position == 3 && posAD == 0)
-            loadData("description ASC");
+            loadData("feedback_subject ASC");
         else if (position == 3 && posAD == 1)
-            loadData("description DESC");
+            loadData("feedback_subject DESC");
         else if (position == 4 && posAD == 0)
-            loadData("status ASC");
+            loadData("company_name ASC");
         else if (position == 4 && posAD == 1)
-            loadData("status DESC");
-        else loadData("sales_quotation_id DESC");
+            loadData("company_name DESC");
+        else if (position == 5 && posAD == 0)
+            loadData("contact_id ASC");
+        else if (position == 5 && posAD == 1)
+            loadData("contact_id DESC");
+        else if (position == 6 && posAD == 0)
+            loadData("contact_personal ASC");
+        else if (position == 6 && posAD == 1)
+            loadData("contact_personal DESC");
+        else if (position == 7 && posAD == 0)
+            loadData("marketing_aspect_id ASC");
+        else if (position == 7 && posAD == 1)
+            loadData("marketing_aspect_id DESC");
+        else if (position == 8 && posAD == 0)
+            loadData("feedback_category_id ASC");
+        else if (position == 8 && posAD == 1)
+            loadData("feedback_category_id DESC");
+        else if (position == 9 && posAD == 0)
+            loadData("feedback_status ASC");
+        else if (position == 9 && posAD == 1)
+            loadData("feedback_status DESC");
+        else loadData("feedback_id DESC");
     }
 
     private void setAdapterList(){
-        adapter = new MonitoringFragment.MyRecyclerViewAdapter(monitorings, mListener);
+        adapter = new CustomerFeedbackFragment.MyRecyclerViewAdapter(customerFeedbacks, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        monitorings.clear();
+        customerFeedbacks.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SALES_QUOTATION_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_CUSTOMER_FEEDBACK_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -276,7 +317,7 @@ public class MonitoringFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            monitorings.add(new Monitoring(jsonArray.getJSONObject(i)));
+                            customerFeedbacks.add(new CustomerFeedback(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -319,9 +360,9 @@ public class MonitoringFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        monitorings.clear();
+        customerFeedbacks.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SALES_QUOTATION_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_CUSTOMER_FEEDBACK_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -330,7 +371,7 @@ public class MonitoringFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            monitorings.add(new Monitoring(jsonArray.getJSONObject(i)));
+                            customerFeedbacks.add(new CustomerFeedback(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -394,16 +435,16 @@ public class MonitoringFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Monitoring item);
+        void onListFragmentInteraction(CustomerFeedback item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<Monitoring> mValues;
-        private final List<Monitoring> values;
+        private final List<CustomerFeedback> mValues;
+        private final List<CustomerFeedback> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<Monitoring> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<CustomerFeedback> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -412,20 +453,25 @@ public class MonitoringFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_monitoring_list, parent, false);
+                    .inflate(R.layout.fragment_customer_feedback_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.mTextNumber.setText(""+mValues.get(position).getSales_quotation_number());
-            holder.mTextSqDate.setText(""+mValues.get(position).getSq_date());
-            holder.mTextKeterangan.setText(""+mValues.get(position).getDescription());
-            holder.mTextStatus.setText(""+mValues.get(position).getStatus());
+            holder.cfTextNumber.setText(""+mValues.get(position).getFeedback_number());
+            holder.cfTextDate.setText(""+mValues.get(position).getFeedback_date());
+            holder.cfTextSubjact.setText(""+mValues.get(position).getFeedback_subject());
+            holder.cfTextCompanyName.setText(""+mValues.get(position).getCompany_name());
+            holder.cfTextContact.setText(""+mValues.get(position).getContact_id());
+            holder.cfTextContactPersonal.setText(""+mValues.get(position).getContact_personal());
+            holder.cfTextMarketing.setText(""+mValues.get(position).getMarketing_aspect_id());
+            holder.cfTextCategory.setText(""+mValues.get(position).getFeedback_category_id());
+            holder.cfTextStatus.setText(""+mValues.get(position).getFeedback_status());
 
             if (position%2==0)
-                holder.mLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.mLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.cfLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.cfLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -451,38 +497,68 @@ public class MonitoringFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<Monitoring> filteredList = new ArrayList<>();
+                List<CustomerFeedback> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((Monitoring) values);
+                    filteredList.add((CustomerFeedback) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (Monitoring item : values){
+                    for (CustomerFeedback item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getSales_quotation_number().toLowerCase().contains(filterPattern)){
+                            if (item.getFeedback_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getSq_date().toLowerCase().contains(filterPattern)){
+                            } else if (item.getFeedback_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getDescription().toLowerCase().contains(filterPattern)){
+                            } else if (item.getFeedback_subject().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getStatus().toLowerCase().contains(filterPattern)){
+                            } else if (item.getCompany_name().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getContact_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getContact_personal().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getMarketing_aspect_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getFeedback_category_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getFeedback_status().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getSales_quotation_number().toLowerCase().contains(filterPattern)){
+                            if (item.getFeedback_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getSq_date().toLowerCase().contains(filterPattern)){
+                            if (item.getFeedback_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getDescription().toLowerCase().contains(filterPattern)){
+                            if (item.getFeedback_subject().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getStatus().toLowerCase().contains(filterPattern)){
+                            if (item.getCompany_name().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==5){
+                            if (item.getContact_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==6){
+                            if (item.getContact_personal().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==7){
+                            if (item.getMarketing_aspect_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==8){
+                            if (item.getFeedback_category_id().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==9){
+                            if (item.getFeedback_status().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         }
@@ -506,23 +582,33 @@ public class MonitoringFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView mTextNumber;
-            public final TextView mTextSqDate;
-            public final TextView mTextKeterangan;
-            public final TextView mTextStatus;
+            public final TextView cfTextNumber;
+            public final TextView cfTextDate;
+            public final TextView cfTextSubjact;
+            public final TextView cfTextCompanyName;
+            public final TextView cfTextContact;
+            public final TextView cfTextContactPersonal;
+            public final TextView cfTextMarketing;
+            public final TextView cfTextCategory;
+            public final TextView cfTextStatus;
 
-            public final LinearLayout mLayoutList;
+            public final LinearLayout cfLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                mTextNumber = (TextView) view.findViewById(R.id.mTextNumber);
-                mTextSqDate = (TextView) view.findViewById(R.id.mTextSqDate);
-                mTextKeterangan = (TextView) view.findViewById(R.id.mTextKeterangan);
-                mTextStatus = (TextView) view.findViewById(R.id.mTextStatus);
+                cfTextNumber = (TextView) view.findViewById(R.id.cfTextNumber);
+                cfTextDate = (TextView) view.findViewById(R.id.cfTextDate);
+                cfTextSubjact = (TextView) view.findViewById(R.id.cfTextSubjact);
+                cfTextCompanyName = (TextView) view.findViewById(R.id.cfTextCompanyName);
+                cfTextContact = (TextView) view.findViewById(R.id.cfTextContact);
+                cfTextContactPersonal = (TextView) view.findViewById(R.id.cfTextContactPersonal);
+                cfTextMarketing = (TextView) view.findViewById(R.id.cfTextMarketing);
+                cfTextCategory = (TextView) view.findViewById(R.id.cfTextCategory);
+                cfTextStatus = (TextView) view.findViewById(R.id.cfTextStatus);
 
-                mLayoutList = (LinearLayout) view.findViewById(R.id.mLayoutList);
+                cfLayoutList = (LinearLayout) view.findViewById(R.id.cfLayoutList);
             }
         }
     }

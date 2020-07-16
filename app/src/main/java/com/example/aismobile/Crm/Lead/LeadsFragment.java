@@ -1,4 +1,4 @@
-package com.example.aismobile.Crm.Monitoring;
+package com.example.aismobile.Crm.Lead;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.CRM.Monitoring;
+import com.example.aismobile.Data.CRM.Lead;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MonitoringFragment extends Fragment {
+public class LeadsFragment extends Fragment {
 
     public TextView textPaging;
     public EditText editSearch;
@@ -65,24 +65,26 @@ public class MonitoringFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public MonitoringFragment.MyRecyclerViewAdapter adapter;
+    public LeadsFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SpinnerSearch = {"Semua Data", "Sales Quotation Number", "Sales Quotation Date", "Keterangan",
-            "Status"};
-    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Sales Quotation Number", "Berdasarkan Sales Quotation Date",
-            "Berdasarkan Keterangan", "Berdasarkan Status"};
+    public String[] SpinnerSearch = {"Semua Data", "Lead Name", "Lead Phone", "Lead Email", "Person",
+            "Position", "Personal Phone", "Status"};
+    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Lead Name", "Berdasarkan Lead Phone",
+            "Berdasarkan Lead Email", "Berdasarkan Person", "Berdasarkan Position", "Berdasarkan Personal Phone",
+            "Berdasarkan Status"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<Monitoring> monitorings;
+    public List<Lead> leads;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public MonitoringFragment() {
+    public LeadsFragment() {
+        // Required empty public constructor
     }
 
-    public static MonitoringFragment newInstance() {
-        MonitoringFragment fragment = new MonitoringFragment();
+    public static LeadsFragment newInstance() {
+        LeadsFragment fragment = new LeadsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -98,7 +100,7 @@ public class MonitoringFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        monitorings = new ArrayList<>();
+        leads = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -108,27 +110,27 @@ public class MonitoringFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_monitoring, container, false);
+        View view = inflater.inflate(R.layout.fragment_leads, container, false);
 
         // Set the adapter
-        recycler = (RecyclerView) view.findViewById(R.id.mRecycler);
+        recycler = (RecyclerView) view.findViewById(R.id.lRecycler);
         if (mColumnCount <= 1) {
             recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
             recycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        fabAdd = (FloatingActionButton) view.findViewById(R.id.mFabAdd);
-        editSearch = (EditText) view.findViewById(R.id.mEditSearch);
-        textPaging = (TextView) view.findViewById(R.id.mTextPaging);
-        btnSearch = (ImageView) view.findViewById(R.id.mBtnSearch);
-        spinnerSearch = (Spinner) view.findViewById(R.id.mSpinnerSearch);
-        spinnerSort = (Spinner) view.findViewById(R.id.mSpinnerSort);
-        spinnerSortAD = (Spinner) view.findViewById(R.id.mSpinnerSortAD);
-        btnShowList = (Button) view.findViewById(R.id.mBtnShowList);
-        btnBefore = (ImageButton) view.findViewById(R.id.mBtnBefore);
-        btnNext = (ImageButton) view.findViewById(R.id.mBtnNext);
-        layoutPaging = (LinearLayout) view.findViewById(R.id.mLayoutPaging);
+        fabAdd = (FloatingActionButton) view.findViewById(R.id.lFabAdd);
+        editSearch = (EditText) view.findViewById(R.id.lEditSearch);
+        textPaging = (TextView) view.findViewById(R.id.lTextPaging);
+        btnSearch = (ImageView) view.findViewById(R.id.lBtnSearch);
+        spinnerSearch = (Spinner) view.findViewById(R.id.lSpinnerSearch);
+        spinnerSort = (Spinner) view.findViewById(R.id.lSpinnerSort);
+        spinnerSortAD = (Spinner) view.findViewById(R.id.lSpinnerSortAD);
+        btnShowList = (Button) view.findViewById(R.id.lBtnShowList);
+        btnBefore = (ImageButton) view.findViewById(R.id.lBtnBefore);
+        btnNext = (ImageButton) view.findViewById(R.id.lBtnNext);
+        layoutPaging = (LinearLayout) view.findViewById(R.id.lLayoutPaging);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +160,7 @@ public class MonitoringFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("sales_quotation_id DESC");
+                    loadDataAll("lead_name ASC");
                     loadAll = true;
                     params = layoutPaging.getLayoutParams();
                     params.height = 0;
@@ -167,7 +169,7 @@ public class MonitoringFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("sales_quotation_id DESC");
+                    loadData("lead_name ASC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -212,62 +214,86 @@ public class MonitoringFragment extends Fragment {
             }
         });
 
-        loadData("sales_quotation_id DESC");
+        loadData("lead_name ASC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("sales_quotation_id ASC");
+            loadDataAll("lead_name ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("sales_quotation_id DESC");
+            loadDataAll("lead_name DESC");
         else if (position == 2 && posAD == 0)
-            loadDataAll("sq_date ASC");
+            loadDataAll("lead_phone ASC");
         else if (position == 2 && posAD == 1)
-            loadDataAll("sq_date DESC");
+            loadDataAll("lead_phone DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("description ASC");
+            loadDataAll("lead_email ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("description DESC");
+            loadDataAll("lead_email DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("status ASC");
+            loadDataAll("person ASC");
         else if (position == 4 && posAD == 1)
+            loadDataAll("person DESC");
+        else if (position == 5 && posAD == 0)
+            loadDataAll("position ASC");
+        else if (position == 5 && posAD == 1)
+            loadDataAll("position DESC");
+        else if (position == 6 && posAD == 0)
+            loadDataAll("personal_phone ASC");
+        else if (position == 6 && posAD == 1)
+            loadDataAll("personal_phone DESC");
+        else if (position == 7 && posAD == 0)
+            loadDataAll("status ASC");
+        else if (position == 7 && posAD == 1)
             loadDataAll("status DESC");
-        else loadDataAll("sales_quotation_id DESC");
+        else loadDataAll("lead_name ASC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("sales_quotation_id ASC");
+            loadData("lead_name ASC");
         else if (position == 1 && posAD == 1)
-            loadData("sales_quotation_id DESC");
+            loadData("lead_name DESC");
         else if (position == 2 && posAD == 0)
-            loadData("sq_date ASC");
+            loadData("lead_phone ASC");
         else if (position == 2 && posAD == 1)
-            loadData("sq_date DESC");
+            loadData("lead_phone DESC");
         else if (position == 3 && posAD == 0)
-            loadData("description ASC");
+            loadData("lead_email ASC");
         else if (position == 3 && posAD == 1)
-            loadData("description DESC");
+            loadData("lead_email DESC");
         else if (position == 4 && posAD == 0)
-            loadData("status ASC");
+            loadData("person ASC");
         else if (position == 4 && posAD == 1)
+            loadData("person DESC");
+        else if (position == 5 && posAD == 0)
+            loadData("position ASC");
+        else if (position == 5 && posAD == 1)
+            loadData("position DESC");
+        else if (position == 6 && posAD == 0)
+            loadData("personal_phone ASC");
+        else if (position == 6 && posAD == 1)
+            loadData("personal_phone DESC");
+        else if (position == 7 && posAD == 0)
+            loadData("status ASC");
+        else if (position == 7 && posAD == 1)
             loadData("status DESC");
-        else loadData("sales_quotation_id DESC");
+        else loadData("lead_name ASC");
     }
 
     private void setAdapterList(){
-        adapter = new MonitoringFragment.MyRecyclerViewAdapter(monitorings, mListener);
+        adapter = new LeadsFragment.MyRecyclerViewAdapter(leads, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        monitorings.clear();
+        leads.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SALES_QUOTATION_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_LEAD_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -276,7 +302,7 @@ public class MonitoringFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            monitorings.add(new Monitoring(jsonArray.getJSONObject(i)));
+                            leads.add(new Lead(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -319,9 +345,9 @@ public class MonitoringFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        monitorings.clear();
+        leads.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SALES_QUOTATION_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_LEAD_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -330,7 +356,7 @@ public class MonitoringFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            monitorings.add(new Monitoring(jsonArray.getJSONObject(i)));
+                            leads.add(new Lead(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -394,16 +420,16 @@ public class MonitoringFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Monitoring item);
+        void onListFragmentInteraction(Lead item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<Monitoring> mValues;
-        private final List<Monitoring> values;
+        private final List<Lead> mValues;
+        private final List<Lead> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<Monitoring> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<Lead> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -412,20 +438,23 @@ public class MonitoringFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_monitoring_list, parent, false);
+                    .inflate(R.layout.fragment_leads_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.mTextNumber.setText(""+mValues.get(position).getSales_quotation_number());
-            holder.mTextSqDate.setText(""+mValues.get(position).getSq_date());
-            holder.mTextKeterangan.setText(""+mValues.get(position).getDescription());
-            holder.mTextStatus.setText(""+mValues.get(position).getStatus());
+            holder.lTextName.setText(""+mValues.get(position).getLead_name());
+            holder.lTextPhone.setText(""+mValues.get(position).getLead_phone());
+            holder.lTextEmail.setText(""+mValues.get(position).getLead_email());
+            holder.lTextPerson.setText(""+mValues.get(position).getPerson());
+            holder.lTextPosition.setText(""+mValues.get(position).getPosition());
+            holder.lTextPersonalPhone.setText(""+mValues.get(position).getPersonal_phone());
+            holder.lTextStatus.setText(""+mValues.get(position).getStatus());
 
             if (position%2==0)
-                holder.mLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.mLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.lLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.lLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -451,34 +480,52 @@ public class MonitoringFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<Monitoring> filteredList = new ArrayList<>();
+                List<Lead> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((Monitoring) values);
+                    filteredList.add((Lead) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (Monitoring item : values){
+                    for (Lead item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getSales_quotation_number().toLowerCase().contains(filterPattern)){
+                            if (item.getLead_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getSq_date().toLowerCase().contains(filterPattern)){
+                            } else if (item.getLead_phone().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getDescription().toLowerCase().contains(filterPattern)){
+                            } else if (item.getLead_email().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getPerson().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getPosition().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getPersonal_phone().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getStatus().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getSales_quotation_number().toLowerCase().contains(filterPattern)){
+                            if (item.getLead_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getSq_date().toLowerCase().contains(filterPattern)){
+                            if (item.getLead_phone().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getDescription().toLowerCase().contains(filterPattern)){
+                            if (item.getLead_email().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==4){
+                            if (item.getPerson().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==4){
+                            if (item.getPosition().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==4){
+                            if (item.getPersonal_phone().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==4){
@@ -506,23 +553,29 @@ public class MonitoringFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView mTextNumber;
-            public final TextView mTextSqDate;
-            public final TextView mTextKeterangan;
-            public final TextView mTextStatus;
+            public final TextView lTextName;
+            public final TextView lTextPhone;
+            public final TextView lTextEmail;
+            public final TextView lTextPerson;
+            public final TextView lTextPosition;
+            public final TextView lTextPersonalPhone;
+            public final TextView lTextStatus;
 
-            public final LinearLayout mLayoutList;
+            public final LinearLayout lLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                mTextNumber = (TextView) view.findViewById(R.id.mTextNumber);
-                mTextSqDate = (TextView) view.findViewById(R.id.mTextSqDate);
-                mTextKeterangan = (TextView) view.findViewById(R.id.mTextKeterangan);
-                mTextStatus = (TextView) view.findViewById(R.id.mTextStatus);
+                lTextName = (TextView) view.findViewById(R.id.lTextName);
+                lTextPhone = (TextView) view.findViewById(R.id.lTextPhone);
+                lTextEmail = (TextView) view.findViewById(R.id.lTextEmail);
+                lTextPerson = (TextView) view.findViewById(R.id.lTextPerson);
+                lTextPosition = (TextView) view.findViewById(R.id.lTextPosition);
+                lTextPersonalPhone = (TextView) view.findViewById(R.id.lTextPersonalPhone);
+                lTextStatus = (TextView) view.findViewById(R.id.lTextStatus);
 
-                mLayoutList = (LinearLayout) view.findViewById(R.id.mLayoutList);
+                lLayoutList = (LinearLayout) view.findViewById(R.id.lLayoutList);
             }
         }
     }

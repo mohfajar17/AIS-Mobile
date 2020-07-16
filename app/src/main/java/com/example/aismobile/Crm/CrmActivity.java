@@ -9,8 +9,18 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.aismobile.Crm.CustomerFeedback.CustomerFeedbackFragment;
+import com.example.aismobile.Crm.Event.EventsFragment;
+import com.example.aismobile.Crm.Kuesioner.KuesionerFragment;
+import com.example.aismobile.Crm.Lead.LeadsFragment;
 import com.example.aismobile.Crm.Monitoring.MonitoringFragment;
+import com.example.aismobile.Crm.Question.QuestionFragment;
+import com.example.aismobile.Data.CRM.CustomerFeedback;
+import com.example.aismobile.Data.CRM.Event;
+import com.example.aismobile.Data.CRM.Kuesioner;
+import com.example.aismobile.Data.CRM.Lead;
 import com.example.aismobile.Data.CRM.Monitoring;
+import com.example.aismobile.Data.CRM.Question;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -23,7 +33,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class CrmActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        MonitoringFragment.OnListFragmentInteractionListener {
+        MonitoringFragment.OnListFragmentInteractionListener,
+        CustomerFeedbackFragment.OnListFragmentInteractionListener,
+        QuestionFragment.OnListFragmentInteractionListener,
+        KuesionerFragment.OnListFragmentInteractionListener,
+        LeadsFragment.OnListFragmentInteractionListener,
+        EventsFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -142,6 +157,31 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public void onListFragmentInteraction(Monitoring item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(CustomerFeedback item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Question item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Kuesioner item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Lead item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Event item) {
 
     }
 }

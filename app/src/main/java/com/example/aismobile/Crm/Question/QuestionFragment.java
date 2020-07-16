@@ -1,4 +1,4 @@
-package com.example.aismobile.Crm.Monitoring;
+package com.example.aismobile.Crm.Question;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.CRM.Monitoring;
+import com.example.aismobile.Data.CRM.Question;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MonitoringFragment extends Fragment {
+public class QuestionFragment extends Fragment {
 
     public TextView textPaging;
     public EditText editSearch;
@@ -65,24 +65,22 @@ public class MonitoringFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public MonitoringFragment.MyRecyclerViewAdapter adapter;
+    public QuestionFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SpinnerSearch = {"Semua Data", "Sales Quotation Number", "Sales Quotation Date", "Keterangan",
-            "Status"};
-    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Sales Quotation Number", "Berdasarkan Sales Quotation Date",
-            "Berdasarkan Keterangan", "Berdasarkan Status"};
+    public String[] SpinnerSearch = {"Semua Data", "Question", "Question Year"};
+    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Question", "Berdasarkan Question Year"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<Monitoring> monitorings;
+    public List<Question> customerFeedbacks;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public MonitoringFragment() {
+    public QuestionFragment() {
     }
 
-    public static MonitoringFragment newInstance() {
-        MonitoringFragment fragment = new MonitoringFragment();
+    public static QuestionFragment newInstance() {
+        QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -98,7 +96,7 @@ public class MonitoringFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        monitorings = new ArrayList<>();
+        customerFeedbacks = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -108,27 +106,27 @@ public class MonitoringFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_monitoring, container, false);
+        View view = inflater.inflate(R.layout.fragment_question, container, false);
 
         // Set the adapter
-        recycler = (RecyclerView) view.findViewById(R.id.mRecycler);
+        recycler = (RecyclerView) view.findViewById(R.id.qRecycler);
         if (mColumnCount <= 1) {
             recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
             recycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        fabAdd = (FloatingActionButton) view.findViewById(R.id.mFabAdd);
-        editSearch = (EditText) view.findViewById(R.id.mEditSearch);
-        textPaging = (TextView) view.findViewById(R.id.mTextPaging);
-        btnSearch = (ImageView) view.findViewById(R.id.mBtnSearch);
-        spinnerSearch = (Spinner) view.findViewById(R.id.mSpinnerSearch);
-        spinnerSort = (Spinner) view.findViewById(R.id.mSpinnerSort);
-        spinnerSortAD = (Spinner) view.findViewById(R.id.mSpinnerSortAD);
-        btnShowList = (Button) view.findViewById(R.id.mBtnShowList);
-        btnBefore = (ImageButton) view.findViewById(R.id.mBtnBefore);
-        btnNext = (ImageButton) view.findViewById(R.id.mBtnNext);
-        layoutPaging = (LinearLayout) view.findViewById(R.id.mLayoutPaging);
+        fabAdd = (FloatingActionButton) view.findViewById(R.id.qFabAdd);
+        editSearch = (EditText) view.findViewById(R.id.qEditSearch);
+        textPaging = (TextView) view.findViewById(R.id.qTextPaging);
+        btnSearch = (ImageView) view.findViewById(R.id.qBtnSearch);
+        spinnerSearch = (Spinner) view.findViewById(R.id.qSpinnerSearch);
+        spinnerSort = (Spinner) view.findViewById(R.id.qSpinnerSort);
+        spinnerSortAD = (Spinner) view.findViewById(R.id.qSpinnerSortAD);
+        btnShowList = (Button) view.findViewById(R.id.qBtnShowList);
+        btnBefore = (ImageButton) view.findViewById(R.id.qBtnBefore);
+        btnNext = (ImageButton) view.findViewById(R.id.qBtnNext);
+        layoutPaging = (LinearLayout) view.findViewById(R.id.qLayoutPaging);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +156,7 @@ public class MonitoringFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("sales_quotation_id DESC");
+                    loadDataAll("question_id ASC");
                     loadAll = true;
                     params = layoutPaging.getLayoutParams();
                     params.height = 0;
@@ -167,7 +165,7 @@ public class MonitoringFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("sales_quotation_id DESC");
+                    loadData("question_id ASC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -212,62 +210,46 @@ public class MonitoringFragment extends Fragment {
             }
         });
 
-        loadData("sales_quotation_id DESC");
+        loadData("question_id ASC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("sales_quotation_id ASC");
+            loadDataAll("question ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("sales_quotation_id DESC");
+            loadDataAll("question DESC");
         else if (position == 2 && posAD == 0)
-            loadDataAll("sq_date ASC");
+            loadDataAll("question_year ASC");
         else if (position == 2 && posAD == 1)
-            loadDataAll("sq_date DESC");
-        else if (position == 3 && posAD == 0)
-            loadDataAll("description ASC");
-        else if (position == 3 && posAD == 1)
-            loadDataAll("description DESC");
-        else if (position == 4 && posAD == 0)
-            loadDataAll("status ASC");
-        else if (position == 4 && posAD == 1)
-            loadDataAll("status DESC");
-        else loadDataAll("sales_quotation_id DESC");
+            loadDataAll("question_year DESC");
+        else loadDataAll("question_id ASC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("sales_quotation_id ASC");
+            loadData("question ASC");
         else if (position == 1 && posAD == 1)
-            loadData("sales_quotation_id DESC");
+            loadData("question DESC");
         else if (position == 2 && posAD == 0)
-            loadData("sq_date ASC");
+            loadData("question_year ASC");
         else if (position == 2 && posAD == 1)
-            loadData("sq_date DESC");
-        else if (position == 3 && posAD == 0)
-            loadData("description ASC");
-        else if (position == 3 && posAD == 1)
-            loadData("description DESC");
-        else if (position == 4 && posAD == 0)
-            loadData("status ASC");
-        else if (position == 4 && posAD == 1)
-            loadData("status DESC");
-        else loadData("sales_quotation_id DESC");
+            loadData("question_year DESC");
+        else loadData("question_id ASC");
     }
 
     private void setAdapterList(){
-        adapter = new MonitoringFragment.MyRecyclerViewAdapter(monitorings, mListener);
+        adapter = new QuestionFragment.MyRecyclerViewAdapter(customerFeedbacks, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        monitorings.clear();
+        customerFeedbacks.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SALES_QUOTATION_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_QUESTION_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -276,7 +258,7 @@ public class MonitoringFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            monitorings.add(new Monitoring(jsonArray.getJSONObject(i)));
+                            customerFeedbacks.add(new Question(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -319,9 +301,9 @@ public class MonitoringFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        monitorings.clear();
+        customerFeedbacks.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SALES_QUOTATION_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_QUESTION_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -330,7 +312,7 @@ public class MonitoringFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            monitorings.add(new Monitoring(jsonArray.getJSONObject(i)));
+                            customerFeedbacks.add(new Question(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -394,16 +376,16 @@ public class MonitoringFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Monitoring item);
+        void onListFragmentInteraction(Question item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<Monitoring> mValues;
-        private final List<Monitoring> values;
+        private final List<Question> mValues;
+        private final List<Question> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<Monitoring> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<Question> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -412,20 +394,18 @@ public class MonitoringFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_monitoring_list, parent, false);
+                    .inflate(R.layout.fragment_question_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.mTextNumber.setText(""+mValues.get(position).getSales_quotation_number());
-            holder.mTextSqDate.setText(""+mValues.get(position).getSq_date());
-            holder.mTextKeterangan.setText(""+mValues.get(position).getDescription());
-            holder.mTextStatus.setText(""+mValues.get(position).getStatus());
+            holder.qTextQuestion.setText(""+mValues.get(position).getQuestion());
+            holder.qTextYear.setText(""+mValues.get(position).getQuestion_year());
 
             if (position%2==0)
-                holder.mLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.mLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.qLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.qLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -451,38 +431,26 @@ public class MonitoringFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<Monitoring> filteredList = new ArrayList<>();
+                List<Question> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((Monitoring) values);
+                    filteredList.add((Question) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (Monitoring item : values){
+                    for (Question item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getSales_quotation_number().toLowerCase().contains(filterPattern)){
+                            if (item.getQuestion().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getSq_date().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            } else if (item.getDescription().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            } else if (item.getStatus().toLowerCase().contains(filterPattern)){
+                            } else if (item.getQuestion_year().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getSales_quotation_number().toLowerCase().contains(filterPattern)){
+                            if (item.getQuestion().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getSq_date().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            }
-                        } else if (spinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getDescription().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            }
-                        } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getStatus().toLowerCase().contains(filterPattern)){
+                            if (item.getQuestion_year().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         }
@@ -506,23 +474,19 @@ public class MonitoringFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView mTextNumber;
-            public final TextView mTextSqDate;
-            public final TextView mTextKeterangan;
-            public final TextView mTextStatus;
+            public final TextView qTextQuestion;
+            public final TextView qTextYear;
 
-            public final LinearLayout mLayoutList;
+            public final LinearLayout qLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                mTextNumber = (TextView) view.findViewById(R.id.mTextNumber);
-                mTextSqDate = (TextView) view.findViewById(R.id.mTextSqDate);
-                mTextKeterangan = (TextView) view.findViewById(R.id.mTextKeterangan);
-                mTextStatus = (TextView) view.findViewById(R.id.mTextStatus);
+                qTextQuestion = (TextView) view.findViewById(R.id.qTextQuestion);
+                qTextYear = (TextView) view.findViewById(R.id.qTextYear);
 
-                mLayoutList = (LinearLayout) view.findViewById(R.id.mLayoutList);
+                qLayoutList = (LinearLayout) view.findViewById(R.id.qLayoutList);
             }
         }
     }

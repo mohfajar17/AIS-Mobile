@@ -69,6 +69,13 @@ public class Config {
     public static final String DATA_URL_WORK_ACCIDENT_LIST = DATA_URL+"getWorkAccident";
     public static final String DATA_URL_GENBA_SAFETY_LIST = DATA_URL+"getGenbaSafety";
     public static final String DATA_URL_SAFETY_FILE_REPORT_LIST = DATA_URL+"getJobOrderSafety";
+    public static final String DATA_URL_CUSTOMER_FEEDBACK_LIST = DATA_URL+"getCustomerFeedback";
+    public static final String DATA_URL_QUESTION_LIST = DATA_URL+"getQuestions";
+    public static final String DATA_URL_KUESIONER_LIST = DATA_URL+"getKuesioner";
+    public static final String DATA_URL_LEAD_LIST = DATA_URL+"getLead";
+    public static final String DATA_URL_FOLLOWUP_LIST = DATA_URL+"getFollowup";
+    public static final String DATA_URL_EVENT_LIST = DATA_URL+"getEvent";
+    public static final String DATA_URL_SCHEDULEVISIT_LIST = DATA_URL+"getScheduleVisits";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

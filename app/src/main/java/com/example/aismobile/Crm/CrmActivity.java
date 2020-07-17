@@ -11,16 +11,21 @@ import android.widget.TextView;
 
 import com.example.aismobile.Crm.CustomerFeedback.CustomerFeedbackFragment;
 import com.example.aismobile.Crm.Event.EventsFragment;
+import com.example.aismobile.Crm.Followup.FollowupsCustomerFragment;
+import com.example.aismobile.Crm.Followup.FollowupsLeadFragment;
 import com.example.aismobile.Crm.Kuesioner.KuesionerFragment;
 import com.example.aismobile.Crm.Lead.LeadsFragment;
 import com.example.aismobile.Crm.Monitoring.MonitoringFragment;
 import com.example.aismobile.Crm.Question.QuestionFragment;
+import com.example.aismobile.Crm.ScheduleVisit.ScheduleFragment;
 import com.example.aismobile.Data.CRM.CustomerFeedback;
 import com.example.aismobile.Data.CRM.Event;
+import com.example.aismobile.Data.CRM.Followup;
 import com.example.aismobile.Data.CRM.Kuesioner;
 import com.example.aismobile.Data.CRM.Lead;
 import com.example.aismobile.Data.CRM.Monitoring;
 import com.example.aismobile.Data.CRM.Question;
+import com.example.aismobile.Data.CRM.ScheduleVisit;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -38,7 +43,10 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
         QuestionFragment.OnListFragmentInteractionListener,
         KuesionerFragment.OnListFragmentInteractionListener,
         LeadsFragment.OnListFragmentInteractionListener,
-        EventsFragment.OnListFragmentInteractionListener {
+        EventsFragment.OnListFragmentInteractionListener,
+        ScheduleFragment.OnListFragmentInteractionListener,
+        FollowupsLeadFragment.OnListFragmentInteractionListener,
+        FollowupsCustomerFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -106,7 +114,7 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
             LeadsFragment mainFragment = LeadsFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_followup && access.toLowerCase().contains("followup".toLowerCase())) {
-            FollowupsFragment mainFragment = FollowupsFragment.newInstance();
+            FollowupsLeadFragment mainFragment = FollowupsLeadFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_events && access.toLowerCase().contains("event".toLowerCase())) {
             EventsFragment mainFragment = EventsFragment.newInstance();
@@ -182,6 +190,16 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public void onListFragmentInteraction(Event item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(ScheduleVisit item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Followup item) {
 
     }
 }

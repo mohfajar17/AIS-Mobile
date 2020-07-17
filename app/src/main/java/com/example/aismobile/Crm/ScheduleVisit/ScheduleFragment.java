@@ -1,4 +1,4 @@
-package com.example.aismobile.Crm.Lead;
+package com.example.aismobile.Crm.ScheduleVisit;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.CRM.Lead;
+import com.example.aismobile.Data.CRM.ScheduleVisit;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LeadsFragment extends Fragment {
+public class ScheduleFragment extends Fragment {
 
     public TextView textPaging;
     public EditText editSearch;
@@ -65,25 +65,24 @@ public class LeadsFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public LeadsFragment.MyRecyclerViewAdapter adapter;
+    public ScheduleFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SpinnerSearch = {"Semua Data", "Lead Name", "Lead Phone", "Lead Email", "Person",
-            "Position", "Personal Phone", "Status"};
-    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Lead Name", "Berdasarkan Lead Phone",
-            "Berdasarkan Lead Email", "Berdasarkan Person", "Berdasarkan Position", "Berdasarkan Personal Phone",
-            "Berdasarkan Status"};
+    public String[] SpinnerSearch = {"Semua Data", "Visits Number", "Visits Date", "Lead", "Company",
+            "Done"};
+    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Visits Number", "Berdasarkan Visits Date",
+            "Berdasarkan Lead", "Berdasarkan Company", "Berdasarkan Done"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<Lead> leads;
+    public List<ScheduleVisit> scheduleVisits;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public LeadsFragment() {
+    public ScheduleFragment() {
     }
 
-    public static LeadsFragment newInstance() {
-        LeadsFragment fragment = new LeadsFragment();
+    public static ScheduleFragment newInstance() {
+        ScheduleFragment fragment = new ScheduleFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -99,7 +98,7 @@ public class LeadsFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        leads = new ArrayList<>();
+        scheduleVisits = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -109,27 +108,27 @@ public class LeadsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_leads, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         // Set the adapter
-        recycler = (RecyclerView) view.findViewById(R.id.lRecycler);
+        recycler = (RecyclerView) view.findViewById(R.id.svRecycler);
         if (mColumnCount <= 1) {
             recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
             recycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        fabAdd = (FloatingActionButton) view.findViewById(R.id.lFabAdd);
-        editSearch = (EditText) view.findViewById(R.id.lEditSearch);
-        textPaging = (TextView) view.findViewById(R.id.lTextPaging);
-        btnSearch = (ImageView) view.findViewById(R.id.lBtnSearch);
-        spinnerSearch = (Spinner) view.findViewById(R.id.lSpinnerSearch);
-        spinnerSort = (Spinner) view.findViewById(R.id.lSpinnerSort);
-        spinnerSortAD = (Spinner) view.findViewById(R.id.lSpinnerSortAD);
-        btnShowList = (Button) view.findViewById(R.id.lBtnShowList);
-        btnBefore = (ImageButton) view.findViewById(R.id.lBtnBefore);
-        btnNext = (ImageButton) view.findViewById(R.id.lBtnNext);
-        layoutPaging = (LinearLayout) view.findViewById(R.id.lLayoutPaging);
+        fabAdd = (FloatingActionButton) view.findViewById(R.id.svFabAdd);
+        editSearch = (EditText) view.findViewById(R.id.svEditSearch);
+        textPaging = (TextView) view.findViewById(R.id.svTextPaging);
+        btnSearch = (ImageView) view.findViewById(R.id.svBtnSearch);
+        spinnerSearch = (Spinner) view.findViewById(R.id.svSpinnerSearch);
+        spinnerSort = (Spinner) view.findViewById(R.id.svSpinnerSort);
+        spinnerSortAD = (Spinner) view.findViewById(R.id.svSpinnerSortAD);
+        btnShowList = (Button) view.findViewById(R.id.svBtnShowList);
+        btnBefore = (ImageButton) view.findViewById(R.id.svBtnBefore);
+        btnNext = (ImageButton) view.findViewById(R.id.svBtnNext);
+        layoutPaging = (LinearLayout) view.findViewById(R.id.svLayoutPaging);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +158,7 @@ public class LeadsFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("lead_name ASC");
+                    loadDataAll("schedule_visits_id DESC");
                     loadAll = true;
                     params = layoutPaging.getLayoutParams();
                     params.height = 0;
@@ -168,7 +167,7 @@ public class LeadsFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("lead_name ASC");
+                    loadData("schedule_visits_id DESC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -213,86 +212,70 @@ public class LeadsFragment extends Fragment {
             }
         });
 
-        loadData("lead_name ASC");
+        loadData("schedule_visits_id DESC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("lead_name ASC");
+            loadDataAll("schedule_visits_id ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("lead_name DESC");
+            loadDataAll("schedule_visits_id DESC");
         else if (position == 2 && posAD == 0)
-            loadDataAll("lead_phone ASC");
+            loadDataAll("visits_date ASC");
         else if (position == 2 && posAD == 1)
-            loadDataAll("lead_phone DESC");
+            loadDataAll("visits_date DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("lead_email ASC");
+            loadDataAll("lead_id ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("lead_email DESC");
+            loadDataAll("lead_id DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("person ASC");
+            loadDataAll("company_id ASC");
         else if (position == 4 && posAD == 1)
-            loadDataAll("person DESC");
+            loadDataAll("company_id DESC");
         else if (position == 5 && posAD == 0)
-            loadDataAll("position ASC");
+            loadDataAll("done ASC");
         else if (position == 5 && posAD == 1)
-            loadDataAll("position DESC");
-        else if (position == 6 && posAD == 0)
-            loadDataAll("personal_phone ASC");
-        else if (position == 6 && posAD == 1)
-            loadDataAll("personal_phone DESC");
-        else if (position == 7 && posAD == 0)
-            loadDataAll("status ASC");
-        else if (position == 7 && posAD == 1)
-            loadDataAll("status DESC");
-        else loadDataAll("lead_name ASC");
+            loadDataAll("done DESC");
+        else loadDataAll("schedule_visits_id DESC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("lead_name ASC");
+            loadData("schedule_visits_id ASC");
         else if (position == 1 && posAD == 1)
-            loadData("lead_name DESC");
+            loadData("schedule_visits_id DESC");
         else if (position == 2 && posAD == 0)
-            loadData("lead_phone ASC");
+            loadData("visits_date ASC");
         else if (position == 2 && posAD == 1)
-            loadData("lead_phone DESC");
+            loadData("visits_date DESC");
         else if (position == 3 && posAD == 0)
-            loadData("lead_email ASC");
+            loadData("lead_id ASC");
         else if (position == 3 && posAD == 1)
-            loadData("lead_email DESC");
+            loadData("lead_id DESC");
         else if (position == 4 && posAD == 0)
-            loadData("person ASC");
+            loadData("company_id ASC");
         else if (position == 4 && posAD == 1)
-            loadData("person DESC");
+            loadData("company_id DESC");
         else if (position == 5 && posAD == 0)
-            loadData("position ASC");
+            loadData("done ASC");
         else if (position == 5 && posAD == 1)
-            loadData("position DESC");
-        else if (position == 6 && posAD == 0)
-            loadData("personal_phone ASC");
-        else if (position == 6 && posAD == 1)
-            loadData("personal_phone DESC");
-        else if (position == 7 && posAD == 0)
-            loadData("status ASC");
-        else if (position == 7 && posAD == 1)
-            loadData("status DESC");
-        else loadData("lead_name ASC");
+            loadData("done DESC");
+        else loadData("schedule_visits_id DESC");
     }
 
     private void setAdapterList(){
-        adapter = new LeadsFragment.MyRecyclerViewAdapter(leads, mListener);
+        adapter = new ScheduleFragment.MyRecyclerViewAdapter(scheduleVisits, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        leads.clear();
+        scheduleVisits.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_LEAD_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SCHEDULEVISIT_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -301,7 +284,7 @@ public class LeadsFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            leads.add(new Lead(jsonArray.getJSONObject(i)));
+                            scheduleVisits.add(new ScheduleVisit(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -344,9 +327,9 @@ public class LeadsFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        leads.clear();
+        scheduleVisits.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_LEAD_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SCHEDULEVISIT_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -355,7 +338,7 @@ public class LeadsFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            leads.add(new Lead(jsonArray.getJSONObject(i)));
+                            scheduleVisits.add(new ScheduleVisit(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -419,16 +402,16 @@ public class LeadsFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Lead item);
+        void onListFragmentInteraction(ScheduleVisit item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<Lead> mValues;
-        private final List<Lead> values;
+        private final List<ScheduleVisit> mValues;
+        private final List<ScheduleVisit> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<Lead> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<ScheduleVisit> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -437,23 +420,21 @@ public class LeadsFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_leads_list, parent, false);
+                    .inflate(R.layout.fragment_schedule_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.lTextName.setText(""+mValues.get(position).getLead_name());
-            holder.lTextPhone.setText(""+mValues.get(position).getLead_phone());
-            holder.lTextEmail.setText(""+mValues.get(position).getLead_email());
-            holder.lTextPerson.setText(""+mValues.get(position).getPerson());
-            holder.lTextPosition.setText(""+mValues.get(position).getPosition());
-            holder.lTextPersonalPhone.setText(""+mValues.get(position).getPersonal_phone());
-            holder.lTextStatus.setText(""+mValues.get(position).getStatus());
+            holder.svTextNumber.setText(""+mValues.get(position).getVisits_number());
+            holder.svTextDate.setText(""+mValues.get(position).getVisits_date());
+            holder.svTextLead.setText(""+mValues.get(position).getLead_id());
+            holder.svTextCompany.setText(""+mValues.get(position).getCompany_id());
+            holder.svTextDone.setText(""+mValues.get(position).getDone());
 
             if (position%2==0)
-                holder.lLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.lLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.svLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.svLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -479,56 +460,44 @@ public class LeadsFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<Lead> filteredList = new ArrayList<>();
+                List<ScheduleVisit> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((Lead) values);
+                    filteredList.add((ScheduleVisit) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (Lead item : values){
+                    for (ScheduleVisit item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getLead_name().toLowerCase().contains(filterPattern)){
+                            if (item.getVisits_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getLead_phone().toLowerCase().contains(filterPattern)){
+                            } else if (item.getVisits_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getLead_email().toLowerCase().contains(filterPattern)){
+                            } else if (item.getLead_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getPerson().toLowerCase().contains(filterPattern)){
+                            } else if (item.getCompany_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getPosition().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            } else if (item.getPersonal_phone().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            } else if (item.getStatus().toLowerCase().contains(filterPattern)){
+                            } else if (item.getDone().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getLead_name().toLowerCase().contains(filterPattern)){
+                            if (item.getVisits_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getLead_phone().toLowerCase().contains(filterPattern)){
+                            if (item.getVisits_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getLead_email().toLowerCase().contains(filterPattern)){
+                            if (item.getLead_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getPerson().toLowerCase().contains(filterPattern)){
+                            if (item.getCompany_id().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
-                        } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getPosition().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            }
-                        } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getPersonal_phone().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            }
-                        } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getStatus().toLowerCase().contains(filterPattern)){
+                        } else if (spinnerSearch.getSelectedItemPosition()==5){
+                            if (item.getDone().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         }
@@ -552,29 +521,25 @@ public class LeadsFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView lTextName;
-            public final TextView lTextPhone;
-            public final TextView lTextEmail;
-            public final TextView lTextPerson;
-            public final TextView lTextPosition;
-            public final TextView lTextPersonalPhone;
-            public final TextView lTextStatus;
+            public final TextView svTextNumber;
+            public final TextView svTextDate;
+            public final TextView svTextLead;
+            public final TextView svTextCompany;
+            public final TextView svTextDone;
 
-            public final LinearLayout lLayoutList;
+            public final LinearLayout svLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                lTextName = (TextView) view.findViewById(R.id.lTextName);
-                lTextPhone = (TextView) view.findViewById(R.id.lTextPhone);
-                lTextEmail = (TextView) view.findViewById(R.id.lTextEmail);
-                lTextPerson = (TextView) view.findViewById(R.id.lTextPerson);
-                lTextPosition = (TextView) view.findViewById(R.id.lTextPosition);
-                lTextPersonalPhone = (TextView) view.findViewById(R.id.lTextPersonalPhone);
-                lTextStatus = (TextView) view.findViewById(R.id.lTextStatus);
+                svTextNumber = (TextView) view.findViewById(R.id.svTextNumber);
+                svTextDate = (TextView) view.findViewById(R.id.svTextDate);
+                svTextLead = (TextView) view.findViewById(R.id.svTextLead);
+                svTextCompany = (TextView) view.findViewById(R.id.svTextCompany);
+                svTextDone = (TextView) view.findViewById(R.id.svTextDone);
 
-                lLayoutList = (LinearLayout) view.findViewById(R.id.lLayoutList);
+                svLayoutList = (LinearLayout) view.findViewById(R.id.svLayoutList);
             }
         }
     }

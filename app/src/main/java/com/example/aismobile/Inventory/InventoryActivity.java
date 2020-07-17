@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aismobile.Inventory.Item.ItemFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 

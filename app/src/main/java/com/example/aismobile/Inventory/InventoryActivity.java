@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aismobile.Data.Inventory.Item;
 import com.example.aismobile.Inventory.Item.ItemFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
@@ -21,7 +22,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class InventoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class InventoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        ItemFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -121,5 +123,10 @@ public class InventoryActivity extends AppCompatActivity implements NavigationVi
         textViewWarning.setText("You can't access this menu");
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+    }
+
+    @Override
+    public void onListFragmentInteraction(Item item) {
+
     }
 }

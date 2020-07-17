@@ -77,6 +77,7 @@ public class Config {
     public static final String DATA_URL_EVENT_LIST = DATA_URL+"getEvent";
     public static final String DATA_URL_SCHEDULEVISIT_LIST = DATA_URL+"getScheduleVisits";
     public static final String DATA_URL_ITEM_LIST = DATA_URL+"getItem";
+    public static final String DATA_URL_KELOMPOK_ITEM_LIST = DATA_URL+"getItemGroup";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

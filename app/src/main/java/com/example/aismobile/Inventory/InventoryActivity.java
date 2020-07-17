@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.aismobile.Data.Inventory.Item;
+import com.example.aismobile.Data.Inventory.ItemGroup;
 import com.example.aismobile.Inventory.Item.ItemFragment;
+import com.example.aismobile.Inventory.Item.KelompokItemFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -23,7 +25,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class InventoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        ItemFragment.OnListFragmentInteractionListener {
+        ItemFragment.OnListFragmentInteractionListener,
+        KelompokItemFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -127,6 +130,11 @@ public class InventoryActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onListFragmentInteraction(Item item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(ItemGroup item) {
 
     }
 }

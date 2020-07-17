@@ -217,39 +217,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="250dp"
+                        android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Lead"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="350dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Notes"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Date"
+                        android:text="Kode Kelompok Item"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -263,7 +235,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Followup By"
+                        android:text="Keterangan"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -273,11 +245,11 @@
                         android:src="@color/colorWhite" />
 
                     <TextView
-                        android:layout_width="170dp"
+                        android:layout_width="130dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Created By"
+                        android:text="Aktif"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </LinearLayout>

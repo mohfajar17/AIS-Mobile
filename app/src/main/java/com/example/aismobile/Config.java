@@ -1,7 +1,7 @@
 package com.example.aismobile;
 
 public class Config {
-//    public static final String DATA_URL = "http://192.168.43.119/ais_web_service/apiAis.php?apicall=";   //IP thetering hp
+//    public static final String DATA_URL = "http://192.168.43.183/ais_web_service/apiAis.php?apicall=";   //IP thetering hp
 //    public static final String DATA_URL = "http://192.168.1.77/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
 //    public static final String DATA_URL = "http://192.168.0.105/ais_web_service/apiAis.php?apicall=";   //IP home wifi
     public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
@@ -78,6 +78,8 @@ public class Config {
     public static final String DATA_URL_SCHEDULEVISIT_LIST = DATA_URL+"getScheduleVisits";
     public static final String DATA_URL_ITEM_LIST = DATA_URL+"getItem";
     public static final String DATA_URL_KELOMPOK_ITEM_LIST = DATA_URL+"getItemGroup";
+    public static final String DATA_URL_KATEGORI_ITEM_LIST = DATA_URL+"getItemCategory";
+    public static final String DATA_URL_TYPE_ITEM_LIST = DATA_URL+"getItemType";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

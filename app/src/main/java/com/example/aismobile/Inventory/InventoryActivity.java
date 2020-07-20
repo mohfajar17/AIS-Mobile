@@ -10,9 +10,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.aismobile.Data.Inventory.Item;
+import com.example.aismobile.Data.Inventory.ItemCategory;
 import com.example.aismobile.Data.Inventory.ItemGroup;
+import com.example.aismobile.Data.Inventory.ItemType;
 import com.example.aismobile.Inventory.Item.ItemFragment;
+import com.example.aismobile.Inventory.Item.KategoriItemFragment;
 import com.example.aismobile.Inventory.Item.KelompokItemFragment;
+import com.example.aismobile.Inventory.Item.TypeItemFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,7 +30,9 @@ import androidx.appcompat.widget.Toolbar;
 
 public class InventoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         ItemFragment.OnListFragmentInteractionListener,
-        KelompokItemFragment.OnListFragmentInteractionListener {
+        KelompokItemFragment.OnListFragmentInteractionListener,
+        KategoriItemFragment.OnListFragmentInteractionListener,
+        TypeItemFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -135,6 +141,16 @@ public class InventoryActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onListFragmentInteraction(ItemGroup item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(ItemCategory item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(ItemType item) {
 
     }
 }

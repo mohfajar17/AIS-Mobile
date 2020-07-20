@@ -166,7 +166,7 @@
             <Button
                 android:id="@+id/tiBtnShowList"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="0dp"
                 android:text="Show all"
                 android:background="@color/colorAsukaRed"
                 android:textColor="@color/colorWhite"/>
@@ -175,7 +175,7 @@
         <LinearLayout
             android:id="@+id/tiLayoutPaging"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -217,11 +217,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="250dp"
+                        android:layout_width="300dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Lead"
+                        android:text="Tipe Item"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -231,53 +231,11 @@
                         android:src="@color/colorWhite" />
 
                     <TextView
-                        android:layout_width="350dp"
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Notes"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Date"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Followup By"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Created By"
+                        android:text="Aktif"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -291,6 +249,11 @@
                     android:id="@+id/tiRecycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:src="@color/colorBlack" />
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>

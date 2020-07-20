@@ -54,6 +54,7 @@ public class KelompokItemFragment extends Fragment {
     private TextView iMenuKelompokItem;
     private TextView iMenuKategoriItem;
     private TextView iMenuTipeItem;
+
     private LinearLayout iShowFilter;
     private LinearLayout ilayoutFilter;
 
@@ -123,8 +124,6 @@ public class KelompokItemFragment extends Fragment {
         iMenuKelompokItem = (TextView) view.findViewById(R.id.kiMenuKelompokItem);
         iMenuKategoriItem = (TextView) view.findViewById(R.id.kiMenuKategoriItem);
         iMenuTipeItem = (TextView) view.findViewById(R.id.kiMenuTipeItem);
-        iShowFilter = (LinearLayout) view.findViewById(R.id.kiShowFilter);
-        ilayoutFilter = (LinearLayout) view.findViewById(R.id.kilayoutFilter);
 
         iMenuItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +158,9 @@ public class KelompokItemFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        iShowFilter = (LinearLayout) view.findViewById(R.id.kiShowFilter);
+        ilayoutFilter = (LinearLayout) view.findViewById(R.id.kilayoutFilter);
         iShowFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,7 +197,7 @@ public class KelompokItemFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 counter = 15*Integer.valueOf(String.valueOf(textPaging.getText()));
-                setSortHalf(spinnerSort.getSelectedItemPosition(), spinnerSortAD.getSelectedItemPosition());
+//                setSortHalf(spinnerSort.getSelectedItemPosition(), spinnerSortAD.getSelectedItemPosition());
                 int textValue = Integer.valueOf(String.valueOf(textPaging.getText()))+1;
                 textPaging.setText(""+textValue);
                 filter = true;
@@ -206,7 +208,7 @@ public class KelompokItemFragment extends Fragment {
             public void onClick(View v) {
                 if (Integer.valueOf(String.valueOf(textPaging.getText())) > 1) {
                     counter = 15*(Integer.valueOf(String.valueOf(textPaging.getText()))-2);
-                    setSortHalf(spinnerSort.getSelectedItemPosition(), spinnerSortAD.getSelectedItemPosition());
+//                    setSortHalf(spinnerSort.getSelectedItemPosition(), spinnerSortAD.getSelectedItemPosition());
                     int textValue = Integer.valueOf(String.valueOf(textPaging.getText()))-1;
                     textPaging.setText(""+textValue);
                     filter = true;
@@ -228,7 +230,7 @@ public class KelompokItemFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("item_group_id DESC");
+//                    loadData("item_group_id DESC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -253,7 +255,7 @@ public class KelompokItemFragment extends Fragment {
                 if (counter<0){
                     setSortAll(position, spinnerSortAD.getSelectedItemPosition());
                 } else {
-                    setSortHalf(position, spinnerSortAD.getSelectedItemPosition());
+//                    setSortHalf(position, spinnerSortAD.getSelectedItemPosition());
                 }
             }
 
@@ -273,7 +275,7 @@ public class KelompokItemFragment extends Fragment {
             }
         });
 
-        loadData("item_group_id DESC");
+        loadDataAll("item_group_id DESC");
 
         return view;
     }
@@ -294,21 +296,21 @@ public class KelompokItemFragment extends Fragment {
         else loadDataAll("item_group_id DESC");
     }
 
-    private void setSortHalf(int position, int posAD){
-        if (position == 1 && posAD == 0)
-            loadData("item_group_code ASC");
-        else if (position == 1 && posAD == 1)
-            loadData("item_group_code DESC");
-        else if (position == 2 && posAD == 0)
-            loadData("description ASC");
-        else if (position == 2 && posAD == 1)
-            loadData("description DESC");
-        else if (position == 3 && posAD == 0)
-            loadData("is_active ASC");
-        else if (position == 3 && posAD == 1)
-            loadData("is_active DESC");
-        else loadData("item_group_id DESC");
-    }
+//    private void setSortHalf(int position, int posAD){
+//        if (position == 1 && posAD == 0)
+//            loadData("item_group_code ASC");
+//        else if (position == 1 && posAD == 1)
+//            loadData("item_group_code DESC");
+//        else if (position == 2 && posAD == 0)
+//            loadData("description ASC");
+//        else if (position == 2 && posAD == 1)
+//            loadData("description DESC");
+//        else if (position == 3 && posAD == 0)
+//            loadData("is_active ASC");
+//        else if (position == 3 && posAD == 1)
+//            loadData("is_active DESC");
+//        else loadData("item_group_id DESC");
+//    }
 
     private void setAdapterList(){
         adapter = new KelompokItemFragment.MyRecyclerViewAdapter(itemGroups, mListener);
@@ -369,58 +371,58 @@ public class KelompokItemFragment extends Fragment {
         Volley.newRequestQueue(getActivity()).add(request);
     }
 
-    public void loadData(final String sortBy){
-        progressDialog.show();
-        recycler.setAdapter(null);
-        itemGroups.clear();
-
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_KELOMPOK_ITEM_LIST, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    int status=jsonObject.getInt("status");
-                    if(status==1){
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
-                        for(int i=0;i<jsonArray.length();i++){
-                            itemGroups.add(new ItemGroup(jsonArray.getJSONObject(i)));
-                        }
-                        setAdapterList();
-                        if (filter){
-                            if (editSearch.getText().toString().matches("")){
-                                spinnerSearch.setSelection(0);
-                                adapter.getFilter().filter("a");
-                            } else adapter.getFilter().filter(String.valueOf(editSearch.getText()));
-                            filter = false;
-                        }
-                    } else {
-                        Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
-                    }
-                    progressDialog.dismiss();
-                } catch (JSONException e) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> param=new HashMap<>();
-                param.put("counter", "" + counter);
-                param.put("sortBy", "" + sortBy);
-                return param;
-            }
-        };
-        Volley.newRequestQueue(getActivity()).add(request);
-    }
+//    public void loadData(final String sortBy){
+//        progressDialog.show();
+//        recycler.setAdapter(null);
+//        itemGroups.clear();
+//
+//        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_KELOMPOK_ITEM_LIST, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    int status=jsonObject.getInt("status");
+//                    if(status==1){
+//                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+//                        for(int i=0;i<jsonArray.length();i++){
+//                            itemGroups.add(new ItemGroup(jsonArray.getJSONObject(i)));
+//                        }
+//                        setAdapterList();
+//                        if (filter){
+//                            if (editSearch.getText().toString().matches("")){
+//                                spinnerSearch.setSelection(0);
+//                                adapter.getFilter().filter("a");
+//                            } else adapter.getFilter().filter(String.valueOf(editSearch.getText()));
+//                            filter = false;
+//                        }
+//                    } else {
+//                        Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
+//                    }
+//                    progressDialog.dismiss();
+//                } catch (JSONException e) {
+//                    progressDialog.dismiss();
+//                    Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                error.printStackTrace();
+//                Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
+//                progressDialog.dismiss();
+//            }
+//        }){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> param=new HashMap<>();
+//                param.put("counter", "" + counter);
+//                param.put("sortBy", "" + sortBy);
+//                return param;
+//            }
+//        };
+//        Volley.newRequestQueue(getActivity()).add(request);
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

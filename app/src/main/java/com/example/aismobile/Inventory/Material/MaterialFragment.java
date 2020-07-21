@@ -1,4 +1,4 @@
-package com.example.aismobile.Inventory.Stock;
+package com.example.aismobile.Inventory.Material;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Inventory.StockAdjustment;
+import com.example.aismobile.Data.Inventory.MaterialReturn;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StockFragment extends Fragment {
+public class MaterialFragment extends Fragment {
 
     public TextView textPaging;
     public EditText editSearch;
@@ -65,24 +65,24 @@ public class StockFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public StockFragment.MyRecyclerViewAdapter adapter;
+    public MaterialFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SpinnerSearch = {"Semua Data", "Adjustment Number", "Adjustment Date", "Penjelasan Singkat",
-            "Catatan", "Approval By"};
-    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Adjustment Number", "Berdasarkan Adjustment Date",
-            "Berdasarkan Penjelasan Singkat", "Berdasarkan Catatan", "Berdasarkan Approval By"};
+    public String[] SpinnerSearch = {"Semua Data", "Nomor Material Return", "Job Order", "Tanggal Kembalian",
+            "Dibuat Oleh", "Catatan", "Diakui"};
+    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Nomor Material Return", "Berdasarkan Job Order",
+            "Berdasarkan Tanggal Kembalian", "Berdasarkan Dibuat Oleh", "Berdasarkan Catatan", "Berdasarkan Diakui"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<StockAdjustment> stockAdjustments;
+    public List<MaterialReturn> materialReturns;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public StockFragment() {
+    public MaterialFragment() {
     }
 
-    public static StockFragment newInstance() {
-        StockFragment fragment = new StockFragment();
+    public static MaterialFragment newInstance() {
+        MaterialFragment fragment = new MaterialFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -98,7 +98,7 @@ public class StockFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        stockAdjustments = new ArrayList<>();
+        materialReturns = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -108,10 +108,10 @@ public class StockFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_stock, container, false);
+        View view = inflater.inflate(R.layout.fragment_material, container, false);
 
         // Set the adapter
-        recycler = (RecyclerView) view.findViewById(R.id.saRecycler);
+        recycler = (RecyclerView) view.findViewById(R.id.mrRecycler);
         if (mColumnCount <= 1) {
             recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
@@ -119,16 +119,16 @@ public class StockFragment extends Fragment {
         }
 
         fabAdd = (FloatingActionButton) view.findViewById(R.id.gsFabAdd);
-        editSearch = (EditText) view.findViewById(R.id.saEditSearch);
-        textPaging = (TextView) view.findViewById(R.id.saTextPaging);
-        btnSearch = (ImageView) view.findViewById(R.id.saBtnSearch);
-        spinnerSearch = (Spinner) view.findViewById(R.id.saSpinnerSearch);
-        spinnerSort = (Spinner) view.findViewById(R.id.saSpinnerSort);
-        spinnerSortAD = (Spinner) view.findViewById(R.id.saSpinnerSortAD);
-        btnShowList = (Button) view.findViewById(R.id.saBtnShowList);
-        btnBefore = (ImageButton) view.findViewById(R.id.saBtnBefore);
-        btnNext = (ImageButton) view.findViewById(R.id.saBtnNext);
-        layoutPaging = (LinearLayout) view.findViewById(R.id.saLayoutPaging);
+        editSearch = (EditText) view.findViewById(R.id.mrEditSearch);
+        textPaging = (TextView) view.findViewById(R.id.mrTextPaging);
+        btnSearch = (ImageView) view.findViewById(R.id.mrBtnSearch);
+        spinnerSearch = (Spinner) view.findViewById(R.id.mrSpinnerSearch);
+        spinnerSort = (Spinner) view.findViewById(R.id.mrSpinnerSort);
+        spinnerSortAD = (Spinner) view.findViewById(R.id.mrSpinnerSortAD);
+        btnShowList = (Button) view.findViewById(R.id.mrBtnShowList);
+        btnBefore = (ImageButton) view.findViewById(R.id.mrBtnBefore);
+        btnNext = (ImageButton) view.findViewById(R.id.mrBtnNext);
+        layoutPaging = (LinearLayout) view.findViewById(R.id.mrLayoutPaging);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +158,7 @@ public class StockFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("stock_adjustment_id DESC");
+                    loadDataAll("material_return_id DESC");
                     loadAll = true;
                     params = layoutPaging.getLayoutParams();
                     params.height = 0;
@@ -167,7 +167,7 @@ public class StockFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("stock_adjustment_id DESC");
+                    loadData("material_return_id DESC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -212,70 +212,78 @@ public class StockFragment extends Fragment {
             }
         });
 
-        loadData("stock_adjustment_id DESC");
+        loadData("material_return_id DESC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("stock_adjustment_id ASC");
+            loadDataAll("material_return_id ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("stock_adjustment_id DESC");
+            loadDataAll("material_return_id DESC");
         else if (position == 2 && posAD == 0)
-            loadDataAll("adjustment_date ASC");
+            loadDataAll("job_order_number ASC");
         else if (position == 2 && posAD == 1)
-            loadDataAll("adjustment_date DESC");
+            loadDataAll("job_order_number DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("short_description ASC");
+            loadDataAll("return_date ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("short_description DESC");
+            loadDataAll("return_date DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("notes ASC");
+            loadDataAll("created_by ASC");
         else if (position == 4 && posAD == 1)
-            loadDataAll("notes DESC");
+            loadDataAll("created_by DESC");
         else if (position == 5 && posAD == 0)
-            loadDataAll("approval_by ASC");
+            loadDataAll("notes ASC");
         else if (position == 5 && posAD == 1)
-            loadDataAll("approval_by DESC");
-        else loadDataAll("stock_adjustment_id DESC");
+            loadDataAll("notes DESC");
+        else if (position == 6 && posAD == 0)
+            loadDataAll("recognized ASC");
+        else if (position == 6 && posAD == 1)
+            loadDataAll("recognized DESC");
+        else loadDataAll("material_return_id DESC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("stock_adjustment_id ASC");
+            loadData("material_return_id ASC");
         else if (position == 1 && posAD == 1)
-            loadData("stock_adjustment_id DESC");
+            loadData("material_return_id DESC");
         else if (position == 2 && posAD == 0)
-            loadData("adjustment_date ASC");
+            loadData("job_order_number ASC");
         else if (position == 2 && posAD == 1)
-            loadData("adjustment_date DESC");
+            loadData("job_order_number DESC");
         else if (position == 3 && posAD == 0)
-            loadData("short_description ASC");
+            loadData("return_date ASC");
         else if (position == 3 && posAD == 1)
-            loadData("short_description DESC");
+            loadData("return_date DESC");
         else if (position == 4 && posAD == 0)
-            loadData("notes ASC");
+            loadData("created_by ASC");
         else if (position == 4 && posAD == 1)
-            loadData("notes DESC");
+            loadData("created_by DESC");
         else if (position == 5 && posAD == 0)
-            loadData("approval_by ASC");
+            loadData("notes ASC");
         else if (position == 5 && posAD == 1)
-            loadData("approval_by DESC");
-        else loadData("stock_adjustment_id DESC");
+            loadData("notes DESC");
+        else if (position == 6 && posAD == 0)
+            loadData("recognized ASC");
+        else if (position == 6 && posAD == 1)
+            loadData("recognized DESC");
+        else loadData("material_return_id DESC");
     }
 
     private void setAdapterList(){
-        adapter = new StockFragment.MyRecyclerViewAdapter(stockAdjustments, mListener);
+        adapter = new MaterialFragment.MyRecyclerViewAdapter(materialReturns, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        stockAdjustments.clear();
+        materialReturns.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_STOCK_ADJUSMENT_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_MATERIAL_RETURN_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -284,7 +292,7 @@ public class StockFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            stockAdjustments.add(new StockAdjustment(jsonArray.getJSONObject(i)));
+                            materialReturns.add(new MaterialReturn(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -327,9 +335,9 @@ public class StockFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        stockAdjustments.clear();
+        materialReturns.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_STOCK_ADJUSMENT_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_MATERIAL_RETURN_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -338,7 +346,7 @@ public class StockFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            stockAdjustments.add(new StockAdjustment(jsonArray.getJSONObject(i)));
+                            materialReturns.add(new MaterialReturn(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -402,16 +410,16 @@ public class StockFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(StockAdjustment item);
+        void onListFragmentInteraction(MaterialReturn item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<StockAdjustment> mValues;
-        private final List<StockAdjustment> values;
+        private final List<MaterialReturn> mValues;
+        private final List<MaterialReturn> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<StockAdjustment> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<MaterialReturn> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -420,21 +428,22 @@ public class StockFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_stock_list, parent, false);
+                    .inflate(R.layout.fragment_material_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.saTextNumber.setText(""+mValues.get(position).getAdjustment_number());
-            holder.saTextDate.setText(""+mValues.get(position).getAdjustment_date());
-            holder.saTextDesc.setText(""+mValues.get(position).getShort_description());
-            holder.saTextNote.setText(""+mValues.get(position).getNotes());
-            holder.saTextApproval.setText(""+mValues.get(position).getApproval_by());
+            holder.mrTextNumber.setText(""+mValues.get(position).getMaterial_return_number());
+            holder.mrTextJobOrder.setText(""+mValues.get(position).getJob_order_number());
+            holder.mrTextDate.setText(""+mValues.get(position).getReturn_date());
+            holder.mrTextDibuat.setText(""+mValues.get(position).getCreated_by());
+            holder.mrTextNote.setText(""+mValues.get(position).getNotes());
+            holder.mrTextDiakui.setText(""+mValues.get(position).getRecognized());
 
             if (position%2==0)
-                holder.saLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.saLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.mrLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.mrLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -460,44 +469,50 @@ public class StockFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<StockAdjustment> filteredList = new ArrayList<>();
+                List<MaterialReturn> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((StockAdjustment) values);
+                    filteredList.add((MaterialReturn) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (StockAdjustment item : values){
+                    for (MaterialReturn item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getAdjustment_number().toLowerCase().contains(filterPattern)){
+                            if (item.getMaterial_return_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getAdjustment_date().toLowerCase().contains(filterPattern)){
+                            } else if (item.getJob_order_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getShort_description().toLowerCase().contains(filterPattern)){
+                            } else if (item.getReturn_date().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getCreated_by().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getNotes().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getApproval_by().toLowerCase().contains(filterPattern)){
+                            } else if (item.getRecognized().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getAdjustment_number().toLowerCase().contains(filterPattern)){
+                            if (item.getMaterial_return_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getAdjustment_date().toLowerCase().contains(filterPattern)){
+                            if (item.getJob_order_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getShort_description().toLowerCase().contains(filterPattern)){
+                            if (item.getReturn_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getNotes().toLowerCase().contains(filterPattern)){
+                            if (item.getCreated_by().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==5){
-                            if (item.getApproval_by().toLowerCase().contains(filterPattern)){
+                            if (item.getNotes().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==6){
+                            if (item.getRecognized().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         }
@@ -521,25 +536,27 @@ public class StockFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView saTextNumber;
-            public final TextView saTextDate;
-            public final TextView saTextDesc;
-            public final TextView saTextNote;
-            public final TextView saTextApproval;
+            public final TextView mrTextNumber;
+            public final TextView mrTextJobOrder;
+            public final TextView mrTextDate;
+            public final TextView mrTextDibuat;
+            public final TextView mrTextNote;
+            public final TextView mrTextDiakui;
 
-            public final LinearLayout saLayoutList;
+            public final LinearLayout mrLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                saTextNumber = (TextView) view.findViewById(R.id.saTextNumber);
-                saTextDate = (TextView) view.findViewById(R.id.saTextDate);
-                saTextDesc = (TextView) view.findViewById(R.id.saTextDesc);
-                saTextNote = (TextView) view.findViewById(R.id.saTextNote);
-                saTextApproval = (TextView) view.findViewById(R.id.saTextApproval);
+                mrTextNumber = (TextView) view.findViewById(R.id.mrTextNumber);
+                mrTextJobOrder = (TextView) view.findViewById(R.id.mrTextJobOrder);
+                mrTextDate = (TextView) view.findViewById(R.id.mrTextDate);
+                mrTextDibuat = (TextView) view.findViewById(R.id.mrTextDibuat);
+                mrTextNote = (TextView) view.findViewById(R.id.mrTextNote);
+                mrTextDiakui = (TextView) view.findViewById(R.id.mrTextDiakui);
 
-                saLayoutList = (LinearLayout) view.findViewById(R.id.saLayoutList);
+                mrLayoutList = (LinearLayout) view.findViewById(R.id.mrLayoutList);
             }
         }
     }

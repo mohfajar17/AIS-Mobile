@@ -1,4 +1,4 @@
-package com.example.aismobile.Inventory.Item;
+package com.example.aismobile.Inventory.Aset;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Inventory.Item;
+import com.example.aismobile.Data.Inventory.Asset;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -48,14 +46,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemFragment extends Fragment {
+public class AsetFragment extends Fragment {
 
-    private TextView iMenuItem;
-    private TextView iMenuKelompokItem;
-    private TextView iMenuKategoriItem;
-    private TextView iMenuTipeItem;
-    private LinearLayout iShowFilter;
-    private LinearLayout ilayoutFilter;
+    private TextView aMenuAsetTf;
+    private TextView aMenuAsetAs;
+    private TextView aMenuAset;
+    private TextView aMenuModelAset;
+    private TextView aMenuKetegoriAset;
+    private TextView aMenuTipeAset;
+    private LinearLayout showFilter;
+    private LinearLayout layoutFilter;
 
     public TextView textPaging;
     public EditText editSearch;
@@ -74,25 +74,25 @@ public class ItemFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public ItemFragment.MyRecyclerViewAdapter adapter;
+    public AsetFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SpinnerSearch = {"Semua Data", "Kode Item", "Nama Item", "Spesifikasi Item", "Stok Sekarang", "Rack",
-            "Warehouse Stocks", "Item Section", "Aset", "Aktif"};
-    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Kode Item", "Berdasarkan Nama Item",
-            "Berdasarkan Spesifikasi Item", "Berdasarkan Stok Sekarang", "Berdasarkan Rack", "Berdasarkan Warehouse Stocks",
-            "Berdasarkan Item Section", "Berdasarkan Aset", "Berdasarkan Aktif"};
+    public String[] SpinnerSearch = {"Semua Data", "Kode Aset", "Nama Aset", "Model Aset", "Location", "Jumlah",
+            "Keterangan", "Status"};
+    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Kode Aset", "Berdasarkan Nama Aset",
+            "Berdasarkan Model Aset", "Berdasarkan Location", "Berdasarkan Jumlah", "Berdasarkan Keterangan",
+            "Berdasarkan Status"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<Item> items;
+    public List<Asset> assets;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public ItemFragment() {
+    public AsetFragment() {
     }
 
-    public static ItemFragment newInstance() {
-        ItemFragment fragment = new ItemFragment();
+    public static AsetFragment newInstance() {
+        AsetFragment fragment = new AsetFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -108,7 +108,7 @@ public class ItemFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        items = new ArrayList<>();
+        assets = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -118,80 +118,115 @@ public class ItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item, container, false);
+        View view = inflater.inflate(R.layout.fragment_aset, container, false);
 
         //sub menu
-        iMenuItem = (TextView) view.findViewById(R.id.iMenuItem);
-        iMenuKelompokItem = (TextView) view.findViewById(R.id.iMenuKelompokItem);
-        iMenuKategoriItem = (TextView) view.findViewById(R.id.iMenuKategoriItem);
-        iMenuTipeItem = (TextView) view.findViewById(R.id.iMenuTipeItem);
-        iShowFilter = (LinearLayout) view.findViewById(R.id.iShowFilter);
-        ilayoutFilter = (LinearLayout) view.findViewById(R.id.ilayoutFilter);
+        aMenuAsetTf = (TextView) view.findViewById(R.id.aMenuAsetTf);
+        aMenuAsetAs = (TextView) view.findViewById(R.id.aMenuAsetAs);
+        aMenuAset = (TextView) view.findViewById(R.id.aMenuAset);
+        aMenuModelAset = (TextView) view.findViewById(R.id.aMenuModelAset);
+        aMenuKetegoriAset = (TextView) view.findViewById(R.id.aMenuKetegoriAset);
+        aMenuTipeAset = (TextView) view.findViewById(R.id.aMenuTipeAset);
+        showFilter = (LinearLayout) view.findViewById(R.id.aShowFilter);
+        layoutFilter = (LinearLayout) view.findViewById(R.id.alayoutFilter);
 
-        iMenuKelompokItem.setOnClickListener(new View.OnClickListener() {
+        aMenuAsetTf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                KelompokItemFragment mainFragment = KelompokItemFragment.newInstance();
-                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-                fragmentTransaction.disallowAddToBackStack();
-                fragmentTransaction.commit();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
+//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//                fragmentTransaction.disallowAddToBackStack();
+//                fragmentTransaction.commit();
             }
         });
-        iMenuKategoriItem.setOnClickListener(new View.OnClickListener() {
+        aMenuAsetAs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                KategoriItemFragment mainFragment = KategoriItemFragment.newInstance();
-                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-                fragmentTransaction.disallowAddToBackStack();
-                fragmentTransaction.commit();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
+//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//                fragmentTransaction.disallowAddToBackStack();
+//                fragmentTransaction.commit();
             }
         });
-        iMenuTipeItem.setOnClickListener(new View.OnClickListener() {
+        aMenuAset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                TypeItemFragment mainFragment = TypeItemFragment.newInstance();
-                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-                fragmentTransaction.disallowAddToBackStack();
-                fragmentTransaction.commit();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
+//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//                fragmentTransaction.disallowAddToBackStack();
+//                fragmentTransaction.commit();
             }
         });
-        iShowFilter.setOnClickListener(new View.OnClickListener() {
+        aMenuModelAset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                params = iShowFilter.getLayoutParams();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
+//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//                fragmentTransaction.disallowAddToBackStack();
+//                fragmentTransaction.commit();
+            }
+        });
+        aMenuKetegoriAset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
+//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//                fragmentTransaction.disallowAddToBackStack();
+//                fragmentTransaction.commit();
+            }
+        });
+        aMenuTipeAset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
+//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//                fragmentTransaction.disallowAddToBackStack();
+//                fragmentTransaction.commit();
+            }
+        });
+        showFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                params = showFilter.getLayoutParams();
                 params.height = 0;
-                iShowFilter.setLayoutParams(params);
-                params = ilayoutFilter.getLayoutParams();
+                showFilter.setLayoutParams(params);
+                params = layoutFilter.getLayoutParams();
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
-                ilayoutFilter.setLayoutParams(params);
+                layoutFilter.setLayoutParams(params);
             }
         });
 
         // Set list adapter
-        recycler = (RecyclerView) view.findViewById(R.id.iRecycler);
+        recycler = (RecyclerView) view.findViewById(R.id.aRecycler);
         if (mColumnCount <= 1) {
             recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
             recycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        fabAdd = (FloatingActionButton) view.findViewById(R.id.iFabAdd);
-        editSearch = (EditText) view.findViewById(R.id.iEditSearch);
-        textPaging = (TextView) view.findViewById(R.id.iTextPaging);
-        btnSearch = (ImageView) view.findViewById(R.id.iBtnSearch);
-        spinnerSearch = (Spinner) view.findViewById(R.id.iSpinnerSearch);
-        spinnerSort = (Spinner) view.findViewById(R.id.iSpinnerSort);
-        spinnerSortAD = (Spinner) view.findViewById(R.id.iSpinnerSortAD);
-        btnShowList = (Button) view.findViewById(R.id.iBtnShowList);
-        btnBefore = (ImageButton) view.findViewById(R.id.iBtnBefore);
-        btnNext = (ImageButton) view.findViewById(R.id.iBtnNext);
-        layoutPaging = (LinearLayout) view.findViewById(R.id.iLayoutPaging);
+        fabAdd = (FloatingActionButton) view.findViewById(R.id.aFabAdd);
+        editSearch = (EditText) view.findViewById(R.id.aEditSearch);
+        textPaging = (TextView) view.findViewById(R.id.aTextPaging);
+        btnSearch = (ImageView) view.findViewById(R.id.aBtnSearch);
+        spinnerSearch = (Spinner) view.findViewById(R.id.aSpinnerSearch);
+        spinnerSort = (Spinner) view.findViewById(R.id.aSpinnerSort);
+        spinnerSortAD = (Spinner) view.findViewById(R.id.aSpinnerSortAD);
+        btnShowList = (Button) view.findViewById(R.id.aBtnShowList);
+        btnBefore = (ImageButton) view.findViewById(R.id.aBtnBefore);
+        btnNext = (ImageButton) view.findViewById(R.id.aBtnNext);
+        layoutPaging = (LinearLayout) view.findViewById(R.id.aLayoutPaging);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,7 +256,7 @@ public class ItemFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("item_id DESC");
+                    loadDataAll("asset_id DESC");
                     loadAll = true;
                     params = layoutPaging.getLayoutParams();
                     params.height = 0;
@@ -230,7 +265,7 @@ public class ItemFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("item_id DESC");
+                    loadData("asset_id DESC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -275,102 +310,86 @@ public class ItemFragment extends Fragment {
             }
         });
 
-        loadData("item_id DESC");
+//        loadData("asset_id DESC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("item_id ASC");
+            loadDataAll("asset_id ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("item_id DESC");
+            loadDataAll("asset_id DESC");
         else if (position == 2 && posAD == 0)
-            loadDataAll("item_name ASC");
+            loadDataAll("asset_name ASC");
         else if (position == 2 && posAD == 1)
-            loadDataAll("item_name DESC");
+            loadDataAll("asset_name DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("item_specification ASC");
+            loadDataAll("short_description ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("item_specification DESC");
+            loadDataAll("short_description DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("current_stock ASC");
+            loadDataAll("location ASC");
         else if (position == 4 && posAD == 1)
-            loadDataAll("current_stock DESC");
+            loadDataAll("location DESC");
         else if (position == 5 && posAD == 0)
-            loadDataAll("rack_code ASC");
+            loadDataAll("quantity ASC");
         else if (position == 5 && posAD == 1)
-            loadDataAll("rack_code DESC");
+            loadDataAll("quantity DESC");
         else if (position == 6 && posAD == 0)
-            loadDataAll("is_warehouse ASC");
+            loadDataAll("remark ASC");
         else if (position == 6 && posAD == 1)
-            loadDataAll("is_warehouse DESC");
+            loadDataAll("remark DESC");
         else if (position == 7 && posAD == 0)
-            loadDataAll("item_section ASC");
+            loadDataAll("status ASC");
         else if (position == 7 && posAD == 1)
-            loadDataAll("item_section DESC");
-        else if (position == 8 && posAD == 0)
-            loadDataAll("is_asset ASC");
-        else if (position == 8 && posAD == 1)
-            loadDataAll("is_asset DESC");
-        else if (position == 9 && posAD == 0)
-            loadDataAll("is_active ASC");
-        else if (position == 9 && posAD == 1)
-            loadDataAll("is_active DESC");
-        else loadDataAll("item_id DESC");
+            loadDataAll("status DESC");
+        else loadDataAll("asset_id DESC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("item_id ASC");
+            loadData("asset_id ASC");
         else if (position == 1 && posAD == 1)
-            loadData("item_id DESC");
+            loadData("asset_id DESC");
         else if (position == 2 && posAD == 0)
-            loadData("item_name ASC");
+            loadData("asset_name ASC");
         else if (position == 2 && posAD == 1)
-            loadData("item_name DESC");
+            loadData("asset_name DESC");
         else if (position == 3 && posAD == 0)
-            loadData("item_specification ASC");
+            loadData("short_description ASC");
         else if (position == 3 && posAD == 1)
-            loadData("item_specification DESC");
+            loadData("short_description DESC");
         else if (position == 4 && posAD == 0)
-            loadData("current_stock ASC");
+            loadData("location ASC");
         else if (position == 4 && posAD == 1)
-            loadData("current_stock DESC");
+            loadData("location DESC");
         else if (position == 5 && posAD == 0)
-            loadData("rack_code ASC");
+            loadData("quantity ASC");
         else if (position == 5 && posAD == 1)
-            loadData("rack_code DESC");
+            loadData("quantity DESC");
         else if (position == 6 && posAD == 0)
-            loadData("is_warehouse ASC");
+            loadData("remark ASC");
         else if (position == 6 && posAD == 1)
-            loadData("is_warehouse DESC");
+            loadData("remark DESC");
         else if (position == 7 && posAD == 0)
-            loadData("item_section ASC");
+            loadData("status ASC");
         else if (position == 7 && posAD == 1)
-            loadData("item_section DESC");
-        else if (position == 8 && posAD == 0)
-            loadData("is_asset ASC");
-        else if (position == 8 && posAD == 1)
-            loadData("is_asset DESC");
-        else if (position == 9 && posAD == 0)
-            loadData("is_active ASC");
-        else if (position == 9 && posAD == 1)
-            loadData("is_active DESC");
-        else loadData("item_id DESC");
+            loadData("status DESC");
+        else loadData("asset_id DESC");
     }
 
     private void setAdapterList(){
-        adapter = new ItemFragment.MyRecyclerViewAdapter(items, mListener);
+        adapter = new AsetFragment.MyRecyclerViewAdapter(assets, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        items.clear();
+        assets.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_ITEM_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_ASET_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -379,14 +398,14 @@ public class ItemFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            items.add(new Item(jsonArray.getJSONObject(i)));
+                            assets.add(new Asset(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
                         if (filter){
                             if (editSearch.getText().toString().matches("")){
                                 spinnerSearch.setSelection(0);
-                                adapter.getFilter().filter("a");
+                                adapter.getFilter().filter("-");
                             } else adapter.getFilter().filter(String.valueOf(editSearch.getText()));
                             filter = false;
                         }
@@ -422,9 +441,9 @@ public class ItemFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        items.clear();
+        assets.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_ITEM_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_ASET_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -433,13 +452,13 @@ public class ItemFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            items.add(new Item(jsonArray.getJSONObject(i)));
+                            assets.add(new Asset(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
                             if (editSearch.getText().toString().matches("")){
                                 spinnerSearch.setSelection(0);
-                                adapter.getFilter().filter("a");
+                                adapter.getFilter().filter("-");
                             } else adapter.getFilter().filter(String.valueOf(editSearch.getText()));
                             filter = false;
                         }
@@ -497,16 +516,16 @@ public class ItemFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Item item);
+        void onListFragmentInteraction(Asset item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<Item> mValues;
-        private final List<Item> values;
+        private final List<Asset> mValues;
+        private final List<Asset> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<Item> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<Asset> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -515,25 +534,23 @@ public class ItemFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_item_list, parent, false);
+                    .inflate(R.layout.fragment_aset_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.iTextCode.setText(""+mValues.get(position).getItem_code());
-            holder.iTextName.setText(""+mValues.get(position).getItem_name());
-            holder.iTextSpesifikasi.setText(""+mValues.get(position).getItem_specification());
-            holder.iTextStock.setText(""+mValues.get(position).getCurrent_stock());
-            holder.iTextRack.setText(""+mValues.get(position).getRack_code());
-            holder.iTextWarehouse.setText(""+mValues.get(position).getIs_warehouse());
-            holder.iTextSection.setText(""+mValues.get(position).getItem_section());
-            holder.iTextAsset.setText(""+mValues.get(position).getIs_asset());
-            holder.iTextActive.setText(""+mValues.get(position).getIs_active());
+            holder.aTextCode.setText(""+mValues.get(position).getAsset_code());
+            holder.aTextName.setText(""+mValues.get(position).getAsset_name());
+            holder.aTextDescription.setText(""+mValues.get(position).getShort_description());
+            holder.aTextLocation.setText(""+mValues.get(position).getLocation());
+            holder.aTextQuantity.setText(""+mValues.get(position).getQuantity());
+            holder.aTextRemark.setText(""+mValues.get(position).getRemark());
+            holder.aTextStatus.setText(""+mValues.get(position).getStatus());
 
             if (position%2==0)
-                holder.iLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.iLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.aLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.aLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -559,68 +576,56 @@ public class ItemFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<Item> filteredList = new ArrayList<>();
+                List<Asset> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((Item) values);
+                    filteredList.add((Asset) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (Item item : values){
+                    for (Asset item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getItem_code().toLowerCase().contains(filterPattern)){
+                            if (item.getAsset_code().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getItem_name().toLowerCase().contains(filterPattern)){
+                            } else if (item.getAsset_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getItem_specification().toLowerCase().contains(filterPattern)){
+                            } else if (item.getShort_description().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getCurrent_stock().toLowerCase().contains(filterPattern)){
+                            } else if (item.getLocation().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getRack_code().toLowerCase().contains(filterPattern)){
+                            } else if (item.getQuantity().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getIs_warehouse().toLowerCase().contains(filterPattern)){
+                            } else if (item.getRemark().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getItem_section().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            } else if (item.getIs_asset().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            } else if (item.getIs_active().toLowerCase().contains(filterPattern)){
+                            } else if (item.getStatus().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getItem_code().toLowerCase().contains(filterPattern)){
+                            if (item.getAsset_code().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getItem_name().toLowerCase().contains(filterPattern)){
+                            if (item.getAsset_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getItem_specification().toLowerCase().contains(filterPattern)){
+                            if (item.getShort_description().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getCurrent_stock().toLowerCase().contains(filterPattern)){
+                            if (item.getLocation().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==5){
-                            if (item.getRack_code().toLowerCase().contains(filterPattern)){
+                            if (item.getQuantity().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==6){
-                            if (item.getIs_warehouse().toLowerCase().contains(filterPattern)){
+                            if (item.getRemark().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==7){
-                            if (item.getItem_section().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            }
-                        } else if (spinnerSearch.getSelectedItemPosition()==8){
-                            if (item.getIs_asset().toLowerCase().contains(filterPattern)){
-                                filteredList.add(item);
-                            }
-                        } else if (spinnerSearch.getSelectedItemPosition()==9){
-                            if (item.getIs_active().toLowerCase().contains(filterPattern)){
+                            if (item.getStatus().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         }
@@ -644,33 +649,29 @@ public class ItemFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView iTextCode;
-            public final TextView iTextName;
-            public final TextView iTextSpesifikasi;
-            public final TextView iTextStock;
-            public final TextView iTextRack;
-            public final TextView iTextWarehouse;
-            public final TextView iTextSection;
-            public final TextView iTextAsset;
-            public final TextView iTextActive;
+            public final TextView aTextCode;
+            public final TextView aTextName;
+            public final TextView aTextDescription;
+            public final TextView aTextLocation;
+            public final TextView aTextQuantity;
+            public final TextView aTextRemark;
+            public final TextView aTextStatus;
 
-            public final LinearLayout iLayoutList;
+            public final LinearLayout aLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                iTextCode = (TextView) view.findViewById(R.id.iTextCode);
-                iTextName = (TextView) view.findViewById(R.id.iTextName);
-                iTextSpesifikasi = (TextView) view.findViewById(R.id.iTextSpesifikasi);
-                iTextStock = (TextView) view.findViewById(R.id.iTextStock);
-                iTextRack = (TextView) view.findViewById(R.id.iTextRack);
-                iTextWarehouse = (TextView) view.findViewById(R.id.iTextWarehouse);
-                iTextSection = (TextView) view.findViewById(R.id.iTextSection);
-                iTextAsset = (TextView) view.findViewById(R.id.iTextAsset);
-                iTextActive = (TextView) view.findViewById(R.id.iTextActive);
+                aTextCode = (TextView) view.findViewById(R.id.aTextCode);
+                aTextName = (TextView) view.findViewById(R.id.aTextName);
+                aTextDescription = (TextView) view.findViewById(R.id.aTextDescription);
+                aTextLocation = (TextView) view.findViewById(R.id.aTextLocation);
+                aTextQuantity = (TextView) view.findViewById(R.id.aTextQuantity);
+                aTextRemark = (TextView) view.findViewById(R.id.aTextRemark);
+                aTextStatus = (TextView) view.findViewById(R.id.aTextStatus);
 
-                iLayoutList = (LinearLayout) view.findViewById(R.id.iLayoutList);
+                aLayoutList = (LinearLayout) view.findViewById(R.id.aLayoutList);
             }
         }
     }

@@ -9,14 +9,19 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aismobile.Data.Inventory.Asset;
+import com.example.aismobile.Data.Inventory.AssetRental;
 import com.example.aismobile.Data.Inventory.Item;
 import com.example.aismobile.Data.Inventory.ItemCategory;
 import com.example.aismobile.Data.Inventory.ItemGroup;
 import com.example.aismobile.Data.Inventory.ItemType;
+import com.example.aismobile.Inventory.Aset.AsetFragment;
+import com.example.aismobile.Inventory.AsetRental.AsetRentalFragment;
 import com.example.aismobile.Inventory.Item.ItemFragment;
 import com.example.aismobile.Inventory.Item.KategoriItemFragment;
 import com.example.aismobile.Inventory.Item.KelompokItemFragment;
 import com.example.aismobile.Inventory.Item.TypeItemFragment;
+import com.example.aismobile.Inventory.Stock.StockFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -32,7 +37,9 @@ public class InventoryActivity extends AppCompatActivity implements NavigationVi
         ItemFragment.OnListFragmentInteractionListener,
         KelompokItemFragment.OnListFragmentInteractionListener,
         KategoriItemFragment.OnListFragmentInteractionListener,
-        TypeItemFragment.OnListFragmentInteractionListener {
+        TypeItemFragment.OnListFragmentInteractionListener,
+        AsetFragment.OnListFragmentInteractionListener,
+        AsetRentalFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -151,6 +158,16 @@ public class InventoryActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onListFragmentInteraction(ItemType item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Asset item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(AssetRental item) {
 
     }
 }

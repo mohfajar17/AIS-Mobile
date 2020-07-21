@@ -80,6 +80,8 @@ public class Config {
     public static final String DATA_URL_KELOMPOK_ITEM_LIST = DATA_URL+"getItemGroup";
     public static final String DATA_URL_KATEGORI_ITEM_LIST = DATA_URL+"getItemCategory";
     public static final String DATA_URL_TYPE_ITEM_LIST = DATA_URL+"getItemType";
+    public static final String DATA_URL_ASET_LIST = DATA_URL+"getAsset";
+    public static final String DATA_URL_ASET_RENTAL_LIST = DATA_URL+"getAssetRental";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

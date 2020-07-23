@@ -12,15 +12,17 @@ public class EmployeeNotice implements Parcelable {
     private String fullname;
     private String notice_date;
     private String subject;
+    private String expired_date;
     private String employee_grade_name;
     private String job_grade_name;
 
-    public EmployeeNotice (int employee_notice_id, String fullname, String notice_date, String subject,
+    public EmployeeNotice (int employee_notice_id, String fullname, String notice_date, String subject, String expired_date,
                            String employee_grade_name, String job_grade_name){
         this.employee_notice_id = employee_notice_id;
         this.fullname = fullname;
         this.notice_date = notice_date;
         this.subject = subject;
+        this.expired_date = expired_date;
         this.employee_grade_name = employee_grade_name;
         this.job_grade_name = job_grade_name;
     }
@@ -29,6 +31,7 @@ public class EmployeeNotice implements Parcelable {
         fullname = in.readString();
         notice_date = in.readString();
         subject = in.readString();
+        expired_date = in.readString();
         employee_grade_name = in.readString();
         job_grade_name = in.readString();
     }
@@ -39,6 +42,7 @@ public class EmployeeNotice implements Parcelable {
             this.fullname = jsonObject.getString("fullname");
             this.notice_date = jsonObject.getString("notice_date");
             this.subject = jsonObject.getString("subject");
+            this.expired_date = jsonObject.getString("expired_date");
             this.employee_grade_name = jsonObject.getString("employee_grade_name");
             this.job_grade_name = jsonObject.getString("job_grade_name");
         } catch (JSONException e) {
@@ -69,6 +73,7 @@ public class EmployeeNotice implements Parcelable {
         dest.writeString(fullname);
         dest.writeString(notice_date);
         dest.writeString(subject);
+        dest.writeString(expired_date);
         dest.writeString(employee_grade_name);
         dest.writeString(job_grade_name);
     }
@@ -87,6 +92,10 @@ public class EmployeeNotice implements Parcelable {
 
     public String getSubject() {
         return subject;
+    }
+
+    public String getExpired_date() {
+        return expired_date;
     }
 
     public String getEmployee_grade_name() {

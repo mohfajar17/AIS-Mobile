@@ -84,6 +84,17 @@ public class Config {
     public static final String DATA_URL_ASET_RENTAL_LIST = DATA_URL+"getAssetRental";
     public static final String DATA_URL_STOCK_ADJUSMENT_LIST = DATA_URL+"getStockAdjustment";
     public static final String DATA_URL_MATERIAL_RETURN_LIST = DATA_URL+"getMaterialReturn";
+    public static final String DATA_URL_CHECK_CLOCK_LIST = DATA_URL+"getEmployeeCheckClock";
+    public static final String DATA_URL_CUTI_LIST = DATA_URL+"getEmployeeLeave";
+    public static final String DATA_URL_PENDIDIKAN_LIST = DATA_URL+"getEmployeeEducation";
+    public static final String DATA_URL_KELUARGA_LIST = DATA_URL+"getEmployeeFamily";
+    public static final String DATA_URL_TRAINING_LIST = DATA_URL+"getTrainingList";
+    public static final String DATA_URL_WORK_EXPERIENCE_LIST = DATA_URL+"getWorkExperience";
+    public static final String DATA_URL_ACHIEVEMENT_LIST = DATA_URL+"getEmployeeAchievement";
+    public static final String DATA_URL_EMPLOYEE_HISTORY_LIST = DATA_URL+"getEmploymentHistory";
+    public static final String DATA_URL_EMPLOYEE_NOTICE_LIST = DATA_URL+"getEmployeeNotice";
+    public static final String DATA_URL_HISTORY_CONTACT_LIST = DATA_URL+"getHistoryContract";
+    public static final String DATA_URL_HARI_LIBUR_LIST = DATA_URL+"getHariLibur";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

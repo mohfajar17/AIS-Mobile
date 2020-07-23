@@ -9,6 +9,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aismobile.Data.Personalia.EmployeeAchievement;
+import com.example.aismobile.Data.Personalia.EmployeeNotice;
+import com.example.aismobile.Data.Personalia.Fullname;
+import com.example.aismobile.Data.Personalia.HariLibur;
+import com.example.aismobile.Data.Personalia.HistoryContract;
+import com.example.aismobile.Personalia.Kerja.CheckClockFragment;
+import com.example.aismobile.Personalia.Kerja.CutiFragment;
+import com.example.aismobile.Personalia.Kerja.ExperienceFragment;
+import com.example.aismobile.Personalia.Kerja.HariLiburFragment;
+import com.example.aismobile.Personalia.Kerja.HistoryContactFragment;
+import com.example.aismobile.Personalia.Kerja.KeluargaFragment;
+import com.example.aismobile.Personalia.Kerja.NoticeFragment;
+import com.example.aismobile.Personalia.Kerja.PendidikanFragment;
+import com.example.aismobile.Personalia.Kerja.PrestasiFragment;
+import com.example.aismobile.Personalia.Kerja.RiwayatFragment;
+import com.example.aismobile.Personalia.Kerja.TrainingFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -16,14 +32,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class PersonaliaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class PersonaliaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        CheckClockFragment.OnListFragmentInteractionListener,
+        CutiFragment.OnListFragmentInteractionListener,
+        PendidikanFragment.OnListFragmentInteractionListener,
+        KeluargaFragment.OnListFragmentInteractionListener,
+        TrainingFragment.OnListFragmentInteractionListener,
+        RiwayatFragment.OnListFragmentInteractionListener,
+        ExperienceFragment.OnListFragmentInteractionListener,
+        PrestasiFragment.OnListFragmentInteractionListener,
+        NoticeFragment.OnListFragmentInteractionListener,
+        HistoryContactFragment.OnListFragmentInteractionListener,
+        HariLiburFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -76,7 +100,7 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
     private void swapFragment(int id) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (id == R.id.nav_kerja && access.toLowerCase().contains("attendance".toLowerCase())) {
-            KerjaFragment mainFragment = KerjaFragment.newInstance();
+            CheckClockFragment mainFragment = CheckClockFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_penggajian && access.toLowerCase().contains("payroll".toLowerCase())) {
             PenggajianFragment mainFragment = PenggajianFragment.newInstance();
@@ -106,7 +130,7 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
             ReportFragment mainFragment = ReportFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else {
-            KerjaFragment mainFragment = KerjaFragment.newInstance();
+            KaryawanFragment mainFragment = KaryawanFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment,mainFragment);
         }
         fragmentTransaction.disallowAddToBackStack();
@@ -144,5 +168,30 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
         textViewWarning.setText("You can't access this menu");
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+    }
+
+    @Override
+    public void onListFragmentInteraction(Fullname item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(EmployeeAchievement item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(EmployeeNotice item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(HistoryContract item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(HariLibur item) {
+
     }
 }

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".Personalia.Kerja.RiwayatFragment" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAsukaBlue"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/krMenuCheckClock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Check Clock "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuPrestasi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Prestasi "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuCuti"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Cuti "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuPendidikan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Pendidikan "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuRiwayat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorBlack"
+                        android:background="@color/colorWhite"
+                        android:textStyle="bold"
+                        android:text=" Riwayat "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuKeluarga"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Keluarga "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuTraining"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaRed"
+                        android:textStyle="bold"
+                        android:text=" Training "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuNotice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaRed"
+                        android:textStyle="bold"
+                        android:text=" Notice "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuWorkExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaRed"
+                        android:textStyle="bold"
+                        android:text=" Work Experience "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuHistoryContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaRed"
+                        android:textStyle="bold"
+                        android:text=" History Contact "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/krMenuHariLibur"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaRed"
+                        android:textStyle="bold"
+                        android:text=" Hari Libur "/>
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:id="@+id/krShowFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:text="Show Filter"/>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_details" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/krLayoutFilter"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/krSpinnerSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:spinnerMode="dialog" />
+
+                <EditText
+                    android:id="@+id/krEditSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+
+                <ImageView
+                    android:id="@+id/krBtnSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_search"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorLightGray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/krSpinnerSort"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
+
+                <Spinner
+                    android:id="@+id/krSpinnerSortAD"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/krBtnShowList"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Show all"
+                android:background="@color/colorAsukaRed"
+                android:textColor="@color/colorWhite"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/krLayoutPaging"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/krBtnBefore"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_navigate_before" />
+
+            <TextView
+                android:id="@+id/krTextPaging"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="1"/>
+
+            <ImageButton
+                android:id="@+id/krBtnNext"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_navigate_next" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Nama Lengkap"
+            android:background="@color/colorAsukaBlue"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/colorWhite" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/krRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/krFabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_add"
+        android:layout_margin="17dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

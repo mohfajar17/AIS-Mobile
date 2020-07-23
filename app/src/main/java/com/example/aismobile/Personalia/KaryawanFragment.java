@@ -13,7 +13,6 @@ import com.example.aismobile.R;
 public class KaryawanFragment extends Fragment {
 
     public KaryawanFragment() {
-        // Required empty public constructor
     }
 
     public static KaryawanFragment newInstance() {

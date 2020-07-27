@@ -98,6 +98,10 @@ public class Config {
     public static final String DATA_URL_KARYAWAN_LIST = DATA_URL+"getEmployee";
     public static final String DATA_URL_DEPARTEMEN_LIST = DATA_URL+"getDepartment";
     public static final String DATA_URL_EMPLOYEE_GRADE_LIST = DATA_URL+"getEmployeeGrade";
+    public static final String DATA_URL_JOB_TITLE_LIST = DATA_URL+"getJobTitle";
+    public static final String DATA_URL_PERSONALIA_NEWS_LIST = DATA_URL+"getPersonaliaNews";
+    public static final String DATA_URL_JOB_GRADE_LIST = DATA_URL+"getJobGrade";
+    public static final String DATA_URL_EMPLOYEE_REPORT_LIST = DATA_URL+"getEmployeeReport";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

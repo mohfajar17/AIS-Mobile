@@ -77,7 +77,7 @@ public class JenjangKaryawanFragment extends Fragment {
             "Berdasarkan Aktif"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<EmployeeGrade> hariLiburs;
+    public List<EmployeeGrade> employeeGrades;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
@@ -102,7 +102,7 @@ public class JenjangKaryawanFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        hariLiburs = new ArrayList<>();
+        employeeGrades = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -138,7 +138,7 @@ public class JenjangKaryawanFragment extends Fragment {
             recycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        fabAdd = (FloatingActionButton) view.findViewById(R.id.empFabAdd);
+        fabAdd = (FloatingActionButton) view.findViewById(R.id.jkFabAdd);
         editSearch = (EditText) view.findViewById(R.id.jkEditSearch);
         textPaging = (TextView) view.findViewById(R.id.jkTextPaging);
         btnSearch = (ImageView) view.findViewById(R.id.jkBtnSearch);
@@ -301,14 +301,14 @@ public class JenjangKaryawanFragment extends Fragment {
     }
 
     private void setAdapterList(){
-        adapter = new JenjangKaryawanFragment.MyRecyclerViewAdapter(hariLiburs, mListener);
+        adapter = new JenjangKaryawanFragment.MyRecyclerViewAdapter(employeeGrades, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        hariLiburs.clear();
+        employeeGrades.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_EMPLOYEE_GRADE_LIST, new Response.Listener<String>() {
             @Override
@@ -319,7 +319,7 @@ public class JenjangKaryawanFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            hariLiburs.add(new EmployeeGrade(jsonArray.getJSONObject(i)));
+                            employeeGrades.add(new EmployeeGrade(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -360,7 +360,7 @@ public class JenjangKaryawanFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        hariLiburs.clear();
+        employeeGrades.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_EMPLOYEE_GRADE_LIST, new Response.Listener<String>() {
             @Override
@@ -371,7 +371,7 @@ public class JenjangKaryawanFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            hariLiburs.add(new EmployeeGrade(jsonArray.getJSONObject(i)));
+                            employeeGrades.add(new EmployeeGrade(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){

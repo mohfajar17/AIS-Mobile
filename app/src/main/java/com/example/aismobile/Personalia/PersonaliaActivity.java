@@ -14,9 +14,12 @@ import com.example.aismobile.Data.Personalia.Employee;
 import com.example.aismobile.Data.Personalia.EmployeeAchievement;
 import com.example.aismobile.Data.Personalia.EmployeeGrade;
 import com.example.aismobile.Data.Personalia.EmployeeNotice;
+import com.example.aismobile.Data.Personalia.EmployeeReport;
 import com.example.aismobile.Data.Personalia.Fullname;
 import com.example.aismobile.Data.Personalia.HariLibur;
 import com.example.aismobile.Data.Personalia.HistoryContract;
+import com.example.aismobile.Data.Personalia.JobTitle;
+import com.example.aismobile.Data.Personalia.PersonNews;
 import com.example.aismobile.Personalia.Kerja.CheckClockFragment;
 import com.example.aismobile.Personalia.Kerja.CutiFragment;
 import com.example.aismobile.Personalia.Kerja.ExperienceFragment;
@@ -49,7 +52,9 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
         ExperienceFragment.OnListFragmentInteractionListener, PrestasiFragment.OnListFragmentInteractionListener,
         NoticeFragment.OnListFragmentInteractionListener, HistoryContactFragment.OnListFragmentInteractionListener,
         HariLiburFragment.OnListFragmentInteractionListener, KaryawanFragment.OnListFragmentInteractionListener,
-        DepartemenFragment.OnListFragmentInteractionListener, JenjangKaryawanFragment.OnListFragmentInteractionListener {
+        DepartemenFragment.OnListFragmentInteractionListener, JenjangKaryawanFragment.OnListFragmentInteractionListener,
+        PangkatFragment.OnListFragmentInteractionListener, JabatanFragment.OnListFragmentInteractionListener,
+        NewsFragment.OnListFragmentInteractionListener, ReportFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -209,6 +214,21 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onListFragmentInteraction(EmployeeGrade item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(JobTitle item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(PersonNews item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(EmployeeReport item) {
 
     }
 }

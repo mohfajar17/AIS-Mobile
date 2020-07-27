@@ -1,14 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Personalia.JabatanFragment">
+    android:background="@color/colorWhite"
+    tools:context=".Personalia.JabatanFragment" >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="fragment jabatan" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorAsukaBlue"
+            android:textStyle="bold"
+            android:text="Jabatan"/>
+
+        <LinearLayout
+            android:id="@+id/jShowFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:text="Show All Filter"/>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_details" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/jLayoutFilter"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/jSpinnerSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:spinnerMode="dialog" />
+
+                <EditText
+                    android:id="@+id/jEditSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+
+                <ImageView
+                    android:id="@+id/jBtnSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_search"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorLightGray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/jSpinnerSort"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
+
+                <Spinner
+                    android:id="@+id/jSpinnerSortAD"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/jBtnShowList"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Show all"
+                android:background="@color/colorAsukaRed"
+                android:textColor="@color/colorWhite"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/jLayoutPaging"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/jBtnBefore"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_navigate_before" />
+
+            <TextView
+                android:id="@+id/jTextPaging"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="1"/>
+
+            <ImageButton
+                android:id="@+id/jBtnNext"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_navigate_next" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Nama Jabatan"
+            android:background="@color/colorAsukaBlue"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/colorWhite" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/jRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/jFabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_add"
+        android:layout_margin="17dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

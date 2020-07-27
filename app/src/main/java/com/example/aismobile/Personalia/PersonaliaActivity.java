@@ -9,7 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aismobile.Data.Personalia.Department;
+import com.example.aismobile.Data.Personalia.Employee;
 import com.example.aismobile.Data.Personalia.EmployeeAchievement;
+import com.example.aismobile.Data.Personalia.EmployeeGrade;
 import com.example.aismobile.Data.Personalia.EmployeeNotice;
 import com.example.aismobile.Data.Personalia.Fullname;
 import com.example.aismobile.Data.Personalia.HariLibur;
@@ -20,11 +23,14 @@ import com.example.aismobile.Personalia.Kerja.ExperienceFragment;
 import com.example.aismobile.Personalia.Kerja.HariLiburFragment;
 import com.example.aismobile.Personalia.Kerja.HistoryContactFragment;
 import com.example.aismobile.Personalia.Kerja.KeluargaFragment;
+import com.example.aismobile.Personalia.Kerja.KerjaFragment;
 import com.example.aismobile.Personalia.Kerja.NoticeFragment;
 import com.example.aismobile.Personalia.Kerja.PendidikanFragment;
 import com.example.aismobile.Personalia.Kerja.PrestasiFragment;
 import com.example.aismobile.Personalia.Kerja.RiwayatFragment;
 import com.example.aismobile.Personalia.Kerja.TrainingFragment;
+import com.example.aismobile.Personalia.Penggajian.PenggajianFragment;
+import com.example.aismobile.Personalia.Penggajian.PotonganKaryawanFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,17 +43,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class PersonaliaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        CheckClockFragment.OnListFragmentInteractionListener,
-        CutiFragment.OnListFragmentInteractionListener,
-        PendidikanFragment.OnListFragmentInteractionListener,
-        KeluargaFragment.OnListFragmentInteractionListener,
-        TrainingFragment.OnListFragmentInteractionListener,
-        RiwayatFragment.OnListFragmentInteractionListener,
-        ExperienceFragment.OnListFragmentInteractionListener,
-        PrestasiFragment.OnListFragmentInteractionListener,
-        NoticeFragment.OnListFragmentInteractionListener,
-        HistoryContactFragment.OnListFragmentInteractionListener,
-        HariLiburFragment.OnListFragmentInteractionListener {
+        CheckClockFragment.OnListFragmentInteractionListener, CutiFragment.OnListFragmentInteractionListener,
+        PendidikanFragment.OnListFragmentInteractionListener, KeluargaFragment.OnListFragmentInteractionListener,
+        TrainingFragment.OnListFragmentInteractionListener, RiwayatFragment.OnListFragmentInteractionListener,
+        ExperienceFragment.OnListFragmentInteractionListener, PrestasiFragment.OnListFragmentInteractionListener,
+        NoticeFragment.OnListFragmentInteractionListener, HistoryContactFragment.OnListFragmentInteractionListener,
+        HariLiburFragment.OnListFragmentInteractionListener, KaryawanFragment.OnListFragmentInteractionListener,
+        DepartemenFragment.OnListFragmentInteractionListener, JenjangKaryawanFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -100,7 +102,7 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
     private void swapFragment(int id) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (id == R.id.nav_kerja && access.toLowerCase().contains("attendance".toLowerCase())) {
-            CheckClockFragment mainFragment = CheckClockFragment.newInstance();
+            KerjaFragment mainFragment = KerjaFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_penggajian && access.toLowerCase().contains("payroll".toLowerCase())) {
             PenggajianFragment mainFragment = PenggajianFragment.newInstance();
@@ -192,6 +194,21 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onListFragmentInteraction(HariLibur item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Employee item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Department item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(EmployeeGrade item) {
 
     }
 }

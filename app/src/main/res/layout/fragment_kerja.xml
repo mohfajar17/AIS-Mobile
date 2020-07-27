@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".Personalia.Penggajian.PenggajianFragment" >
+    tools:context=".Personalia.Kerja.KerjaFragment" >
 
     <TextView
         android:layout_width="match_parent"
@@ -17,10 +17,19 @@
         android:textColor="@color/colorWhite"
         android:background="@color/colorAsukaBlue"
         android:textStyle="bold"
-        android:text=" Menu Penggajian "/>
+        android:text=" Menu Kerja "/>
 
     <TextView
-        android:id="@+id/pMenuPotonganKaryawan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorAsukaRed"
+        android:textStyle="bold"
+        android:text=" ATTENDANCE "/>
+
+    <TextView
+        android:id="@+id/kMenuCheckClock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -29,7 +38,7 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Potongan Karyawan "/>
+        android:text=" Check Clock "/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -37,7 +46,7 @@
         android:src="@color/colorAsukaBlue" />
 
     <TextView
-        android:id="@+id/pMenuTunjanganKaryawan"
+        android:id="@+id/kMenuPrestasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -46,7 +55,7 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Tunjangan Karyawan "/>
+        android:text=" Prestasi "/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -54,7 +63,7 @@
         android:src="@color/colorAsukaBlue" />
 
     <TextView
-        android:id="@+id/pMenuTunjanganTemporary"
+        android:id="@+id/kMenuCuti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -63,7 +72,7 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Tunjangan Temporary "/>
+        android:text=" Cuti "/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -71,7 +80,7 @@
         android:src="@color/colorAsukaBlue" />
 
     <TextView
-        android:id="@+id/pMenuTunjanganJenjang"
+        android:id="@+id/kMenuPendidikan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -80,7 +89,7 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Tunjangan Jenjang "/>
+        android:text=" Pendidikan "/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -88,7 +97,7 @@
         android:src="@color/colorAsukaBlue" />
 
     <TextView
-        android:id="@+id/pMenuPotongan"
+        android:id="@+id/kMenuRiwayat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -97,7 +106,7 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Potongan "/>
+        android:text=" Riwayat "/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -105,7 +114,7 @@
         android:src="@color/colorAsukaBlue" />
 
     <TextView
-        android:id="@+id/pMenuTunjangan"
+        android:id="@+id/kMenuKeluarga"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -114,7 +123,28 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Tunjangan "/>
+        android:text=" Keluarga "/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorAsukaRed"
+        android:textStyle="bold"
+        android:text=" KERJA "/>
+
+    <TextView
+        android:id="@+id/kMenuTraining"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:padding="10dp"
+        android:gravity="left"
+        android:textColor="@color/colorBlack"
+        android:background="@color/colorWhite"
+        android:textStyle="bold"
+        android:text=" Training "/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -122,7 +152,7 @@
         android:src="@color/colorAsukaBlue" />
 
     <TextView
-        android:id="@+id/pMenuGolGaji"
+        android:id="@+id/kMenuNotice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -131,7 +161,7 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Golongan Gaji "/>
+        android:text=" Notice "/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -139,7 +169,7 @@
         android:src="@color/colorAsukaBlue" />
 
     <TextView
-        android:id="@+id/pMenuStatusKawin"
+        android:id="@+id/kMenuWorkExperience"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -148,7 +178,7 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Status Kawin "/>
+        android:text=" Work Experience "/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -156,7 +186,7 @@
         android:src="@color/colorAsukaBlue" />
 
     <TextView
-        android:id="@+id/pMenuSalaryCorrect"
+        android:id="@+id/kMenuHistoryContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -165,7 +195,7 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Salary Correction "/>
+        android:text=" History Contact "/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -173,7 +203,7 @@
         android:src="@color/colorAsukaBlue" />
 
     <TextView
-        android:id="@+id/pMenuLateDeduc"
+        android:id="@+id/kMenuHariLibur"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
@@ -182,58 +212,7 @@
         android:textColor="@color/colorBlack"
         android:background="@color/colorWhite"
         android:textStyle="bold"
-        android:text=" Late Deducation "/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaBlue" />
-
-    <TextView
-        android:id="@+id/pMenuSisaCuti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16dp"
-        android:padding="10dp"
-        android:gravity="left"
-        android:textColor="@color/colorBlack"
-        android:background="@color/colorWhite"
-        android:textStyle="bold"
-        android:text=" Sisa Cuti "/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaBlue" />
-
-    <TextView
-        android:id="@+id/pMenuKabupaten"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16dp"
-        android:padding="10dp"
-        android:gravity="left"
-        android:textColor="@color/colorBlack"
-        android:background="@color/colorWhite"
-        android:textStyle="bold"
-        android:text=" Kabupaten "/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaBlue" />
-
-    <TextView
-        android:id="@+id/pMenuProvinsi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16dp"
-        android:padding="10dp"
-        android:gravity="left"
-        android:textColor="@color/colorBlack"
-        android:background="@color/colorWhite"
-        android:textStyle="bold"
-        android:text=" Provinsi "/>
+        android:text=" Hari Libur "/>
 
     <ImageView
         android:layout_width="match_parent"

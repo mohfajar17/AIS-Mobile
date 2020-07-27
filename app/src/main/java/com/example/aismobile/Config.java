@@ -95,6 +95,9 @@ public class Config {
     public static final String DATA_URL_EMPLOYEE_NOTICE_LIST = DATA_URL+"getEmployeeNotice";
     public static final String DATA_URL_HISTORY_CONTACT_LIST = DATA_URL+"getHistoryContract";
     public static final String DATA_URL_HARI_LIBUR_LIST = DATA_URL+"getHariLibur";
+    public static final String DATA_URL_KARYAWAN_LIST = DATA_URL+"getEmployee";
+    public static final String DATA_URL_DEPARTEMEN_LIST = DATA_URL+"getDepartment";
+    public static final String DATA_URL_EMPLOYEE_GRADE_LIST = DATA_URL+"getEmployeeGrade";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

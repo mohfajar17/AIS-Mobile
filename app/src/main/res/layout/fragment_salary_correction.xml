@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".Personalia.Penggajian.SalaryCorrectionFragment" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAsukaBlue"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/pscMenuPotonganKaryawan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Potongan Karyawan "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuTunjanganKaryawan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Tunjangan Karyawan "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuTunjanganTemporary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Tunjangan Temporary "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuTunjanganJenjang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Tunjangan Jenjang "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuPotongan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Potongan "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuTunjangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Tunjangan "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuGolGaji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Golongan Gaji "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuStatusKawin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Status Kawin "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuSalaryCorrect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorBlack"
+                        android:background="@color/colorWhite"
+                        android:textStyle="bold"
+                        android:text=" Salary Correction "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuLateDeduc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Late Deducation "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuSisaCuti"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Sisa Cuti "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuKabupaten"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Kabupaten "/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/pscMenuProvinsi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorAsukaBlue"
+                        android:textStyle="bold"
+                        android:text=" Provinsi "/>
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:id="@+id/pscShowFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:text="Show Filter"/>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_details" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pscLayoutFilter"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/pscSpinnerSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:spinnerMode="dialog" />
+
+                <EditText
+                    android:id="@+id/pscEditSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+
+                <ImageView
+                    android:id="@+id/pscBtnSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_search"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorLightGray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/pscSpinnerSort"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
+
+                <Spinner
+                    android:id="@+id/pscSpinnerSortAD"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/pscBtnShowList"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Show all"
+                android:background="@color/colorAsukaRed"
+                android:textColor="@color/colorWhite"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pscLayoutPaging"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/pscBtnBefore"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_navigate_before" />
+
+            <TextView
+                android:id="@+id/pscTextPaging"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="1"/>
+
+            <ImageButton
+                android:id="@+id/pscBtnNext"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_navigate_next" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Nama Lengkap"
+            android:background="@color/colorAsukaBlue"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/colorWhite" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pscRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/pscFabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_add"
+        android:layout_margin="17dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

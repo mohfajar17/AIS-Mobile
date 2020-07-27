@@ -95,6 +95,10 @@ public class Config {
     public static final String DATA_URL_EMPLOYEE_NOTICE_LIST = DATA_URL+"getEmployeeNotice";
     public static final String DATA_URL_HISTORY_CONTACT_LIST = DATA_URL+"getHistoryContract";
     public static final String DATA_URL_HARI_LIBUR_LIST = DATA_URL+"getHariLibur";
+    public static final String DATA_URL_EMPLOYEE_DEDUCTION_LIST = DATA_URL+"getEmployeeDeduction";
+    public static final String DATA_URL_EMPLOYEE_GRADE_ALLOWANCE_LIST = DATA_URL+"getEmployeeGradeAllowance";
+    public static final String DATA_URL_DEDUCTION_LIST = DATA_URL+"getDeduction";
+    public static final String DATA_URL_ALLOWANCE_LIST = DATA_URL+"getAllowance";
     public static final String DATA_URL_KARYAWAN_LIST = DATA_URL+"getEmployee";
     public static final String DATA_URL_DEPARTEMEN_LIST = DATA_URL+"getDepartment";
     public static final String DATA_URL_EMPLOYEE_GRADE_LIST = DATA_URL+"getEmployeeGrade";

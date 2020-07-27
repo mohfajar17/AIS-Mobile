@@ -9,10 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aismobile.Data.Personalia.Allowance;
+import com.example.aismobile.Data.Personalia.Deduction;
 import com.example.aismobile.Data.Personalia.Department;
 import com.example.aismobile.Data.Personalia.Employee;
 import com.example.aismobile.Data.Personalia.EmployeeAchievement;
+import com.example.aismobile.Data.Personalia.EmployeeDeduction;
 import com.example.aismobile.Data.Personalia.EmployeeGrade;
+import com.example.aismobile.Data.Personalia.EmployeeGradeAllowance;
 import com.example.aismobile.Data.Personalia.EmployeeNotice;
 import com.example.aismobile.Data.Personalia.EmployeeReport;
 import com.example.aismobile.Data.Personalia.Fullname;
@@ -20,6 +24,8 @@ import com.example.aismobile.Data.Personalia.HariLibur;
 import com.example.aismobile.Data.Personalia.HistoryContract;
 import com.example.aismobile.Data.Personalia.JobTitle;
 import com.example.aismobile.Data.Personalia.PersonNews;
+import com.example.aismobile.Data.Project.TunjanganKaryawan;
+import com.example.aismobile.Data.Project.TunjanganTemporary;
 import com.example.aismobile.Personalia.Kerja.CheckClockFragment;
 import com.example.aismobile.Personalia.Kerja.CutiFragment;
 import com.example.aismobile.Personalia.Kerja.ExperienceFragment;
@@ -33,7 +39,12 @@ import com.example.aismobile.Personalia.Kerja.PrestasiFragment;
 import com.example.aismobile.Personalia.Kerja.RiwayatFragment;
 import com.example.aismobile.Personalia.Kerja.TrainingFragment;
 import com.example.aismobile.Personalia.Penggajian.PenggajianFragment;
+import com.example.aismobile.Personalia.Penggajian.PotonganFragment;
 import com.example.aismobile.Personalia.Penggajian.PotonganKaryawanFragment;
+import com.example.aismobile.Personalia.Penggajian.TunjanganFragment;
+import com.example.aismobile.Personalia.Penggajian.TunjanganJenjangFragment;
+import com.example.aismobile.Personalia.Penggajian.TunjanganKaryawanFragment;
+import com.example.aismobile.Personalia.Penggajian.TunjanganTemporaryFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -54,7 +65,10 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
         HariLiburFragment.OnListFragmentInteractionListener, KaryawanFragment.OnListFragmentInteractionListener,
         DepartemenFragment.OnListFragmentInteractionListener, JenjangKaryawanFragment.OnListFragmentInteractionListener,
         PangkatFragment.OnListFragmentInteractionListener, JabatanFragment.OnListFragmentInteractionListener,
-        NewsFragment.OnListFragmentInteractionListener, ReportFragment.OnListFragmentInteractionListener {
+        NewsFragment.OnListFragmentInteractionListener, ReportFragment.OnListFragmentInteractionListener,
+        PotonganKaryawanFragment.OnListFragmentInteractionListener, TunjanganKaryawanFragment.OnListFragmentInteractionListener,
+        TunjanganTemporaryFragment.OnListFragmentInteractionListener, TunjanganJenjangFragment.OnListFragmentInteractionListener,
+        PotonganFragment.OnListFragmentInteractionListener, TunjanganFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -229,6 +243,36 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onListFragmentInteraction(EmployeeReport item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(EmployeeDeduction item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(TunjanganKaryawan item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(TunjanganTemporary item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(EmployeeGradeAllowance item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Deduction item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Allowance item) {
 
     }
 }

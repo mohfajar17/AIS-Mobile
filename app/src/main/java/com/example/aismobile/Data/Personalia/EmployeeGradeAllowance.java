@@ -67,4 +67,24 @@ public class EmployeeGradeAllowance implements Parcelable {
         dest.writeString(allowance_id);
         dest.writeString(is_active);
     }
+
+    public int getEmployee_grade_allowance_id() {
+        return employee_grade_allowance_id;
+    }
+
+    public String getEmployee_grade_allowance_name() {
+        return employee_grade_allowance_name;
+    }
+
+    public String getEmployee_grade_name() {
+        return employee_grade_name;
+    }
+
+    public String getAllowance_id() {
+        return allowance_id;
+    }
+
+    public String getIs_active() {
+        return is_active;
+    }
 }

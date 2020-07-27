@@ -25,7 +25,7 @@
         android:id="@+id/pttTextKaryawan"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
+        android:gravity="top|left"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -39,7 +39,7 @@
         android:id="@+id/pttTextType"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
+        android:gravity="top|left"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -109,7 +109,7 @@
         android:id="@+id/pttTextVerifiedBy"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
+        android:gravity="top|left"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -123,7 +123,7 @@
         android:id="@+id/pttTextApproval1"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
+        android:gravity="top|left"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -137,7 +137,7 @@
         android:id="@+id/pttTextApproval2"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
+        android:gravity="top|left"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />

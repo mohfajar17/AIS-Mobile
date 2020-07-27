@@ -67,4 +67,24 @@ public class SalaryCorrection implements Parcelable {
         dest.writeString(report_name);
         dest.writeString(is_deduction);
     }
+
+    public int getSalary_correction_id() {
+        return salary_correction_id;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getReport_name() {
+        return report_name;
+    }
+
+    public String getIs_deduction() {
+        return is_deduction;
+    }
 }

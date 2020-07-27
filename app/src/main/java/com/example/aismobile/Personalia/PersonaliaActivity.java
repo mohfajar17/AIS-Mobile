@@ -23,7 +23,10 @@ import com.example.aismobile.Data.Personalia.Fullname;
 import com.example.aismobile.Data.Personalia.HariLibur;
 import com.example.aismobile.Data.Personalia.HistoryContract;
 import com.example.aismobile.Data.Personalia.JobTitle;
+import com.example.aismobile.Data.Personalia.MaritalStatus;
 import com.example.aismobile.Data.Personalia.PersonNews;
+import com.example.aismobile.Data.Personalia.SalaryCorrection;
+import com.example.aismobile.Data.Personalia.SalaryGrade;
 import com.example.aismobile.Data.Project.TunjanganKaryawan;
 import com.example.aismobile.Data.Project.TunjanganTemporary;
 import com.example.aismobile.Personalia.Kerja.CheckClockFragment;
@@ -38,9 +41,12 @@ import com.example.aismobile.Personalia.Kerja.PendidikanFragment;
 import com.example.aismobile.Personalia.Kerja.PrestasiFragment;
 import com.example.aismobile.Personalia.Kerja.RiwayatFragment;
 import com.example.aismobile.Personalia.Kerja.TrainingFragment;
+import com.example.aismobile.Personalia.Penggajian.GolonganGajiFragment;
 import com.example.aismobile.Personalia.Penggajian.PenggajianFragment;
 import com.example.aismobile.Personalia.Penggajian.PotonganFragment;
 import com.example.aismobile.Personalia.Penggajian.PotonganKaryawanFragment;
+import com.example.aismobile.Personalia.Penggajian.SalaryCorrectionFragment;
+import com.example.aismobile.Personalia.Penggajian.StatusKawinFragment;
 import com.example.aismobile.Personalia.Penggajian.TunjanganFragment;
 import com.example.aismobile.Personalia.Penggajian.TunjanganJenjangFragment;
 import com.example.aismobile.Personalia.Penggajian.TunjanganKaryawanFragment;
@@ -68,7 +74,9 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
         NewsFragment.OnListFragmentInteractionListener, ReportFragment.OnListFragmentInteractionListener,
         PotonganKaryawanFragment.OnListFragmentInteractionListener, TunjanganKaryawanFragment.OnListFragmentInteractionListener,
         TunjanganTemporaryFragment.OnListFragmentInteractionListener, TunjanganJenjangFragment.OnListFragmentInteractionListener,
-        PotonganFragment.OnListFragmentInteractionListener, TunjanganFragment.OnListFragmentInteractionListener {
+        PotonganFragment.OnListFragmentInteractionListener, TunjanganFragment.OnListFragmentInteractionListener,
+        GolonganGajiFragment.OnListFragmentInteractionListener, StatusKawinFragment.OnListFragmentInteractionListener,
+        SalaryCorrectionFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -273,6 +281,21 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onListFragmentInteraction(Allowance item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(SalaryGrade item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(MaritalStatus item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(SalaryCorrection item) {
 
     }
 }

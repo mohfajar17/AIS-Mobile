@@ -99,6 +99,9 @@ public class Config {
     public static final String DATA_URL_EMPLOYEE_GRADE_ALLOWANCE_LIST = DATA_URL+"getEmployeeGradeAllowance";
     public static final String DATA_URL_DEDUCTION_LIST = DATA_URL+"getDeduction";
     public static final String DATA_URL_ALLOWANCE_LIST = DATA_URL+"getAllowance";
+    public static final String DATA_URL_SALARY_GRADE_LIST = DATA_URL+"getSalaryGrade";
+    public static final String DATA_URL_MARITAL_STATUS_LIST = DATA_URL+"getMaritalStatus";
+    public static final String DATA_URL_SALARY_CORRECTION_LIST = DATA_URL+"getSalaryCorrection";
     public static final String DATA_URL_KARYAWAN_LIST = DATA_URL+"getEmployee";
     public static final String DATA_URL_DEPARTEMEN_LIST = DATA_URL+"getDepartment";
     public static final String DATA_URL_EMPLOYEE_GRADE_LIST = DATA_URL+"getEmployeeGrade";

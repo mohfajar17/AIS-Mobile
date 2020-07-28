@@ -102,6 +102,10 @@ public class Config {
     public static final String DATA_URL_SALARY_GRADE_LIST = DATA_URL+"getSalaryGrade";
     public static final String DATA_URL_MARITAL_STATUS_LIST = DATA_URL+"getMaritalStatus";
     public static final String DATA_URL_SALARY_CORRECTION_LIST = DATA_URL+"getSalaryCorrection";
+    public static final String DATA_URL_LATE_DEDUCTION_LIST = DATA_URL+"getLateDeduction";
+    public static final String DATA_URL_REMAIN_LEAVE_LIST = DATA_URL+"getRemainLeave";
+    public static final String DATA_URL_KABUPATEN_LIST = DATA_URL+"getKabupaten";
+    public static final String DATA_URL_PROVINSI_LIST = DATA_URL+"getProvinsi";
     public static final String DATA_URL_KARYAWAN_LIST = DATA_URL+"getEmployee";
     public static final String DATA_URL_DEPARTEMEN_LIST = DATA_URL+"getDepartment";
     public static final String DATA_URL_EMPLOYEE_GRADE_LIST = DATA_URL+"getEmployeeGrade";

@@ -374,7 +374,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Nama Lengkap"
+            android:text="Provinsi"
             android:background="@color/colorAsukaBlue"
             android:textColor="@android:color/white"
             android:textStyle="bold" />

@@ -284,7 +284,7 @@
                     android:id="@+id/pkSpinnerSearch"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0"
+                    android:layout_weight="4"
                     android:spinnerMode="dialog" />
 
                 <EditText
@@ -369,15 +369,37 @@
                 android:src="@drawable/ic_navigate_next" />
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="Nama Lengkap"
             android:background="@color/colorAsukaBlue"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Provinsi"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:src="@color/colorWhite" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Kabupaten"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"

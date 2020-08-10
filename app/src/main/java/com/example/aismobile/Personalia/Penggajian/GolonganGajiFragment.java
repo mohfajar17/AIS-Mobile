@@ -43,6 +43,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -637,6 +639,15 @@ public class GolonganGajiFragment extends Fragment {
             holder.pggTextGajiHarian.setText(""+mValues.get(position).getBasic_salary_per_day());
             holder.pggTextAturanLembur.setText(""+mValues.get(position).getOvertime_rule());
             holder.pggTextPembayaran.setText(""+mValues.get(position).getPayment_cycle());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.pggTextGajiPokok.setText(formatter.format(Long.valueOf(mValues.get(position).getBasic_salary())));
+                holder.pggTextGajiHarian.setText(formatter.format(Long.valueOf(mValues.get(position).getBasic_salary_per_day())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.pggTextGajiPokok.setText(mValues.get(position).getBasic_salary());
+                holder.pggTextGajiHarian.setText(mValues.get(position).getBasic_salary_per_day());
+            }
 
             if (position%2==0)
                 holder.pggLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

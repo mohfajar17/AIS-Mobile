@@ -6,57 +6,47 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_job_order"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/sub_menu_1"
             android:title="Job Order" />
         <item
             android:id="@+id/nav_work_completion"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/sub_menu_1"
             android:title="Work Completion" />
         <item
             android:id="@+id/nav_material_req"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/sub_menu_1"
             android:title="Material Requests / SRR" />
         <item
             android:id="@+id/nav_tools_request"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/sub_menu_1"
             android:title="Tools Request" />
         <item
             android:id="@+id/nav_work_request"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/sub_menu_1"
             android:title="Work Request" />
         <item
             android:id="@+id/nav_pengambilan"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/sub_menu_1"
             android:title="Pengambilan" />
         <item
             android:id="@+id/nav_spkl"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/sub_menu_1"
             android:title="Surat Perintah Kerja Lembur" />
+        <item
+            android:id="@+id/nav_proposed_budget"
+            android:icon="@drawable/sub_menu_2"
+            android:title="Proposed Budget" />
+        <item
+            android:id="@+id/nav_cash_project_report"
+            android:icon="@drawable/sub_menu_2"
+            android:title="Cash Project Report" />
+        <item
+            android:id="@+id/nav_tunjangan_karyawan"
+            android:icon="@drawable/sub_menu_3"
+            android:title="Tunjangan Karyawan" />
+        <item
+            android:id="@+id/nav_tunjangan_temporary"
+            android:icon="@drawable/sub_menu_3"
+            android:title="Tunjangan Temporary" />
     </group>
-
-    <item android:title="-------------------------">
-        <menu>
-            <item
-                android:id="@+id/nav_proposed_budget"
-                android:icon="@drawable/ic_person"
-                android:title="Proposed Budget" />
-            <item
-                android:id="@+id/nav_cash_project_report"
-                android:icon="@drawable/ic_person"
-                android:title="Cash Project Report" />
-        </menu>
-    </item>
-
-    <item android:title="-------------------------">
-        <menu>
-            <item
-                android:id="@+id/nav_tunjangan_karyawan"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Tunjangan Karyawan" />
-            <item
-                android:id="@+id/nav_tunjangan_temporary"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Tunjangan Temporary" />
-        </menu>
-    </item>
 </menu>

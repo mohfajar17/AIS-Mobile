@@ -41,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -467,9 +469,16 @@ public class SalesQuotationsFragment extends Fragment {
             holder.sqTextDate.setText(""+mValues.get(position).getSq_date());
             holder.sqTextDepartemen.setText(""+mValues.get(position).getDepartment_name());
             holder.sqTextKeterangan.setText(""+mValues.get(position).getDescription());
-            holder.sqTextNilai.setText(""+mValues.get(position).getAmount());
-            holder.sqTextWoAmount.setText(""+mValues.get(position).getWo_amount());
             holder.sqTextStatus.setText(""+mValues.get(position).getStatus());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.sqTextNilai.setText(formatter.format(Long.valueOf(mValues.get(position).getAmount())));
+                holder.sqTextWoAmount.setText(formatter.format(Long.valueOf(mValues.get(position).getWo_amount())));
+            } catch (NumberFormatException ex){
+                holder.sqTextNilai.setText(mValues.get(position).getAmount());
+                holder.sqTextWoAmount.setText(mValues.get(position).getWo_amount());
+            }
 
             if (position%2==0)
                 holder.sqLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

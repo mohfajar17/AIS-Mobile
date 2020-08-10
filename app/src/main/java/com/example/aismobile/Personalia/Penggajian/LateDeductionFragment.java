@@ -43,6 +43,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -598,8 +600,14 @@ public class LateDeductionFragment extends Fragment {
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
             holder.pldTextEmpReport.setText(""+mValues.get(position).getReport_name());
-            holder.pldTextAmount.setText(""+mValues.get(position).getAmount());
             holder.pldTextNotes.setText(""+mValues.get(position).getNotes());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.pldTextAmount.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getAmount())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.pldTextAmount.setText("Rp. "+ mValues.get(position).getAmount());
+            }
 
             if (position%2==0)
                 holder.pldLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

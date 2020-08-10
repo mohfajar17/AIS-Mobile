@@ -94,7 +94,7 @@ public class SafetyActivity extends AppCompatActivity implements NavigationView.
 
         swapFragment(item.getItemId());
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_marketing);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_safety);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -43,6 +43,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -639,15 +641,26 @@ public class StatusKawinFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.pskTextKode.setText("");
+            holder.pskTextKode.setText(""+mValues.get(position).getMarital_status_code());
             holder.pskTextNama.setText(""+mValues.get(position).getMarital_status_name());
-            holder.pskTextWajibPajak.setText(""+mValues.get(position).getMinimum_amount());
-            holder.pskTextStatus.setText(""+mValues.get(position).getMinimum_amount_maried());
             holder.pskTextTanggungan.setText(""+mValues.get(position).getPerson_to_care());
-            holder.pskTextPajak.setText(""+mValues.get(position).getTax_amount());
-            holder.pskTextPtkp.setText(""+mValues.get(position).getPtkp_tahunan());
-            holder.pskTextJpk.setText(""+mValues.get(position).getJpk_bulanan());
-            holder.pskTextUmk.setText(""+mValues.get(position).getUmk_amount());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.pskTextWajibPajak.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getMinimum_amount())));
+                holder.pskTextStatus.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getMinimum_amount_maried())));
+                holder.pskTextPajak.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTax_amount())));
+                holder.pskTextPtkp.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getPtkp_tahunan())));
+                holder.pskTextJpk.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getJpk_bulanan())));
+                holder.pskTextUmk.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getUmk_amount())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.pskTextWajibPajak.setText("Rp. "+ mValues.get(position).getMinimum_amount());
+                holder.pskTextStatus.setText("Rp. "+ mValues.get(position).getMinimum_amount_maried());
+                holder.pskTextPajak.setText("Rp. "+ mValues.get(position).getTax_amount());
+                holder.pskTextPtkp.setText("Rp. "+ mValues.get(position).getPtkp_tahunan());
+                holder.pskTextJpk.setText("Rp. "+ mValues.get(position).getJpk_bulanan());
+                holder.pskTextUmk.setText("Rp. "+ mValues.get(position).getUmk_amount());
+            }
 
             if (position%2==0)
                 holder.pskLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

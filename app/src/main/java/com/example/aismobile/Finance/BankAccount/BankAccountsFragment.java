@@ -41,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -447,9 +449,15 @@ public class BankAccountsFragment extends Fragment {
             holder.baTextNumber.setText(""+mValues.get(position).getBank_account_number());
             holder.baTextBankName.setText(""+mValues.get(position).getBank_name());
             holder.baTextCode.setText(""+mValues.get(position).getCurrency_code());
-            holder.baTextBalance.setText(""+mValues.get(position).getEnding_reconcile_balance());
             holder.baTextDate.setText(""+mValues.get(position).getLast_reconciled_date());
             holder.baTextIsActive.setText(""+mValues.get(position).getIs_active());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.baTextBalance.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getEnding_reconcile_balance())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.baTextBalance.setText("Rp. "+ mValues.get(position).getEnding_reconcile_balance());
+            }
 
             if (position%2==0)
                 holder.baLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

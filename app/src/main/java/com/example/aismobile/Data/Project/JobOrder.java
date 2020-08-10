@@ -162,6 +162,7 @@ public class JobOrder implements Parcelable {
             this.max_pb_amount = jsonObject.getString("max_pb_amount");
             this.material_amount = jsonObject.getString("material_amount");
             this.tools_amount = jsonObject.getString("tools_amount");
+            this.man_power_amount = jsonObject.getString("man_power_amount");
             this.cod_amount = jsonObject.getString("cod_amount");
             this.wo_amount = jsonObject.getString("wo_amount");
             this.material_return_amount = jsonObject.getString("material_return_amount");

@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorLightGray"
     tools:context=".Project.JobOrder.JobOrderDetailActivity">
 
     <TextView
+        android:id="@+id/jodJobOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18dp"
@@ -18,11 +18,291 @@
         android:background="@color/colorAsukaBlue"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        android:text="Job Order Detail"/>
+        android:text="Job Order : "/>
+
+    <TextView
+        android:id="@+id/jodDepartemen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        android:gravity="left"
+        android:textColor="@color/colorBlack"
+        android:text="Departemen : "/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorLightGray"/>
+
+    <TextView
+        android:id="@+id/jodKeterangan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        android:gravity="left"
+        android:textColor="@color/colorBlack"
+        android:text="Keterangan : "/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorLightGray"/>
+
+    <TextView
+        android:id="@+id/jodDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:padding="5dp"
+        android:gravity="center"
+        android:textColor="@color/colorAsukaRed"
+        android:textStyle="bold"
+        android:text="0 Day Remaining"/>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAsukaBlue"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/menuJoDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:background="@color/colorLightGray"
+                    android:textStyle="bold"
+                    android:text=" Detail "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoMr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" MR "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoPr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Purchase Request "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoTr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Tools Request "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoMp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Man Power "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoCod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" COD "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoWo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" WO "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoPb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" PB "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoCpr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" CPR "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoExpenses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Expenses "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoInvoice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Invoice "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoMatRet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Material Return "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoNotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Notes "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" History "/>
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorLightGray">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,200 +315,1215 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textViewNamaJO"
+                    android:id="@+id/detailSalesQuotation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
-                    android:layout_marginTop="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:textSize="18dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Nomer Job Order"
-                    android:textStyle="bold"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Sales Quotation"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textViewDepartemen"
+                    android:id="@+id/detailPOClient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
-                    android:layout_marginTop="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:textSize="18dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Departemen"
-                    android:textStyle="bold"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Purchase Order Client"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textViewPIC"
+                    android:id="@+id/detailSalesOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
-                    android:layout_marginTop="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:textSize="18dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="PIC"
-                    android:textStyle="bold"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Sales Order"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textViewTipe"
+                    android:id="@+id/detailSupervisor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
-                    android:layout_marginTop="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:textSize="18dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Tipe"
-                    android:textStyle="bold"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Supervisor"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textViewKeteranganJO"
+                    android:id="@+id/detailTglAwal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
-                    android:layout_marginTop="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:textSize="18dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Keterangan Job Order"
-                    android:textStyle="bold"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Tanggal Awal"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textViewNilai"
+                    android:id="@+id/detailTglAkhir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
-                    android:layout_marginTop="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:textSize="18dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Tanggal Akhir"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailJenisPajak"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Jenis Pajak"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailNilai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
                     android:text="Nilai"
-                    android:textStyle="bold"
-                    android:background="@drawable/bubble_sub"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textViewStatus"
+                    android:id="@+id/detailBudgetAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
-                    android:layout_marginTop="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
                     android:paddingBottom="10dp"
-                    android:textSize="18dp"
+                    android:gravity="right"
+                    android:textStyle="bold"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Status"
-                    android:textStyle="bold"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Budgeting Amount"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailNilaiKontrak"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:textStyle="bold|italic"
+                    android:text="Nilai Kontrak"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailCustomerInvoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:gravity="right"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Customer Invoice"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailCustomerPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:gravity="right"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Customer Payment"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailBalance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:gravity="right"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Balance"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailCatatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Catatan"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="50dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/bubble">
+
+                    <ImageView
+                        android:id="@+id/downloadSalesQuotation"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/pdf_download" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Sales Quotation" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="10dp"
+                        android:src="@color/colorBlack" />
+
+                    <ImageView
+                        android:id="@+id/downloadPOClient"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/pdf_download" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Purchase Order Client" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Atachments"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="500dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/bubble"
+                                android:gravity="left|center"
+                                android:paddingLeft="170dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3.5"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:text="Budget"
+                                    android:textColor="@color/colorBlack"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3.5"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:text="Pengeluaran"
+                                    android:textColor="@color/colorBlack"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:text="( % )"
+                                    android:textColor="@color/colorBlack"/>
+                            </LinearLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailMateriB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailMateriP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailMateriPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:text="Material"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailToolB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailToolP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailToolPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:text="Tools"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailMpcB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailMpcP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailMpcPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:text="Man Power Cost"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailCodB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailCodP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailCodPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:text="Cash On Deliverie"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailWoB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailWoP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailWoPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:text="Work Order"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailMrB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailMrP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailMrPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:text="Material Return (-)"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailPbB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailPbP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailPbPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:text="Propose Budget"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailCprB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailCprP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailCprPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:text="Cash Project Report"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailExpensesB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailExpensesP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailExpensesPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:text="Expenses"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bubble"
+                                    android:gravity="left|center"
+                                    android:paddingLeft="170dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/detailTotalBudgetB"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:text="Rp. "
+                                        android:textStyle="bold|italic"
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailTotalBudgetP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.5"
+                                        android:gravity="right"
+                                        android:textStyle="bold|italic"
+                                        android:text="Rp. "
+                                        android:textColor="@color/colorBlack"/>
+
+                                    <TextView
+                                        android:id="@+id/detailTotalBudgetPr"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:gravity="right"
+                                        android:textStyle="bold|italic"
+                                        android:text="- %"
+                                        android:textColor="@color/colorBlack"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bubble_sub"
+                                    android:padding="10dp"
+                                    android:textStyle="bold|italic"
+                                    android:text="Total Budget"
+                                    android:textColor="@color/colorWhite"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailLabaRugiBerjalan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:gravity="right"
+                    android:textSize="16dp"
+                    android:textStyle="bold|italic"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold|italic"
+                    android:text="Laba/Rugi Berjalan"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailSisaBudget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:gravity="right"
+                    android:textSize="16dp"
+                    android:textStyle="bold|italic"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold|italic"
+                    android:text="Sisa Budget"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailLabaRugi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold|italic"
+                    android:gravity="right"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold|italic"
+                    android:text="Laba/Rugi"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailDibuatOleh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Dibuat Oleh"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailTanggalDibuat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Tanggal Dibuat"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailDiubahOleh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Diubah Oleh"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailDiubahTgl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="170dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Tanggal Diubah"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
         </LinearLayout>

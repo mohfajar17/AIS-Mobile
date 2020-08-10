@@ -41,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -466,8 +468,14 @@ public class SupplierInvoiceFragment extends Fragment {
             holder.siTextDueDate.setText(""+mValues.get(position).getDue_date());
             holder.siTextPaymentDate.setText(""+mValues.get(position).getPayment_date());
             holder.siTextLateDays.setText(""+mValues.get(position).getLate_days());
-            holder.siTextTotalSI.setText(""+mValues.get(position).getTotalSI());
             holder.siTextStatus.setText(""+mValues.get(position).getSupplier_invoice_status());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.siTextTotalSI.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTotalSI())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.siTextTotalSI.setText("Rp. "+ mValues.get(position).getTotalSI());
+            }
 
             if (position%2==0)
                 holder.siLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

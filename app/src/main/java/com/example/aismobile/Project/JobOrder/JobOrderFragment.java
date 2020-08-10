@@ -174,7 +174,7 @@ public class JobOrderFragment extends Fragment {
                     loadJobOrder("job_order_id DESC");
                     loadAll = false;
                     params = layoutListJO.getLayoutParams();
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                     layoutListJO.setLayoutParams(params);
                     buttonShowAllList.setText("Show All");
                 }

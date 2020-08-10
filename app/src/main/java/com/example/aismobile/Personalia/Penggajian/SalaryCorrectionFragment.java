@@ -43,6 +43,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -606,9 +608,15 @@ public class SalaryCorrectionFragment extends Fragment {
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
             holder.pscTextEmpReport.setText(""+mValues.get(position).getReport_name());
-            holder.pscTextAmount.setText(""+mValues.get(position).getAmount());
             holder.pscTextNotes.setText(""+mValues.get(position).getNotes());
             holder.pscTextPotongan.setText(""+mValues.get(position).getIs_deduction());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.pscTextAmount.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getAmount())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.pscTextAmount.setText("Rp. "+ mValues.get(position).getAmount());
+            }
 
             if (position%2==0)
                 holder.pscLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

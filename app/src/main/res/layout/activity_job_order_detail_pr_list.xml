@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:id="@+id/layoutJoMr"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/joTextNo"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextItem"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:gravity="left|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextSpesifikasi"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:gravity="left|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextMrNumber"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextPoNumber"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextPickupNumber"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextQty"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextStatus"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextUnitPrice"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:gravity="right|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextDiscount"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:gravity="right|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/joTextSubTotal"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:gravity="right|top"
+        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+</LinearLayout>

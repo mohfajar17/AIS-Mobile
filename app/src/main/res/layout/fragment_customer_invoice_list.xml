@@ -137,7 +137,7 @@
         android:id="@+id/ciTextTotal"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
+        android:gravity="top|right"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />

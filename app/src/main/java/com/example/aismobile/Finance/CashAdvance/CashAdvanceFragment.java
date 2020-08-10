@@ -41,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -439,8 +441,14 @@ public class CashAdvanceFragment extends Fragment {
             holder.caTextDate.setText(""+mValues.get(position).getAdvanced_date());
             holder.caTextAdvancedFor.setText(""+mValues.get(position).getAdvanced_for());
             holder.caTextReceived.setText(""+mValues.get(position).getReceived_by());
-            holder.caTextNilai.setText(""+mValues.get(position).getAmount());
             holder.caTextStatus.setText(""+mValues.get(position).getStatus());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.caTextNilai.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getAmount())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.caTextNilai.setText("Rp. "+ mValues.get(position).getAmount());
+            }
 
             if (position%2==0)
                 holder.caLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

@@ -113,6 +113,15 @@ public class Config {
     public static final String DATA_URL_PERSONALIA_NEWS_LIST = DATA_URL+"getPersonaliaNews";
     public static final String DATA_URL_JOB_GRADE_LIST = DATA_URL+"getJobGrade";
     public static final String DATA_URL_EMPLOYEE_REPORT_LIST = DATA_URL+"getEmployeeReport";
+    public static final String DATA_URL_DETAIL_JO_MR_LIST = DATA_URL+"getDetailJOMR";
+    public static final String DATA_URL_DETAIL_JO_PR_LIST = DATA_URL+"getDetailJOPR";
+    public static final String DATA_URL_DETAIL_JO_TR_LIST = DATA_URL+"getDetailJOTR";
+    public static final String DATA_URL_DETAIL_JO_COD_LIST = DATA_URL+"getDetailJOCOD";
+    public static final String DATA_URL_DETAIL_JO_EXPENSES_LIST = DATA_URL+"getDetailJOExpenses";
+    public static final String DATA_URL_DETAIL_JO_INVOICE_LIST = DATA_URL+"getDetailJOInvoice";
+    public static final String DATA_URL_DETAIL_JO_MP_PERMANEN_LIST = DATA_URL+"getDetailJOManPowerPermanenKontrak";
+    public static final String DATA_URL_DETAIL_JO_MP_TEMP_LIST = DATA_URL+"getDetailJOManPowerTemp";
+    public static final String DATA_URL_DETAIL_JO_WO_LIST = DATA_URL+"getDetailJOWO";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

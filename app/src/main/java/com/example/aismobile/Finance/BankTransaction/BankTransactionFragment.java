@@ -41,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -465,9 +467,15 @@ public class BankTransactionFragment extends Fragment {
             holder.btTextApproval1.setText(""+mValues.get(position).getApproval1());
             holder.btTextApproval2.setText(""+mValues.get(position).getApproval2());
             holder.btTextTglTrans.setText(""+mValues.get(position).getTransaction_date());
-            holder.btTextTotal.setText(""+mValues.get(position).getBank_transaction_number());
             holder.btTextStatus.setText(""+mValues.get(position).getStatus());
             holder.btTextReconciled.setText(""+mValues.get(position).getReconciled());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.btTextTotal.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTotal_amount())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.btTextTotal.setText("Rp. "+ mValues.get(position).getTotal_amount());
+            }
 
             if (position%2==0)
                 holder.btLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

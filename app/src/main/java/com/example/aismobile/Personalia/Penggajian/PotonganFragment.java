@@ -43,6 +43,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -616,8 +618,14 @@ public class PotonganFragment extends Fragment {
             holder.ppTextNama.setText(""+mValues.get(position).getDeduction_name());
             holder.ppTextKode.setText(""+mValues.get(position).getReport_code());
             holder.ppTextKeterangan.setText(""+mValues.get(position).getDescription());
-            holder.ppTextNilai.setText(""+mValues.get(position).getValue());
             holder.ppTextPenyesuaian.setText(""+mValues.get(position).getAdjustment());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.ppTextNilai.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getValue())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.ppTextNilai.setText("Rp. "+ mValues.get(position).getValue());
+            }
 
             if (position%2==0)
                 holder.ppLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

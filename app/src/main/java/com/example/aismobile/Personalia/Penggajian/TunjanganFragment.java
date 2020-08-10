@@ -43,6 +43,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -626,8 +628,14 @@ public class TunjanganFragment extends Fragment {
             holder.ptTextKode.setText(""+mValues.get(position).getReport_code());
             holder.ptTextJenis.setText(""+mValues.get(position).getAllowance_type_name());
             holder.ptTextKelompok.setText(""+mValues.get(position).getAllowance_group_name());
-            holder.ptTextNilai.setText(""+mValues.get(position).getValue());
             holder.ptTextSatuan.setText(""+mValues.get(position).getAllowance_unit());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.ptTextNilai.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getValue())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.ptTextNilai.setText("Rp. "+ mValues.get(position).getValue());
+            }
 
             if (position%2==0)
                 holder.ptLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

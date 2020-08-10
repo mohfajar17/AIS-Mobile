@@ -41,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -475,9 +477,15 @@ public class ExpensesFragment extends Fragment {
             holder.eTextApproval2.setText(""+mValues.get(position).getApproval2());
             holder.eTextCashAdvance.setText(""+mValues.get(position).getAdvanced_number());
             holder.eTextDate.setText(""+mValues.get(position).getExpenses_date());
-            holder.eTextTotal.setText(""+mValues.get(position).getTotal_amount());
             holder.eTextRekBank.setText(""+mValues.get(position).getBank_account_name());
             holder.eTextDone.setText(""+mValues.get(position).getDone());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.eTextTotal.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTotal_amount())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.eTextTotal.setText("Rp. "+ mValues.get(position).getTotal_amount());
+            }
 
             if (position%2==0)
                 holder.eLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

@@ -41,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -477,7 +479,13 @@ public class CustomerInvoiceFragment extends Fragment {
             holder.ciTextPONumber.setText(""+mValues.get(position).getClient_po_number());
             holder.ciTextStatus.setText(""+mValues.get(position).getSales_order_invoice_status());
             holder.ciTextPaymentLate.setText(""+mValues.get(position).getPayment_late());
-            holder.ciTextTotal.setText(""+mValues.get(position).getGrand_total());
+
+            try{
+                NumberFormat formatter = new DecimalFormat("#,###");
+                holder.ciTextTotal.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getGrand_total())));
+            } catch (NumberFormatException ex){ // handle your exception
+                holder.ciTextTotal.setText("Rp. "+ mValues.get(position).getGrand_total());
+            }
 
             if (position%2==0)
                 holder.ciLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

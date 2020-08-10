@@ -14,18 +14,20 @@ public class BankTransaction implements Parcelable {
     private String approval1;
     private String approval2;
     private String transaction_date;
+    private String total_amount;
     private String status;
     private String reconciled;
 
     public BankTransaction(int bank_transaction_id, String bank_transaction_number, String checked_by,
-                           String approval1, String approval2, String transaction_date, String status,
-                           String reconciled){
+                           String approval1, String approval2, String transaction_date, String total_amount,
+                           String status, String reconciled){
         this.bank_transaction_id = bank_transaction_id;
         this.bank_transaction_number = bank_transaction_number;
         this.checked_by = checked_by;
         this.approval1 = approval1;
         this.approval2 = approval2;
         this.transaction_date = transaction_date;
+        this.total_amount = total_amount;
         this.status = status;
         this.reconciled = reconciled;
     }
@@ -36,6 +38,7 @@ public class BankTransaction implements Parcelable {
         approval1 = in.readString();
         approval2 = in.readString();
         transaction_date = in.readString();
+        total_amount = in.readString();
         status = in.readString();
         reconciled = in.readString();
     }
@@ -48,6 +51,7 @@ public class BankTransaction implements Parcelable {
             this.approval1 = jsonObject.getString("approval1");
             this.approval2 = jsonObject.getString("approval2");
             this.transaction_date = jsonObject.getString("transaction_date");
+            this.total_amount = jsonObject.getString("total_amount");
             this.status = jsonObject.getString("status");
             this.reconciled = jsonObject.getString("reconciled");
         } catch (JSONException e) {
@@ -80,6 +84,7 @@ public class BankTransaction implements Parcelable {
         dest.writeString(approval1);
         dest.writeString(approval2);
         dest.writeString(transaction_date);
+        dest.writeString(total_amount);
         dest.writeString(status);
         dest.writeString(reconciled);
     }
@@ -106,6 +111,10 @@ public class BankTransaction implements Parcelable {
 
     public String getTransaction_date() {
         return transaction_date;
+    }
+
+    public String getTotal_amount() {
+        return total_amount;
     }
 
     public String getStatus() {

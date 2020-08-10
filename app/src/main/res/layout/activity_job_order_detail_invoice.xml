@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Project.JobOrder.JobOrderDetailInvoiceActivity">
+
+    <TextView
+        android:id="@+id/jodJobOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="@color/colorAsukaBlue"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:text="Job Order : "/>
+
+    <TextView
+        android:id="@+id/jodDepartemen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        android:gravity="left"
+        android:textColor="@color/colorBlack"
+        android:text="Departemen : "/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorLightGray"/>
+
+    <TextView
+        android:id="@+id/jodKeterangan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        android:gravity="left"
+        android:textColor="@color/colorBlack"
+        android:text="Keterangan : "/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorLightGray"/>
+
+    <TextView
+        android:id="@+id/jodDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:padding="5dp"
+        android:gravity="center"
+        android:textColor="@color/colorAsukaRed"
+        android:textStyle="bold"
+        android:text="0 Day Remaining"/>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAsukaBlue"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/menuJoDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Detail "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoMr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" MR "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoPr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Purchase Request "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoTr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Tools Request "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoMp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Man Power "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoCod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" COD "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoWo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" WO "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoPb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" PB "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoCpr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" CPR "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoExpenses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Expenses "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoInvoice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:background="@color/colorLightGray"
+                    android:textStyle="bold"
+                    android:text=" Invoice "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoMatRet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Material Return "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoNotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Notes "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/menuJoHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" History "/>
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:src="@color/colorWhite"/>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAsukaBlue"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="No."
+                    android:padding="10dp"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Customer Invoice Number"
+                    android:padding="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Date"
+                    android:padding="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Sales Order Invoice Description"
+                    android:padding="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Work Completion"
+                    android:padding="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Total"
+                    android:padding="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Status"
+                    android:padding="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Payment Late"
+                    android:padding="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorWhite"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerJobOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:isScrollContainer="false" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="745dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:text="Total "
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold|italic"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/totalJobOrder"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:text="-"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold|italic"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/layoutJo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/joTextNo"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:padding="10dp"
+            android:textColor="@android:color/black"/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorBlack"/>
+
+        <TextView
+            android:id="@+id/joTextCprNumber"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:padding="10dp"
+            android:textColor="@android:color/black"/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorBlack"/>
+
+        <TextView
+            android:id="@+id/joTextPbNumber"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:padding="10dp"
+            android:textColor="@android:color/black"/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorBlack"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaBlue"/>
+</LinearLayout>

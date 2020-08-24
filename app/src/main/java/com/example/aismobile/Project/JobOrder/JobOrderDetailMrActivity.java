@@ -326,7 +326,9 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
             holder.joTextQty.setText(mValues.get(position).getQuantity_taked());
             holder.joTextStatus.setText(mValues.get(position).getStatus());
 
-            int qty = Integer.valueOf(mValues.get(position).getQuantity_taked())*Integer.valueOf(mValues.get(position).getUnit_price());
+            double quantity = Double.valueOf(mValues.get(position).getQuantity_taked());
+            double price = Double.valueOf(mValues.get(position).getUnit_price());
+            int qty = (int) quantity*(int) price;
             totalPrice = totalPrice + qty;
 
             try{

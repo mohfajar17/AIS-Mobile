@@ -348,7 +348,7 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="300dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="Bulan"

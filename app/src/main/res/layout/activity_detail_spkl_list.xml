@@ -2,16 +2,15 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:id="@+id/layoutJo"
+    android:id="@+id/layoutSpkl"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/joTextNo"
+        android:id="@+id/spklTextNo"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:gravity="center|top"
-        android:text="-"
         android:padding="10dp"
         android:textColor="@android:color/black"/>
 
@@ -21,11 +20,10 @@
         android:src="@color/colorBlack"/>
 
     <TextView
-        android:id="@+id/joTextBulan"
-        android:layout_width="300dp"
+        android:id="@+id/spklTextKaryawan"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:gravity="left|top"
-        android:text="-"
+        android:gravity="center|top"
         android:padding="10dp"
         android:textColor="@android:color/black"/>
 
@@ -35,53 +33,10 @@
         android:src="@color/colorBlack"/>
 
     <TextView
-        android:id="@+id/joTextGajiPokok"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:gravity="right|top"
-        android:text="-"
-        android:padding="10dp"
-        android:textColor="@android:color/black"/>
-
-    <ImageView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:src="@color/colorBlack"/>
-
-    <TextView
-        android:id="@+id/joTextGajiLembur"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:gravity="right|top"
-        android:text="-"
-        android:padding="10dp"
-        android:textColor="@android:color/black"/>
-
-    <ImageView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:src="@color/colorBlack"/>
-
-    <TextView
-        android:id="@+id/joTextTunjangan"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:gravity="right|top"
-        android:text="-"
-        android:padding="10dp"
-        android:textColor="@android:color/black"/>
-
-    <ImageView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:src="@color/colorBlack"/>
-
-    <TextView
-        android:id="@+id/joTextSubTotal"
+        android:id="@+id/spklTextPosisi"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:gravity="right|top"
-        android:text="-"
+        android:gravity="center|top"
         android:padding="10dp"
         android:textColor="@android:color/black"/>
 
@@ -91,11 +46,75 @@
         android:src="@color/colorBlack"/>
 
     <TextView
-        android:id="@+id/joTextJumlahKaryawan"
+        android:id="@+id/spklTextTglLembur"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:gravity="center|top"
-        android:text="-"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/spklTextStartTime"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/spklTextFinishTime"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/spklTextDescription"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/spklTextApproval1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/spklTextApproval2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
         android:padding="10dp"
         android:textColor="@android:color/black"/>
 </LinearLayout>

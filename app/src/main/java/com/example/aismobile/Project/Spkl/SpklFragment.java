@@ -80,7 +80,6 @@ public class SpklFragment extends Fragment {
     public boolean filter = false;
 
     public SpklFragment() {
-        // Required empty public constructor
     }
 
     public static SpklFragment newInstance() {
@@ -131,6 +130,14 @@ public class SpklFragment extends Fragment {
         pskBtnBefore = (ImageButton) view.findViewById(R.id.pskBtnBefore);
         pskBtnNext = (ImageButton) view.findViewById(R.id.pskBtnNext);
         pskLayoutPaging = (LinearLayout) view.findViewById(R.id.pskLayoutPaging);
+
+        pskFabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), BuatSpklActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
 
         pskBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -487,10 +494,9 @@ public class SpklFragment extends Fragment {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity(), ""+mValues.get(position).getCreated_by(), Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-//                    intent.putExtra("detailJO", mValues.get(position));
-//                    holder.itemView.getContext().startActivity(intent);
+                    Intent intent = new Intent(getActivity(), DetailSpklActivity.class);
+                    intent.putExtra("detail", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         }

@@ -208,7 +208,7 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         downloadSalesQuotation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/salesQuotation/Sales_Quotaion."+jobOrder.getSales_quotation_id());
+                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/salesQuotation/"+jobOrder.getSales_file_name());
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
             }
@@ -216,7 +216,7 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         downloadPOClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/salesQuotation/Client_PO."+jobOrder.getSales_quotation_id());
+                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/salesQuotation/"+jobOrder.getClient_po_file_name());
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
             }

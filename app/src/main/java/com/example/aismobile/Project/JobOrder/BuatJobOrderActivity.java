@@ -1,22 +1,17 @@
 package com.example.aismobile.Project.JobOrder;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
+import android.media.Image;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -30,15 +25,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-public class BuatJobOrderFragment extends Fragment {
+public class BuatJobOrderActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
 
-    private Button daftarJobOrder;
+    private ImageView buttonBack;
     private EditText editJOTglAwal;
     private EditText editJOTglAkhir;
 
@@ -59,58 +52,35 @@ public class BuatJobOrderFragment extends Fragment {
             "PPH 21 (3%)", "PPH Final PSL 4 (2) 3%", "Custom", "PPH Final 10%", "PPH Final 12%",
             "PPH Final PSL 4 (2) 4%", "PPH Final Pasal 4 Ayat (2) 2%", "PPH 22 (1,5%)", "PPN 1%"};
 
-    public BuatJobOrderFragment() {
-        // Required empty public constructor
-    }
-
-    public static BuatJobOrderFragment newInstance() {
-        BuatJobOrderFragment fragment = new BuatJobOrderFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
+        setContentView(R.layout.activity_buat_job_order);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_buat_job_order, container, false);
+        buttonBack = (ImageView) findViewById(R.id.buttonBack);
+        editJOTglAwal = (EditText) findViewById(R.id.editJOTglAwal);
+        editJOTglAkhir = (EditText) findViewById(R.id.editJOTglAkhir);
+        editJOSalesQuotation = (Spinner) findViewById(R.id.editJOSalesQuotation);
+        editJOType = (Spinner) findViewById(R.id.editJOType);
+        editJOCategory = (Spinner) findViewById(R.id.editJOCategory);
+        editJOPic = (Spinner) findViewById(R.id.editJOPic);
+        editJOLokasi = (Spinner) findViewById(R.id.editJOLokasi);
+        editJODepartemen = (Spinner) findViewById(R.id.editJODepartemen);
+        editJOJobCodeStatus = (Spinner) findViewById(R.id.editJOJobCodeStatus);
+        editJOSalesOrder = (Spinner) findViewById(R.id.editJOSalesOrder);
+        editJOJenisPajak = (Spinner) findViewById(R.id.editJOJenisPajak);
 
-        daftarJobOrder = (Button) view.findViewById(R.id.daftarJobOrder);
-        editJOTglAwal = (EditText) view.findViewById(R.id.editJOTglAwal);
-        editJOTglAkhir = (EditText) view.findViewById(R.id.editJOTglAkhir);
-        editJOSalesQuotation = (Spinner) view.findViewById(R.id.editJOSalesQuotation);
-        editJOType = (Spinner) view.findViewById(R.id.editJOType);
-        editJOCategory = (Spinner) view.findViewById(R.id.editJOCategory);
-        editJOPic = (Spinner) view.findViewById(R.id.editJOPic);
-        editJOLokasi = (Spinner) view.findViewById(R.id.editJOLokasi);
-        editJODepartemen = (Spinner) view.findViewById(R.id.editJODepartemen);
-        editJOJobCodeStatus = (Spinner) view.findViewById(R.id.editJOJobCodeStatus);
-        editJOSalesOrder = (Spinner) view.findViewById(R.id.editJOSalesOrder);
-        editJOJenisPajak = (Spinner) view.findViewById(R.id.editJOJenisPajak);
-
-        daftarJobOrder.setOnClickListener(new View.OnClickListener() {
+        buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new JobOrderFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.containerFragment, fragment);
-                fragmentTransaction.disallowAddToBackStack();
-                fragmentTransaction.commit();
+                onBackPressed();
             }
         });
 
         editJOTglAwal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(BuatJobOrderFragment.this.getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(BuatJobOrderActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         editJOTglAwal.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
@@ -124,7 +94,7 @@ public class BuatJobOrderFragment extends Fragment {
         editJOTglAkhir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(BuatJobOrderFragment.this.getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(BuatJobOrderActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         editJOTglAkhir.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
@@ -136,20 +106,18 @@ public class BuatJobOrderFragment extends Fragment {
         });
 
         getListSalesQuotation();
-        adapter = new ArrayAdapter<String>(BuatJobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOType);
+        adapter = new ArrayAdapter<String>(BuatJobOrderActivity.this, android.R.layout.simple_spinner_dropdown_item, JOType);
         editJOType.setAdapter(adapter);
-        adapter = new ArrayAdapter<String>(BuatJobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOCategory);
+        adapter = new ArrayAdapter<String>(BuatJobOrderActivity.this, android.R.layout.simple_spinner_dropdown_item, JOCategory);
         editJOCategory.setAdapter(adapter);
         getListEmployee();
         getListWorkbase();
         getListDepartmen();
-        adapter = new ArrayAdapter<String>(BuatJobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOJobCodeStatus);
+        adapter = new ArrayAdapter<String>(BuatJobOrderActivity.this, android.R.layout.simple_spinner_dropdown_item, JOJobCodeStatus);
         editJOJobCodeStatus.setAdapter(adapter);
         getListSalesOrder();
-        adapter = new ArrayAdapter<String>(BuatJobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOJenisPajak);
+        adapter = new ArrayAdapter<String>(BuatJobOrderActivity.this, android.R.layout.simple_spinner_dropdown_item, JOJenisPajak);
         editJOJenisPajak.setAdapter(adapter);
-
-        return view;
     }
 
     public void getListSalesQuotation() {
@@ -167,7 +135,7 @@ public class BuatJobOrderFragment extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JOSalesQuotation[i + 1] = jsonArray.getJSONObject(i).getString("sales_quotation_number") + " | " + jsonArray.getJSONObject(i).getString("description");
                                 }
-                                adapter = new ArrayAdapter<String>(BuatJobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOSalesQuotation);
+                                adapter = new ArrayAdapter<String>(BuatJobOrderActivity.this, android.R.layout.simple_spinner_dropdown_item, JOSalesQuotation);
                                 editJOSalesQuotation.setAdapter(adapter);
                             }
                         } catch (JSONException e) {
@@ -182,7 +150,7 @@ public class BuatJobOrderFragment extends Fragment {
                     }
                 }){
         };
-        Volley.newRequestQueue(getActivity()).add(request);
+        Volley.newRequestQueue(BuatJobOrderActivity.this).add(request);
     }
 
     public void getListEmployee() {
@@ -200,7 +168,7 @@ public class BuatJobOrderFragment extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JOPic[i + 1] = jsonArray.getJSONObject(i).getString("fullname");
                                 }
-                                adapter = new ArrayAdapter<String>(BuatJobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOPic);
+                                adapter = new ArrayAdapter<String>(BuatJobOrderActivity.this, android.R.layout.simple_spinner_dropdown_item, JOPic);
                                 editJOPic.setAdapter(adapter);
                             }
                         } catch (JSONException e) {
@@ -215,7 +183,7 @@ public class BuatJobOrderFragment extends Fragment {
                     }
                 }){
         };
-        Volley.newRequestQueue(getActivity()).add(request);
+        Volley.newRequestQueue(BuatJobOrderActivity.this).add(request);
     }
 
     public void getListWorkbase() {
@@ -233,7 +201,7 @@ public class BuatJobOrderFragment extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JOLokasi[i + 1] = jsonArray.getJSONObject(i).getString("company_workbase_name");
                                 }
-                                adapter = new ArrayAdapter<String>(BuatJobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOLokasi);
+                                adapter = new ArrayAdapter<String>(BuatJobOrderActivity.this, android.R.layout.simple_spinner_dropdown_item, JOLokasi);
                                 editJOLokasi.setAdapter(adapter);
                             }
                         } catch (JSONException e) {
@@ -248,7 +216,7 @@ public class BuatJobOrderFragment extends Fragment {
                     }
                 }){
         };
-        Volley.newRequestQueue(getActivity()).add(request);
+        Volley.newRequestQueue(BuatJobOrderActivity.this).add(request);
     }
 
     public void getListDepartmen() {
@@ -266,7 +234,7 @@ public class BuatJobOrderFragment extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JODepartmen[i + 1] = jsonArray.getJSONObject(i).getString("department_name");
                                 }
-                                adapter = new ArrayAdapter<String>(BuatJobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JODepartmen);
+                                adapter = new ArrayAdapter<String>(BuatJobOrderActivity.this, android.R.layout.simple_spinner_dropdown_item, JODepartmen);
                                 editJODepartemen.setAdapter(adapter);
                             }
                         } catch (JSONException e) {
@@ -281,7 +249,7 @@ public class BuatJobOrderFragment extends Fragment {
                     }
                 }){
         };
-        Volley.newRequestQueue(getActivity()).add(request);
+        Volley.newRequestQueue(BuatJobOrderActivity.this).add(request);
     }
 
     public void getListSalesOrder() {
@@ -299,7 +267,7 @@ public class BuatJobOrderFragment extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JOSalesOrder[i + 1] = jsonArray.getJSONObject(i).getString("sales_order_number")+" | "+jsonArray.getJSONObject(i).getString("short_description");
                                 }
-                                adapter = new ArrayAdapter<String>(BuatJobOrderFragment.this.getActivity(), android.R.layout.simple_spinner_dropdown_item, JOSalesOrder);
+                                adapter = new ArrayAdapter<String>(BuatJobOrderActivity.this, android.R.layout.simple_spinner_dropdown_item, JOSalesOrder);
                                 editJOSalesOrder.setAdapter(adapter);
                             }
                         } catch (JSONException e) {
@@ -314,6 +282,6 @@ public class BuatJobOrderFragment extends Fragment {
                     }
                 }){
         };
-        Volley.newRequestQueue(getActivity()).add(request);
+        Volley.newRequestQueue(BuatJobOrderActivity.this).add(request);
     }
 }

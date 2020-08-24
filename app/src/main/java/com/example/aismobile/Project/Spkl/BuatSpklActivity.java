@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -61,6 +62,7 @@ public class BuatSpklActivity extends AppCompatActivity {
     private Spinner editSpklDepartment;
     private Spinner editSpklRequested;
     private Button buttonBuat;
+    private ImageView buttonBack;
 
     private TextView buttonSpkl1;
     private TextView buttonSpkl2;
@@ -94,6 +96,7 @@ public class BuatSpklActivity extends AppCompatActivity {
         editSpklDepartment = (Spinner) findViewById(R.id.editSpklDepartment);
         editSpklRequested = (Spinner) findViewById(R.id.editSpklRequested);
         buttonBuat = (Button) findViewById(R.id.buttonBuat);
+        buttonBack = (ImageView) findViewById(R.id.buttonBack);
 
         buttonSpkl1 = (TextView) findViewById(R.id.buttonSpkl1);
         buttonSpkl2 = (TextView) findViewById(R.id.buttonSpkl2);
@@ -136,6 +139,12 @@ public class BuatSpklActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createdSpkl();
+            }
+        });
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 

@@ -51,7 +51,7 @@ public class JobOrderDetailPrActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoPr> joprs;
     private ProgressDialog progressDialog;
-    private int totalPrice = 0;
+    private long totalPrice = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -317,35 +317,40 @@ public class JobOrderDetailPrActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
+            double quantity = 0;
+            if (String.valueOf(mValues.get(position).getQuantity_taked()).equals("null")) {
+                quantity = 0;
+                holder.joTextQty.setText("" + (int) quantity);
+            } else {
+                quantity = Double.valueOf(mValues.get(position).getQuantity_taked());
+                holder.joTextQty.setText("" + (int) quantity + " " + mValues.get(position).getUnit_abbr());
+            }
+
+            double price = Double.valueOf(mValues.get(position).getUnit_price());
             int nomor = position+1;
+
             holder.joTextNo.setText("" + nomor);
             holder.joTextItem.setText(mValues.get(position).getItem_name());
             holder.joTextSpesifikasi.setText(mValues.get(position).getItem_specification());
             holder.joTextMrNumber.setText(mValues.get(position).getMaterial_request_number());
             holder.joTextPoNumber.setText(mValues.get(position).getPurchase_order_number());
             holder.joTextPickupNumber.setText(mValues.get(position).getPickup_number());
-            holder.joTextQty.setText(mValues.get(position).getQuantity_taked());
-            holder.joTextDiscount.setText(mValues.get(position).getDiscount());
             holder.joTextStatus.setText(mValues.get(position).getStatus());
 
-            double one = Double.valueOf(mValues.get(position).getQuantity_taked());
-            double two = Double.valueOf(mValues.get(position).getUnit_price());
+            double diskon = Double.valueOf(mValues.get(position).getDiscount());
+            double qty = quantity * price;
+            totalPrice = totalPrice + (long) qty;
 
-            double qty = one * two;
-            totalPrice = totalPrice + (int) qty;
-
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.joTextUnitPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) two)));
-                holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) qty)));
-                if (position == joprs.size()-1)
-                    totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
-            } catch (NumberFormatException ex){
-                holder.joTextUnitPrice.setText("Rp. " + two);
-                holder.joTextSubTotal.setText("Rp. " + qty);
-                if (position == joprs.size()-1)
-                    totalJobOrder.setText("Rp. "+totalPrice);
+            if (qty > 0) {
+                qty -= diskon;
             }
+
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.joTextUnitPrice.setText("Rp. "+ formatter.format((int) price));
+            holder.joTextDiscount.setText("Rp. "+ formatter.format((int) diskon));
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format((int) qty));
+            if (position == joprs.size()-1)
+                totalJobOrder.setText("Rp. "+formatter.format(totalPrice));
 
             if (position%2==0)
                 holder.layoutJoMr.setBackgroundColor(getResources().getColor(R.color.colorLightGray));

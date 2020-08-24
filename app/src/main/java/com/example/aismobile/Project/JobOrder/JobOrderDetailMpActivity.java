@@ -55,8 +55,9 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
     private List<JoMppk> joMppks;
     private List<JoMptm> joMptms;
     private ProgressDialog progressDialog;
-    private int totalPricePermanen = 0;
-    private int totalPriceTemp = 0;
+    private long totalPricePermanen = 0;
+    private long totalPriceTemp = 0;
+    private long totalPriceAll = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -79,6 +80,7 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
     private TextView jodDay;
     private TextView totalJobOrderTemp;
     private TextView totalJobOrderPermanen;
+    private TextView totalKeseluruhanMp;
 
     private JobOrder jobOrder;
 
@@ -110,6 +112,7 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
         jodDay = (TextView) findViewById(R.id.jodDay);
         totalJobOrderTemp = (TextView) findViewById(R.id.totalJobOrderTemp);
         totalJobOrderPermanen = (TextView) findViewById(R.id.totalJobOrderPermanen);
+        totalKeseluruhanMp = (TextView) findViewById(R.id.totalKeseluruhanMp);
 
         recylerViewLayoutManagerTemp = new LinearLayoutManager(context);
         recyclerViewTemp.setLayoutManager(recylerViewLayoutManagerTemp);
@@ -277,7 +280,16 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joMptms.add(new JoMptm(jsonArray.getJSONObject(i)));
+
+                            double one = jsonArray.getJSONObject(i).getDouble("GP");
+                            double two = jsonArray.getJSONObject(i).getDouble("GL");
+                            double three = jsonArray.getJSONObject(i).getDouble("Tunjangan");
+                            double four = jsonArray.getJSONObject(i).getDouble("project_location");
+
+                            double subTotal = one+two+three+four;
+                            totalPriceTemp += (long) subTotal;
                         }
+                        totalPriceAll += totalPriceTemp;
                         adapterTemp = new MyRecyclerViewAdapterTemp(joMptms, context);
                         recyclerViewTemp.setAdapter(adapterTemp);
                     } else {
@@ -318,7 +330,17 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joMppks.add(new JoMppk(jsonArray.getJSONObject(i)));
+
+                            double one = jsonArray.getJSONObject(i).getDouble("GP");
+                            double two = jsonArray.getJSONObject(i).getDouble("GL");
+                            double three = jsonArray.getJSONObject(i).getDouble("Tunjangan");
+                            double four = jsonArray.getJSONObject(i).getDouble("project_location");
+                            double five = jsonArray.getJSONObject(i).getDouble("AB");
+
+                            double subTotal = one+two+three+four-five;
+                            totalPricePermanen += (long) subTotal;
                         }
+                        totalPriceAll += totalPricePermanen;
                         adapterPermanen = new MyRecyclerViewAdapterPermanen(joMppks, context);
                         recyclerViewPermanen.setAdapter(adapterPermanen);
                     } else {
@@ -371,7 +393,7 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
             int nomor = position+1;
             holder.joTextNo.setText("" + nomor);
             holder.joTextBulan.setText(mValues.get(position).getYear());
-            holder.joTextJumlahKaryawan.setText(mValues.get(position).getJumlah());
+            holder.joTextJumlahKaryawan.setText(mValues.get(position).getJumlah()+" Orang");
 
             double one = Double.valueOf(mValues.get(position).getGP());
             double two = Double.valueOf(mValues.get(position).getGL());
@@ -380,29 +402,18 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
             double five = Double.valueOf(mValues.get(position).getAB());
 
             double subTotal = one+two+three+four-five;
-            totalPricePermanen = totalPricePermanen + (int) subTotal;
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) subTotal)));
-                holder.joTextGajiPokok.setText("Rp. "+ formatter.format(Long.valueOf((int) one)));
-                holder.joTextGajiLembur.setText("Rp. "+ formatter.format(Long.valueOf((int) two)));
-                holder.joTextTunjangan.setText("Rp. "+ formatter.format(Long.valueOf((int) three)));
-                holder.joTextTunjanganLokasi.setText("Rp. "+ formatter.format(Long.valueOf((int) four)));
-                holder.joTextPotonganAbsent.setText("Rp. "+ formatter.format(Long.valueOf((int) five)));
-                if (position == joMppks.size()-1)
-                    totalJobOrderPermanen.setText("Rp. "+formatter.format(Long.valueOf(totalPricePermanen)));
-            } catch (NumberFormatException ex){
-                holder.joTextSubTotal.setText("Rp. " + subTotal);
-                holder.joTextGajiPokok.setText("Rp. " + mValues.get(position).getGP());
-                holder.joTextGajiLembur.setText("Rp. " + mValues.get(position).getGL());
-                holder.joTextTunjangan.setText("Rp. " + mValues.get(position).getTunjangan());
-                holder.joTextTunjanganLokasi.setText("Rp. " + mValues.get(position).getProject_location());
-                holder.joTextPotonganAbsent.setText("Rp. " + mValues.get(position).getAB());
-                if (position == joMppks.size()-1)
-                    totalJobOrderPermanen.setText("Rp. "+ totalPricePermanen);
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) subTotal)));
+            holder.joTextGajiPokok.setText("Rp. "+ formatter.format(Long.valueOf((int) one)));
+            holder.joTextGajiLembur.setText("Rp. "+ formatter.format(Long.valueOf((int) two)));
+            holder.joTextTunjangan.setText("Rp. "+ formatter.format(Long.valueOf((int) three)));
+            holder.joTextTunjanganLokasi.setText("Rp. "+ formatter.format(Long.valueOf((int) four)));
+            holder.joTextPotonganAbsent.setText("Rp. "+ formatter.format(Long.valueOf((int) five)));
+            if (position == joMppks.size()-1) {
+                totalJobOrderPermanen.setText("Rp. " + formatter.format(Long.valueOf(totalPricePermanen)));
+                totalKeseluruhanMp.setText("Rp. " + formatter.format(Long.valueOf(totalPriceAll)));
             }
-
             if (position%2==0)
                 holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
             else holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -468,7 +479,7 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
             int nomor = position+1;
             holder.joTextNo.setText("" + nomor);
             holder.joTextBulan.setText(mValues.get(position).getYear());
-            holder.joTextJumlahKaryawan.setText(mValues.get(position).getJumlah());
+            holder.joTextJumlahKaryawan.setText(mValues.get(position).getJumlah() + " Orang");
 
             double one = Double.valueOf(mValues.get(position).getGP());
             double two = Double.valueOf(mValues.get(position).getGL());
@@ -476,23 +487,15 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
             double four = Double.valueOf(mValues.get(position).getProject_location());
 
             double subTotal = one+two+three+four;
-            totalPriceTemp = totalPriceTemp + (int) subTotal;
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) subTotal)));
-                holder.joTextGajiPokok.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getGP())));
-                holder.joTextGajiLembur.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getGL())));
-                holder.joTextTunjangan.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTunjangan())));
-                if (position == joMptms.size()-1)
-                    totalJobOrderTemp.setText("Rp. "+formatter.format(Long.valueOf(totalPriceTemp)));
-            } catch (NumberFormatException ex){
-                holder.joTextSubTotal.setText("Rp. " + subTotal);
-                holder.joTextGajiPokok.setText("Rp. " + mValues.get(position).getGP());
-                holder.joTextGajiLembur.setText("Rp. " + mValues.get(position).getGL());
-                holder.joTextTunjangan.setText("Rp. " + mValues.get(position).getTunjangan());
-                if (position == joMptms.size()-1)
-                    totalJobOrderTemp.setText("Rp. "+ totalPriceTemp);
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) subTotal)));
+            holder.joTextGajiPokok.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getGP())));
+            holder.joTextGajiLembur.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getGL())));
+            holder.joTextTunjangan.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTunjangan())));
+            if (position == joMptms.size()-1) {
+                totalJobOrderTemp.setText("Rp. " + formatter.format(Long.valueOf(totalPriceTemp)));
+                totalKeseluruhanMp.setText("Rp. " + formatter.format(Long.valueOf(totalPriceAll)));
             }
 
             if (position%2==0)

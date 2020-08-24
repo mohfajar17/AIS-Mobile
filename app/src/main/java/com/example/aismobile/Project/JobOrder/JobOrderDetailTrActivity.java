@@ -316,31 +316,27 @@ public class JobOrderDetailTrActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
+            NumberFormat formatter = new DecimalFormat("#,###");
             int nomor = position+1;
+            double quantity = 0;
+            if (String.valueOf(mValues.get(position).getQty()).equals("null")) {
+                quantity = 0;
+            } else {
+                quantity = Double.valueOf(mValues.get(position).getQty());
+            }
+            double Price = Double.valueOf(mValues.get(position).getPrice());
+            double subTotal = quantity * Price;
+            totalPrice = totalPrice + (int) subTotal;
+
             holder.joTextNo.setText("" + nomor);
             holder.joTextRrNumber.setText(mValues.get(position).getUnit());
             holder.joTextAsetRental.setText(mValues.get(position).getAssetName());
             holder.joTextKeterangan.setText(mValues.get(position).getAssetDesc());
-            holder.joTextQty.setText(mValues.get(position).getQty());
-
-            double one = Double.valueOf(mValues.get(position).getQty());
-            double two = Double.valueOf(mValues.get(position).getPrice());
-
-            double qty = one * two;
-            totalPrice = totalPrice + (int) qty;
-
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.joTextPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) two)));
-                holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) qty)));
-                if (position == joTrs.size()-1)
-                    totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
-            } catch (NumberFormatException ex){
-                holder.joTextPrice.setText("Rp. " + two);
-                holder.joTextSubTotal.setText("Rp. " + qty);
-                if (position == joTrs.size()-1)
-                    totalJobOrder.setText("Rp. "+totalPrice);
-            }
+            holder.joTextQty.setText("" + (int) quantity);
+            holder.joTextPrice.setText("Rp. "+ formatter.format((int) Price));
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format((int) subTotal));
+            if (position == joTrs.size()-1)
+                totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
 
             if (position%2==0)
                 holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorLightGray));

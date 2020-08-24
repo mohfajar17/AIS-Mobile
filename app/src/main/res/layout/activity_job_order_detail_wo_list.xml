@@ -80,7 +80,7 @@
         android:id="@+id/joTextWorkRequest"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:gravity="right|top"
+        android:gravity="center|top"
         android:text="-"
         android:padding="10dp"
         android:textColor="@android:color/black"/>

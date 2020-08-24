@@ -472,7 +472,7 @@
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:text="-"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold|italic"/>

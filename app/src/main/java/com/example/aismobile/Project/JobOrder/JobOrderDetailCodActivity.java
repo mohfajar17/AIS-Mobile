@@ -331,20 +331,12 @@ public class JobOrderDetailCodActivity extends AppCompatActivity {
             double qty = (banyak*satuan) - diskon;
             totalPrice = totalPrice + (int) qty;
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.joTextUnitPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) satuan)));
-                holder.joTextDiscount.setText("Rp. "+ formatter.format(Long.valueOf((int) diskon)));
-                holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) qty)));
-                if (position == joCods.size()-1)
-                    totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
-            } catch (NumberFormatException ex){
-                holder.joTextUnitPrice.setText("Rp. " + mValues.get(position).getHarga());
-                holder.joTextDiscount.setText("Rp. " + mValues.get(position).getDiscount());
-                holder.joTextSubTotal.setText("Rp. " + qty);
-                if (position == joCods.size()-1)
-                    totalJobOrder.setText("Rp. "+totalPrice);
-            }
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.joTextUnitPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) satuan)));
+            holder.joTextDiscount.setText("Rp. "+ formatter.format(Long.valueOf((int) diskon)));
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) qty)));
+            if (position == joCods.size()-1)
+                totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
 
             if (position%2==0)
                 holder.layoutJoMr.setBackgroundColor(getResources().getColor(R.color.colorLightGray));

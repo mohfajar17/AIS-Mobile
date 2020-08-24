@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Project.Spkl.BuatSpklActivity"></activity>
+        <activity android:name=".Project.JobOrder.BuatJobOrderActivity"></activity>
+        <activity android:name=".Project.Spkl.BuatSpklActivity" />
         <activity android:name=".Project.Spkl.DetailSpklActivity" />
         <activity android:name=".Project.JobOrder.JobOrderDetailHistoryActivity" />
         <activity android:name=".Project.JobOrder.JobOrderDetailNotesActivity" />

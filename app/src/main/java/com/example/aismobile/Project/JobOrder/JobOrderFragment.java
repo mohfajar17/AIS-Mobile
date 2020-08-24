@@ -217,12 +217,8 @@ public class JobOrderFragment extends Fragment {
         fabAddJO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new BuatJobOrderFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.containerFragment, fragment);
-                fragmentTransaction.disallowAddToBackStack();
-                fragmentTransaction.commit();
+                Intent intent = new Intent(getContext(), BuatJobOrderActivity.class);
+                startActivityForResult(intent,1);
             }
         });
 

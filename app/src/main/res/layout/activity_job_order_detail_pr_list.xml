@@ -134,7 +134,7 @@
 
     <TextView
         android:id="@+id/joTextDiscount"
-        android:layout_width="80dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:gravity="right|top"
         android:text="-"

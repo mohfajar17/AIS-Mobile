@@ -50,7 +50,7 @@ public class JobOrderDetailInvoiceActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoInvoice> joInvoices;
     private ProgressDialog progressDialog;
-    private int totalPrice = 0;
+    private long totalPrice = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -266,6 +266,7 @@ public class JobOrderDetailInvoiceActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joInvoices.add(new JoInvoice(jsonArray.getJSONObject(i)));
+                            totalPrice += (long) jsonArray.getJSONObject(i).getDouble("service_amount");
                         }
                         adapter = new MyRecyclerViewAdapter(joInvoices, context);
                         recyclerView.setAdapter(adapter);
@@ -329,7 +330,6 @@ public class JobOrderDetailInvoiceActivity extends AppCompatActivity {
             else holder.joTextPaymentLate.setText(mValues.get(position).getPayment_later());
 
             double harga = Double.valueOf(mValues.get(position).getService_amount());
-            totalPrice = totalPrice + (int) harga;
 
             NumberFormat formatter = new DecimalFormat("#,###");
             holder.joTextTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) harga)));

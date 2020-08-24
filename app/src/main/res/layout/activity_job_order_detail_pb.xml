@@ -415,6 +415,7 @@
                         android:id="@+id/recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clipToPadding="true"
                         android:nestedScrollingEnabled="false" />
 
                     <LinearLayout
@@ -562,6 +563,7 @@
                         android:id="@+id/recyclerViewAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clipToPadding="true"
                         android:nestedScrollingEnabled="false"/>
                 </LinearLayout>
             </HorizontalScrollView>

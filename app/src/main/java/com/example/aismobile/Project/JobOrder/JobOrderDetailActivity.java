@@ -23,6 +23,8 @@ import java.util.concurrent.TimeUnit;
 
 public class JobOrderDetailActivity extends AppCompatActivity {
 
+    private double toDouble;
+
     private TextView menuJoDetail;
     private TextView menuJoMr;
     private TextView menuJoPr;
@@ -143,16 +145,35 @@ public class JobOrderDetailActivity extends AppCompatActivity {
 
         NumberFormat formatter = new DecimalFormat("#,###");
 
-        detailMateriB.setText("Rp. " + formatter.format(Long.valueOf(jobOrder.getMaterial_amount())));
-        detailToolB.setText("Rp. " +  formatter.format(Long.valueOf(jobOrder.getTools_amount())));
-        detailMpcB.setText("Rp. " +  formatter.format(Long.valueOf(jobOrder.getMan_power_amount())));
-        detailCodB.setText("Rp. " +  formatter.format(Long.valueOf(jobOrder.getCod_amount())));
-        detailWoB.setText("Rp. " +  formatter.format(Long.valueOf(jobOrder.getWo_amount())));
-        detailMrB.setText("Rp. " +  formatter.format(Long.valueOf(jobOrder.getMaterial_return_amount())));
-        detailPbB.setText("Rp. " +  formatter.format(Long.valueOf(jobOrder.getPb_amount())));
-        detailCprB.setText("Rp. " +  formatter.format(Long.valueOf(jobOrder.getCpr_amount())));
-        detailExpensesB.setText("Rp. " +  formatter.format(Long.valueOf(jobOrder.getExpenses_amount())));
-        int total = (int) Integer.valueOf(jobOrder.getMaterial_amount()) + Integer.valueOf(jobOrder.getTools_amount()) + Integer.valueOf(jobOrder.getMan_power_amount()) + Integer.valueOf(jobOrder.getCod_amount()) + Integer.valueOf(jobOrder.getWo_amount()) + Integer.valueOf(jobOrder.getMaterial_return_amount()) + Integer.valueOf(jobOrder.getPb_amount()) + Integer.valueOf(jobOrder.getCpr_amount()) + Integer.valueOf(jobOrder.getExpenses_amount());
+        int total = 0;
+
+        toDouble = Double.valueOf(jobOrder.getMaterial_amount());
+        detailMateriB.setText("Rp. " + formatter.format((int) toDouble));
+        total += (int) toDouble;
+        toDouble = Double.valueOf(jobOrder.getTools_amount());
+        detailToolB.setText("Rp. " +  formatter.format((int) toDouble));
+        total += (int) toDouble;
+        toDouble = Double.valueOf(jobOrder.getMan_power_amount());
+        detailMpcB.setText("Rp. " +  formatter.format((int) toDouble));
+        total += (int) toDouble;
+        toDouble = Double.valueOf(jobOrder.getCod_amount());
+        detailCodB.setText("Rp. " +  formatter.format((int) toDouble));
+        total += (int) toDouble;
+        toDouble = Double.valueOf(jobOrder.getWo_amount());
+        detailWoB.setText("Rp. " +  formatter.format((int) toDouble));
+        total += (int) toDouble;
+        toDouble = Double.valueOf(jobOrder.getMaterial_return_amount());
+        detailMrB.setText("Rp. " +  formatter.format((int) toDouble));
+        total += (int) toDouble;
+        toDouble = Double.valueOf(jobOrder.getPb_amount());
+        detailPbB.setText("Rp. " +  formatter.format((int) toDouble));
+        total += (int) toDouble;
+        toDouble = Double.valueOf(jobOrder.getCpr_amount());
+        detailCprB.setText("Rp. " +  formatter.format((int) toDouble));
+        total += (int) toDouble;
+        toDouble = Double.valueOf(jobOrder.getExpenses_amount());
+        detailExpensesB.setText("Rp. " +  formatter.format((int) toDouble));
+        total += (int) toDouble;
         detailTotalBudgetB.setText("Rp. " +  formatter.format(total));
 
         jodJobOrder.setText(jobOrder.getJob_order_number());
@@ -171,27 +192,19 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         detailTanggalDibuat.setText(jobOrder.getCreated_date());
         detailDiubahOleh.setText(jobOrder.getModified_by());
         detailDiubahTgl.setText(jobOrder.getModified_date());
-        try{
-            detailNilai.setText("Rp. "+ formatter.format(Long.valueOf(jobOrder.getAmount())));
-            detailBudgetAmount.setText("Rp. "+ formatter.format(Long.valueOf(jobOrder.getBudgeting_amount())));
-            detailNilaiKontrak.setText("Rp. "+ formatter.format(Long.valueOf(jobOrder.getAmount())));
-            detailCustomerInvoice.setText("Rp. ");
-            detailCustomerPayment.setText("Rp. ");
-            detailBalance.setText("Rp. ");
-            detailLabaRugiBerjalan.setText("Rp. ");
-            detailSisaBudget.setText("Rp. ");
-            detailLabaRugi.setText("Rp. ");
-        } catch (NumberFormatException ex){ // handle your exception
-            detailNilai.setText("Rp. "+ jobOrder.getAmount());
-            detailBudgetAmount.setText("Rp. "+ jobOrder.getBudgeting_amount());
-            detailNilaiKontrak.setText("Rp. "+ jobOrder.getAmount());
-            detailCustomerInvoice.setText("Rp. ");
-            detailCustomerPayment.setText("Rp. ");
-            detailBalance.setText("Rp. ");
-            detailLabaRugiBerjalan.setText("Rp. ");
-            detailSisaBudget.setText("Rp. ");
-            detailLabaRugi.setText("Rp. ");
-        }
+
+        toDouble = Double.valueOf(jobOrder.getAmount());
+        detailNilai.setText("Rp. "+ formatter.format((int) toDouble));
+        toDouble = Double.valueOf(jobOrder.getBudgeting_amount());
+        detailBudgetAmount.setText("Rp. "+ formatter.format((int) toDouble));
+        toDouble = Double.valueOf(jobOrder.getAmount());
+        detailNilaiKontrak.setText("Rp. "+ formatter.format((int) toDouble));
+        detailCustomerInvoice.setText("Rp. ");
+        detailCustomerPayment.setText("Rp. ");
+        detailBalance.setText("Rp. ");
+        detailLabaRugiBerjalan.setText("Rp. ");
+        detailSisaBudget.setText("Rp. ");
+        detailLabaRugi.setText("Rp. ");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {

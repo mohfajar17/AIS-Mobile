@@ -48,13 +48,6 @@ import java.util.Map;
 
 public class AsetRentalFragment extends Fragment {
 
-    private TextView arMenuAsetRent;
-    private TextView arMenuModelAset;
-    private TextView arMenuKategoriAset;
-    private TextView arMenuTipeAset;
-    private LinearLayout showFilter;
-    private LinearLayout layoutFilter;
-
     public TextView textPaging;
     public EditText editSearch;
     public ImageView btnSearch;
@@ -116,26 +109,6 @@ public class AsetRentalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_aset_rental, container, false);
-
-        //sub menu
-        arMenuAsetRent = (TextView) view.findViewById(R.id.arnMenuAsetRent);
-        arMenuKategoriAset = (TextView) view.findViewById(R.id.arnMenuKategoriAset);
-        arMenuModelAset = (TextView) view.findViewById(R.id.arnMenuModelAset);
-        arMenuTipeAset = (TextView) view.findViewById(R.id.arnMenuTipeAset);
-        showFilter = (LinearLayout) view.findViewById(R.id.arnShowFilter);
-        layoutFilter = (LinearLayout) view.findViewById(R.id.arnlayoutFilter);
-
-        showFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                params = showFilter.getLayoutParams();
-                params.height = 0;
-                showFilter.setLayoutParams(params);
-                params = layoutFilter.getLayoutParams();
-                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
-                layoutFilter.setLayoutParams(params);
-            }
-        });
 
         // Set list adapter
         recycler = (RecyclerView) view.findViewById(R.id.arnRecycler);

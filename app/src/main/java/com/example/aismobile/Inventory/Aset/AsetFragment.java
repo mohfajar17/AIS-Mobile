@@ -48,15 +48,6 @@ import java.util.Map;
 
 public class AsetFragment extends Fragment {
 
-    private TextView aMenuAsetTf;
-    private TextView aMenuAsetAs;
-    private TextView aMenuAset;
-    private TextView aMenuModelAset;
-    private TextView aMenuKetegoriAset;
-    private TextView aMenuTipeAset;
-    private LinearLayout showFilter;
-    private LinearLayout layoutFilter;
-
     public TextView textPaging;
     public EditText editSearch;
     public ImageView btnSearch;
@@ -119,94 +110,6 @@ public class AsetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_aset, container, false);
-
-        //sub menu
-        aMenuAsetTf = (TextView) view.findViewById(R.id.aMenuAsetTf);
-        aMenuAsetAs = (TextView) view.findViewById(R.id.aMenuAsetAs);
-        aMenuAset = (TextView) view.findViewById(R.id.aMenuAset);
-        aMenuModelAset = (TextView) view.findViewById(R.id.aMenuModelAset);
-        aMenuKetegoriAset = (TextView) view.findViewById(R.id.aMenuKetegoriAset);
-        aMenuTipeAset = (TextView) view.findViewById(R.id.aMenuTipeAset);
-        showFilter = (LinearLayout) view.findViewById(R.id.aShowFilter);
-        layoutFilter = (LinearLayout) view.findViewById(R.id.alayoutFilter);
-
-        aMenuAsetTf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
-//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-//                fragmentTransaction.disallowAddToBackStack();
-//                fragmentTransaction.commit();
-            }
-        });
-        aMenuAsetAs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
-//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-//                fragmentTransaction.disallowAddToBackStack();
-//                fragmentTransaction.commit();
-            }
-        });
-        aMenuAset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
-//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-//                fragmentTransaction.disallowAddToBackStack();
-//                fragmentTransaction.commit();
-            }
-        });
-        aMenuModelAset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
-//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-//                fragmentTransaction.disallowAddToBackStack();
-//                fragmentTransaction.commit();
-            }
-        });
-        aMenuKetegoriAset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
-//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-//                fragmentTransaction.disallowAddToBackStack();
-//                fragmentTransaction.commit();
-            }
-        });
-        aMenuTipeAset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                AssetTransfersFragment mainFragment = AssetTransfersFragment.newInstance();
-//                fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-//                fragmentTransaction.disallowAddToBackStack();
-//                fragmentTransaction.commit();
-            }
-        });
-        showFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                params = showFilter.getLayoutParams();
-                params.height = 0;
-                showFilter.setLayoutParams(params);
-                params = layoutFilter.getLayoutParams();
-                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
-                layoutFilter.setLayoutParams(params);
-            }
-        });
 
         // Set list adapter
         recycler = (RecyclerView) view.findViewById(R.id.aRecycler);

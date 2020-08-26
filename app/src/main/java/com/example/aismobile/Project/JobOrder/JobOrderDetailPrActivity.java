@@ -267,6 +267,21 @@ public class JobOrderDetailPrActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joprs.add(new JoPr(jsonArray.getJSONObject(i)));
+
+                            double quantity = 0;
+                            if (jsonArray.getJSONObject(i).getString("quantity_taked").equals("null")) {
+                                quantity = 0;
+                            } else {
+                                quantity = jsonArray.getJSONObject(i).getDouble("quantity_taked");
+                            }
+
+                            double price = jsonArray.getJSONObject(i).getDouble("unit_price");
+                            double diskon = jsonArray.getJSONObject(i).getDouble("discount");
+                            double qty = quantity * price;
+                            if ((int) qty > 0) {
+                                qty -= diskon;
+                            }
+                            totalPrice += (long) qty;
                         }
                         adapter = new MyRecyclerViewAdapter(joprs, context);
                         recyclerView.setAdapter(adapter);
@@ -317,6 +332,7 @@ public class JobOrderDetailPrActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
+            int nomor = position+1;
             double quantity = 0;
             if (String.valueOf(mValues.get(position).getQuantity_taked()).equals("null")) {
                 quantity = 0;
@@ -327,7 +343,11 @@ public class JobOrderDetailPrActivity extends AppCompatActivity {
             }
 
             double price = Double.valueOf(mValues.get(position).getUnit_price());
-            int nomor = position+1;
+            double diskon = Double.valueOf(mValues.get(position).getDiscount());
+            double qty = quantity * price;
+            if (qty > 0) {
+                qty -= diskon;
+            }
 
             holder.joTextNo.setText("" + nomor);
             holder.joTextItem.setText(mValues.get(position).getItem_name());
@@ -336,14 +356,6 @@ public class JobOrderDetailPrActivity extends AppCompatActivity {
             holder.joTextPoNumber.setText(mValues.get(position).getPurchase_order_number());
             holder.joTextPickupNumber.setText(mValues.get(position).getPickup_number());
             holder.joTextStatus.setText(mValues.get(position).getStatus());
-
-            double diskon = Double.valueOf(mValues.get(position).getDiscount());
-            double qty = quantity * price;
-            totalPrice = totalPrice + (long) qty;
-
-            if (qty > 0) {
-                qty -= diskon;
-            }
 
             NumberFormat formatter = new DecimalFormat("#,###");
             holder.joTextUnitPrice.setText("Rp. "+ formatter.format((int) price));

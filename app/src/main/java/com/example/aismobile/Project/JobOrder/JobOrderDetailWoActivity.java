@@ -264,9 +264,16 @@ public class JobOrderDetailWoActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        totalPrice = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joCods.add(new JoWo(jsonArray.getJSONObject(i)));
+
+                            double banyak = jsonArray.getJSONObject(i).getDouble("quantity");
+                            double satuan = jsonArray.getJSONObject(i).getDouble("unit_price");
+                            double diskon = jsonArray.getJSONObject(i).getDouble("discount");
+                            double qty = (banyak*satuan) - diskon;
+                            totalPrice = totalPrice + (int) qty;
                         }
                         adapter = new MyRecyclerViewAdapter(joCods, context);
                         recyclerView.setAdapter(adapter);
@@ -318,6 +325,12 @@ public class JobOrderDetailWoActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
             int nomor = position+1;
+
+            double banyak = Double.valueOf(mValues.get(position).getQuantity());
+            double satuan = Double.valueOf(mValues.get(position).getUnit_price());
+            double diskon = Double.valueOf(mValues.get(position).getDiscount());
+            double qty = (banyak*satuan) - diskon;
+
             holder.joTextNo.setText("" + nomor);
             holder.joTextWorkOrders.setText(mValues.get(position).getPurchase_service_number());
             holder.joTextNamaItem.setText(mValues.get(position).getItem_name());
@@ -326,13 +339,6 @@ public class JobOrderDetailWoActivity extends AppCompatActivity {
             holder.joTextWorkRequest.setText(mValues.get(position).getWork_order_number());
             holder.joTextJumlah.setText(mValues.get(position).getQuantity());
             holder.joTextAbbr.setText(mValues.get(position).getUnit_abbr());
-
-            double banyak = Double.valueOf(mValues.get(position).getQuantity());
-            double satuan = Double.valueOf(mValues.get(position).getUnit_price());
-            double diskon = Double.valueOf(mValues.get(position).getDiscount());
-
-            double qty = (banyak*satuan) - diskon;
-            totalPrice = totalPrice + (int) qty;
 
             NumberFormat formatter = new DecimalFormat("#,###");
             holder.joTextUnitPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) satuan)));

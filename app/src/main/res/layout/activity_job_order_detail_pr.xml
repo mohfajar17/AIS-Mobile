@@ -496,7 +496,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="1240dp"
+                            android:layout_width="1260dp"
                             android:layout_height="wrap_content"
                             android:gravity="right"
                             android:text="Total "

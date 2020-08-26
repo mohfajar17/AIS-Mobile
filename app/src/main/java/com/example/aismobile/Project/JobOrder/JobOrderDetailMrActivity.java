@@ -263,10 +263,22 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
+                    totalPrice = 0;
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             jomrs.add(new JoMr(jsonArray.getJSONObject(i)));
+
+                            double quantity = 0;
+                            if (jsonArray.getJSONObject(i).getString("quantity_taked").equals("null")) {
+                                quantity = 0;
+                            } else {
+                                quantity = jsonArray.getJSONObject(i).getDouble("quantity_taked");
+                            }
+
+                            double price = jsonArray.getJSONObject(i).getDouble("unit_price");
+                            int qty = (int) quantity*(int) price;
+                            totalPrice +=  qty;
                         }
                         adapter = new MyRecyclerViewAdapter(jomrs, context);
                         recyclerView.setAdapter(adapter);
@@ -329,7 +341,6 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
 
             double price = Double.valueOf(mValues.get(position).getUnit_price());
             int qty = (int) quantity*(int) price;
-            totalPrice = totalPrice + qty;
 
             int nomor = position+1;
             holder.joTextNo.setText("" + nomor);

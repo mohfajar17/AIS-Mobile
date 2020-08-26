@@ -50,7 +50,7 @@ public class JobOrderDetailExpensesActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoExpenses> joExpenses;
     private ProgressDialog progressDialog;
-    private int totalPrice = 0;
+    private long totalPrice = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -263,9 +263,13 @@ public class JobOrderDetailExpensesActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        totalPrice = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joExpenses.add(new JoExpenses(jsonArray.getJSONObject(i)));
+
+                            double harga = jsonArray.getJSONObject(i).getDouble("amount");
+                            totalPrice += (long) harga;
                         }
                         adapter = new MyRecyclerViewAdapter(joExpenses, context);
                         recyclerView.setAdapter(adapter);
@@ -317,15 +321,14 @@ public class JobOrderDetailExpensesActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
             int nomor = position + 1;
+            double harga = Double.valueOf(mValues.get(position).getAmount());
+
             holder.joTextNo.setText("" + nomor);
             holder.joTextExpensesNumber.setText(mValues.get(position).getExpenses_number());
             holder.joTextExpensesDate.setText(mValues.get(position).getBegin_date());
             holder.joTextItem.setText(mValues.get(position).getItem_name());
             holder.joTextAccountName.setText(mValues.get(position).getBank_account_name());
             holder.joTextRekBank.setText(mValues.get(position).getBank_account_name());
-
-            double harga = Double.valueOf(mValues.get(position).getAmount());
-            totalPrice = totalPrice + (int) harga;
 
             NumberFormat formatter = new DecimalFormat("#,###");
             holder.joTextNilai.setText("Rp. "+ formatter.format(Long.valueOf((int) harga)));

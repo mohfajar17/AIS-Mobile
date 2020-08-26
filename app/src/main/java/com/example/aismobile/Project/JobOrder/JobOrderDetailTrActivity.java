@@ -266,6 +266,16 @@ public class JobOrderDetailTrActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joTrs.add(new JoTr(jsonArray.getJSONObject(i)));
+
+                            double quantity = 0;
+                            if (jsonArray.getJSONObject(i).getString("Qty").equals("null")) {
+                                quantity = 0;
+                            } else {
+                                quantity = jsonArray.getJSONObject(i).getDouble("Qty");
+                            }
+                            double Price = jsonArray.getJSONObject(i).getDouble("price");
+                            double subTotal = quantity * Price;
+                            totalPrice += (int) subTotal;
                         }
                         adapter = new MyRecyclerViewAdapter(joTrs, context);
                         recyclerView.setAdapter(adapter);
@@ -326,15 +336,14 @@ public class JobOrderDetailTrActivity extends AppCompatActivity {
             }
             double Price = Double.valueOf(mValues.get(position).getPrice());
             double subTotal = quantity * Price;
-            totalPrice = totalPrice + (int) subTotal;
 
             holder.joTextNo.setText("" + nomor);
             holder.joTextRrNumber.setText(mValues.get(position).getUnit());
             holder.joTextAsetRental.setText(mValues.get(position).getAssetName());
             holder.joTextKeterangan.setText(mValues.get(position).getAssetDesc());
             holder.joTextQty.setText("" + (int) quantity);
-            holder.joTextPrice.setText("Rp. "+ formatter.format((int) Price));
-            holder.joTextSubTotal.setText("Rp. "+ formatter.format((int) subTotal));
+            holder.joTextPrice.setText("Rp. "+ formatter.format((long) Price));
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format((long) subTotal));
             if (position == joTrs.size()-1)
                 totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
 

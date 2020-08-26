@@ -130,6 +130,8 @@ public class Config {
     public static final String DATA_URL_LIST_JOB_ORDER = DATA_URL+"listJobOrder";
     public static final String DATA_URL_SPKL_NUMBER = DATA_URL+"getSpklNumber";
     public static final String DATA_URL_CREATE_SPKL = DATA_URL+"addSpkl";
+    public static final String DATA_URL_JOB_ORDER_NUMBER = DATA_URL+"getJobOrderNumber";
+    public static final String DATA_URL_CREATE_JOB_ORDER = DATA_URL+"addJobOrder";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

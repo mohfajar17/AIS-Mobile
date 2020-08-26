@@ -85,7 +85,7 @@
                     android:enabled="false"
                     android:hint="nomor job order"
                     android:inputType="text"
-                    android:text="JO-XXX-2008-0080" />
+                    android:text="JO-XXX-2008-0070" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -298,7 +298,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:hint="dd-mm-yyyy"
+                    android:hint="yyyy-mm-dd"
                     android:inputType="text" />
 
                 <LinearLayout
@@ -324,7 +324,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:hint="dd-mm-yyyy"
+                    android:hint="yyyy-mm-dd"
                     android:inputType="text" />
 
                 <TextView
@@ -473,6 +473,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="nilai"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -487,6 +488,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="budgeting amount"
+                    android:text="0"
                     android:inputType="number" />
 
                 <LinearLayout
@@ -546,6 +548,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="material"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -560,6 +563,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="tools"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -574,6 +578,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="man power"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -588,6 +593,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="cash on delivery"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -602,6 +608,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="work order"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -616,6 +623,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="material return"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -630,6 +638,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="proposed budget"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -644,6 +653,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="cash project report"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -658,6 +668,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="expenses"
+                    android:text="0"
                     android:inputType="number" />
 
                 <TextView
@@ -672,15 +683,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="catatan" />
-
-                <Button
-                    android:id="@+id/simpanJobOrderBaru"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorAsukaBlue"
-                    android:textColor="@color/colorWhite"
-                    android:text="Buat" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/simpanJobOrderBaru"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bubble_red"
+                android:textColor="@color/colorWhite"
+                android:text="Buat" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

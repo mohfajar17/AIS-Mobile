@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -47,6 +49,7 @@ public class DetailSpklActivity extends AppCompatActivity {
     private List<SpklDetail> jomrs;
     private ProgressDialog progressDialog;
 
+    private ImageView buttonBack;
     private TextView menuSpklDetail;
     private TextView menuSpklHistory;
     private TextView textSpklNumber;
@@ -90,6 +93,7 @@ public class DetailSpklActivity extends AppCompatActivity {
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
+        buttonBack = (ImageView) findViewById(R.id.buttonBack);
         menuSpklDetail = (TextView) findViewById(R.id.menuSpklDetail);
         menuSpklHistory = (TextView) findViewById(R.id.menuSpklHistory);
         textSpklNumber = (TextView) findViewById(R.id.textSpklNumber);
@@ -116,8 +120,8 @@ public class DetailSpklActivity extends AppCompatActivity {
         detailSpklLocation.setText(spkls.getWork_location());
         detailSpklJobCode.setText(spkls.getJob_order_id());
         detailSpklProposedDate.setText(spkls.getProposed_date());
-        detailSpklReq.setText(spkls.getRequested_id());
-        detailSpklReqDate.setText(spkls.getRequest_date());
+        detailSpklReq.setText(spkls.getCreated_by());
+        detailSpklReqDate.setText("");//spkls.getRequest_date());
         detailSpklApproval1.setText(spkls.getApproval1_by() + "\n" + spkls.getApproval1_date());
         detailSpklApproval2.setText(spkls.getApproval2_by() + "\n" + spkls.getApproval2_date());
         detailSpklVerifiedBy.setText(spkls.getVerified_by() + "\n" + spkls.getVerified_date());
@@ -125,6 +129,13 @@ public class DetailSpklActivity extends AppCompatActivity {
         historySpklCreatedDate.setText(spkls.getCreated_date());
         historySpklModifiedBy.setText(spkls.getModified_by());
         historySpklModifiedDate.setText(spkls.getModified_date());
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         menuSpklDetail.setOnClickListener(new View.OnClickListener() {
             @Override

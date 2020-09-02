@@ -45,6 +45,7 @@ import java.util.concurrent.TimeUnit;
 
 public class JobOrderDetailCprActivity extends AppCompatActivity {
 
+    private long totalCpr;
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
@@ -329,6 +330,7 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
             recylerViewLayoutManager = new LinearLayoutManager(context);
             holder.recyclerViewList.setLayoutManager(recylerViewLayoutManager);
 
+            totalCpr = 0;
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DETAIL_JO_CPR_REST_LIST, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -339,9 +341,20 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
                             for(int i=0;i<jsonArray.length();i++){
                                 joCprRests.add(new JoCprRest(jsonArray.getJSONObject(i)));
+
+                                double quantity = jsonArray.getJSONObject(i).getDouble("quantity");
+                                double price = jsonArray.getJSONObject(i).getDouble("unit_price");
+                                double diskon = jsonArray.getJSONObject(i).getDouble("discount");
+                                long subTotal = ((long) quantity * (long) price) - (long) diskon;
+
+                                totalCpr += subTotal;
                             }
                             newAdapter = new MyNewRecyclerViewAdapter(joCprRests, context);
                             holder.recyclerViewList.setAdapter(newAdapter);
+
+                            holder.joTextTotalNumber.setText("Total CPR ( " + mValues.get(position).getResponsbility_advance_number() + " )");
+                            NumberFormat formatter = new DecimalFormat("#,###");
+                            holder.joTextTotalCpr.setText("Rp. " + formatter.format(totalCpr));
                         } else {
                             Toast.makeText(JobOrderDetailCprActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                         }
@@ -377,6 +390,8 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
             public final TextView joTextNo;
             public final TextView joTextCprNumber;
             public final TextView joTextPbNumber;
+            public final TextView joTextTotalCpr;
+            public final TextView joTextTotalNumber;
             public final RecyclerView recyclerViewList;
             public final LinearLayout layoutJo;
 
@@ -387,6 +402,8 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
                 joTextNo = (TextView) itemView.findViewById(R.id.joTextNo);
                 joTextCprNumber = (TextView) itemView.findViewById(R.id.joTextCprNumber);
                 joTextPbNumber = (TextView) itemView.findViewById(R.id.joTextPbNumber);
+                joTextTotalCpr = (TextView) itemView.findViewById(R.id.joTextTotalCpr);
+                joTextTotalNumber = (TextView) itemView.findViewById(R.id.joTextTotalNumber);
                 recyclerViewList = (RecyclerView) itemView.findViewById(R.id.recyclerViewList);
                 layoutJo = (LinearLayout) itemView.findViewById(R.id.layoutJo);
             }

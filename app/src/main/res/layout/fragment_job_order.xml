@@ -225,6 +225,19 @@
                         android:padding="10dp"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
                 <ImageView

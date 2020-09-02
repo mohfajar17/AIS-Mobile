@@ -432,11 +432,16 @@
                         android:layout_height="1dp"
                         android:src="@color/colorWhite"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerViewTemp"
+                    <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:isScrollContainer="true" />
+                        android:fillViewport="true">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewTemp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </androidx.core.widget.NestedScrollView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -621,11 +626,16 @@
                         android:layout_height="1dp"
                         android:src="@color/colorWhite"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerViewPermanen"
+                    <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:isScrollContainer="true" />
+                        android:fillViewport="true">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewPermanen"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </androidx.core.widget.NestedScrollView>
 
                     <LinearLayout
                         android:layout_width="match_parent"

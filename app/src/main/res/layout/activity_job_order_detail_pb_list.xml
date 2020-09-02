@@ -95,12 +95,16 @@
                     android:textColor="@android:color/black"/>
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewList"
-                android:layout_width="wrap_content"
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="true"
-                android:nestedScrollingEnabled="false"/>
+                android:fillViewport="true">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </androidx.core.widget.NestedScrollView>
         </LinearLayout>
     </LinearLayout>
 

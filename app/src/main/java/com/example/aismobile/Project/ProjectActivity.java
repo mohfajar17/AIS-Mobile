@@ -14,6 +14,7 @@ import com.example.aismobile.Data.Project.JobOrder;
 import com.example.aismobile.Data.Project.MaterialRequest;
 import com.example.aismobile.Data.Project.Pickup;
 import com.example.aismobile.Data.Project.ProposedBudget;
+import com.example.aismobile.Data.Project.ResourcesRequest;
 import com.example.aismobile.Data.Project.Spkl;
 import com.example.aismobile.Data.Project.TunjanganKaryawan;
 import com.example.aismobile.Data.Project.TunjanganTemporary;
@@ -53,7 +54,8 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
         ProposedBudgetFragment.OnListFragmentInteractionListener,
         CashProjectFragment.OnListFragmentInteractionListener,
         TunKaryawanFragment.OnListFragmentInteractionListener,
-        TunTemporaryFragment.OnListFragmentInteractionListener {
+        TunTemporaryFragment.OnListFragmentInteractionListener,
+        ToolsReqFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -232,6 +234,11 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(TunjanganTemporary item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(ResourcesRequest item) {
 
     }
 }

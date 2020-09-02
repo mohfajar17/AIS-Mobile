@@ -2,8 +2,8 @@ package com.example.aismobile;
 
 public class Config {
 //    public static final String DATA_URL = "http://192.168.43.183/ais_web_service/apiAis.php?apicall=";   //IP thetering hp
-//    public static final String DATA_URL = "http://192.168.88.248/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
-//    public static final String DATA_URL = "http://192.168.0.105/ais_web_service/apiAis.php?apicall=";   //IP home wifi
+//    public static final String DATA_URL = "http://192.168.88.212/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
+//    public static final String DATA_URL = "http://192.168.0.103/ais_web_service/apiAis.php?apicall=";   //IP home wifi
     public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
     public static final String DATA_URL_LOGIN = DATA_URL+"login";
     public static final String DATA_URL_USER_ACCESS = DATA_URL+"accessAllowModul";
@@ -33,6 +33,7 @@ public class Config {
     public static final String DATA_URL_MATERIAL_REQUISITION_LIST = DATA_URL+"getMaterialRequisition";
     public static final String DATA_URL_WORK_ORDER_LIST = DATA_URL+"getWorkOrder";
     public static final String DATA_URL_PICKUP_LIST = DATA_URL+"getPickup";
+    public static final String DATA_URL_TOOLS_REQUEST_LIST = DATA_URL+"getResourcesRequest";
     public static final String DATA_URL_PROPOSE_BUDGET_LIST = DATA_URL+"getProposedBudget";
     public static final String DATA_URL_CASH_PROJECT_LIST = DATA_URL+"getCashProjectReport";
     public static final String DATA_URL_SPKL_LIST = DATA_URL+"getSpkl";
@@ -122,7 +123,9 @@ public class Config {
     public static final String DATA_URL_DETAIL_JO_CPR_LIST = DATA_URL+"getDetailJOCPR";
     public static final String DATA_URL_DETAIL_JO_CPR_REST_LIST = DATA_URL+"getDetailJOCPRRestFrom";
     public static final String DATA_URL_DETAIL_SPKL_LIST = DATA_URL+"getDetailSpkl";
+    public static final String DATA_URL_LIST_DETAIL_SPKL = DATA_URL+"getListDetailSpkl";
     public static final String DATA_URL_LIST_SALES_QUOTATION = DATA_URL+"listSalesQuotation";
+    public static final String DATA_URL_LIST_SALES_QUOTATION_UPDATE = DATA_URL+"listSalesQuotationUpdate";
     public static final String DATA_URL_LIST_EMPLOYEE = DATA_URL+"listEmployee";
     public static final String DATA_URL_LIST_WORKBASE = DATA_URL+"listWorkbase";
     public static final String DATA_URL_LIST_DEPARTMEN = DATA_URL+"listDepartmen";
@@ -130,8 +133,11 @@ public class Config {
     public static final String DATA_URL_LIST_JOB_ORDER = DATA_URL+"listJobOrder";
     public static final String DATA_URL_SPKL_NUMBER = DATA_URL+"getSpklNumber";
     public static final String DATA_URL_CREATE_SPKL = DATA_URL+"addSpkl";
+    public static final String DATA_URL_UPDATE_SPKL = DATA_URL+"updateSpkl";
     public static final String DATA_URL_JOB_ORDER_NUMBER = DATA_URL+"getJobOrderNumber";
     public static final String DATA_URL_CREATE_JOB_ORDER = DATA_URL+"addJobOrder";
+    public static final String DATA_URL_UPDATE_JOB_ORDER = DATA_URL+"updateJobOrder";
+    public static final String DATA_URL_DATA_JOB_ORDER = DATA_URL+"getDataJobOrder";
     public static final String DATA_URL_PHOTO_PROFILE = "https://ais.asukaindonesia.co.id/protected/attachments/employeePhoto/";
     public static final String DATA_URL_IMAGE = "https://ais.asukaindonesia.co.id/protected/attachments/news/";
 }

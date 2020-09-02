@@ -483,11 +483,17 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical" >
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerJobOrder"
+                    <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:isScrollContainer="false" />
+                        android:fillViewport="true">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerJobOrder"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:isScrollContainer="false" />
+                    </androidx.core.widget.NestedScrollView>
 
                     <LinearLayout
                         android:layout_width="match_parent"

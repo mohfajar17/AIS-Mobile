@@ -491,6 +491,19 @@ public class SpklFragment extends Fragment {
                 holder.pskLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.pskLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
+            holder.pskBtnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mValues.get(position).getApproval1_by().isEmpty()){
+                        Intent intent = new Intent(getActivity(), UpdateSpklActivity.class);
+                        intent.putExtra("detail", mValues.get(position));
+                        holder.itemView.getContext().startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "Overtime Workorder has been Approval I", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -616,6 +629,7 @@ public class SpklFragment extends Fragment {
             public final TextView pskTextApproval2;
             public final TextView pskTextVerifiedBy;
 
+            public final ImageView pskBtnEdit;
             public final LinearLayout pskLayoutList;
 
             public ViewHolder(View view) {
@@ -633,6 +647,7 @@ public class SpklFragment extends Fragment {
                 pskTextApproval2 = (TextView) view.findViewById(R.id.pskTextApproval2);
                 pskTextVerifiedBy = (TextView) view.findViewById(R.id.pskTextVerifiedBy);
 
+                pskBtnEdit = (ImageView) view.findViewById(R.id.pskBtnEdit);
                 pskLayoutList = (LinearLayout) view.findViewById(R.id.pskLayoutList);
             }
         }

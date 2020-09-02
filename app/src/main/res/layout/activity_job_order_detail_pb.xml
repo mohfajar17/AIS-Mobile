@@ -312,8 +312,7 @@
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -411,12 +410,16 @@
                         android:layout_height="1dp"
                         android:src="@color/colorWhite"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
+                    <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clipToPadding="true"
-                        android:nestedScrollingEnabled="false" />
+                        android:fillViewport="true">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </androidx.core.widget.NestedScrollView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -559,12 +562,16 @@
                         android:layout_height="1dp"
                         android:src="@color/colorWhite"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerViewAll"
+                    <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clipToPadding="true"
-                        android:nestedScrollingEnabled="false"/>
+                        android:fillViewport="true">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewAll"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </androidx.core.widget.NestedScrollView>
                 </LinearLayout>
             </HorizontalScrollView>
         </LinearLayout>

@@ -460,6 +460,15 @@ public class JobOrderFragment extends Fragment {
                 holder.layoutJobOrderColor.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.layoutJobOrderColor.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
+            holder.JOEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), UpdateJobOrderActivity.class);
+                    intent.putExtra("detail", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            });
+
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -563,6 +572,7 @@ public class JobOrderFragment extends Fragment {
             public final TextView JOKeterangan;
             public final TextView JONilai;
             public final TextView JOStatus;
+            public final ImageView JOEdit;
             public final LinearLayout layoutJobOrderColor;
 
             public ViewHolder(View view) {
@@ -576,6 +586,7 @@ public class JobOrderFragment extends Fragment {
                 JOKeterangan = (TextView) view.findViewById(R.id.JOKeterangan);
                 JONilai = (TextView) view.findViewById(R.id.JONilai);
                 JOStatus = (TextView) view.findViewById(R.id.JOStatus);
+                JOEdit = (ImageView) view.findViewById(R.id.JOEdit);
                 layoutJobOrderColor = (LinearLayout) view.findViewById(R.id.layoutJobOrderColor);
             }
         }

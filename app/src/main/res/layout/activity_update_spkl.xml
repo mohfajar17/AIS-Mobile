@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Project.Spkl.UpdateSpklActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAsukaBlue"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/buttonBack"
+            android:layout_width="50dp"
+            android:padding="7dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_ab_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:padding="10dp"
+            android:gravity="left|center"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:text="Update Overtime Workorder"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:text="Kolom dengan (*) harus diisi"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorLightGray" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Overtime Workorder Number"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@android:color/holo_red_dark" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editSpklNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:hint="nomor job order"
+                    android:inputType="text"
+                    android:text="-" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Job Code"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@android:color/holo_red_dark" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editSpklJo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:hint="nomor job order"
+                    android:inputType="text"
+                    android:text="-" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lokasi Job Order"
+                    android:textColor="@android:color/black" />
+
+                <EditText
+                    android:id="@+id/editSpklLokasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:hint="nomor job order"
+                    android:inputType="text"
+                    android:text="-" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Department"
+                    android:textColor="@android:color/black" />
+
+                <EditText
+                    android:id="@+id/editSpklDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:hint="nomor job order"
+                    android:inputType="text"
+                    android:text="-" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Work Description"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@android:color/holo_red_dark" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editSpklDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="work description"
+                    android:inputType="text"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proposed Date"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@android:color/holo_red_dark" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editSpklDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="proposed date"
+                    android:inputType="text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Requested"
+                    android:textColor="@android:color/black" />
+
+                <EditText
+                    android:id="@+id/editSpklRequested"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:hint="nomor job order"
+                    android:inputType="text"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                android:background="@drawable/border">
+
+                <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:id="@+id/layoutspkl1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:paddingTop="50dp"
+                        android:paddingBottom="10dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nama Karyawan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklNamaKaryawan1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="nama karyawan"
+                            android:enabled="false"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Overtime Date"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklOvertimeDate1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="overtime date"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklStartTime1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="08:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Finish Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklFinishTime1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="17:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Keterangan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklKeterangan1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="keterangan"
+                            android:inputType="text"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/buttonSpkl1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Overtime Workorder 1"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:id="@+id/layoutspkl2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:paddingTop="50dp"
+                        android:paddingBottom="10dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nama Karyawan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklNamaKaryawan2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="nama karyawan"
+                            android:enabled="false"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Overtime Date"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklOvertimeDate2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="overtime date"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklStartTime2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="08:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Finish Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklFinishTime2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="17:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Keterangan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklKeterangan2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="keterangan"
+                            android:inputType="text"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/buttonSpkl2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Overtime Workorder 2"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:id="@+id/layoutspkl3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:paddingTop="50dp"
+                        android:paddingBottom="10dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nama Karyawan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklNamaKaryawan3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="nama karyawan"
+                            android:enabled="false"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Overtime Date"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklOvertimeDate3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="overtime date"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklStartTime3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="08:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Finish Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklFinishTime3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="17:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Keterangan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklKeterangan3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="keterangan"
+                            android:inputType="text"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/buttonSpkl3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Overtime Workorder 3"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:id="@+id/layoutspkl4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:paddingTop="50dp"
+                        android:paddingBottom="10dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nama Karyawan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklNamaKaryawan4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="nama karyawan"
+                            android:enabled="false"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Overtime Date"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklOvertimeDate4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="overtime date"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklStartTime4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="08:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Finish Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklFinishTime4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="17:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Keterangan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklKeterangan4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="keterangan"
+                            android:inputType="text"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/buttonSpkl4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Overtime Workorder 4"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:id="@+id/layoutspkl5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:paddingTop="50dp"
+                        android:paddingBottom="10dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nama Karyawan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklNamaKaryawan5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="nama karyawan"
+                            android:enabled="false"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Overtime Date"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklOvertimeDate5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="overtime date"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklStartTime5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="08:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Finish Time"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklFinishTime5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="17:00"
+                            android:inputType="text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Keterangan"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/spklKeterangan5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="keterangan"
+                            android:inputType="text"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/buttonSpkl5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Overtime Workorder 5"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonBuat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bubble_red"
+                android:textColor="@color/colorWhite"
+                android:text="Update" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

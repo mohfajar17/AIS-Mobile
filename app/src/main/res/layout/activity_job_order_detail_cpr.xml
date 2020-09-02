@@ -436,16 +436,17 @@
                     android:textStyle="bold"/>
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:src="@color/colorWhite"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewAll"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"/>
+                android:fillViewport="true">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewAll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"/>
+            </androidx.core.widget.NestedScrollView>
         </LinearLayout>
     </HorizontalScrollView>
 </LinearLayout>

@@ -79,7 +79,6 @@ public class CashProjectReport implements Parcelable {
         responsbility_advance_number = in.readString();
         cash_advance_id = in.readString();
         job_order_id = in.readString();
-        notes = in.readString();
         begin_date = in.readString();
         end_date = in.readString();
         notes = in.readString();

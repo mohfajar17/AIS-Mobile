@@ -14,7 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Project.JobOrder.UpdateJobOrderActivity"></activity>
+        <activity android:name=".Project.TunjanganTemporary.DetailTunTemporaryActivity"></activity>
+        <activity android:name=".Project.TunjanganKaryawan.DetailTunjanganKaryawanActivity" />
+        <activity android:name=".Project.CashProject.DetailCashProjectActivity" />
+        <activity android:name=".Project.ProposedBudget.DetailProposedBudgetActivity" />
+        <activity android:name=".Project.Pengambilan.DetailPengambilanActivity" />
+        <activity android:name=".Project.WorkRequests.DetailWorkReqActivity" />
+        <activity android:name=".Project.MaterialRequest.DetailMaterialRequestActivity" />
+        <activity android:name=".Project.WorkCompletion.DetailWorkCompletionActivity" />
+        <activity android:name=".Project.JobOrder.UpdateJobOrderActivity" />
         <activity android:name=".Project.Spkl.UpdateSpklActivity" />
         <activity android:name=".Project.JobOrder.BuatJobOrderActivity" />
         <activity android:name=".Project.Spkl.BuatSpklActivity" />

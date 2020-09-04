@@ -37,6 +37,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
 import com.example.aismobile.Data.Project.JobOrder;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -51,6 +52,9 @@ import java.util.List;
 import java.util.Map;
 
 public class JobOrderFragment extends Fragment {
+
+    private SharedPrefManager sharedPrefManager;
+    private String empDepartemen;
 
     public TextView textViewList;
     public EditText editTextSearchJO;
@@ -103,6 +107,7 @@ public class JobOrderFragment extends Fragment {
         progressDialog.setCancelable(false);
 
         jobOrders = new ArrayList<>();
+        sharedPrefManager = SharedPrefManager.getInstance(getActivity());
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -223,8 +228,43 @@ public class JobOrderFragment extends Fragment {
         });
 
         loadJobOrder("job_order_id DESC");
+        loadEmployeeData();
 
         return view;
+    }
+
+    private void loadEmployeeData() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_EMPLOYEE_DATA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    if(status==1){
+                        JSONObject jsonData = jsonObject.getJSONObject("data");
+                        empDepartemen = jsonData.getString("department_id");
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("employee_id", sharedPrefManager.getEmployeeId());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(getActivity()).add(request);
     }
 
     private void setSortAll(int position, int posAD){
@@ -463,18 +503,71 @@ public class JobOrderFragment extends Fragment {
             holder.JOEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), UpdateJobOrderActivity.class);
-                    intent.putExtra("detail", mValues.get(position));
-                    holder.itemView.getContext().startActivity(intent);
+                    if (Integer.valueOf(sharedPrefManager.getUserId()) == 1 || //akses untuk admin
+                            Integer.valueOf(sharedPrefManager.getUserId()) == 5 || //update hanya untuk pak alfan, pak bambang, bu ida
+                            Integer.valueOf(sharedPrefManager.getUserId()) == 17 ||
+                            Integer.valueOf(sharedPrefManager.getUserId()) == 34 ||
+                            Integer.valueOf(sharedPrefManager.getEmployeeId()) == 1 ||
+                            Integer.valueOf(sharedPrefManager.getEmployeeId()) == 5 ||
+                            Integer.valueOf(sharedPrefManager.getEmployeeId()) == 77) {
+                        Intent intent = new Intent(getActivity(), UpdateJobOrderActivity.class);
+                        intent.putExtra("detail", mValues.get(position));
+                        holder.itemView.getContext().startActivity(intent);
+                    } else Toast.makeText(getActivity(), "You don't have access to edit Job Order", Toast.LENGTH_LONG).show();
                 }
             });
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-                    intent.putExtra("detailJO", mValues.get(position));
-                    holder.itemView.getContext().startActivity(intent);
+                    int canView = 0;
+                    if (Integer.valueOf(sharedPrefManager.getUserId()) == 1 || Integer.valueOf(sharedPrefManager.getUserId()) == 5 ||
+                            Integer.valueOf(sharedPrefManager.getUserId()) == 34 || Integer.valueOf(sharedPrefManager.getUserId()) == 107 ||
+                            Integer.valueOf(sharedPrefManager.getUserId()) == 17 || Integer.valueOf(sharedPrefManager.getUserId()) == 19 ||
+                            Integer.valueOf(sharedPrefManager.getUserId()) == 35 || Integer.valueOf(sharedPrefManager.getUserId()) == 166 ||
+                            Integer.valueOf(sharedPrefManager.getUserId()) == 181 || Integer.valueOf(sharedPrefManager.getUserId()) == 154 ||
+                            Integer.valueOf(sharedPrefManager.getUserId()) == 300)
+                        canView = 1;
+                    else {
+                        if (Integer.valueOf(sharedPrefManager.getEmployeeId()) == 1 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 5 ||
+                                Integer.valueOf(sharedPrefManager.getEmployeeId()) == 393 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 77 ||
+                                Integer.valueOf(sharedPrefManager.getEmployeeId()) == 149 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 85 ||
+                                Integer.valueOf(sharedPrefManager.getEmployeeId()) == 57 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 3234 ||
+                                Integer.valueOf(sharedPrefManager.getEmployeeId()) == 3249 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 1695 ||
+                                Integer.valueOf(sharedPrefManager.getEmployeeId()) == 2111 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 1955 ||
+                                Integer.valueOf(sharedPrefManager.getEmployeeId()) == 3133 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 2063 ||
+                                Integer.valueOf(sharedPrefManager.getEmployeeId()) == 3533 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 3535)
+                            canView = 1;
+                        else {
+                            if (mValues.get(position).getSupervisor().toLowerCase().contains(sharedPrefManager.getUserDisplayName().toLowerCase()))
+                                canView = 1;
+                            else {
+                                if (empDepartemen.toLowerCase().contains(mValues.get(position).getDepartment_id().toLowerCase())){
+                                    if (Integer.valueOf(sharedPrefManager.getEmployeeId()) == 1354 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 1275 ||
+                                            Integer.valueOf(sharedPrefManager.getEmployeeId()) == 3202 || Integer.valueOf(sharedPrefManager.getEmployeeId()) == 3538)
+                                        canView = 1;
+                                    else canView = 0;
+                                } else canView = 0;
+                            }
+                        }
+                    }
+
+                    if (mValues.get(position).getJob_order_id()==1371){
+                        if (Integer.valueOf(sharedPrefManager.getUserId())==1 || Integer.valueOf(sharedPrefManager.getUserId())==5 || Integer.valueOf(sharedPrefManager.getEmployeeId())==1)
+                            canView=1;
+                        else canView = 0;
+                    }
+
+                    if (mValues.get(position).getDepartment_id().toLowerCase().contains("Office Pasuruan".toLowerCase())){
+                        if (Integer.valueOf(sharedPrefManager.getEmployeeId())==149 || Integer.valueOf(sharedPrefManager.getEmployeeId())==289)
+                            canView = 1;
+                    }
+
+                    if (canView == 1){
+                        Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
+                        intent.putExtra("detailJO", mValues.get(position));
+                        holder.itemView.getContext().startActivity(intent);
+                    } else Toast.makeText(getActivity(), "You don't have access to view Job Order", Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -572,7 +665,7 @@ public class JobOrderFragment extends Fragment {
             public final TextView JOKeterangan;
             public final TextView JONilai;
             public final TextView JOStatus;
-            public final ImageView JOEdit;
+            public final LinearLayout JOEdit;
             public final LinearLayout layoutJobOrderColor;
 
             public ViewHolder(View view) {
@@ -586,7 +679,7 @@ public class JobOrderFragment extends Fragment {
                 JOKeterangan = (TextView) view.findViewById(R.id.JOKeterangan);
                 JONilai = (TextView) view.findViewById(R.id.JONilai);
                 JOStatus = (TextView) view.findViewById(R.id.JOStatus);
-                JOEdit = (ImageView) view.findViewById(R.id.JOEdit);
+                JOEdit = (LinearLayout) view.findViewById(R.id.JOEdit);
                 layoutJobOrderColor = (LinearLayout) view.findViewById(R.id.layoutJobOrderColor);
             }
         }

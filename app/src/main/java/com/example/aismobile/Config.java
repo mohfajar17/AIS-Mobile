@@ -30,9 +30,12 @@ public class Config {
     public static final String DATA_URL_ACCESS_CONTACT = DATA_URL+"accessAllowContact";
     public static final String DATA_URL_JOB_ORDER_LIST = DATA_URL+"getJobOrder";
     public static final String DATA_URL_WORK_COMPLETION_LIST = DATA_URL+"getWorkCompletion";
+    public static final String DATA_URL_WORK_COMPLETION_DETAIL_LIST = DATA_URL+"getWorkCompletionDetail";
     public static final String DATA_URL_MATERIAL_REQUISITION_LIST = DATA_URL+"getMaterialRequisition";
     public static final String DATA_URL_WORK_ORDER_LIST = DATA_URL+"getWorkOrder";
+    public static final String DATA_URL_WORK_ORDER_DETAIL_LIST = DATA_URL+"getWorkOrderDetail";
     public static final String DATA_URL_PICKUP_LIST = DATA_URL+"getPickup";
+    public static final String DATA_URL_PICKUP_DETAIL_LIST = DATA_URL+"getPickupDetail";
     public static final String DATA_URL_TOOLS_REQUEST_LIST = DATA_URL+"getResourcesRequest";
     public static final String DATA_URL_PROPOSE_BUDGET_LIST = DATA_URL+"getProposedBudget";
     public static final String DATA_URL_CASH_PROJECT_LIST = DATA_URL+"getCashProjectReport";

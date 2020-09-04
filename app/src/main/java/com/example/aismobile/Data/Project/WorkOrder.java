@@ -12,6 +12,7 @@ public class WorkOrder implements Parcelable {
     private String work_order_number;
     private String work_order_description;
     private String job_order_id;
+    private String job_order_description;
     private String job_order_type;
     private String begin_date;
     private String end_date;
@@ -34,7 +35,7 @@ public class WorkOrder implements Parcelable {
     private String approval_comment3;
     private String work_order_discount_type;
 
-    public WorkOrder(int work_order_id, String work_order_number, String work_order_description, String job_order_id,
+    public WorkOrder(int work_order_id, String work_order_number, String work_order_description, String job_order_id, String job_order_description,
                      String job_order_type, String begin_date, String end_date, String notes, String created_by,
                      String created_date, String modified_by, String modified_date, String checked_by,
                      String checked_date, String checked_comment, String approval1, String approval_date1,
@@ -44,6 +45,7 @@ public class WorkOrder implements Parcelable {
         this.work_order_number = work_order_number;
         this.work_order_description = work_order_description;
         this.job_order_id = job_order_id;
+        this.job_order_description = job_order_description;
         this.job_order_type = job_order_type;
         this.begin_date = begin_date;
         this.end_date = end_date;
@@ -72,6 +74,7 @@ public class WorkOrder implements Parcelable {
         work_order_number = in.readString();
         work_order_description = in.readString();
         job_order_id = in.readString();
+        job_order_description = in.readString();
         job_order_type = in.readString();
         begin_date = in.readString();
         end_date = in.readString();
@@ -101,6 +104,7 @@ public class WorkOrder implements Parcelable {
             this.work_order_number = jsonObject.getString("work_order_number");
             this.work_order_description = jsonObject.getString("work_order_description");
             this.job_order_id = jsonObject.getString("job_order_id");
+            this.job_order_description = jsonObject.getString("job_order_description");
             this.job_order_type = jsonObject.getString("job_order_type");
             this.begin_date = jsonObject.getString("begin_date");
             this.end_date = jsonObject.getString("end_date");
@@ -150,6 +154,7 @@ public class WorkOrder implements Parcelable {
         dest.writeString(work_order_number);
         dest.writeString(work_order_description);
         dest.writeString(job_order_id);
+        dest.writeString(job_order_description);
         dest.writeString(job_order_type);
         dest.writeString(begin_date);
         dest.writeString(end_date);
@@ -187,6 +192,10 @@ public class WorkOrder implements Parcelable {
 
     public String getJob_order_id() {
         return job_order_id;
+    }
+
+    public String getJob_order_description() {
+        return job_order_description;
     }
 
     public String getJob_order_type() {

@@ -12,6 +12,7 @@ public class MaterialRequest implements Parcelable {
     private String material_request_number;
     private String material_request_status;
     private String job_order_id;
+    private String job_order_description;
     private String sales_quotation_id;
     private String requisition_date;
     private String usage_date;
@@ -36,7 +37,7 @@ public class MaterialRequest implements Parcelable {
     private String comment3;
 
     public MaterialRequest (int material_request_id, String material_request_number, String material_request_status,
-                            String job_order_id, String sales_quotation_id, String requisition_date, String usage_date,
+                            String job_order_id, String job_order_description, String sales_quotation_id, String requisition_date, String usage_date,
                             String notes, String version, String priority, String created_by, String created_date,
                             String modified_by, String modified_date, String checked_by, String checked_date,
                             String checked_comment, String approval1, String approval_date1, String comment1,
@@ -46,6 +47,7 @@ public class MaterialRequest implements Parcelable {
         this.material_request_number = material_request_number;
         this.material_request_status = material_request_status;
         this.job_order_id = job_order_id;
+        this.job_order_description = job_order_description;
         this.sales_quotation_id = sales_quotation_id;
         this.requisition_date = requisition_date;
         this.usage_date = usage_date;
@@ -75,6 +77,7 @@ public class MaterialRequest implements Parcelable {
         material_request_number = in.readString();
         material_request_status = in.readString();
         job_order_id = in.readString();
+        job_order_description = in.readString();
         sales_quotation_id = in.readString();
         requisition_date = in.readString();
         usage_date = in.readString();
@@ -105,6 +108,7 @@ public class MaterialRequest implements Parcelable {
             this.material_request_number = jsonObject.getString("material_request_number");
             this.material_request_status = jsonObject.getString("material_request_status");
             this.job_order_id = jsonObject.getString("job_order_id");
+            this.job_order_description = jsonObject.getString("job_order_description");
             this.sales_quotation_id = jsonObject.getString("sales_quotation_id");
             this.requisition_date = jsonObject.getString("requisition_date");
             this.usage_date = jsonObject.getString("usage_date");
@@ -155,6 +159,7 @@ public class MaterialRequest implements Parcelable {
         dest.writeString(material_request_number);
         dest.writeString(material_request_status);
         dest.writeString(job_order_id);
+        dest.writeString(job_order_description);
         dest.writeString(sales_quotation_id);
         dest.writeString(requisition_date);
         dest.writeString(usage_date);
@@ -193,6 +198,10 @@ public class MaterialRequest implements Parcelable {
 
     public String getJob_order_id() {
         return job_order_id;
+    }
+
+    public String getJob_order_description() {
+        return job_order_description;
     }
 
     public String getSales_quotation_id() {

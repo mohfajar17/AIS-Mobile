@@ -13,6 +13,9 @@ public class JoPbRest implements Parcelable {
     private String quantity;
     private String unit_abbr;
     private String unit_price;
+    private String advance_app1;
+    private String advance_app2;
+    private String advance_app3;
 
     public JoPbRest(int cash_advance_detail_id, String item_name, String quantity, String unit_abbr, String unit_price){
         this.cash_advance_detail_id = cash_advance_detail_id;
@@ -28,6 +31,9 @@ public class JoPbRest implements Parcelable {
         quantity = in.readString();
         unit_abbr = in.readString();
         unit_price = in.readString();
+        advance_app1 = in.readString();
+        advance_app2 = in.readString();
+        advance_app3 = in.readString();
     }
 
     public JoPbRest(JSONObject jsonObject){
@@ -37,6 +43,9 @@ public class JoPbRest implements Parcelable {
             this.quantity = jsonObject.getString("quantity");
             this.unit_abbr = jsonObject.getString("unit_abbr");
             this.unit_price = jsonObject.getString("unit_price");
+            this.advance_app1 = jsonObject.getString("advance_app1");
+            this.advance_app2 = jsonObject.getString("advance_app2");
+            this.advance_app3 = jsonObject.getString("advance_app3");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -66,6 +75,21 @@ public class JoPbRest implements Parcelable {
         dest.writeString(quantity);
         dest.writeString(unit_abbr);
         dest.writeString(unit_price);
+        dest.writeString(advance_app1);
+        dest.writeString(advance_app2);
+        dest.writeString(advance_app3);
+    }
+
+    public String getAdvance_app1() {
+        return advance_app1;
+    }
+
+    public String getAdvance_app2() {
+        return advance_app2;
+    }
+
+    public String getAdvance_app3() {
+        return advance_app3;
     }
 
     public int getCash_advance_detail_id() {

@@ -240,7 +240,7 @@ public class DetailPengambilanActivity extends AppCompatActivity {
             holder.textJmlDiminta.setText(mValues.get(position).getQuantity_taked()+" "+mValues.get(position).getUnit_abbr());
             holder.textJmlDiambil.setText(mValues.get(position).getPicked_up()+" "+mValues.get(position).getUnit_abbr());
             holder.textDiambil.setText(mValues.get(position).getTaken()+" "+mValues.get(position).getUnit_abbr());
-            holder.textCatatan.setText(mValues.get(position).getNotes()+" "+mValues.get(position).getUnit_abbr());
+            holder.textCatatan.setText(mValues.get(position).getNotes());
 
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));

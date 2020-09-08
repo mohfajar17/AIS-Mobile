@@ -27,6 +27,7 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
     private LinearLayout layoutCatatan;
     private LinearLayout layoutHistory;
     private TextView textCatatan;
+    private TextView textCheckedComment;
     private TextView textCreatedBy;
     private TextView textCreatedDate;
     private TextView textModifiedBy;
@@ -43,6 +44,15 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
     private TextView textApproval1;
     private TextView textApproval2;
 
+    private TextView textListNama;
+    private TextView textListJenjang;
+    private TextView textListType;
+    private TextView textListKabupaten;
+    private TextView textListDays;
+    private TextView textListApproval1;
+    private TextView textListApproval2;
+    private TextView textListPaid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +60,24 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         tunjanganTemporary = bundle.getParcelable("detail");
+
+        textListNama = (TextView) findViewById(R.id.textListNama);
+        textListJenjang = (TextView) findViewById(R.id.textListJenjang);
+        textListType = (TextView) findViewById(R.id.textListType);
+        textListKabupaten = (TextView) findViewById(R.id.textListKabupaten);
+        textListDays = (TextView) findViewById(R.id.textListDays);
+        textListApproval1 = (TextView) findViewById(R.id.textListApproval1);
+        textListApproval2 = (TextView) findViewById(R.id.textListApproval2);
+        textListPaid = (TextView) findViewById(R.id.textListPaid);
+
+        textListNama.setText(tunjanganTemporary.getEmployee_id());
+        textListJenjang.setText(tunjanganTemporary.getEmployee_grade_id());
+        textListType.setText(tunjanganTemporary.getAdditional_allowance_type());
+        textListKabupaten.setText(tunjanganTemporary.getKab_id());
+        textListDays.setText(tunjanganTemporary.getDays());
+        textListApproval1.setText(tunjanganTemporary.getApproval1_status());
+        textListApproval2.setText(tunjanganTemporary.getApproval2_status());
+        textListPaid.setText(tunjanganTemporary.getPaid());
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
         textNumber = (TextView) findViewById(R.id.textNumber);
@@ -60,6 +88,7 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
         layoutCatatan = (LinearLayout) findViewById(R.id.layoutCatatan);
         layoutHistory = (LinearLayout) findViewById(R.id.layoutHistory);
         textCatatan = (TextView) findViewById(R.id.textCatatan);
+        textCheckedComment = (TextView) findViewById(R.id.textCheckedComment);
         textCreatedBy = (TextView) findViewById(R.id.textCreatedBy);
         textCreatedDate = (TextView) findViewById(R.id.textCreatedDate);
         textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
@@ -76,7 +105,8 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
         textApproval1 = (TextView) findViewById(R.id.textApproval1);
         textApproval2 = (TextView) findViewById(R.id.textApproval2);
 
-        textJobOrder.setText(tunjanganTemporary.getJob_order_id());
+        textJobOrder.setText(tunjanganTemporary.getJob_order_id() + " (" + tunjanganTemporary.getJob_order_location() +
+                ") => " + tunjanganTemporary.getJob_order_description());
         textTglAwal.setText(tunjanganTemporary.getBegin_date());
         textTglAkhir.setText(tunjanganTemporary.getEnd_date());
         textRequestedBy.setText(tunjanganTemporary.getRequested_by());
@@ -89,6 +119,7 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
 
         textNumber.setText(tunjanganTemporary.getEmployee_allowance_number());
         textCatatan.setText(tunjanganTemporary.getNotes());
+        textCheckedComment.setText(tunjanganTemporary.getChecked_comment());
         textCreatedBy.setText(tunjanganTemporary.getCreated_by());
         textCreatedDate.setText(tunjanganTemporary.getCreated_date());
         textModifiedBy.setText(tunjanganTemporary.getModified_by());

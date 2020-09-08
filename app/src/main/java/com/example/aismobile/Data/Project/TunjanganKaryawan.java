@@ -11,9 +11,12 @@ public class TunjanganKaryawan implements Parcelable {
     private int employee_allowance_id;
     private String employee_allowance_number;
     private String employee_id;
+    private String employee_grade_name;
     private String additional_allowance_type;
     private String kab_id;
     private String job_order_id;
+    private String job_order_description;
+    private String job_order_location;
     private String begin_date;
     private String end_date;
     private String days;
@@ -39,8 +42,8 @@ public class TunjanganKaryawan implements Parcelable {
     private String modified_by;
     private String modified_date;
 
-    public TunjanganKaryawan(int employee_allowance_id, String employee_allowance_number, String employee_id,
-                             String additional_allowance_type, String kab_id, String job_order_id, String begin_date,
+    public TunjanganKaryawan(int employee_allowance_id, String employee_allowance_number, String employee_id, String employee_grade_name,
+                             String additional_allowance_type, String kab_id, String job_order_id, String job_order_description, String job_order_location, String begin_date,
                              String end_date, String days, String notes, String amount_perday, String approval1_status,
                              String approval2_status, String requested_by, String approval1_by, String approval_date1,
                              String approval_comment1, String approval2_by, String approval_date2, String approval_comment2,
@@ -50,9 +53,12 @@ public class TunjanganKaryawan implements Parcelable {
         this.employee_allowance_id = employee_allowance_id;
         this.employee_allowance_number = employee_allowance_number;
         this.employee_id = employee_id;
+        this.employee_grade_name = employee_grade_name;
         this.additional_allowance_type = additional_allowance_type;
         this.kab_id = kab_id;
         this.job_order_id = job_order_id;
+        this.job_order_description = job_order_description;
+        this.job_order_location = job_order_location;
         this.begin_date = begin_date;
         this.end_date = end_date;
         this.days = days;
@@ -83,9 +89,12 @@ public class TunjanganKaryawan implements Parcelable {
         employee_allowance_id = in.readInt();
         employee_allowance_number = in.readString();
         employee_id = in.readString();
+        employee_grade_name = in.readString();
         additional_allowance_type = in.readString();
         kab_id = in.readString();
         job_order_id = in.readString();
+        job_order_description = in.readString();
+        job_order_location = in.readString();
         begin_date = in.readString();
         end_date = in.readString();
         days = in.readString();
@@ -117,9 +126,12 @@ public class TunjanganKaryawan implements Parcelable {
             this.employee_allowance_id = jsonObject.getInt("employee_allowance_id");
             this.employee_allowance_number = jsonObject.getString("employee_allowance_number");
             this.employee_id = jsonObject.getString("employee_id");
+            this.employee_grade_name = jsonObject.getString("employee_grade_name");
             this.additional_allowance_type = jsonObject.getString("additional_allowance_type");
             this.kab_id = jsonObject.getString("kab_id");
             this.job_order_id = jsonObject.getString("job_order_id");
+            this.job_order_description = jsonObject.getString("job_order_description");
+            this.job_order_location = jsonObject.getString("job_order_location");
             this.begin_date = jsonObject.getString("begin_date");
             this.end_date = jsonObject.getString("end_date");
             this.days = jsonObject.getString("days");
@@ -171,9 +183,12 @@ public class TunjanganKaryawan implements Parcelable {
         dest.writeInt(employee_allowance_id);
         dest.writeString(employee_allowance_number);
         dest.writeString(employee_id);
+        dest.writeString(employee_grade_name);
         dest.writeString(additional_allowance_type);
         dest.writeString(kab_id);
         dest.writeString(job_order_id);
+        dest.writeString(job_order_description);
+        dest.writeString(job_order_location);
         dest.writeString(begin_date);
         dest.writeString(end_date);
         dest.writeString(days);
@@ -318,5 +333,17 @@ public class TunjanganKaryawan implements Parcelable {
 
     public String getModified_date() {
         return modified_date;
+    }
+
+    public String getJob_order_description() {
+        return job_order_description;
+    }
+
+    public String getJob_order_location() {
+        return job_order_location;
+    }
+
+    public String getEmployee_grade_name() {
+        return employee_grade_name;
     }
 }

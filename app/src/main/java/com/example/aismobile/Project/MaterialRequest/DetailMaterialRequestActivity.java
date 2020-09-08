@@ -1,22 +1,51 @@
 package com.example.aismobile.Project.MaterialRequest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.aismobile.Config;
 import com.example.aismobile.Data.Project.MaterialRequest;
+import com.example.aismobile.Data.Project.MaterialRequestDetail;
 import com.example.aismobile.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DetailMaterialRequestActivity extends AppCompatActivity {
 
     private ViewGroup.LayoutParams params;
     private MaterialRequest materialRequest;
+    private Context context;
+    private RecyclerView recyclerView;
+    private MyRecyclerViewAdapter adapter;
+    private RecyclerView.LayoutManager recylerViewLayoutManager;
+    private List<MaterialRequestDetail> materialRequestDetails;
+    private ProgressDialog progressDialog;
 
     private TextView textNumber;
     private ImageView buttonBack;
@@ -50,6 +79,18 @@ public class DetailMaterialRequestActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         materialRequest = bundle.getParcelable("detail");
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading data");
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
+
+        context = getApplicationContext();
+        materialRequestDetails = new ArrayList<>();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recylerViewLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(recylerViewLayoutManager);
 
         textJobOrder = (TextView) findViewById(R.id.textJobOrder);
         textKeterangan = (TextView) findViewById(R.id.textKeterangan);
@@ -133,6 +174,52 @@ public class DetailMaterialRequestActivity extends AppCompatActivity {
                 menuHistory.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
+
+        loadDetail();
+    }
+
+    public void loadDetail(){
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_MATERIAL_REQUISITION_DETAIL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for(int i=0;i<jsonArray.length();i++){
+                            materialRequestDetails.add(new MaterialRequestDetail(jsonArray.getJSONObject(i)));
+                        }
+                        adapter = new MyRecyclerViewAdapter(materialRequestDetails, context);
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(DetailMaterialRequestActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(DetailMaterialRequestActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailMaterialRequestActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("materialId", "" + materialRequest.getMaterial_request_id());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailMaterialRequestActivity.this).add(request);
     }
 
     private void hiddenLayout(){
@@ -149,5 +236,89 @@ public class DetailMaterialRequestActivity extends AppCompatActivity {
         params = layoutPickup.getLayoutParams(); params.height = 0; layoutPickup.setLayoutParams(params);
         params = layoutCatatan.getLayoutParams(); params.height = 0; layoutCatatan.setLayoutParams(params);
         params = layoutHistory.getLayoutParams(); params.height = 0; layoutHistory.setLayoutParams(params);
+    }
+
+    private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+
+        private final List<MaterialRequestDetail> mValues;
+        private Context context;
+
+        private MyRecyclerViewAdapter(List<MaterialRequestDetail> mValues, Context context) {
+            this.mValues = mValues;
+            this.context = context;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_detail_material_request_list, parent, false);
+            return new MyRecyclerViewAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
+            int nomor = position+1;
+            holder.textNo.setText("" + nomor);
+            holder.textItem.setText(mValues.get(position).getItem_name() + " | " + mValues.get(position).getItem_specification());
+            holder.textKeterangan.setText(mValues.get(position).getNotes());
+            holder.textPO.setText(mValues.get(position).getPurchase_order_number());
+            holder.textJumlah.setText(mValues.get(position).getQuantity()+" "+mValues.get(position).getUnit_abbr());
+            holder.textStock.setText(mValues.get(position).getIs_stock_request());
+            holder.textPembelian.setText(mValues.get(position).getQuantity_stock_request());
+            holder.textApproval1.setText(mValues.get(position).getPo_app1());
+            holder.textApproval2.setText(mValues.get(position).getPo_app2());
+            holder.textApproval3.setText(mValues.get(position).getPo_app3());
+            holder.textStatus.setText(mValues.get(position).getStatus());
+            holder.textStockGudang.setText(mValues.get(position).getStock_charging());
+
+            if (position%2==0)
+                holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.layout.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public final View mView;
+            public final TextView textNo;
+            public final TextView textItem;
+            public final TextView textKeterangan;
+            public final TextView textPO;
+            public final TextView textJumlah;
+            public final TextView textUnitPrice;
+            public final TextView textStock;
+            public final TextView textPembelian;
+            public final TextView textApproval1;
+            public final TextView textApproval2;
+            public final TextView textApproval3;
+            public final TextView textStatus;
+            public final TextView textStockGudang;
+
+            public final LinearLayout layout;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+
+                mView = itemView;
+                textNo = (TextView) itemView.findViewById(R.id.textNo);
+                textItem = (TextView) itemView.findViewById(R.id.textItem);
+                textKeterangan = (TextView) itemView.findViewById(R.id.textKeterangan);
+                textPO = (TextView) itemView.findViewById(R.id.textPO);
+                textJumlah = (TextView) itemView.findViewById(R.id.textJumlah);
+                textUnitPrice = (TextView) itemView.findViewById(R.id.textUnitPrice);
+                textStock = (TextView) itemView.findViewById(R.id.textStock);
+                textPembelian = (TextView) itemView.findViewById(R.id.textPembelian);
+                textApproval1 = (TextView) itemView.findViewById(R.id.textApproval1);
+                textApproval2 = (TextView) itemView.findViewById(R.id.textApproval2);
+                textApproval3 = (TextView) itemView.findViewById(R.id.textApproval3);
+                textStatus = (TextView) itemView.findViewById(R.id.textStatus);
+                textStockGudang = (TextView) itemView.findViewById(R.id.textStockGudang);
+
+                layout = (LinearLayout) itemView.findViewById(R.id.layout);
+            }
+        }
     }
 }

@@ -381,7 +381,21 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
-                            android:layout_width="270dp"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Penggunaan"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="250dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="Item"
@@ -395,10 +409,38 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
-                            android:layout_width="200dp"
+                            android:layout_width="120dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Keterangan"
+                            android:text="Qty"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Price"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Discount"
                             android:padding="10dp"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"/>
@@ -411,34 +453,6 @@
                         <TextView
                             android:layout_width="150dp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Jumlah"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-
-                        <TextView
-                            android:layout_width="120dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Unit Price"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-
-                        <TextView
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Sub Total"
                             android:padding="10dp"

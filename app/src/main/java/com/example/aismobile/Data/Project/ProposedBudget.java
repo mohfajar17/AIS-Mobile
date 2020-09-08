@@ -11,6 +11,7 @@ public class ProposedBudget implements Parcelable {
     private int cash_advance_id;
     private String cash_advance_number;
     private String job_order_id;
+    private String job_order_description;
     private String person_in_charge;
     private String requisition_date;
     private String due_date;
@@ -39,17 +40,20 @@ public class ProposedBudget implements Parcelable {
     private String recipient_by;
     private String done;
     private String bank_transaction_type_id;
+    private String category;
 
-    public ProposedBudget(int cash_advance_id, String cash_advance_number, String job_order_id, String person_in_charge,
+    public ProposedBudget(int cash_advance_id, String cash_advance_number, String job_order_id, String job_order_description, String person_in_charge,
                           String requisition_date, String due_date, String payment_date, String rest_value, String rest_from, String notes,
                           String created_by, String created_date, String modified_by, String modified_date, String approval1,
                           String approval_date1, String approval_comment1, String approval1_status, String approval2,
                           String approval_date2, String approval_comment2, String approval2_status, String approval3,
                           String approval_date3, String approval_comment3, String approval3_status, String checked_by,
-                          String checked_date, String recipient_by, String done, String bank_transaction_type_id){
+                          String checked_date, String recipient_by, String done, String bank_transaction_type_id,
+                          String category){
         this.cash_advance_id = cash_advance_id;
         this.cash_advance_number = cash_advance_number;
         this.job_order_id = job_order_id;
+        this.job_order_description = job_order_description;
         this.person_in_charge = person_in_charge;
         this.requisition_date = requisition_date;
         this.due_date = due_date;
@@ -78,12 +82,14 @@ public class ProposedBudget implements Parcelable {
         this.recipient_by = recipient_by;
         this.done = done;
         this.bank_transaction_type_id = bank_transaction_type_id;
+        this.category = category;
     }
 
     protected ProposedBudget(Parcel in) {
         cash_advance_id = in.readInt();
         cash_advance_number = in.readString();
         job_order_id = in.readString();
+        job_order_description = in.readString();
         person_in_charge = in.readString();
         requisition_date = in.readString();
         due_date = in.readString();
@@ -112,6 +118,7 @@ public class ProposedBudget implements Parcelable {
         recipient_by = in.readString();
         done = in.readString();
         bank_transaction_type_id = in.readString();
+        category = in.readString();
     }
 
     public ProposedBudget(JSONObject jsonObject){
@@ -119,13 +126,14 @@ public class ProposedBudget implements Parcelable {
             this.cash_advance_id = jsonObject.getInt("cash_advance_id");
             this.cash_advance_number = jsonObject.getString("cash_advance_number");
             this.job_order_id = jsonObject.getString("job_order_id");
+            this.job_order_description = jsonObject.getString("job_order_description");
             this.person_in_charge = jsonObject.getString("person_in_charge");
             this.requisition_date = jsonObject.getString("requisition_date");
             this.due_date = jsonObject.getString("due_date");
             this.payment_date = jsonObject.getString("payment_date");
             this.rest_value = jsonObject.getString("rest_value");
             this.rest_from = jsonObject.getString("rest_from");
-//            this.notes = jsonObject.getString("notes");
+            this.notes = jsonObject.getString("notes");
             this.created_by = jsonObject.getString("created_by");
             this.created_date = jsonObject.getString("created_date");
             this.modified_by = jsonObject.getString("modified_by");
@@ -147,6 +155,7 @@ public class ProposedBudget implements Parcelable {
             this.recipient_by = jsonObject.getString("recipient_by");
             this.done = jsonObject.getString("done");
             this.bank_transaction_type_id = jsonObject.getString("bank_transaction_type_id");
+            this.category = jsonObject.getString("category");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -174,6 +183,7 @@ public class ProposedBudget implements Parcelable {
         dest.writeInt(cash_advance_id);
         dest.writeString(cash_advance_number);
         dest.writeString(job_order_id);
+        dest.writeString(job_order_description);
         dest.writeString(person_in_charge);
         dest.writeString(requisition_date);
         dest.writeString(due_date);
@@ -202,6 +212,7 @@ public class ProposedBudget implements Parcelable {
         dest.writeString(recipient_by);
         dest.writeString(done);
         dest.writeString(bank_transaction_type_id);
+        dest.writeString(category);
     }
 
     public int getCash_advance_id() {
@@ -214,6 +225,10 @@ public class ProposedBudget implements Parcelable {
 
     public String getJob_order_id() {
         return job_order_id;
+    }
+
+    public String getJob_order_description() {
+        return job_order_description;
     }
 
     public String getPerson_in_charge() {
@@ -326,5 +341,9 @@ public class ProposedBudget implements Parcelable {
 
     public String getBank_transaction_type_id() {
         return bank_transaction_type_id;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }

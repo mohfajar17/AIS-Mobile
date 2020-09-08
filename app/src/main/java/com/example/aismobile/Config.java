@@ -32,13 +32,16 @@ public class Config {
     public static final String DATA_URL_WORK_COMPLETION_LIST = DATA_URL+"getWorkCompletion";
     public static final String DATA_URL_WORK_COMPLETION_DETAIL_LIST = DATA_URL+"getWorkCompletionDetail";
     public static final String DATA_URL_MATERIAL_REQUISITION_LIST = DATA_URL+"getMaterialRequisition";
+    public static final String DATA_URL_MATERIAL_REQUISITION_DETAIL = DATA_URL+"getMaterialReqDetail";
     public static final String DATA_URL_WORK_ORDER_LIST = DATA_URL+"getWorkOrder";
     public static final String DATA_URL_WORK_ORDER_DETAIL_LIST = DATA_URL+"getWorkOrderDetail";
     public static final String DATA_URL_PICKUP_LIST = DATA_URL+"getPickup";
     public static final String DATA_URL_PICKUP_DETAIL_LIST = DATA_URL+"getPickupDetail";
     public static final String DATA_URL_TOOLS_REQUEST_LIST = DATA_URL+"getResourcesRequest";
     public static final String DATA_URL_PROPOSE_BUDGET_LIST = DATA_URL+"getProposedBudget";
+    public static final String DATA_URL_PROPOSE_BUDGET_DETAIL_LIST = DATA_URL+"getProposedBudgetDetail";
     public static final String DATA_URL_CASH_PROJECT_LIST = DATA_URL+"getCashProjectReport";
+    public static final String DATA_URL_CASH_PROJECT_DETAIL_LIST = DATA_URL+"getCashProjectReportDetail";
     public static final String DATA_URL_SPKL_LIST = DATA_URL+"getSpkl";
     public static final String DATA_URL_TUNJANGAN_KARYAWAN_LIST = DATA_URL+"getTunjanganKaryawan";
     public static final String DATA_URL_TUNJANGAN_TEMPORARY_LIST = DATA_URL+"getTunjanganTemporary";

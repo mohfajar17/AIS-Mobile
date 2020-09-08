@@ -12,6 +12,7 @@ public class CashProjectReport implements Parcelable {
     private String responsbility_advance_number;
     private String cash_advance_id;
     private String job_order_id;
+    private String job_order_number;
     private String begin_date;
     private String end_date;
     private String notes;
@@ -35,19 +36,21 @@ public class CashProjectReport implements Parcelable {
     private String ra_file_name;
     private String ra_file_type;
     private String bank_transaction_type_id;
+    private String category;
     private String ra_discount_type;
 
-    public CashProjectReport(int responsbility_advance_id, String responsbility_advance_number, String cash_advance_id, String job_order_id,
+    public CashProjectReport(int responsbility_advance_id, String responsbility_advance_number, String cash_advance_id, String job_order_id, String job_order_number,
                              String begin_date, String end_date, String notes, String created_by, String created_date,
                              String modified_by, String modified_date, String approval1, String approval_date1,
                              String approval_comment1, String approval2, String approval_date2, String approval_comment2,
                              String approval3, String approval_date3, String approval_comment3, String checked_by,
                              String checked_date, String done, String ra_archive, String ra_file_name, String ra_file_type,
-                             String bank_transaction_type_id, String ra_discount_type){
+                             String bank_transaction_type_id, String category, String ra_discount_type){
         this.responsbility_advance_id = responsbility_advance_id;
         this.responsbility_advance_number = responsbility_advance_number;
         this.cash_advance_id = cash_advance_id;
         this.job_order_id = job_order_id;
+        this.job_order_number = job_order_number;
         this.begin_date = begin_date;
         this.end_date = end_date;
         this.notes = notes;
@@ -71,6 +74,7 @@ public class CashProjectReport implements Parcelable {
         this.ra_file_name = ra_file_name;
         this.ra_file_type = ra_file_type;
         this.bank_transaction_type_id = bank_transaction_type_id;
+        this.category = category;
         this.ra_discount_type = ra_discount_type;
     }
 
@@ -79,6 +83,7 @@ public class CashProjectReport implements Parcelable {
         responsbility_advance_number = in.readString();
         cash_advance_id = in.readString();
         job_order_id = in.readString();
+        job_order_number = in.readString();
         begin_date = in.readString();
         end_date = in.readString();
         notes = in.readString();
@@ -102,6 +107,7 @@ public class CashProjectReport implements Parcelable {
         ra_file_name = in.readString();
         ra_file_type = in.readString();
         bank_transaction_type_id = in.readString();
+        category = in.readString();
         ra_discount_type = in.readString();
     }
 
@@ -111,6 +117,7 @@ public class CashProjectReport implements Parcelable {
             this.responsbility_advance_number = jsonObject.getString("responsbility_advance_number");
             this.cash_advance_id = jsonObject.getString("cash_advance_id");
             this.job_order_id = jsonObject.getString("job_order_id");
+            this.job_order_number = jsonObject.getString("job_order_number");
             this.begin_date = jsonObject.getString("begin_date");
             this.end_date = jsonObject.getString("end_date");
             this.notes = jsonObject.getString("notes");
@@ -134,6 +141,7 @@ public class CashProjectReport implements Parcelable {
             this.ra_file_name = jsonObject.getString("ra_file_name");
             this.ra_file_type = jsonObject.getString("ra_file_type");
             this.bank_transaction_type_id = jsonObject.getString("bank_transaction_type_id");
+            this.category = jsonObject.getString("category");
             this.ra_discount_type = jsonObject.getString("ra_discount_type");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -163,6 +171,7 @@ public class CashProjectReport implements Parcelable {
         dest.writeString(responsbility_advance_number);
         dest.writeString(cash_advance_id);
         dest.writeString(job_order_id);
+        dest.writeString(job_order_number);
         dest.writeString(begin_date);
         dest.writeString(end_date);
         dest.writeString(notes);
@@ -186,6 +195,7 @@ public class CashProjectReport implements Parcelable {
         dest.writeString(ra_file_name);
         dest.writeString(ra_file_type);
         dest.writeString(bank_transaction_type_id);
+        dest.writeString(category);
         dest.writeString(ra_discount_type);
     }
 
@@ -203,6 +213,10 @@ public class CashProjectReport implements Parcelable {
 
     public String getJob_order_id() {
         return job_order_id;
+    }
+
+    public String getJob_order_number() {
+        return job_order_number;
     }
 
     public String getBegin_date() {
@@ -295,6 +309,10 @@ public class CashProjectReport implements Parcelable {
 
     public String getBank_transaction_type_id() {
         return bank_transaction_type_id;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public String getRa_discount_type() {

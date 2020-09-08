@@ -434,7 +434,7 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
-                            android:layout_width="170dp"
+                            android:layout_width="250dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="Item"
@@ -448,10 +448,10 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
-                            android:layout_width="300dp"
+                            android:layout_width="120dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Spesifikasi"
+                            android:text="Qty"
                             android:padding="10dp"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"/>
@@ -462,10 +462,10 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
-                            android:layout_width="170dp"
+                            android:layout_width="130dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Lokasi"
+                            android:text="Price"
                             android:padding="10dp"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"/>
@@ -476,10 +476,10 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
-                            android:layout_width="100dp"
+                            android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Jumlah Diminta"
+                            android:text="Sub Total"
                             android:padding="10dp"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"/>
@@ -493,7 +493,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Telah Diambil"
+                            android:text="Approval 1"
                             android:padding="10dp"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"/>
@@ -505,9 +505,9 @@
 
                         <TextView
                             android:layout_width="100dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Diambil"
+                            android:text="Approval 2"
                             android:padding="10dp"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"/>
@@ -518,10 +518,10 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
-                            android:layout_width="170dp"
-                            android:layout_height="match_parent"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Catatan"
+                            android:text="Approval 3"
                             android:padding="10dp"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"/>
@@ -531,6 +531,111 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:src="@color/colorWhite"/>
+
+                    <LinearLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|top"
+                            android:padding="10dp"
+                            android:text="1"
+                            android:textColor="@android:color/black"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textRestItem"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|top"
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|top"
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textRestPrice"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="right|top"
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textRestSubTotal"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="right|top"
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textRestApproval1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|top"
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textRestApproval2"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|top"
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textRestApproval3"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|top"
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"/>
+                    </LinearLayout>
 
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
@@ -543,11 +648,195 @@
                             android:layout_height="wrap_content"/>
                     </androidx.core.widget.NestedScrollView>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="51dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="251dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="121dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Total"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textTotal"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="Rp.-"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorBlack"/>
+                        android:src="@color/colorWhite"/>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="51dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="251dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="121dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Total Approved"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textTotalApproved"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="Rp.-"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorWhite"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="51dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="251dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="121dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Total Approved"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textTotalTransfered"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="Rp.-"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
 

@@ -14,6 +14,8 @@ public class TunjanganTemporary implements Parcelable {
     private String additional_allowance_type;
     private String kab_id;
     private String job_order_id;
+    private String job_order_location;
+    private String job_order_description;
     private String begin_date;
     private String end_date;
     private String days;
@@ -41,7 +43,7 @@ public class TunjanganTemporary implements Parcelable {
     private String modified_date;
 
     public TunjanganTemporary(int employee_allowance_id, String employee_allowance_number, String employee_id,
-                              String additional_allowance_type, String kab_id, String job_order_id, String begin_date,
+                              String additional_allowance_type, String kab_id, String job_order_id, String job_order_location, String job_order_description, String begin_date,
                               String end_date, String days, String notes, String amount_perday, String employee_grade_id,
                               String approval1_status, String approval2_status, String requested_by, String approval1_by,
                               String approval_date1, String approval_comment1, String approval2_by, String approval_date2,
@@ -54,6 +56,8 @@ public class TunjanganTemporary implements Parcelable {
         this.additional_allowance_type = additional_allowance_type;
         this.kab_id = kab_id;
         this.job_order_id = job_order_id;
+        this.job_order_location = job_order_location;
+        this.job_order_description = job_order_description;
         this.begin_date = begin_date;
         this.end_date = end_date;
         this.days = days;
@@ -88,6 +92,8 @@ public class TunjanganTemporary implements Parcelable {
         additional_allowance_type = in.readString();
         kab_id = in.readString();
         job_order_id = in.readString();
+        job_order_location = in.readString();
+        job_order_description = in.readString();
         begin_date = in.readString();
         end_date = in.readString();
         days = in.readString();
@@ -123,6 +129,8 @@ public class TunjanganTemporary implements Parcelable {
             this.additional_allowance_type = jsonObject.getString("additional_allowance_type");
             this.kab_id = jsonObject.getString("kab_id");
             this.job_order_id = jsonObject.getString("job_order_id");
+            this.job_order_location = jsonObject.getString("job_order_location");
+            this.job_order_description = jsonObject.getString("job_order_description");
             this.begin_date = jsonObject.getString("begin_date");
             this.end_date = jsonObject.getString("end_date");
             this.days = jsonObject.getString("days");
@@ -178,6 +186,8 @@ public class TunjanganTemporary implements Parcelable {
         dest.writeString(additional_allowance_type);
         dest.writeString(kab_id);
         dest.writeString(job_order_id);
+        dest.writeString(job_order_location);
+        dest.writeString(job_order_description);
         dest.writeString(begin_date);
         dest.writeString(end_date);
         dest.writeString(days);
@@ -327,5 +337,13 @@ public class TunjanganTemporary implements Parcelable {
 
     public String getModified_date() {
         return modified_date;
+    }
+
+    public String getJob_order_location() {
+        return job_order_location;
+    }
+
+    public String getJob_order_description() {
+        return job_order_description;
     }
 }

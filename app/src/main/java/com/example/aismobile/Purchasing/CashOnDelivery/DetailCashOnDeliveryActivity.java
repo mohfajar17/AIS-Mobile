@@ -1,4 +1,4 @@
-package com.example.aismobile.Project.ProposedBudget;
+package com.example.aismobile.Purchasing.CashOnDelivery;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,8 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Project.ProposedBudget;
-import com.example.aismobile.Data.Project.ProposedBudgetDetail;
+import com.example.aismobile.Data.Purchasing.CashOnDelivery;
+import com.example.aismobile.Data.Purchasing.CashOnDeliveryDetail;
+import com.example.aismobile.Data.Purchasing.PurchaseService;
 import com.example.aismobile.R;
 
 import org.json.JSONArray;
@@ -38,15 +39,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DetailProposedBudgetActivity extends AppCompatActivity {
+public class DetailCashOnDeliveryActivity extends AppCompatActivity {
 
     private ViewGroup.LayoutParams params;
-    private ProposedBudget proposedBudget;
+    private CashOnDelivery proposedBudget;
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
-    private List<ProposedBudgetDetail> proposedBudgetDetails;
+    private List<CashOnDeliveryDetail> proposedBudgetDetails;
     private ProgressDialog progressDialog;
 
     private TextView textNumber;
@@ -58,42 +59,32 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
     private LinearLayout layoutCatatan;
     private LinearLayout layoutHistory;
 
-    private TextView textJobCode;
-    private TextView textKeteranganJobCode;
-    private TextView textPenanggungJwb;
-    private TextView textRequestDate;
-    private TextView textPaymentDate;
-    private TextView textDueDate;
-    private TextView textAccount;
-    private TextView textCategory;
-    private TextView textDone;
+    private TextView textJobOrder;
+    private TextView textKeteranganJo;
+    private TextView textJenisPembelian;
+    private TextView textSupplier;
+    private TextView textAlamatPengiriman;
+    private TextView textDigunakanOleh;
+    private TextView textTglAwal;
+    private TextView textTglAkhir;
+    private TextView textJenisPajak;
+    private TextView textPaymentTerm;
+    private TextView textPersetujuan;
     private TextView textCheckedBy;
     private TextView textCheckedDate;
-    private TextView textPenerima;
     private TextView textApproval1;
-    private TextView textApproval2;
-    private TextView textApproval3;
+    private TextView textApproval1Date;
+    private TextView textPoComment;
     private TextView textCatatan;
     private TextView textCreatedBy;
     private TextView textCreatedDate;
     private TextView textModifiedBy;
     private TextView textModifiedDate;
-    private TextView textGrandTotal;
-
-    private TextView textRestItem;
-    private TextView textRestPrice;
-    private TextView textRestSubTotal;
-    private TextView textTotal;
-    private TextView textTotalApproved;
-    private TextView textTotalTransfered;
-
-    private int totalTransfered;
-    private int totalApproved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_proposed_budget);
+        setContentView(R.layout.activity_detail_cash_on_delivery);
 
         Bundle bundle = getIntent().getExtras();
         proposedBudget = bundle.getParcelable("detail");
@@ -110,59 +101,45 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
-        textJobCode = (TextView) findViewById(R.id.textJobCode);
-        textKeteranganJobCode = (TextView) findViewById(R.id.textKeteranganJobCode);
-        textPenanggungJwb = (TextView) findViewById(R.id.textPenanggungJwb);
-        textRequestDate = (TextView) findViewById(R.id.textRequestDate);
-        textPaymentDate = (TextView) findViewById(R.id.textPaymentDate);
-        textDueDate = (TextView) findViewById(R.id.textDueDate);
-        textAccount = (TextView) findViewById(R.id.textAccount);
-        textCategory = (TextView) findViewById(R.id.textCategory);
-        textDone = (TextView) findViewById(R.id.textDone);
+        textJobOrder = (TextView) findViewById(R.id.textJobOrder);
+        textKeteranganJo = (TextView) findViewById(R.id.textKeteranganJo);
+        textJenisPembelian = (TextView) findViewById(R.id.textJenisPembelian);
+        textSupplier = (TextView) findViewById(R.id.textSupplier);
+        textAlamatPengiriman = (TextView) findViewById(R.id.textAlamatPengiriman);
+        textDigunakanOleh = (TextView) findViewById(R.id.textDigunakanOleh);
+        textTglAwal = (TextView) findViewById(R.id.textTglAwal);
+        textTglAkhir = (TextView) findViewById(R.id.textTglAkhir);
+        textJenisPajak = (TextView) findViewById(R.id.textJenisPajak);
+        textPaymentTerm = (TextView) findViewById(R.id.textPaymentTerm);
+        textPersetujuan = (TextView) findViewById(R.id.textPersetujuan);
         textCheckedBy = (TextView) findViewById(R.id.textCheckedBy);
         textCheckedDate = (TextView) findViewById(R.id.textCheckedDate);
-        textPenerima = (TextView) findViewById(R.id.textPenerima);
         textApproval1 = (TextView) findViewById(R.id.textApproval1);
-        textApproval2 = (TextView) findViewById(R.id.textApproval2);
-        textApproval3 = (TextView) findViewById(R.id.textApproval3);
+        textApproval1Date = (TextView) findViewById(R.id.textApproval1Date);
+        textPoComment = (TextView) findViewById(R.id.textPoComment);
         textCatatan = (TextView) findViewById(R.id.textCatatan);
         textCreatedBy = (TextView) findViewById(R.id.textCreatedBy);
         textCreatedDate = (TextView) findViewById(R.id.textCreatedDate);
         textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
         textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
-        textGrandTotal = (TextView) findViewById(R.id.textGrandTotal);
 
-        textRestItem = (TextView) findViewById(R.id.textRestItem);
-        textRestPrice = (TextView) findViewById(R.id.textRestPrice);
-        textRestSubTotal = (TextView) findViewById(R.id.textRestSubTotal);
-        textTotal = (TextView) findViewById(R.id.textTotal);
-        textTotalApproved = (TextView) findViewById(R.id.textTotalApproved);
-        textTotalTransfered = (TextView) findViewById(R.id.textTotalTransfered);
-
-        NumberFormat formatter = new DecimalFormat("#,###");
-        double toDouble = Double.valueOf(proposedBudget.getRest_value());
-        textRestPrice.setText("Rp. " + formatter.format((long) toDouble));
-        textRestSubTotal.setText("Rp. " + formatter.format((long) toDouble));
-        textRestItem.setText(proposedBudget.getRest_from());
-
-        textJobCode.setText(proposedBudget.getJob_order_id());
-        textKeteranganJobCode.setText(proposedBudget.getJob_order_description());
-        textPenanggungJwb.setText(proposedBudget.getPerson_in_charge());
-        textRequestDate.setText(proposedBudget.getRequisition_date());
-        textPaymentDate.setText(proposedBudget.getPayment_date());
-        textDueDate.setText(proposedBudget.getDue_date());
-        textAccount.setText(proposedBudget.getCategory());
-        textCategory.setText(proposedBudget.getBank_transaction_type_id());
-        if (Integer.valueOf(proposedBudget.getDone()) == 2)
-            textDone.setText("Tidak");
-        else textDone.setText("Ya");
+        textJobOrder.setText(proposedBudget.getJob_order_id());
+        textKeteranganJo.setText(proposedBudget.getJob_order_description());
+        textJenisPembelian.setText(proposedBudget.getPurchase_order_type_id());
+        textSupplier.setText(proposedBudget.getSupplier_id());
+        textAlamatPengiriman.setText(proposedBudget.getDelivery_address());
+        textDigunakanOleh.setText(proposedBudget.getUsed_by());
+        textTglAwal.setText(proposedBudget.getBegin_date());
+        textTglAkhir.setText(proposedBudget.getEnd_date());
+        textJenisPajak.setText(proposedBudget.getTax_type_id());
+        textPaymentTerm.setText(proposedBudget.getPayment_term_id());
+        textPersetujuan.setText(proposedBudget.getApproval_assign_id());
         textCheckedBy.setText(proposedBudget.getChecked_by());
         textCheckedDate.setText(proposedBudget.getChecked_date());
-        textPenerima.setText(proposedBudget.getRecipient_by());
-        textApproval1.setText(proposedBudget.getApproval1() + "\n" + proposedBudget.getApproval_date1() + "\n" + proposedBudget.getApproval_comment1());
-        textApproval2.setText(proposedBudget.getApproval2() + "\n" + proposedBudget.getApproval_date2() + "\n" + proposedBudget.getApproval_comment2());
-        textApproval3.setText(proposedBudget.getApproval3() + "\n" + proposedBudget.getApproval_date3() + "\n" + proposedBudget.getApproval_comment3());
+        textApproval1.setText(proposedBudget.getApproval1());
+        textApproval1Date.setText(proposedBudget.getApproval_date1());
         textCatatan.setText(proposedBudget.getNotes());
+        textPoComment.setText(proposedBudget.getApproval_comment1());
         textCreatedBy.setText(proposedBudget.getCreated_by());
         textCreatedDate.setText(proposedBudget.getCreated_date());
         textModifiedBy.setText(proposedBudget.getModified_by());
@@ -177,7 +154,7 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
         layoutCatatan = (LinearLayout) findViewById(R.id.layoutCatatan);
         layoutHistory = (LinearLayout) findViewById(R.id.layoutHistory);
 
-        textNumber.setText(proposedBudget.getCash_advance_number());
+        textNumber.setText(proposedBudget.getCash_on_delivery_number());
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,7 +208,7 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
     public void loadDetail(){
         progressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_PROPOSE_BUDGET_DETAIL_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_CASH_ON_DELIVERY_DETAIL_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -240,24 +217,17 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            proposedBudgetDetails.add(new ProposedBudgetDetail(jsonArray.getJSONObject(i)));
-
-                            double quantity = jsonArray.getJSONObject(i).getDouble("quantity");
-                            double price = jsonArray.getJSONObject(i).getDouble("unit_price");
-
-                            totalTransfered += (int) quantity * (int) price;
+                            proposedBudgetDetails.add(new CashOnDeliveryDetail(jsonArray.getJSONObject(i)));
                         }
-                        double restValue = Double.valueOf(proposedBudget.getRest_value());
-                        totalApproved = totalTransfered + (int) restValue;
                         adapter = new MyRecyclerViewAdapter(proposedBudgetDetails, context);
                         recyclerView.setAdapter(adapter);
                     } else {
-                        Toast.makeText(DetailProposedBudgetActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailCashOnDeliveryActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {
                     progressDialog.dismiss();
-                    Toast.makeText(DetailProposedBudgetActivity.this, "", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailCashOnDeliveryActivity.this, "", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
@@ -265,26 +235,26 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(DetailProposedBudgetActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailCashOnDeliveryActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
-                param.put("id", "" + proposedBudget.getCash_advance_id());
+                param.put("cod_id", "" + proposedBudget.getCash_on_delivery_id());
                 return param;
             }
         };
-        Volley.newRequestQueue(DetailProposedBudgetActivity.this).add(request);
+        Volley.newRequestQueue(DetailCashOnDeliveryActivity.this).add(request);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
-        private final List<ProposedBudgetDetail> mValues;
+        private final List<CashOnDeliveryDetail> mValues;
         private Context context;
 
-        private MyRecyclerViewAdapter(List<ProposedBudgetDetail> mValues, Context context) {
+        private MyRecyclerViewAdapter(List<CashOnDeliveryDetail> mValues, Context context) {
             this.mValues = mValues;
             this.context = context;
         }
@@ -292,35 +262,33 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.activity_detail_proposed_budget_list, parent, false);
+                    .inflate(R.layout.activity_detail_cash_on_delivery_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            int nomor = position+2;
+            int nomor = position+1;
             holder.textNo.setText("" + nomor);
             holder.textItem.setText(mValues.get(position).getItem_name());
             holder.textQty.setText(mValues.get(position).getQuantity() + " " + mValues.get(position).getUnit_abbr());
-            holder.textApproval1.setText(mValues.get(position).getAdvance_app1());
-            holder.textApproval2.setText(mValues.get(position).getAdvance_app2());
-            holder.textApproval3.setText(mValues.get(position).getAdvance_app3());
+            holder.textApproval1.setText(mValues.get(position).getCod_app1());
 
             NumberFormat formatter = new DecimalFormat("#,###");
-            double toDouble = 0;
-            toDouble = Double.valueOf(mValues.get(position).getUnit_price());
-            holder.textPrice.setText("Rp. " + formatter.format((long) toDouble));
-            toDouble = Double.valueOf(mValues.get(position).getUnit_price())*Double.valueOf(mValues.get(position).getQuantity());
-            holder.textSubTotal.setText("Rp. " + formatter.format((long) toDouble));
+            holder.textBudget.setText("Rp. " + formatter.format(Integer.valueOf(mValues.get(position).getMax_budget())));
+            holder.textDiscount.setText("Rp. " + formatter.format(Integer.valueOf(mValues.get(position).getDiscount())));
+            holder.textPrice.setText("Rp. " + formatter.format(Integer.valueOf(mValues.get(position).getUnit_price_buy())));
+            int subTotal = (Integer.valueOf(mValues.get(position).getUnit_price_buy())*Integer.valueOf(mValues.get(position).getQuantity()))-Integer.valueOf(mValues.get(position).getDiscount());
+            holder.textSubTotal.setText("Rp. " + formatter.format(subTotal));
 
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.layout.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
-            if (mValues.size() == position+1){
+//            if (mValues.size() == position+1){
 //                textTotalTransfered.setText("Rp. " + formatter.format(totalTransfered));
 //                textTotal.setText("Rp. " + formatter.format(totalTransfered));
-            }
+//            }
         }
 
         @Override
@@ -334,10 +302,10 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
             public final TextView textItem;
             public final TextView textQty;
             public final TextView textPrice;
+            public final TextView textDiscount;
+            public final TextView textBudget;
             public final TextView textSubTotal;
             public final TextView textApproval1;
-            public final TextView textApproval2;
-            public final TextView textApproval3;
 
             public final LinearLayout layout;
 
@@ -349,10 +317,10 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
                 textItem = (TextView) itemView.findViewById(R.id.textItem);
                 textQty = (TextView) itemView.findViewById(R.id.textQty);
                 textPrice = (TextView) itemView.findViewById(R.id.textPrice);
+                textDiscount = (TextView) itemView.findViewById(R.id.textDiscount);
+                textBudget = (TextView) itemView.findViewById(R.id.textBudget);
                 textSubTotal = (TextView) itemView.findViewById(R.id.textSubTotal);
                 textApproval1 = (TextView) itemView.findViewById(R.id.textApproval1);
-                textApproval2 = (TextView) itemView.findViewById(R.id.textApproval2);
-                textApproval3 = (TextView) itemView.findViewById(R.id.textApproval3);
 
                 layout = (LinearLayout) itemView.findViewById(R.id.layout);
             }

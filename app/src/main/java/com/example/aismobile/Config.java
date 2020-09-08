@@ -46,8 +46,11 @@ public class Config {
     public static final String DATA_URL_TUNJANGAN_KARYAWAN_LIST = DATA_URL+"getTunjanganKaryawan";
     public static final String DATA_URL_TUNJANGAN_TEMPORARY_LIST = DATA_URL+"getTunjanganTemporary";
     public static final String DATA_URL_PURCHASE_ORDER_LIST = DATA_URL+"getPurchaseOrder";
+    public static final String DATA_URL_PURCHASE_ORDER_DETAIL_LIST = DATA_URL+"getPurchaseOrderDetail";
     public static final String DATA_URL_PURCHASE_SERVICE_LIST = DATA_URL+"getPurchaseService";
+    public static final String DATA_URL_PURCHASE_SERVICE_DETAIL_LIST = DATA_URL+"getPurchaseServiceDetail";
     public static final String DATA_URL_CASH_ON_DELIVERY_LIST = DATA_URL+"getCashOnDelivery";
+    public static final String DATA_URL_CASH_ON_DELIVERY_DETAIL_LIST = DATA_URL+"getCashOnDeliveryDetail";
     public static final String DATA_URL_CONTTRACT_AGREEMENT_LIST = DATA_URL+"getContractAgreement";
     public static final String DATA_URL_GRN_LIST = DATA_URL+"getGoodReceivedNote";
     public static final String DATA_URL_WORK_HANDOVER_LIST = DATA_URL+"getWorkHandover";

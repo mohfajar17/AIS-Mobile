@@ -9,6 +9,7 @@ import org.json.JSONObject;
 public class PurchaseOrder implements Parcelable {
     private int purchase_order_id;
     private String purchase_order_number;
+    private String purchase_order_type_id;
     private String tax_type_id;
     private String purchase_order_status_id;
     private String contract_agreement_id;
@@ -45,7 +46,7 @@ public class PurchaseOrder implements Parcelable {
     private String purchase_order_discount_type;
     private String job_order_number;
 
-    public PurchaseOrder(int purchase_order_id, String purchase_order_number, String tax_type_id, String purchase_order_status_id,
+    public PurchaseOrder(int purchase_order_id, String purchase_order_number, String purchase_order_type_id, String tax_type_id, String purchase_order_status_id,
                          String contract_agreement_id, String supplier_id, String purchase_quotation_number,
                          String purchase_quotation_date, String begin_date, String end_date, String payment_term_id,
                          String payment_desc, String delivery_address, String delivery_address2, String approval_assign_id,
@@ -57,6 +58,7 @@ public class PurchaseOrder implements Parcelable {
                          String purchase_order_discount_type, String job_order_number){
         this.purchase_order_id = purchase_order_id;
         this.purchase_order_number = purchase_order_number;
+        this.purchase_order_type_id = purchase_order_type_id;
         this.tax_type_id = tax_type_id;
         this.purchase_order_status_id = purchase_order_status_id;
         this.contract_agreement_id = contract_agreement_id;
@@ -97,6 +99,7 @@ public class PurchaseOrder implements Parcelable {
     protected PurchaseOrder(Parcel in) {
         purchase_order_id = in.readInt();
         purchase_order_number = in.readString();
+        purchase_order_type_id = in.readString();
         tax_type_id = in.readString();
         purchase_order_status_id = in.readString();
         contract_agreement_id = in.readString();
@@ -138,6 +141,7 @@ public class PurchaseOrder implements Parcelable {
         try {
             this.purchase_order_id = jsonObject.getInt("purchase_order_id");
             this.purchase_order_number = jsonObject.getString("purchase_order_number");
+            this.purchase_order_type_id = jsonObject.getString("purchase_order_type_id");
             this.tax_type_id = jsonObject.getString("tax_type_id");
             this.purchase_order_status_id = jsonObject.getString("purchase_order_status_id");
             this.contract_agreement_id = jsonObject.getString("contract_agreement_id");
@@ -199,6 +203,7 @@ public class PurchaseOrder implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(purchase_order_id);
         dest.writeString(purchase_order_number);
+        dest.writeString(purchase_order_type_id);
         dest.writeString(tax_type_id);
         dest.writeString(purchase_order_status_id);
         dest.writeString(contract_agreement_id);
@@ -242,6 +247,10 @@ public class PurchaseOrder implements Parcelable {
 
     public String getPurchase_order_number() {
         return purchase_order_number;
+    }
+
+    public String getPurchase_order_type_id() {
+        return purchase_order_type_id;
     }
 
     public String getTax_type_id() {

@@ -11,6 +11,7 @@ public class CashOnDelivery implements Parcelable {
     private int cash_on_delivery_id;
     private String cash_on_delivery_number;
     private String job_order_id;
+    private String job_order_description;
     private String used_by;
     private String purchase_order_type_id;
     private String tax_type_id;
@@ -39,7 +40,7 @@ public class CashOnDelivery implements Parcelable {
     private String cod_file_type;
     private String cod_discount_type;
 
-    public CashOnDelivery(int cash_on_delivery_id, String cash_on_delivery_number, String job_order_id,
+    public CashOnDelivery(int cash_on_delivery_id, String cash_on_delivery_number, String job_order_id, String job_order_description,
                           String used_by, String purchase_order_type_id, String tax_type_id, String purchase_order_status_id,
                           String supplier_id, String begin_date, String end_date, String payment_term_id,
                           String payment_desc, String delivery_address, String delivery_address2, String notes,
@@ -50,6 +51,7 @@ public class CashOnDelivery implements Parcelable {
         this.cash_on_delivery_id = cash_on_delivery_id;
         this.cash_on_delivery_number = cash_on_delivery_number;
         this.job_order_id = job_order_id;
+        this.job_order_description = job_order_description;
         this.used_by = used_by;
         this.purchase_order_type_id = purchase_order_type_id;
         this.tax_type_id = tax_type_id;
@@ -83,6 +85,7 @@ public class CashOnDelivery implements Parcelable {
         cash_on_delivery_id = in.readInt();
         cash_on_delivery_number = in.readString();
         job_order_id = in.readString();
+        job_order_description = in.readString();
         used_by = in.readString();
         purchase_order_type_id = in.readString();
         tax_type_id = in.readString();
@@ -117,6 +120,7 @@ public class CashOnDelivery implements Parcelable {
             this.cash_on_delivery_id = jsonObject.getInt("cash_on_delivery_id");
             this.cash_on_delivery_number = jsonObject.getString("cash_on_delivery_number");
             this.job_order_id = jsonObject.getString("job_order_id");
+            this.job_order_description = jsonObject.getString("job_order_description");
             this.used_by = jsonObject.getString("used_by");
             this.purchase_order_type_id = jsonObject.getString("purchase_order_type_id");
             this.tax_type_id = jsonObject.getString("tax_type_id");
@@ -171,6 +175,7 @@ public class CashOnDelivery implements Parcelable {
         dest.writeInt(cash_on_delivery_id);
         dest.writeString(cash_on_delivery_number);
         dest.writeString(job_order_id);
+        dest.writeString(job_order_description);
         dest.writeString(used_by);
         dest.writeString(purchase_order_type_id);
         dest.writeString(tax_type_id);
@@ -210,6 +215,10 @@ public class CashOnDelivery implements Parcelable {
 
     public String getJob_order_id() {
         return job_order_id;
+    }
+
+    public String getJob_order_description() {
+        return job_order_description;
     }
 
     public String getUsed_by() {

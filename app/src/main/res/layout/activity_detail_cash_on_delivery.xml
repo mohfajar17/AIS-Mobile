@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Project.ProposedBudget.DetailProposedBudgetActivity">
+    tools:context=".Purchasing.CashOnDelivery.DetailCashOnDeliveryActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +29,7 @@
             android:gravity="left|center"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            android:text="Proposed Budget"/>
+            android:text="COD"/>
     </LinearLayout>
 
     <LinearLayout
@@ -92,7 +91,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textJobCode"
+                    android:id="@+id/textJobOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -108,7 +107,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Job Code"
+                    android:text="Job Order"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -118,7 +117,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textKeteranganJobCode"
+                    android:id="@+id/textKeteranganJo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -144,7 +143,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textPenanggungJwb"
+                    android:id="@+id/textJenisPembelian"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -160,7 +159,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Penanggung Jwb"
+                    android:text="Jenis Pembelian"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -170,7 +169,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textRequestDate"
+                    android:id="@+id/textSupplier"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -186,7 +185,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Request Date"
+                    android:text="Supplier"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -196,7 +195,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textPaymentDate"
+                    android:id="@+id/textAlamatPengiriman"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -212,7 +211,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Payment Date"
+                    android:text="Alamat Kirim"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -222,7 +221,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textDueDate"
+                    android:id="@+id/textDigunakanOleh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -238,7 +237,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Due Date"
+                    android:text="Digunakan Oleh"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -248,7 +247,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textAccount"
+                    android:id="@+id/textTglAwal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -264,7 +263,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Account"
+                    android:text="Tgl Awal"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -274,7 +273,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textCategory"
+                    android:id="@+id/textTglAkhir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -290,7 +289,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Category"
+                    android:text="Tgl Akhir"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -300,7 +299,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textDone"
+                    android:id="@+id/textJenisPajak"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -316,7 +315,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Done"
+                    android:text="Jenis Pajak"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -326,7 +325,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textCheckedBy"
+                    android:id="@+id/textPaymentTerm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -342,59 +341,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="CheckedBy"
-                    android:textColor="@color/colorWhite"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/textCheckedDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bubble"
-                    android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="-"
-                    android:textColor="@color/colorBlack"/>
-
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bubble_sub"
-                    android:padding="10dp"
-                    android:text="Checked Date"
-                    android:textColor="@color/colorWhite"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/textPenerima"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bubble"
-                    android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="-"
-                    android:textColor="@color/colorBlack"/>
-
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bubble_sub"
-                    android:padding="10dp"
-                    android:text="Penerima"
+                    android:text="Payment Term"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -434,7 +381,7 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
-                            android:layout_width="250dp"
+                            android:layout_width="200dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="Item"
@@ -476,6 +423,34 @@
                             android:src="@color/colorWhite"/>
 
                         <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Discount"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Budget"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
                             android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -497,145 +472,12 @@
                             android:padding="10dp"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-
-                        <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Approval 2"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-
-                        <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Approval 3"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:src="@color/colorWhite"/>
-
-                    <LinearLayout
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center|top"
-                            android:padding="10dp"
-                            android:text="1"
-                            android:textColor="@android:color/black"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorBlack"/>
-
-                        <TextView
-                            android:id="@+id/textRestItem"
-                            android:layout_width="250dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="left|top"
-                            android:padding="10dp"
-                            android:textColor="@android:color/black"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorBlack"/>
-
-                        <TextView
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center|top"
-                            android:padding="10dp"
-                            android:textColor="@android:color/black"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorBlack"/>
-
-                        <TextView
-                            android:id="@+id/textRestPrice"
-                            android:layout_width="130dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="right|top"
-                            android:padding="10dp"
-                            android:textColor="@android:color/black"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorBlack"/>
-
-                        <TextView
-                            android:id="@+id/textRestSubTotal"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="right|top"
-                            android:padding="10dp"
-                            android:textColor="@android:color/black"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorBlack"/>
-
-                        <TextView
-                            android:id="@+id/textRestApproval1"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center|top"
-                            android:padding="10dp"
-                            android:textColor="@android:color/black"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorBlack"/>
-
-                        <TextView
-                            android:id="@+id/textRestApproval2"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center|top"
-                            android:padding="10dp"
-                            android:textColor="@android:color/black"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorBlack"/>
-
-                        <TextView
-                            android:id="@+id/textRestApproval3"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center|top"
-                            android:padding="10dp"
-                            android:textColor="@android:color/black"/>
-                    </LinearLayout>
 
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
@@ -647,196 +489,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                     </androidx.core.widget.NestedScrollView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="51dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="251dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="121dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="130dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Total"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-
-                        <TextView
-                            android:id="@+id/textTotal"
-                            android:layout_width="150dp"
-                            android:layout_height="match_parent"
-                            android:gravity="right|top"
-                            android:text="Rp.-"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="51dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="251dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="121dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="130dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Total Approved"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-
-                        <TextView
-                            android:id="@+id/textTotalApproved"
-                            android:layout_width="150dp"
-                            android:layout_height="match_parent"
-                            android:gravity="right|top"
-                            android:text="Rp.-"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="51dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="251dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="121dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="130dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Total Approved"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-
-                        <TextView
-                            android:id="@+id/textTotalTransfered"
-                            android:layout_width="150dp"
-                            android:layout_height="match_parent"
-                            android:gravity="right|top"
-                            android:text="Rp.-"
-                            android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
-                    </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -851,6 +503,84 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
+                    android:id="@+id/textPersetujuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Persetujuan"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textCheckedBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Checked By"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textCheckedDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Checked Date"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
                     android:id="@+id/textApproval1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -859,7 +589,7 @@
                     android:paddingLeft="140dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:text="-\n-\n-"
+                    android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
@@ -867,7 +597,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Approval 1\nApproval Date 1\nComment 1"
+                    android:text="Approval 1"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -877,7 +607,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textApproval2"
+                    android:id="@+id/textApproval1Date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -885,7 +615,7 @@
                     android:paddingLeft="140dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:text="-\n-\n-"
+                    android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
@@ -893,7 +623,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Approval 2\nApproval Date 2\nComment 2"
+                    android:text="Approval 1 Date"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
@@ -903,7 +633,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/textApproval3"
+                    android:id="@+id/textPoComment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
@@ -911,7 +641,7 @@
                     android:paddingLeft="140dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:text="-\n-\n-"
+                    android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
@@ -919,7 +649,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Approval 3\nApproval Date 3\nComment 3"
+                    android:text="Po Comment 1"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
         </LinearLayout>
@@ -1070,4 +800,4 @@
                 android:textColor="@color/colorWhite" />
         </RelativeLayout>
     </LinearLayout>
-  </LinearLayout>
+</LinearLayout>

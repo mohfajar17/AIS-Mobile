@@ -53,8 +53,11 @@ public class Config {
     public static final String DATA_URL_CASH_ON_DELIVERY_DETAIL_LIST = DATA_URL+"getCashOnDeliveryDetail";
     public static final String DATA_URL_CONTTRACT_AGREEMENT_LIST = DATA_URL+"getContractAgreement";
     public static final String DATA_URL_GRN_LIST = DATA_URL+"getGoodReceivedNote";
+    public static final String DATA_URL_GRN_DETAIL_LIST = DATA_URL+"getGoodReceivedNoteDetail";
     public static final String DATA_URL_WORK_HANDOVER_LIST = DATA_URL+"getWorkHandover";
+    public static final String DATA_URL_WORK_HANDOVER_DETAIL_LIST = DATA_URL+"getWorkHandoverDetail";
     public static final String DATA_URL_SERCICES_RECEIPT_LIST = DATA_URL+"getServicesReceipt";
+    public static final String DATA_URL_SERCICES_RECEIPT_DETAIL_LIST = DATA_URL+"getServicesReceiptDetail";
     public static final String DATA_URL_CONTACT_LIST = DATA_URL+"getContact";
     public static final String DATA_URL_SUPPLIER_LIST = DATA_URL+"getSupplier";
     public static final String DATA_URL_COMPANY_LIST = DATA_URL+"getCompany";

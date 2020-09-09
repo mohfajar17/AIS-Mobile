@@ -489,6 +489,293 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                     </androidx.core.widget.NestedScrollView>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorWhite"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="765dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="Total : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textTotal"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorWhite"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="765dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="Budget : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textBudget"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorWhite"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="765dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="Discount : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textDiscount"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorWhite"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="765dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="Efisiensi : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textEfisiensi"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorWhite"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="765dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="DPP : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textDPP"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorWhite"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="765dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="Pajak : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textPajak"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorWhite"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="765dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|top"
+                            android:text="GrandTotal : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:id="@+id/textGrandTotal"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+                    </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
 

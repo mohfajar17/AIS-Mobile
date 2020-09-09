@@ -18,6 +18,17 @@ public class CustomerFeedback implements Parcelable {
     private String marketing_aspect_id;
     private String feedback_category_id;
     private String feedback_status;
+    private String department_name;
+    private String media_name;
+    private String closed_user_id;
+    private String closed_time;
+    private String priority;
+    private String feedback_description;
+    private String user_displayname;
+    private String feedback_entry_time;
+    private String analyze_description;
+    private String answer_description;
+    private String preventive_description;
 
     public CustomerFeedback(int feedback_id, String feedback_number, String feedback_date, String feedback_subject,
                             String company_name, String contact_id, String contact_personal, String marketing_aspect_id,
@@ -45,6 +56,17 @@ public class CustomerFeedback implements Parcelable {
         marketing_aspect_id = in.readString();
         feedback_category_id = in.readString();
         feedback_status = in.readString();
+        department_name = in.readString();
+        media_name = in.readString();
+        closed_user_id = in.readString();
+        closed_time = in.readString();
+        priority = in.readString();
+        feedback_description = in.readString();
+        user_displayname = in.readString();
+        feedback_entry_time = in.readString();
+        analyze_description = in.readString();
+        answer_description = in.readString();
+        preventive_description = in.readString();
     }
 
     public CustomerFeedback(JSONObject jsonObject){
@@ -59,6 +81,17 @@ public class CustomerFeedback implements Parcelable {
             this.marketing_aspect_id = jsonObject.getString("marketing_aspect_id");
             this.feedback_category_id = jsonObject.getString("feedback_category_id");
             this.feedback_status = jsonObject.getString("feedback_status");
+            this.department_name = jsonObject.getString("department_name");
+            this.media_name = jsonObject.getString("media_name");
+            this.closed_user_id = jsonObject.getString("closed_user_id");
+            this.closed_time = jsonObject.getString("closed_time");
+            this.priority = jsonObject.getString("priority");
+            this.feedback_description = jsonObject.getString("feedback_description");
+            this.user_displayname = jsonObject.getString("user_displayname");
+            this.feedback_entry_time = jsonObject.getString("feedback_entry_time");
+            this.analyze_description = jsonObject.getString("analyze_description");
+            this.answer_description = jsonObject.getString("answer_description");
+            this.preventive_description = jsonObject.getString("preventive_description");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -93,6 +126,17 @@ public class CustomerFeedback implements Parcelable {
         dest.writeString(marketing_aspect_id);
         dest.writeString(feedback_category_id);
         dest.writeString(feedback_status);
+        dest.writeString(department_name);
+        dest.writeString(media_name);
+        dest.writeString(closed_user_id);
+        dest.writeString(closed_time);
+        dest.writeString(priority);
+        dest.writeString(feedback_description);
+        dest.writeString(user_displayname);
+        dest.writeString(feedback_entry_time);
+        dest.writeString(analyze_description);
+        dest.writeString(answer_description);
+        dest.writeString(preventive_description);
     }
 
     public int getFeedback_id() {
@@ -133,5 +177,49 @@ public class CustomerFeedback implements Parcelable {
 
     public String getFeedback_status() {
         return feedback_status;
+    }
+
+    public String getDepartment_name() {
+        return department_name;
+    }
+
+    public String getMedia_name() {
+        return media_name;
+    }
+
+    public String getClosed_user_id() {
+        return closed_user_id;
+    }
+
+    public String getClosed_time() {
+        return closed_time;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public String getFeedback_description() {
+        return feedback_description;
+    }
+
+    public String getUser_displayname() {
+        return user_displayname;
+    }
+
+    public String getFeedback_entry_time() {
+        return feedback_entry_time;
+    }
+
+    public String getAnalyze_description() {
+        return analyze_description;
+    }
+
+    public String getAnswer_description() {
+        return answer_description;
+    }
+
+    public String getPreventive_description() {
+        return preventive_description;
     }
 }

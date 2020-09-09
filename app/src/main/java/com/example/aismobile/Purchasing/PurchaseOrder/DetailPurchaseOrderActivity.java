@@ -80,6 +80,22 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
     private TextView textModifiedBy;
     private TextView textModifiedDate;
 
+    private TextView textTotal;
+    private TextView textBudget;
+    private TextView textDiscount;
+    private TextView textEfisiensi;
+    private TextView textDPP;
+    private TextView textPajak;
+    private TextView textGrandTotal;
+
+    private double total;
+    private double budget;
+    private double discount;
+    private double efisiensi;
+    private double dpp;
+    private double pajak;
+    private double grandTotal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +115,14 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
+
+        textTotal = (TextView) findViewById(R.id.textTotal);
+        textBudget = (TextView) findViewById(R.id.textBudget);
+        textDiscount = (TextView) findViewById(R.id.textDiscount);
+        textEfisiensi = (TextView) findViewById(R.id.textEfisiensi);
+        textDPP = (TextView) findViewById(R.id.textDPP);
+        textPajak = (TextView) findViewById(R.id.textPajak);
+        textGrandTotal = (TextView) findViewById(R.id.textGrandTotal);
 
         textJenisPembelian = (TextView) findViewById(R.id.textJenisPembelian);
         textContract = (TextView) findViewById(R.id.textContract);
@@ -217,7 +241,16 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             proposedBudgetDetails.add(new PurchaseOrderDetail(jsonArray.getJSONObject(i)));
+
+                            total += (jsonArray.getJSONObject(i).getDouble("quantity")*jsonArray.getJSONObject(i).getDouble("unit_price_buy"))-jsonArray.getJSONObject(i).getDouble("discount");
+                            budget += jsonArray.getJSONObject(i).getDouble("quantity")*jsonArray.getJSONObject(i).getDouble("max_budget");
+                            discount += jsonArray.getJSONObject(i).getDouble("discount");
                         }
+                        efisiensi = budget - total;
+                        dpp = total;
+                        pajak = total*10/100;
+                        grandTotal = dpp+pajak;
+
                         adapter = new MyRecyclerViewAdapter(proposedBudgetDetails, context);
                         recyclerView.setAdapter(adapter);
                     } else {
@@ -285,10 +318,15 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.layout.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
-//            if (mValues.size() == position+1){
-//                textTotalTransfered.setText("Rp. " + formatter.format(totalTransfered));
-//                textTotal.setText("Rp. " + formatter.format(totalTransfered));
-//            }
+            if (mValues.size() == position+1){
+                textTotal.setText("Rp. " + formatter.format((long) total));
+                textBudget.setText("Rp. " + formatter.format((long) budget));
+                textDiscount.setText("Rp. " + formatter.format((long) discount));
+                textEfisiensi.setText("Rp. " + formatter.format((long) efisiensi));
+                textDPP.setText("Rp. " + formatter.format((long) dpp));
+                textPajak.setText("Rp. " + formatter.format((long) pajak));
+                textGrandTotal.setText("Rp. " + formatter.format((long) grandTotal));
+            }
         }
 
         @Override

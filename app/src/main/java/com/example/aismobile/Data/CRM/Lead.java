@@ -16,6 +16,10 @@ public class Lead implements Parcelable {
     private String position;
     private String personal_phone;
     private String status;
+    private String lead_address;
+    private String notes;
+    private String modified_by;
+    private String modified_date;
 
     public Lead(int lead_id, String lead_name, String lead_phone, String lead_email, String person, String position,
                 String personal_phone, String status){
@@ -38,6 +42,10 @@ public class Lead implements Parcelable {
         position = in.readString();
         personal_phone = in.readString();
         status = in.readString();
+        lead_address = in.readString();
+        notes = in.readString();
+        modified_by = in.readString();
+        modified_date = in.readString();
     }
 
     public Lead(JSONObject jsonObject){
@@ -50,6 +58,10 @@ public class Lead implements Parcelable {
             this.position = jsonObject.getString("position");
             this.personal_phone = jsonObject.getString("personal_phone");
             this.status = jsonObject.getString("status");
+            this.lead_address = jsonObject.getString("lead_address");
+            this.notes = jsonObject.getString("notes");
+            this.modified_by = jsonObject.getString("modified_by");
+            this.modified_date = jsonObject.getString("modified_date");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -82,6 +94,10 @@ public class Lead implements Parcelable {
         dest.writeString(position);
         dest.writeString(personal_phone);
         dest.writeString(status);
+        dest.writeString(lead_address);
+        dest.writeString(notes);
+        dest.writeString(modified_by);
+        dest.writeString(modified_date);
     }
 
     public int getLead_id() {
@@ -114,5 +130,21 @@ public class Lead implements Parcelable {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getLead_address() {
+        return lead_address;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
     }
 }

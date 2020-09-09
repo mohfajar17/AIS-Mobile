@@ -18,10 +18,11 @@ public class ServicesReceipt implements Parcelable {
     private String created_date;
     private String modified_by;
     private String modified_date;
+    private String job_order_number;
 
     public ServicesReceipt(int services_receipt_id, String services_receipt_number, String receipt_date,
                            String cash_on_delivery_id, String recognized, String notes, String created_by,
-                           String created_date, String modified_by, String modified_date){
+                           String created_date, String modified_by, String modified_date, String job_order_number){
         this.services_receipt_id = services_receipt_id;
         this.services_receipt_number = services_receipt_number;
         this.receipt_date = receipt_date;
@@ -32,6 +33,7 @@ public class ServicesReceipt implements Parcelable {
         this.created_date = created_date;
         this.modified_by = modified_by;
         this.modified_date = modified_date;
+        this.job_order_number = job_order_number;
     }
 
     protected ServicesReceipt(Parcel in) {
@@ -45,6 +47,7 @@ public class ServicesReceipt implements Parcelable {
         created_date = in.readString();
         modified_by = in.readString();
         modified_date = in.readString();
+        job_order_number = in.readString();
     }
 
     public ServicesReceipt(JSONObject jsonObject){
@@ -59,6 +62,7 @@ public class ServicesReceipt implements Parcelable {
             this.created_date = jsonObject.getString("created_date");
             this.modified_by = jsonObject.getString("modified_by");
             this.modified_date = jsonObject.getString("modified_date");
+            this.job_order_number = jsonObject.getString("job_order_number");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -93,6 +97,7 @@ public class ServicesReceipt implements Parcelable {
         dest.writeString(created_date);
         dest.writeString(modified_by);
         dest.writeString(modified_date);
+        dest.writeString(job_order_number);
     }
 
     public int getServices_receipt_id() {
@@ -133,5 +138,9 @@ public class ServicesReceipt implements Parcelable {
 
     public String getModified_date() {
         return modified_date;
+    }
+
+    public String getJob_order_number() {
+        return job_order_number;
     }
 }

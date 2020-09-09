@@ -14,7 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Purchasing.CashOnDelivery.DetailCashOnDeliveryActivity"></activity>
+        <activity android:name=".Crm.ScheduleVisit.DetailScheduleActivity"></activity>
+        <activity android:name=".Crm.Lead.DetailLeadsActivity" />
+        <activity android:name=".Crm.CustomerFeedback.DetailCustomerFeedbackActivity" />
+        <activity android:name=".Purchasing.ServicesReceipt.DetailServicesReceiptActivity" />
+        <activity android:name=".Purchasing.WorkHandover.DetailWorkHandoverActivity" />
+        <activity android:name=".Purchasing.GoodReceivedNote.DetailGoodRecivedNoteActivity" />
+        <activity android:name=".Purchasing.CashOnDelivery.DetailCashOnDeliveryActivity" />
         <activity android:name=".Purchasing.WorkOrder.DetailWorkOrdderActivity" />
         <activity android:name=".Purchasing.PurchaseOrder.DetailPurchaseOrderActivity" />
         <activity android:name=".Project.TunjanganTemporary.DetailTunTemporaryActivity" />

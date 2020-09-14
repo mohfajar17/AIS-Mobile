@@ -149,7 +149,7 @@
 
     <TextView
         android:id="@+id/poTextStatus"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
         android:text="-"

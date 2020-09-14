@@ -14,7 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Crm.ScheduleVisit.DetailScheduleActivity"></activity>
+        <activity android:name=".Marketing.SalesQuotation.DetailSalesQuotationsActivity"></activity>
+        <activity android:name=".Contact.Perusahaan.DetailPerusahaanActivity" />
+        <activity android:name=".Contact.Supplier.DetailSupplierActivity" />
+        <activity android:name=".Contact.Contacts.DetailContactsActivity" />
+        <activity android:name=".Safety.GenbaSafety.DetailGenbaSafetyActivity" />
+        <activity android:name=".Safety.WorkAccident.DetailWorkAccidentActivity" />
+        <activity android:name=".Crm.ScheduleVisit.DetailScheduleActivity" />
         <activity android:name=".Crm.Lead.DetailLeadsActivity" />
         <activity android:name=".Crm.CustomerFeedback.DetailCustomerFeedbackActivity" />
         <activity android:name=".Purchasing.ServicesReceipt.DetailServicesReceiptActivity" />

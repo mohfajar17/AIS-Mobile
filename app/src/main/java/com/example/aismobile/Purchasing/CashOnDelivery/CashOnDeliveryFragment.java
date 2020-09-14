@@ -211,7 +211,7 @@ public class CashOnDeliveryFragment extends Fragment {
             }
         });
 
-        loadData("cash_on_delivery_id DESC");
+//        loadData("cash_on_delivery_id DESC");
 
         return view;
     }
@@ -457,7 +457,21 @@ public class CashOnDeliveryFragment extends Fragment {
             holder.codTextCheckedBy.setText(""+mValues.get(position).getChecked_by());
             holder.codTextPersetujuan.setText(""+mValues.get(position).getApproval_assign_id());
             holder.codTextApproval1.setText(""+mValues.get(position).getApproval1());
-            holder.codTextStatus.setText(""+mValues.get(position).getPurchase_order_status_id());
+
+            if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==1)
+                holder.codTextStatus.setText("New");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==2)
+                holder.codTextStatus.setText("Pending");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==3)
+                holder.codTextStatus.setText("Progress");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==4)
+                holder.codTextStatus.setText("Complete");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==5)
+                holder.codTextStatus.setText("Closed");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==6)
+                holder.codTextStatus.setText("Cancel");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==7)
+                holder.codTextStatus.setText("Received");
 
             if (position%2==0)
                 holder.codLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

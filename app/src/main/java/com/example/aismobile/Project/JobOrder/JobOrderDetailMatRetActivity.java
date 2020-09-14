@@ -1,23 +1,59 @@
 package com.example.aismobile.Project.JobOrder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.aismobile.Config;
+import com.example.aismobile.Data.Project.DetailJobOrder.JoMatRet;
+import com.example.aismobile.Data.Project.DetailJobOrder.JoMatRetOther;
 import com.example.aismobile.Data.Project.JobOrder;
 import com.example.aismobile.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class JobOrderDetailMatRetActivity extends AppCompatActivity {
+
+    private Context context;
+    private RecyclerView recyclerView;
+    private MyRecyclerViewAdapter adapter;
+    private RecyclerView.LayoutManager recylerViewLayoutManager;
+    private List<JoMatRet> joPbs;
+    private List<JoMatRetOther> joPbRests;
+    private ProgressDialog progressDialog;
+    private MyNewRecyclerViewAdapter newAdapter;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -45,6 +81,19 @@ public class JobOrderDetailMatRetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_order_detail_mat_ret);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading data");
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
+
+        context = getApplicationContext();
+        joPbs = new ArrayList<>();
+        joPbRests = new ArrayList<>();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recylerViewLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(recylerViewLayoutManager);
 
         menuJoDetail = (TextView) findViewById(R.id.menuJoDetail);
         menuJoMr = (TextView) findViewById(R.id.menuJoMr);
@@ -202,5 +251,203 @@ public class JobOrderDetailMatRetActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        loadJobOrderDetail();
+    }
+
+    public void loadJobOrderDetail(){
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DETAIL_JO_MATRET_LIST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for(int i=0;i<jsonArray.length();i++){
+                            joPbs.add(new JoMatRet(jsonArray.getJSONObject(i)));
+                        }
+                        adapter = new MyRecyclerViewAdapter(joPbs, context);
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(JobOrderDetailMatRetActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(JobOrderDetailMatRetActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(JobOrderDetailMatRetActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("jobOrder", "" + jobOrder.getJob_order_id());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(JobOrderDetailMatRetActivity.this).add(request);
+    }
+
+    private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+
+        private final List<JoMatRet> mValues;
+        private Context context;
+
+        private MyRecyclerViewAdapter(List<JoMatRet> mValues, Context context) {
+            this.mValues = mValues;
+            this.context = context;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_job_order_detail_mat_ret_list, parent, false);
+            return new MyRecyclerViewAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
+            if (position % 2 == 0)
+                holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+            else holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+
+            int numb = position + 1;
+            holder.joTextNo.setText(""+numb);
+            holder.joTextPbNumber.setText(mValues.get(position).getMaterial_return_number());
+
+            recylerViewLayoutManager = new LinearLayoutManager(context);
+            holder.recyclerViewList.setLayoutManager(recylerViewLayoutManager);
+
+            StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DETAIL_JO_MATRET_REST_LIST, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        int status=jsonObject.getInt("status");
+                        if(status==1){
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for(int i=0;i<jsonArray.length();i++){
+                                joPbRests.add(new JoMatRetOther(jsonArray.getJSONObject(i)));
+                            }
+                            newAdapter = new MyNewRecyclerViewAdapter(joPbRests, context);
+                            holder.recyclerViewList.setAdapter(newAdapter);
+                        } else {
+                            Toast.makeText(JobOrderDetailMatRetActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(JobOrderDetailMatRetActivity.this, "", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                    Toast.makeText(JobOrderDetailMatRetActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> param=new HashMap<>();
+                    param.put("jobOrder", "" + mValues.get(position).getMaterial_return_id());
+                    return param;
+                }
+            };
+            Volley.newRequestQueue(JobOrderDetailMatRetActivity.this).add(request);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public final View mView;
+            public final TextView joTextNo;
+            public final TextView joTextPbNumber;
+            public final RecyclerView recyclerViewList;
+
+            public final LinearLayout layoutJo;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+
+                mView = itemView;
+                joTextNo = (TextView) itemView.findViewById(R.id.joTextNo);
+                joTextPbNumber = (TextView) itemView.findViewById(R.id.joTextPbNumber);
+                recyclerViewList = (RecyclerView) itemView.findViewById(R.id.recyclerViewList);
+
+                layoutJo = (LinearLayout) itemView.findViewById(R.id.layout);
+            }
+        }
+    }
+
+    private class MyNewRecyclerViewAdapter extends RecyclerView.Adapter<MyNewRecyclerViewAdapter.ViewHolder> {
+
+        private final List<JoMatRetOther> mValues;
+        private Context context;
+
+        private MyNewRecyclerViewAdapter(List<JoMatRetOther> mValues, Context context) {
+            this.mValues = mValues;
+            this.context = context;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_job_order_detail_mat_ret_list_other, parent, false);
+            return new MyNewRecyclerViewAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final MyNewRecyclerViewAdapter.ViewHolder holder, final int position) {
+            holder.joTextItem.setText(mValues.get(position).getItem_name());
+            holder.joTextSpesifikasi.setText(mValues.get(position).getItem_specification());
+            holder.joTextQty.setText(mValues.get(position).getQuantity() + " " + mValues.get(position).getUnit_abbr());
+
+            double quantity = Double.valueOf(mValues.get(position).getQuantity());
+            double price = Double.valueOf(mValues.get(position).getUnit_price_stock());
+            int subTotal = (int) quantity * (int) price;
+
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.joTextUnitPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) price)));
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf(subTotal)));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public final View mView;
+            public final TextView joTextItem;
+            public final TextView joTextSpesifikasi;
+            public final TextView joTextQty;
+            public final TextView joTextUnitPrice;
+            public final TextView joTextSubTotal;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+
+                mView = itemView;
+                joTextItem = (TextView) itemView.findViewById(R.id.joTextItem);
+                joTextSpesifikasi = (TextView) itemView.findViewById(R.id.joTextSpesifikasi);
+                joTextQty = (TextView) itemView.findViewById(R.id.joTextQty);
+                joTextUnitPrice = (TextView) itemView.findViewById(R.id.joTextUnitPrice);
+                joTextSubTotal = (TextView) itemView.findViewById(R.id.joTextSubTotal);
+            }
+        }
     }
 }

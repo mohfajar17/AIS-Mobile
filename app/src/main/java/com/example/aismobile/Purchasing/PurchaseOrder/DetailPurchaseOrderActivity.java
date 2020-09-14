@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +60,7 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
     private LinearLayout layoutCatatan;
     private LinearLayout layoutHistory;
 
+    private ImageView downloadAtachment;
     private TextView textJenisPembelian;
     private TextView textContract;
     private TextView textSupplier;
@@ -124,6 +127,7 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
         textPajak = (TextView) findViewById(R.id.textPajak);
         textGrandTotal = (TextView) findViewById(R.id.textGrandTotal);
 
+        downloadAtachment = (ImageView) findViewById(R.id.downloadAtachment);
         textJenisPembelian = (TextView) findViewById(R.id.textJenisPembelian);
         textContract = (TextView) findViewById(R.id.textContract);
         textSupplier = (TextView) findViewById(R.id.textSupplier);
@@ -209,6 +213,14 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
                 params = layoutHistory.getLayoutParams(); params.height = ViewGroup.LayoutParams.MATCH_PARENT; layoutHistory.setLayoutParams(params);
                 menuHistory.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
                 menuHistory.setTextColor(getResources().getColor(R.color.colorBlack));
+            }
+        });
+        downloadAtachment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/purchaseQuotation/"+ proposedBudget.getPurchase_file_name());
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
             }
         });
 
@@ -307,12 +319,16 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
             holder.textQty.setText(mValues.get(position).getQuantity() + " " + mValues.get(position).getUnit_abbr());
             holder.textApproval1.setText(mValues.get(position).getPo_app1());
 
+            double toDouble;
             NumberFormat formatter = new DecimalFormat("#,###");
-            holder.textBudget.setText("Rp. " + formatter.format(Integer.valueOf(mValues.get(position).getMax_budget())));
-            holder.textDiscount.setText("Rp. " + formatter.format(Integer.valueOf(mValues.get(position).getDiscount())));
-            holder.textPrice.setText("Rp. " + formatter.format(Integer.valueOf(mValues.get(position).getUnit_price_buy())));
-            int subTotal = (Integer.valueOf(mValues.get(position).getUnit_price_buy())*Integer.valueOf(mValues.get(position).getQuantity()))-Integer.valueOf(mValues.get(position).getDiscount());
-            holder.textSubTotal.setText("Rp. " + formatter.format(subTotal));
+            toDouble = Double.valueOf(mValues.get(position).getMax_budget());
+            holder.textBudget.setText("Rp. " + formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getDiscount());
+            holder.textDiscount.setText("Rp. " + formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getUnit_price_buy());
+            holder.textPrice.setText("Rp. " + formatter.format((long) toDouble));
+            toDouble = (Double.valueOf(mValues.get(position).getUnit_price_buy())*Double.valueOf(mValues.get(position).getQuantity()))-Double.valueOf(mValues.get(position).getDiscount());
+            holder.textSubTotal.setText("Rp. " + formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));

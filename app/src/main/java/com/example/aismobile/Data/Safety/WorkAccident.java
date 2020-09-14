@@ -17,6 +17,18 @@ public class WorkAccident implements Parcelable {
     private String job_grade_id;
     private String company_workbase_id;
     private String accident_type;
+    private String is_work_location;
+    private String witness;
+    private String notes;
+    private String action;
+    private String counter_meassure;
+    private String created_by;
+    private String created_date;
+    private String modified_by;
+    private String modified_date;
+    private String accident_photo_1;
+    private String accident_photo_2;
+    private String accident_photo_3;
 
     public WorkAccident (int work_accident_id, String employee_id, String employee_name, String day_accident,
                          String date_accident, String time_accident, String job_grade_id, String company_workbase_id,
@@ -42,6 +54,18 @@ public class WorkAccident implements Parcelable {
         job_grade_id = in.readString();
         company_workbase_id = in.readString();
         accident_type = in.readString();
+        is_work_location = in.readString();
+        witness = in.readString();
+        notes = in.readString();
+        action = in.readString();
+        counter_meassure = in.readString();
+        created_by = in.readString();
+        created_date = in.readString();
+        modified_by = in.readString();
+        modified_date = in.readString();
+        accident_photo_1 = in.readString();
+        accident_photo_2 = in.readString();
+        accident_photo_3 = in.readString();
     }
 
     public WorkAccident(JSONObject jsonObject){
@@ -55,6 +79,18 @@ public class WorkAccident implements Parcelable {
             this.job_grade_id = jsonObject.getString("job_grade_id");
             this.company_workbase_id = jsonObject.getString("company_workbase_id");
             this.accident_type = jsonObject.getString("accident_type");
+            this.is_work_location = jsonObject.getString("is_work_location");
+            this.witness = jsonObject.getString("witness");
+            this.notes = jsonObject.getString("notes");
+            this.action = jsonObject.getString("action");
+            this.counter_meassure = jsonObject.getString("counter_meassure");
+            this.created_by = jsonObject.getString("created_by");
+            this.created_date = jsonObject.getString("created_date");
+            this.modified_by = jsonObject.getString("modified_by");
+            this.modified_date = jsonObject.getString("modified_date");
+            this.accident_photo_1 = jsonObject.getString("accident_photo_1");
+            this.accident_photo_2 = jsonObject.getString("accident_photo_2");
+            this.accident_photo_3 = jsonObject.getString("accident_photo_3");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -88,6 +124,18 @@ public class WorkAccident implements Parcelable {
         dest.writeString(job_grade_id);
         dest.writeString(company_workbase_id);
         dest.writeString(accident_type);
+        dest.writeString(is_work_location);
+        dest.writeString(witness);
+        dest.writeString(notes);
+        dest.writeString(action);
+        dest.writeString(counter_meassure);
+        dest.writeString(created_by);
+        dest.writeString(created_date);
+        dest.writeString(modified_by);
+        dest.writeString(modified_date);
+        dest.writeString(accident_photo_1);
+        dest.writeString(accident_photo_2);
+        dest.writeString(accident_photo_3);
     }
 
     public int getWork_accident_id() {
@@ -124,5 +172,53 @@ public class WorkAccident implements Parcelable {
 
     public String getAccident_type() {
         return accident_type;
+    }
+
+    public String getIs_work_location() {
+        return is_work_location;
+    }
+
+    public String getWitness() {
+        return witness;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public String getCounter_meassure() {
+        return counter_meassure;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
+    }
+
+    public String getAccident_photo_1() {
+        return accident_photo_1;
+    }
+
+    public String getAccident_photo_2() {
+        return accident_photo_2;
+    }
+
+    public String getAccident_photo_3() {
+        return accident_photo_3;
     }
 }

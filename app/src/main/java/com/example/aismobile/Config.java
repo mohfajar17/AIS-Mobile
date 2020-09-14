@@ -76,6 +76,7 @@ public class Config {
     public static final String DATA_URL_SALES_ORDER_LIST = DATA_URL+"getSalesOrder";
     public static final String DATA_URL_WORK_ACCIDENT_LIST = DATA_URL+"getWorkAccident";
     public static final String DATA_URL_GENBA_SAFETY_LIST = DATA_URL+"getGenbaSafety";
+    public static final String DATA_URL_GENBA_SAFETY_DETAIL_LIST = DATA_URL+"getGenbaSafetyDetail";
     public static final String DATA_URL_SAFETY_FILE_REPORT_LIST = DATA_URL+"getJobOrderSafety";
     public static final String DATA_URL_CUSTOMER_FEEDBACK_LIST = DATA_URL+"getCustomerFeedback";
     public static final String DATA_URL_QUESTION_LIST = DATA_URL+"getQuestions";
@@ -134,6 +135,8 @@ public class Config {
     public static final String DATA_URL_DETAIL_JO_PB_REST_LIST = DATA_URL+"getDetailJOPBRestFrom";
     public static final String DATA_URL_DETAIL_JO_CPR_LIST = DATA_URL+"getDetailJOCPR";
     public static final String DATA_URL_DETAIL_JO_CPR_REST_LIST = DATA_URL+"getDetailJOCPRRestFrom";
+    public static final String DATA_URL_DETAIL_JO_MATRET_LIST = DATA_URL+"getDetailJOMaterialReturn";
+    public static final String DATA_URL_DETAIL_JO_MATRET_REST_LIST = DATA_URL+"getDetailJOMaterialReturnDetail";
     public static final String DATA_URL_DETAIL_SPKL_LIST = DATA_URL+"getDetailSpkl";
     public static final String DATA_URL_LIST_DETAIL_SPKL = DATA_URL+"getListDetailSpkl";
     public static final String DATA_URL_LIST_SALES_QUOTATION = DATA_URL+"listSalesQuotation";

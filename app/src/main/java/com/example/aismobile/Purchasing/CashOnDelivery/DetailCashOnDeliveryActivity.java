@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +27,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
 import com.example.aismobile.Data.Purchasing.CashOnDelivery;
 import com.example.aismobile.Data.Purchasing.CashOnDeliveryDetail;
-import com.example.aismobile.Data.Purchasing.PurchaseService;
 import com.example.aismobile.R;
 
 import org.json.JSONArray;
@@ -42,12 +43,12 @@ import java.util.Map;
 public class DetailCashOnDeliveryActivity extends AppCompatActivity {
 
     private ViewGroup.LayoutParams params;
-    private CashOnDelivery proposedBudget;
+    private CashOnDelivery cashOnDelivery;
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
-    private List<CashOnDeliveryDetail> proposedBudgetDetails;
+    private List<CashOnDeliveryDetail> cashOnDeliveryDetails;
     private ProgressDialog progressDialog;
 
     private TextView textNumber;
@@ -59,6 +60,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
     private LinearLayout layoutCatatan;
     private LinearLayout layoutHistory;
 
+    private ImageView downloadAtachment;
     private TextView textJobOrder;
     private TextView textKeteranganJo;
     private TextView textJenisPembelian;
@@ -103,7 +105,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_cash_on_delivery);
 
         Bundle bundle = getIntent().getExtras();
-        proposedBudget = bundle.getParcelable("detail");
+        cashOnDelivery = bundle.getParcelable("detail");
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
@@ -111,7 +113,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         context = getApplicationContext();
-        proposedBudgetDetails = new ArrayList<>();
+        cashOnDeliveryDetails = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recylerViewLayoutManager = new LinearLayoutManager(context);
@@ -125,6 +127,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
         textPajak = (TextView) findViewById(R.id.textPajak);
         textGrandTotal = (TextView) findViewById(R.id.textGrandTotal);
 
+        downloadAtachment = (ImageView) findViewById(R.id.downloadAtachment);
         textJobOrder = (TextView) findViewById(R.id.textJobOrder);
         textKeteranganJo = (TextView) findViewById(R.id.textKeteranganJo);
         textJenisPembelian = (TextView) findViewById(R.id.textJenisPembelian);
@@ -147,27 +150,27 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
         textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
         textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
 
-        textJobOrder.setText(proposedBudget.getJob_order_id());
-        textKeteranganJo.setText(proposedBudget.getJob_order_description());
-        textJenisPembelian.setText(proposedBudget.getPurchase_order_type_id());
-        textSupplier.setText(proposedBudget.getSupplier_id());
-        textAlamatPengiriman.setText(proposedBudget.getDelivery_address());
-        textDigunakanOleh.setText(proposedBudget.getUsed_by());
-        textTglAwal.setText(proposedBudget.getBegin_date());
-        textTglAkhir.setText(proposedBudget.getEnd_date());
-        textJenisPajak.setText(proposedBudget.getTax_type_id());
-        textPaymentTerm.setText(proposedBudget.getPayment_term_id());
-        textPersetujuan.setText(proposedBudget.getApproval_assign_id());
-        textCheckedBy.setText(proposedBudget.getChecked_by());
-        textCheckedDate.setText(proposedBudget.getChecked_date());
-        textApproval1.setText(proposedBudget.getApproval1());
-        textApproval1Date.setText(proposedBudget.getApproval_date1());
-        textCatatan.setText(proposedBudget.getNotes());
-        textPoComment.setText(proposedBudget.getApproval_comment1());
-        textCreatedBy.setText(proposedBudget.getCreated_by());
-        textCreatedDate.setText(proposedBudget.getCreated_date());
-        textModifiedBy.setText(proposedBudget.getModified_by());
-        textModifiedDate.setText(proposedBudget.getModified_date());
+        textJobOrder.setText(cashOnDelivery.getJob_order_id());
+        textKeteranganJo.setText(cashOnDelivery.getJob_order_description());
+        textJenisPembelian.setText(cashOnDelivery.getPurchase_order_type_id());
+        textSupplier.setText(cashOnDelivery.getSupplier_id());
+        textAlamatPengiriman.setText(cashOnDelivery.getDelivery_address());
+        textDigunakanOleh.setText(cashOnDelivery.getUsed_by());
+        textTglAwal.setText(cashOnDelivery.getBegin_date());
+        textTglAkhir.setText(cashOnDelivery.getEnd_date());
+        textJenisPajak.setText(cashOnDelivery.getTax_type_id());
+        textPaymentTerm.setText(cashOnDelivery.getPayment_term_id());
+        textPersetujuan.setText(cashOnDelivery.getApproval_assign_id());
+        textCheckedBy.setText(cashOnDelivery.getChecked_by());
+        textCheckedDate.setText(cashOnDelivery.getChecked_date());
+        textApproval1.setText(cashOnDelivery.getApproval1());
+        textApproval1Date.setText(cashOnDelivery.getApproval_date1());
+        textCatatan.setText(cashOnDelivery.getNotes());
+        textPoComment.setText(cashOnDelivery.getApproval_comment1());
+        textCreatedBy.setText(cashOnDelivery.getCreated_by());
+        textCreatedDate.setText(cashOnDelivery.getCreated_date());
+        textModifiedBy.setText(cashOnDelivery.getModified_by());
+        textModifiedDate.setText(cashOnDelivery.getModified_date());
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
         textNumber = (TextView) findViewById(R.id.textNumber);
@@ -178,7 +181,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
         layoutCatatan = (LinearLayout) findViewById(R.id.layoutCatatan);
         layoutHistory = (LinearLayout) findViewById(R.id.layoutHistory);
 
-        textNumber.setText(proposedBudget.getCash_on_delivery_number());
+        textNumber.setText(cashOnDelivery.getCash_on_delivery_number());
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,6 +215,14 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
                 menuHistory.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
+        downloadAtachment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/cashOnDelivery/"+ cashOnDelivery.getCod_file_name());
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+            }
+        });
 
         loadDetail();
     }
@@ -241,7 +252,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            proposedBudgetDetails.add(new CashOnDeliveryDetail(jsonArray.getJSONObject(i)));
+                            cashOnDeliveryDetails.add(new CashOnDeliveryDetail(jsonArray.getJSONObject(i)));
 
                             total += (jsonArray.getJSONObject(i).getDouble("quantity")*jsonArray.getJSONObject(i).getDouble("unit_price"))-jsonArray.getJSONObject(i).getDouble("discount");
                             budget += jsonArray.getJSONObject(i).getDouble("quantity")*jsonArray.getJSONObject(i).getDouble("max_budget");
@@ -252,7 +263,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
                         pajak = total*10/100;
                         grandTotal = dpp+pajak;
 
-                        adapter = new MyRecyclerViewAdapter(proposedBudgetDetails, context);
+                        adapter = new MyRecyclerViewAdapter(cashOnDeliveryDetails, context);
                         recyclerView.setAdapter(adapter);
                     } else {
                         Toast.makeText(DetailCashOnDeliveryActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
@@ -275,7 +286,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
-                param.put("cod_id", "" + proposedBudget.getCash_on_delivery_id());
+                param.put("cod_id", "" + cashOnDelivery.getCash_on_delivery_id());
                 return param;
             }
         };
@@ -307,12 +318,16 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
             holder.textQty.setText(mValues.get(position).getQuantity() + " " + mValues.get(position).getUnit_abbr());
             holder.textApproval1.setText(mValues.get(position).getCod_app1());
 
+            double toDouble;
             NumberFormat formatter = new DecimalFormat("#,###");
-            holder.textBudget.setText("Rp. " + formatter.format(Integer.valueOf(mValues.get(position).getMax_budget())));
-            holder.textDiscount.setText("Rp. " + formatter.format(Integer.valueOf(mValues.get(position).getDiscount())));
-            holder.textPrice.setText("Rp. " + formatter.format(Integer.valueOf(mValues.get(position).getUnit_price_buy())));
-            int subTotal = (Integer.valueOf(mValues.get(position).getUnit_price_buy())*Integer.valueOf(mValues.get(position).getQuantity()))-Integer.valueOf(mValues.get(position).getDiscount());
-            holder.textSubTotal.setText("Rp. " + formatter.format(subTotal));
+            toDouble = Double.valueOf(mValues.get(position).getMax_budget());
+            holder.textBudget.setText("Rp. " + formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getDiscount());
+            holder.textDiscount.setText("Rp. " + formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getUnit_price_buy());
+            holder.textPrice.setText("Rp. " + formatter.format((long) toDouble));
+            toDouble = (Double.valueOf(mValues.get(position).getUnit_price_buy())*Double.valueOf(mValues.get(position).getQuantity()))-Double.valueOf(mValues.get(position).getDiscount());
+            holder.textSubTotal.setText("Rp. " + formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));

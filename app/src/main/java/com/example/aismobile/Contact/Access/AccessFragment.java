@@ -213,7 +213,7 @@ public class AccessFragment extends Fragment {
             }
         });
 
-        loadData("access_request_id DESC");
+//        loadData("access_request_id DESC");
 
         return view;
     }

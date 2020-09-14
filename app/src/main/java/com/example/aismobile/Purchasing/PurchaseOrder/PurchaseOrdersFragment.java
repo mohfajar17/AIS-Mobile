@@ -213,7 +213,7 @@ public class PurchaseOrdersFragment extends Fragment {
             }
         });
 
-        loadData("purchase_order_id DESC");
+//        loadData("purchase_order_id DESC");
 
         return view;
     }
@@ -477,7 +477,21 @@ public class PurchaseOrdersFragment extends Fragment {
             holder.poTextCheckedBy.setText(""+mValues.get(position).getChecked_by());
             holder.poTextPersetujuan.setText(""+mValues.get(position).getApproval_assign_id());
             holder.poTextApproval1.setText(""+mValues.get(position).getPo_approval1());
-            holder.poTextStatus.setText(""+mValues.get(position).getPurchase_order_status_id());
+
+            if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==1)
+                holder.poTextStatus.setText("New");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==2)
+                holder.poTextStatus.setText("Pending");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==3)
+                holder.poTextStatus.setText("Progress");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==4)
+                holder.poTextStatus.setText("Complete");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==5)
+                holder.poTextStatus.setText("Closed");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==6)
+                holder.poTextStatus.setText("Cancel");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==7)
+                holder.poTextStatus.setText("Received");
 
             if (position%2==0)
                 holder.poLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

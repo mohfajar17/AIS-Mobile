@@ -157,7 +157,7 @@ public class WorkOrdersFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("purchase_order_id DESC");
+                    loadDataAll("purchase_service_id DESC");
                     loadAll = true;
                     params = woLayoutPaging.getLayoutParams();
                     params.height = 0;
@@ -166,7 +166,7 @@ public class WorkOrdersFragment extends Fragment {
                 } else {
                     woTextPaging.setText("1");
                     counter = 0;
-                    loadData("purchase_order_id DESC");
+                    loadData("purchase_service_id DESC");
                     loadAll = false;
                     params = woLayoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -211,7 +211,7 @@ public class WorkOrdersFragment extends Fragment {
             }
         });
 
-        loadData("purchase_order_id DESC");
+//        loadData("purchase_order_id DESC");
 
         return view;
     }
@@ -457,7 +457,21 @@ public class WorkOrdersFragment extends Fragment {
             holder.woTextCheckedBy.setText(""+mValues.get(position).getChecked_by());
             holder.woTextPersetujuan.setText(""+mValues.get(position).getApproval_assign_id());
             holder.woTextApproval1.setText(""+mValues.get(position).getPo_approval1());
-            holder.woTextStatus.setText(""+mValues.get(position).getPurchase_order_status_id());
+
+            if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==1)
+                holder.woTextStatus.setText("New");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==2)
+                holder.woTextStatus.setText("Pending");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==3)
+                holder.woTextStatus.setText("Progress");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==4)
+                holder.woTextStatus.setText("Complete");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==5)
+                holder.woTextStatus.setText("Closed");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==6)
+                holder.woTextStatus.setText("Cancel");
+            else if (Integer.valueOf(mValues.get(position).getPurchase_order_status_id())==7)
+                holder.woTextStatus.setText("Received");
 
             if (position%2==0)
                 holder.woLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

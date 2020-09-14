@@ -52,8 +52,6 @@ public class NewsDetailActivity extends AppCompatActivity {
             imageDetailInfo.setImageResource(R.drawable.no_image);
     }
 
-
-
     public void ShowPopup() {
         ImageView imageNo;
         myDialog.setContentView(R.layout.custom_popup_image);

@@ -65,9 +65,9 @@
 
     <TextView
         android:id="@+id/codTextJobOrder"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:gravity="top|left"
+        android:gravity="top|center"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -121,7 +121,7 @@
 
     <TextView
         android:id="@+id/codTextStatus"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
         android:text="-"

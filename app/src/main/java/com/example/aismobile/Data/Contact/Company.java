@@ -14,6 +14,16 @@ public class Company implements Parcelable {
     private String company_address;
     private String company_city;
     private String company_email;
+    private String npwp;
+    private String company_address_sppkp;
+    private String company_state;
+    private String company_country;
+    private String company_zipcode;
+    private String company_phone1;
+    private String company_phone2;
+    private String company_fax;
+    private String company_www;
+    private String company_notes;
 
     public Company(int company_id, String company_name, String company_code, String company_address,
                    String company_city, String company_email){
@@ -32,6 +42,16 @@ public class Company implements Parcelable {
         company_address = in.readString();
         company_city = in.readString();
         company_email = in.readString();
+        npwp = in.readString();
+        company_address_sppkp = in.readString();
+        company_state = in.readString();
+        company_country = in.readString();
+        company_zipcode = in.readString();
+        company_phone1 = in.readString();
+        company_phone2 = in.readString();
+        company_fax = in.readString();
+        company_www = in.readString();
+        company_notes = in.readString();
     }
 
     public Company(JSONObject jsonObject){
@@ -42,6 +62,16 @@ public class Company implements Parcelable {
             this.company_address = jsonObject.getString("company_address");
             this.company_city = jsonObject.getString("company_city");
             this.company_email = jsonObject.getString("company_email");
+            this.npwp = jsonObject.getString("npwp");
+            this.company_address_sppkp = jsonObject.getString("company_address_sppkp");
+            this.company_state = jsonObject.getString("company_state");
+            this.company_country = jsonObject.getString("company_country");
+            this.company_zipcode = jsonObject.getString("company_zipcode");
+            this.company_phone1 = jsonObject.getString("company_phone1");
+            this.company_phone2 = jsonObject.getString("company_phone2");
+            this.company_fax = jsonObject.getString("company_fax");
+            this.company_www = jsonObject.getString("company_www");
+            this.company_notes = jsonObject.getString("company_notes");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -72,6 +102,16 @@ public class Company implements Parcelable {
         dest.writeString(company_address);
         dest.writeString(company_city);
         dest.writeString(company_email);
+        dest.writeString(npwp);
+        dest.writeString(company_address_sppkp);
+        dest.writeString(company_state);
+        dest.writeString(company_country);
+        dest.writeString(company_zipcode);
+        dest.writeString(company_phone1);
+        dest.writeString(company_phone2);
+        dest.writeString(company_fax);
+        dest.writeString(company_www);
+        dest.writeString(company_notes);
     }
 
     public int getCompany_id() {
@@ -96,5 +136,45 @@ public class Company implements Parcelable {
 
     public String getCompany_email() {
         return company_email;
+    }
+
+    public String getNpwp() {
+        return npwp;
+    }
+
+    public String getCompany_address_sppkp() {
+        return company_address_sppkp;
+    }
+
+    public String getCompany_state() {
+        return company_state;
+    }
+
+    public String getCompany_country() {
+        return company_country;
+    }
+
+    public String getCompany_zipcode() {
+        return company_zipcode;
+    }
+
+    public String getCompany_phone1() {
+        return company_phone1;
+    }
+
+    public String getCompany_phone2() {
+        return company_phone2;
+    }
+
+    public String getCompany_fax() {
+        return company_fax;
+    }
+
+    public String getCompany_www() {
+        return company_www;
+    }
+
+    public String getCompany_notes() {
+        return company_notes;
     }
 }

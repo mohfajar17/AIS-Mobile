@@ -9,9 +9,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.aismobile.Config;
 import com.example.aismobile.Data.Project.JobOrder;
 import com.example.aismobile.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -19,11 +31,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class JobOrderDetailActivity extends AppCompatActivity {
 
     private double toDouble;
+    private double totalPengeluaran = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -78,6 +93,26 @@ public class JobOrderDetailActivity extends AppCompatActivity {
     private TextView detailCprB;
     private TextView detailExpensesB;
     private TextView detailTotalBudgetB;
+    private TextView detailMateriP;
+    private TextView detailToolP;
+    private TextView detailMpcP;
+    private TextView detailCodP;
+    private TextView detailWoP;
+    private TextView detailMrP;
+    private TextView detailPbP;
+    private TextView detailCprP;
+    private TextView detailExpensesP;
+    private TextView detailTotalBudgetP;
+    private TextView detailMateriPr;
+    private TextView detailToolPr;
+    private TextView detailMpcPr;
+    private TextView detailCodPr;
+    private TextView detailWoPr;
+    private TextView detailMrPr;
+    private TextView detailPbPr;
+    private TextView detailCprPr;
+    private TextView detailExpensesPr;
+    private TextView detailTotalBudgetPr;
 
     private JobOrder jobOrder;
 
@@ -142,11 +177,29 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         detailCprB = (TextView) findViewById(R.id.detailCprB);
         detailExpensesB = (TextView) findViewById(R.id.detailExpensesB);
         detailTotalBudgetB = (TextView) findViewById(R.id.detailTotalBudgetB);
+        detailMateriP = (TextView) findViewById(R.id.detailMateriP);
+        detailToolP = (TextView) findViewById(R.id.detailToolP);
+        detailMpcP = (TextView) findViewById(R.id.detailMpcP);
+        detailCodP = (TextView) findViewById(R.id.detailCodP);
+        detailWoP = (TextView) findViewById(R.id.detailWoP);
+        detailMrP = (TextView) findViewById(R.id.detailMrP);
+        detailPbP = (TextView) findViewById(R.id.detailPbP);
+        detailCprP = (TextView) findViewById(R.id.detailCprP);
+        detailExpensesP = (TextView) findViewById(R.id.detailExpensesP);
+        detailTotalBudgetP = (TextView) findViewById(R.id.detailTotalBudgetP);
+        detailMateriPr = (TextView) findViewById(R.id.detailMateriPr);
+        detailToolPr = (TextView) findViewById(R.id.detailToolPr);
+        detailMpcPr = (TextView) findViewById(R.id.detailMpcPr);
+        detailCodPr = (TextView) findViewById(R.id.detailCodPr);
+        detailWoPr = (TextView) findViewById(R.id.detailWoPr);
+        detailMrPr = (TextView) findViewById(R.id.detailMrPr);
+        detailPbPr = (TextView) findViewById(R.id.detailPbPr);
+        detailCprPr = (TextView) findViewById(R.id.detailCprPr);
+        detailExpensesPr = (TextView) findViewById(R.id.detailExpensesPr);
+        detailTotalBudgetPr = (TextView) findViewById(R.id.detailTotalBudgetPr);
 
         NumberFormat formatter = new DecimalFormat("#,###");
-
         int total = 0;
-
         toDouble = Double.valueOf(jobOrder.getMaterial_amount());
         detailMateriB.setText("Rp. " + formatter.format((int) toDouble));
         total += (int) toDouble;
@@ -199,12 +252,6 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         detailBudgetAmount.setText("Rp. "+ formatter.format((int) toDouble));
         toDouble = Double.valueOf(jobOrder.getAmount());
         detailNilaiKontrak.setText("Rp. "+ formatter.format((int) toDouble));
-        detailCustomerInvoice.setText("Rp. ");
-        detailCustomerPayment.setText("Rp. ");
-        detailBalance.setText("Rp. ");
-        detailLabaRugiBerjalan.setText("Rp. ");
-        detailSisaBudget.setText("Rp. ");
-        detailLabaRugi.setText("Rp. ");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -352,5 +399,104 @@ public class JobOrderDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        getData();
+    }
+
+    private void getData() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_JOB_ORDER_TOTAL_DATA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        JSONObject json = jsonObject.getJSONObject("data");
+                        double doubles;
+                        totalPengeluaran = 0;
+                        NumberFormat formatter = new DecimalFormat("#,###");
+                        doubles = json.getDouble("mr")+json.getDouble("pr"); totalPengeluaran+=doubles;
+                        detailMateriP.setText("Rp. " + formatter.format((long) doubles));
+                        doubles = json.getDouble("tr"); totalPengeluaran+=doubles;
+                        detailToolP.setText("Rp. " + formatter.format((long) doubles));
+                        doubles = json.getDouble("manPower"); totalPengeluaran+=doubles;
+                        detailMpcP.setText("Rp. " + formatter.format((long) doubles));
+                        doubles = json.getDouble("cod"); totalPengeluaran+=doubles;
+                        detailCodP.setText("Rp. " + formatter.format((long) doubles));
+                        doubles = json.getDouble("wo"); totalPengeluaran+=doubles;
+                        detailWoP.setText("Rp. " + formatter.format((long) doubles));
+                        doubles = json.getDouble("matret"); totalPengeluaran+=doubles;
+                        detailMrP.setText("Rp. " + formatter.format((long) doubles));
+                        doubles = json.getDouble("pbHalf"); totalPengeluaran+=doubles;
+                        detailPbP.setText("Rp. " + formatter.format((long) doubles));
+                        doubles = json.getDouble("cpr"); totalPengeluaran+=doubles;
+                        detailCprP.setText("Rp. " + formatter.format((long) doubles));
+                        doubles = json.getDouble("expenses"); totalPengeluaran+=doubles;
+                        detailExpensesP.setText("Rp. " + formatter.format((long) doubles));
+                        detailTotalBudgetP.setText("Rp. " + formatter.format((long) totalPengeluaran));
+
+                        if (json.getDouble("mr")+json.getDouble("pr") > Double.valueOf(jobOrder.getMaterial_amount()) && Double.valueOf(jobOrder.getMaterial_amount()) > 0)
+                            detailMateriPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                        else detailMateriPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (json.getDouble("tr") > Double.valueOf(jobOrder.getTools_amount()) && Double.valueOf(jobOrder.getTools_amount()) > 0)
+                            detailToolPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                        else detailToolPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (json.getDouble("manPower") > Double.valueOf(jobOrder.getMan_power_amount()) && Double.valueOf(jobOrder.getMan_power_amount()) > 0)
+                            detailMpcPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                        else detailMpcPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (json.getDouble("cod") > Double.valueOf(jobOrder.getCod_amount()) && Double.valueOf(jobOrder.getCod_amount()) > 0)
+                            detailCodPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                        else detailCodPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (json.getDouble("wo") > Double.valueOf(jobOrder.getWo_amount()) && Double.valueOf(jobOrder.getWo_amount()) > 0)
+                            detailWoPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                        else detailWoPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (json.getDouble("matret") > Double.valueOf(jobOrder.getMaterial_return_amount()) && Double.valueOf(jobOrder.getMaterial_return_amount()) > 0)
+                            detailMrPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                        else detailMrPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (json.getDouble("pbHalf") > Double.valueOf(jobOrder.getPb_amount()) && Double.valueOf(jobOrder.getPb_amount()) > 0)
+                            detailPbPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                        else detailPbPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (json.getDouble("cpr") > Double.valueOf(jobOrder.getCpr_amount()) && Double.valueOf(jobOrder.getCpr_amount()) > 0)
+                            detailCprPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                        else detailCprPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (json.getDouble("expenses") > Double.valueOf(jobOrder.getExpenses_amount()) && Double.valueOf(jobOrder.getExpenses_amount()) > 0)
+                            detailExpensesPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                        else detailExpensesPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+
+                        toDouble = Double.valueOf(jobOrder.getAmount()) - totalPengeluaran;
+                        detailLabaRugi.setText("Rp. " + formatter.format((long) toDouble));
+                        toDouble = Double.valueOf(jobOrder.getBudgeting_amount()) - totalPengeluaran;
+                        detailSisaBudget.setText("Rp. " + formatter.format((long) toDouble));
+                        toDouble = json.getDouble("invoice") - totalPengeluaran;
+                        detailLabaRugiBerjalan.setText("Rp. " + formatter.format((long) toDouble));
+                        toDouble = json.getDouble("payment");
+                        detailCustomerPayment.setText("Rp. " + formatter.format((long) toDouble));
+                        toDouble = json.getDouble("invoice");
+                        detailCustomerInvoice.setText("Rp. " + formatter.format((long) toDouble));
+                        toDouble = json.getDouble("invoice") - json.getDouble("payment");
+                        detailBalance.setText("Rp. " + formatter.format((long) toDouble));
+                    } else {
+                        Toast.makeText(JobOrderDetailActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                onBackPressed();
+                Toast.makeText(JobOrderDetailActivity.this, "Your network is broken, please check your network", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("jobOrder", "" + jobOrder.getJob_order_id());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
     }
 }

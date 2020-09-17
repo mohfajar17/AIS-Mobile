@@ -805,11 +805,8 @@
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="2"
-                                    android:gravity="center"
-                                    android:textStyle="bold"
-                                    android:text="( % )"
-                                    android:textColor="@color/colorBlack"/>
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="10dp" />
                             </LinearLayout>
 
                             <RelativeLayout
@@ -847,10 +844,8 @@
                                         android:id="@+id/detailMateriPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -897,10 +892,8 @@
                                         android:id="@+id/detailToolPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -947,10 +940,8 @@
                                         android:id="@+id/detailMpcPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -997,10 +988,8 @@
                                         android:id="@+id/detailCodPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -1047,10 +1036,8 @@
                                         android:id="@+id/detailWoPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -1097,10 +1084,8 @@
                                         android:id="@+id/detailMrPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -1147,10 +1132,8 @@
                                         android:id="@+id/detailPbPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -1197,10 +1180,8 @@
                                         android:id="@+id/detailCprPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -1247,10 +1228,8 @@
                                         android:id="@+id/detailExpensesPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -1270,7 +1249,7 @@
                                 <LinearLayout
                                     android:layout_width="500dp"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/bubble"
+                                    android:background="@drawable/bubble_sub"
                                     android:gravity="left|center"
                                     android:paddingLeft="170dp"
                                     android:orientation="horizontal">
@@ -1283,7 +1262,7 @@
                                         android:gravity="right"
                                         android:text="Rp. "
                                         android:textStyle="bold|italic"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:textColor="@color/colorWhite"/>
 
                                     <TextView
                                         android:id="@+id/detailTotalBudgetP"
@@ -1293,27 +1272,24 @@
                                         android:gravity="right"
                                         android:textStyle="bold|italic"
                                         android:text="Rp. "
-                                        android:textColor="@color/colorBlack"/>
+                                        android:textColor="@color/colorWhite"/>
 
                                     <TextView
                                         android:id="@+id/detailTotalBudgetPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:gravity="right"
-                                        android:textStyle="bold|italic"
-                                        android:text="- %"
-                                        android:textColor="@color/colorBlack"/>
+                                        android:layout_weight="1"
+                                        android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
                                 <TextView
                                     android:layout_width="160dp"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/bubble_sub"
+                                    android:background="@drawable/bubble"
                                     android:padding="10dp"
                                     android:textStyle="bold|italic"
                                     android:text="Total Budget"
-                                    android:textColor="@color/colorWhite"/>
+                                    android:textColor="@color/colorBlack"/>
                             </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>

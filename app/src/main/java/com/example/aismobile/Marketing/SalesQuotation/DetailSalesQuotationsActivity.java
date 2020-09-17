@@ -89,8 +89,8 @@ public class DetailSalesQuotationsActivity extends AppCompatActivity {
         textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
         textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
 
-        textDepartemen.setText(cashOnDelivery.getDepartment_name());
-        textKeterangan.setText(cashOnDelivery.getDescription());
+        textDepartemen.setText("Departemen : "+ cashOnDelivery.getDepartment_name());
+        textKeterangan.setText("Keterangan : "+ cashOnDelivery.getDescription());
         textSQNumber.setText(cashOnDelivery.getSales_quotation_number());
         textSQDate.setText(cashOnDelivery.getSq_date());
         textCompletionDate.setText(cashOnDelivery.getCompletion_date());

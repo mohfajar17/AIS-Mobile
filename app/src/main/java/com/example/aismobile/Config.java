@@ -29,6 +29,7 @@ public class Config {
     public static final String DATA_URL_ACCESS_HSE = DATA_URL+"accessAllowHSE";
     public static final String DATA_URL_ACCESS_CONTACT = DATA_URL+"accessAllowContact";
     public static final String DATA_URL_JOB_ORDER_LIST = DATA_URL+"getJobOrder";
+    public static final String DATA_URL_JOB_ORDER_TOTAL_DATA = DATA_URL+"getTotalDetailJO";
     public static final String DATA_URL_WORK_COMPLETION_LIST = DATA_URL+"getWorkCompletion";
     public static final String DATA_URL_WORK_COMPLETION_DETAIL_LIST = DATA_URL+"getWorkCompletionDetail";
     public static final String DATA_URL_MATERIAL_REQUISITION_LIST = DATA_URL+"getMaterialRequisition";
@@ -132,6 +133,7 @@ public class Config {
     public static final String DATA_URL_DETAIL_JO_MP_TEMP_LIST = DATA_URL+"getDetailJOManPowerTemp";
     public static final String DATA_URL_DETAIL_JO_WO_LIST = DATA_URL+"getDetailJOWO";
     public static final String DATA_URL_DETAIL_JO_PB_LIST = DATA_URL+"getDetailJOPB";
+    public static final String DATA_URL_DETAIL_JO_PB_HALF_LIST = DATA_URL+"getDetailJOPBHalf";
     public static final String DATA_URL_DETAIL_JO_PB_REST_LIST = DATA_URL+"getDetailJOPBRestFrom";
     public static final String DATA_URL_DETAIL_JO_CPR_LIST = DATA_URL+"getDetailJOCPR";
     public static final String DATA_URL_DETAIL_JO_CPR_REST_LIST = DATA_URL+"getDetailJOCPRRestFrom";
@@ -145,6 +147,7 @@ public class Config {
     public static final String DATA_URL_LIST_WORKBASE = DATA_URL+"listWorkbase";
     public static final String DATA_URL_LIST_DEPARTMEN = DATA_URL+"listDepartmen";
     public static final String DATA_URL_LIST_SALES_ORDER = DATA_URL+"listSalesOrder";
+    public static final String DATA_URL_LIST_SALES_ORDER_DETAIL = DATA_URL+"getSalesOrderDetail";
     public static final String DATA_URL_LIST_JOB_ORDER = DATA_URL+"listJobOrder";
     public static final String DATA_URL_SPKL_NUMBER = DATA_URL+"getSpklNumber";
     public static final String DATA_URL_CREATE_SPKL = DATA_URL+"addSpkl";

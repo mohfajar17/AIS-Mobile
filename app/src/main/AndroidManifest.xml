@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Marketing.SalesQuotation.DetailSalesQuotationsActivity"></activity>
+        <activity android:name=".Marketing.SalesOrder.DetailSalesOrderActivity"></activity>
+        <activity android:name=".Marketing.SalesQuotation.DetailSalesQuotationsActivity" />
         <activity android:name=".Contact.Perusahaan.DetailPerusahaanActivity" />
         <activity android:name=".Contact.Supplier.DetailSupplierActivity" />
         <activity android:name=".Contact.Contacts.DetailContactsActivity" />

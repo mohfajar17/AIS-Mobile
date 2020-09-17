@@ -14,6 +14,7 @@ public class SalesOrder implements Parcelable {
     private String sales_order_date;
     private String due_date;
     private String status;
+    private String company_id;
 
     public SalesOrder (int sales_order_id, String sales_order_number, String short_description,
                            String sales_order_date, String due_date, String status){
@@ -32,6 +33,7 @@ public class SalesOrder implements Parcelable {
         sales_order_date = in.readString();
         due_date = in.readString();
         status = in.readString();
+        company_id = in.readString();
     }
 
     public SalesOrder(JSONObject jsonObject){
@@ -42,6 +44,7 @@ public class SalesOrder implements Parcelable {
             this.sales_order_date = jsonObject.getString("sales_order_date");
             this.due_date = jsonObject.getString("due_date");
             this.status = jsonObject.getString("status");
+            this.company_id = jsonObject.getString("company_id");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -72,6 +75,7 @@ public class SalesOrder implements Parcelable {
         dest.writeString(sales_order_date);
         dest.writeString(due_date);
         dest.writeString(status);
+        dest.writeString(company_id);
     }
 
     public int getSales_order_id() {
@@ -96,5 +100,9 @@ public class SalesOrder implements Parcelable {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getCompany_id() {
+        return company_id;
     }
 }

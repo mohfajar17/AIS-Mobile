@@ -54,6 +54,12 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private MyNewRecyclerViewAdapter newAdapter;
 
+    private Context contextHalf;
+    private RecyclerView recyclerViewHalf;
+    private MyHalfRecyclerViewAdapter adapterHalf;
+    private RecyclerView.LayoutManager recylerViewLayoutManagerHalf;
+    private List<JoPb> joPbHalfs;
+
     private TextView menuJoDetail;
     private TextView menuJoMr;
     private TextView menuJoPr;
@@ -93,6 +99,13 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewAll);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
+
+        contextHalf = getApplicationContext();
+        joPbHalfs = new ArrayList<>();
+
+        recyclerViewHalf = (RecyclerView) findViewById(R.id.recyclerView);
+        recylerViewLayoutManagerHalf = new LinearLayoutManager(contextHalf);
+        recyclerViewHalf.setLayoutManager(recylerViewLayoutManagerHalf);
 
         menuJoDetail = (TextView) findViewById(R.id.menuJoDetail);
         menuJoMr = (TextView) findViewById(R.id.menuJoMr);
@@ -252,6 +265,42 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
         });
 
         loadJobOrderDetail();
+        loadHalfData();
+    }
+
+    private void loadHalfData() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DETAIL_JO_PB_HALF_LIST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for(int i=0;i<jsonArray.length();i++){
+                            joPbHalfs.add(new JoPb(jsonArray.getJSONObject(i)));
+                        }
+                        adapterHalf = new MyHalfRecyclerViewAdapter(joPbHalfs, contextHalf);
+                        recyclerViewHalf.setAdapter(adapterHalf);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("jobOrder", "" + jobOrder.getJob_order_id());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(JobOrderDetailPbActivity.this).add(request);
     }
 
     public void loadJobOrderDetail(){
@@ -452,6 +501,67 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
                 joTextQty = (TextView) itemView.findViewById(R.id.joTextQty);
                 joTextUnitPrice = (TextView) itemView.findViewById(R.id.joTextUnitPrice);
                 joTextSubTotal = (TextView) itemView.findViewById(R.id.joTextSubTotal);
+            }
+        }
+    }
+
+    private class MyHalfRecyclerViewAdapter extends RecyclerView.Adapter<MyHalfRecyclerViewAdapter.ViewHolder> {
+
+        private final List<JoPb> mValues;
+        private Context context;
+
+        private MyHalfRecyclerViewAdapter(List<JoPb> mValues, Context context) {
+            this.mValues = mValues;
+            this.context = context;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_job_order_detail_pb_list, parent, false);
+            return new MyHalfRecyclerViewAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final MyHalfRecyclerViewAdapter.ViewHolder holder, final int position) {
+            if (position % 2 == 0)
+                holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+            else holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+
+            int numb = position + 1;
+            holder.joTextNo.setText(""+numb);
+            holder.joTextPbNumber.setText(mValues.get(position).getCash_advance_number());
+            holder.joTextItem.setText(mValues.get(position).getRest_from());
+
+            double restValue = Double.valueOf(mValues.get(position).getRest_value());
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) restValue)));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public final View mView;
+            public final TextView joTextNo;
+            public final TextView joTextPbNumber;
+            public final TextView joTextItem;
+            public final TextView joTextSubTotal;
+
+            public final LinearLayout layoutJo;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+
+                mView = itemView;
+                joTextNo = (TextView) itemView.findViewById(R.id.joTextNo);
+                joTextPbNumber = (TextView) itemView.findViewById(R.id.joTextPbNumber);
+                joTextItem = (TextView) itemView.findViewById(R.id.joTextItem);
+                joTextSubTotal = (TextView) itemView.findViewById(R.id.joTextSubTotal);
+
+                layoutJo = (LinearLayout) itemView.findViewById(R.id.layoutJo);
             }
         }
     }

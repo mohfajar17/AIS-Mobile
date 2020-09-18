@@ -1,16 +1,11 @@
-package com.example.aismobile.Safety.GenbaSafety;
+package com.example.aismobile.Inventory.Stock;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,62 +23,61 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Safety.GenbaSafety;
-import com.example.aismobile.Data.Safety.GenbaSafetyDetail;
+import com.example.aismobile.Data.Inventory.StockAdjustment;
+import com.example.aismobile.Data.Inventory.StockDetail;
 import com.example.aismobile.R;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DetailGenbaSafetyActivity extends AppCompatActivity {
+public class DetailStockActivity extends AppCompatActivity {
 
-    private Dialog myDialog;
     private ViewGroup.LayoutParams params;
-    private GenbaSafety genbaSafety;
+    private StockAdjustment stockAdjustment;
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
-    private List<GenbaSafetyDetail> genbaSafetyDetails;
+    private List<StockDetail> stockDetails;
     private ProgressDialog progressDialog;
 
-    private TextView textNumber;
     private ImageView buttonBack;
     private TextView menuDetail;
     private TextView menuCatatan;
     private TextView menuHistory;
     private ScrollView layoutDetail;
-    private ScrollView layoutCatatan;
+    private LinearLayout layoutCatatan;
     private LinearLayout layoutHistory;
 
-    private TextView textGenbaDate;
-    private TextView textTime;
-    private TextView textNamaPembuat;
-    private TextView textWorkbase;
-    private TextView textChronology;
+    private TextView textAdjustmentNumber;
+    private TextView textPenjelasanSingkat;
+    private TextView textTglAdjustment;
+    private TextView textApprovalBy;
+    private TextView textApprovalDate;
+    private TextView textApprovalNotes;
+    private TextView textTitle;
+    private TextView textCatatan;
     private TextView textCreatedBy;
     private TextView textCreatedDate;
     private TextView textModifiedBy;
     private TextView textModifiedDate;
-    private ImageView downloadAtachment1;
-    private ImageView downloadAtachment2;
-    private ImageView downloadAtachment3;
+    private TextView textTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_genba_safety);
+        setContentView(R.layout.activity_detail_stock);
 
         Bundle bundle = getIntent().getExtras();
-        genbaSafety = bundle.getParcelable("detail");
-        myDialog = new Dialog(this);
+        stockAdjustment = bundle.getParcelable("detail");
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
@@ -91,45 +85,47 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         context = getApplicationContext();
-        genbaSafetyDetails = new ArrayList<>();
+        stockDetails = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
-        textGenbaDate = (TextView) findViewById(R.id.textGenbaDate);
-        textTime = (TextView) findViewById(R.id.textTime);
-        textNamaPembuat = (TextView) findViewById(R.id.textNamaPembuat);
-        textWorkbase = (TextView) findViewById(R.id.textWorkbase);
-        textChronology = (TextView) findViewById(R.id.textChronology);
+        textAdjustmentNumber = (TextView) findViewById(R.id.textAdjustmentNumber);
+        textPenjelasanSingkat = (TextView) findViewById(R.id.textPenjelasanSingkat);
+        textTglAdjustment = (TextView) findViewById(R.id.textTglAdjustment);
+        textApprovalBy = (TextView) findViewById(R.id.textApprovalBy);
+        textApprovalDate = (TextView) findViewById(R.id.textApprovalDate);
+        textApprovalNotes = (TextView) findViewById(R.id.textApprovalNotes);
+        textTitle = (TextView) findViewById(R.id.textTitle);
+        textCatatan = (TextView) findViewById(R.id.textCatatan);
         textCreatedBy = (TextView) findViewById(R.id.textCreatedBy);
         textCreatedDate = (TextView) findViewById(R.id.textCreatedDate);
         textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
         textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
+        textTotal = (TextView) findViewById(R.id.textTotal);
 
-        textGenbaDate.setText(genbaSafety.getGenba_date());
-        textTime.setText(genbaSafety.getGenba_time());
-        textNamaPembuat.setText(genbaSafety.getCreated_by());
-        textWorkbase.setText(genbaSafety.getCompany_workbase_id());
-        textChronology.setText(genbaSafety.getNotes());
-        textCreatedBy.setText(genbaSafety.getCreated_by());
-        textCreatedDate.setText(genbaSafety.getCreated_date());
-        textModifiedBy.setText(genbaSafety.getModified_by());
-        textModifiedDate.setText(genbaSafety.getModified_date());
-        downloadAtachment1 = (ImageView) findViewById(R.id.downloadAtachment1);
-        downloadAtachment2 = (ImageView) findViewById(R.id.downloadAtachment2);
-        downloadAtachment3 = (ImageView) findViewById(R.id.downloadAtachment3);
+        textAdjustmentNumber.setText(stockAdjustment.getAdjustment_number());
+        textPenjelasanSingkat.setText(stockAdjustment.getShort_description());
+        textTglAdjustment.setText(stockAdjustment.getAdjustment_date());
+        textApprovalBy.setText(stockAdjustment.getApproval_by());
+        textApprovalDate.setText(stockAdjustment.getApproval_date());
+        textApprovalNotes.setText(stockAdjustment.getApproval_notes());
+        textTitle.setText("Stock Adjustment " + stockAdjustment.getShort_description());
+        textCatatan.setText(stockAdjustment.getNotes());
+        textCreatedBy.setText(stockAdjustment.getCreated_by());
+        textCreatedDate.setText(stockAdjustment.getCreated_date());
+        textModifiedBy.setText(stockAdjustment.getModified_by());
+        textModifiedDate.setText(stockAdjustment.getModified_date());
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
-        textNumber = (TextView) findViewById(R.id.textNumber);
         menuDetail = (TextView) findViewById(R.id.menuDetail);
         menuCatatan = (TextView) findViewById(R.id.menuCatatan);
         menuHistory = (TextView) findViewById(R.id.menuHistory);
         layoutDetail = (ScrollView) findViewById(R.id.layoutDetail);
-        layoutCatatan = (ScrollView) findViewById(R.id.layoutCatatan);
+        layoutCatatan = (LinearLayout) findViewById(R.id.layoutCatatan);
         layoutHistory = (LinearLayout) findViewById(R.id.layoutHistory);
 
-        textNumber.setText("Genba Safety #" + genbaSafety.getGenba_safety_number());
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,46 +160,7 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
             }
         });
 
-        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo1()).into(downloadAtachment1);
-        if (downloadAtachment1.getDrawable() == null)
-            downloadAtachment1.setImageResource(R.drawable.no_image);
-        downloadAtachment1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo1());
-            }
-        });
-        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo2()).into(downloadAtachment2);
-        if (downloadAtachment2.getDrawable() == null)
-            downloadAtachment2.setImageResource(R.drawable.no_image);
-        downloadAtachment2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo2());
-            }
-        });
-        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo3()).into(downloadAtachment3);
-        if (downloadAtachment3.getDrawable() == null)
-            downloadAtachment3.setImageResource(R.drawable.no_image);
-        downloadAtachment3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo3());
-            }
-        });
-
         loadDetail();
-    }
-
-    public void showPopup(String url) {
-        ImageView imageView;
-        myDialog.setContentView(R.layout.custom_popup_image);
-        imageView = (ImageView) myDialog.findViewById(R.id.imageNo);
-        Picasso.get().load(url).into(imageView);
-        if (imageView.getDrawable() == null)
-            imageView.setImageResource(R.drawable.no_image);
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
     }
 
     private void hiddenLayout(){
@@ -222,27 +179,31 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
     public void loadDetail(){
         progressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_GENBA_SAFETY_DETAIL_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_STOCK_ADJUSMENT_DETAIL_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        double toDouble = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            genbaSafetyDetails.add(new GenbaSafetyDetail(jsonArray.getJSONObject(i)));
+                            stockDetails.add(new StockDetail(jsonArray.getJSONObject(i)));
+                            toDouble += jsonArray.getJSONObject(i).getDouble("adjustment_value") * jsonArray.getJSONObject(i).getDouble("unit_price");
                         }
+                        NumberFormat formatter = new DecimalFormat("#,###");
+                        textTotal.setText("Rp. " + formatter.format((long) toDouble));
 
-                        adapter = new MyRecyclerViewAdapter(genbaSafetyDetails, context);
+                        adapter = new MyRecyclerViewAdapter(stockDetails, context);
                         recyclerView.setAdapter(adapter);
                     } else {
-                        Toast.makeText(DetailGenbaSafetyActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailStockActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {
                     progressDialog.dismiss();
-                    Toast.makeText(DetailGenbaSafetyActivity.this, "", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailStockActivity.this, "", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
@@ -250,26 +211,26 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(DetailGenbaSafetyActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailStockActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
-                param.put("gs_id", "" + genbaSafety.getGenba_safety_id());
+                param.put("jobOrder", "" + stockAdjustment.getStock_adjustment_id());
                 return param;
             }
         };
-        Volley.newRequestQueue(DetailGenbaSafetyActivity.this).add(request);
+        Volley.newRequestQueue(DetailStockActivity.this).add(request);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
-        private final List<GenbaSafetyDetail> mValues;
+        private final List<StockDetail> mValues;
         private Context context;
 
-        private MyRecyclerViewAdapter(List<GenbaSafetyDetail> mValues, Context context) {
+        private MyRecyclerViewAdapter(List<StockDetail> mValues, Context context) {
             this.mValues = mValues;
             this.context = context;
         }
@@ -277,18 +238,26 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.activity_detail_genba_safety_list, parent, false);
+                    .inflate(R.layout.activity_detail_stock_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
             int nomor = position+1;
-            holder.textNo.setText("" + nomor);
-            holder.textKaryawan.setText(mValues.get(position).getEmployee_id());
-            holder.textKaryawanLuar.setText(mValues.get(position).getEmployee_name1());
-            holder.textPosisi.setText(mValues.get(position).getDepartemen());
-            holder.textDescription.setText(mValues.get(position).getNotes());
+            holder.textItem.setText(mValues.get(position).getItem_name());
+            holder.textSpesifikasi.setText(mValues.get(position).getItem_specification());
+            holder.textStockSekarang.setText(mValues.get(position).getCurrent_stock());
+            holder.textStockAktual.setText(mValues.get(position).getActual_stock());
+            holder.textPenyesuaian.setText(mValues.get(position).getAdjustment_value());
+            holder.textCatatan.setText(mValues.get(position).getNotes());
+
+            double toDouble;
+            NumberFormat formatter = new DecimalFormat("#,###");
+            toDouble = Double.valueOf(mValues.get(position).getUnit_price());
+            holder.textHargaSatuan.setText("Rp. " + formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getUnit_price())*Double.valueOf(mValues.get(position).getAdjustment_value());
+            holder.textSubTotal.setText("Rp. " + formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -302,11 +271,14 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            public final TextView textNo;
-            public final TextView textKaryawan;
-            public final TextView textKaryawanLuar;
-            public final TextView textPosisi;
-            public final TextView textDescription;
+            public final TextView textItem;
+            public final TextView textSpesifikasi;
+            public final TextView textStockSekarang;
+            public final TextView textStockAktual;
+            public final TextView textPenyesuaian;
+            public final TextView textHargaSatuan;
+            public final TextView textSubTotal;
+            public final TextView textCatatan;
 
             public final LinearLayout layout;
 
@@ -314,11 +286,14 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
                 super(itemView);
 
                 mView = itemView;
-                textNo = (TextView) itemView.findViewById(R.id.textNo);
-                textKaryawan = (TextView) itemView.findViewById(R.id.textKaryawan);
-                textKaryawanLuar = (TextView) itemView.findViewById(R.id.textKaryawanLuar);
-                textPosisi = (TextView) itemView.findViewById(R.id.textPosisi);
-                textDescription = (TextView) itemView.findViewById(R.id.textDescription);
+                textItem = (TextView) itemView.findViewById(R.id.textItem);
+                textSpesifikasi = (TextView) itemView.findViewById(R.id.textSpesifikasi);
+                textStockSekarang = (TextView) itemView.findViewById(R.id.textStockSekarang);
+                textStockAktual = (TextView) itemView.findViewById(R.id.textStockAktual);
+                textPenyesuaian = (TextView) itemView.findViewById(R.id.textPenyesuaian);
+                textHargaSatuan = (TextView) itemView.findViewById(R.id.textHargaSatuan);
+                textSubTotal = (TextView) itemView.findViewById(R.id.textSubTotal);
+                textCatatan = (TextView) itemView.findViewById(R.id.textCatatan);
 
                 layout = (LinearLayout) itemView.findViewById(R.id.layout);
             }

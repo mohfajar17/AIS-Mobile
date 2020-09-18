@@ -282,9 +282,9 @@ public class ItemFragment extends Fragment {
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("item_id ASC");
+            loadDataAll("item_code ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("item_id DESC");
+            loadDataAll("item_code DESC");
         else if (position == 2 && posAD == 0)
             loadDataAll("item_name ASC");
         else if (position == 2 && posAD == 1)
@@ -322,9 +322,9 @@ public class ItemFragment extends Fragment {
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("item_id ASC");
+            loadData("item_code ASC");
         else if (position == 1 && posAD == 1)
-            loadData("item_id DESC");
+            loadData("item_code DESC");
         else if (position == 2 && posAD == 0)
             loadData("item_name ASC");
         else if (position == 2 && posAD == 1)
@@ -538,10 +538,9 @@ public class ItemFragment extends Fragment {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity(), ""+mValues.get(position).getCreated_by(), Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-//                    intent.putExtra("detailJO", mValues.get(position));
-//                    holder.itemView.getContext().startActivity(intent);
+                    Intent intent = new Intent(getActivity(), DetailItemActivity.class);
+                    intent.putExtra("detail", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         }

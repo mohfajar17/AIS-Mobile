@@ -14,6 +14,12 @@ public class StockAdjustment implements Parcelable {
     private String short_description;
     private String notes;
     private String approval_by;
+    private String approval_date;
+    private String approval_notes;
+    private String created_by;
+    private String created_date;
+    private String modified_by;
+    private String modified_date;
 
     public StockAdjustment (int stock_adjustment_id, String adjustment_number, String adjustment_date,
                             String short_description, String notes, String approval_by){
@@ -31,6 +37,12 @@ public class StockAdjustment implements Parcelable {
         short_description = in.readString();
         notes = in.readString();
         approval_by = in.readString();
+        approval_date = in.readString();
+        approval_notes = in.readString();
+        created_by = in.readString();
+        created_date = in.readString();
+        modified_by = in.readString();
+        modified_date = in.readString();
     }
 
     public StockAdjustment(JSONObject jsonObject){
@@ -41,6 +53,12 @@ public class StockAdjustment implements Parcelable {
             this.short_description = jsonObject.getString("short_description");
             this.notes = jsonObject.getString("notes");
             this.approval_by = jsonObject.getString("approval_by");
+            this.approval_date = jsonObject.getString("approval_date");
+            this.approval_notes = jsonObject.getString("approval_notes");
+            this.created_by = jsonObject.getString("created_by");
+            this.created_date = jsonObject.getString("created_date");
+            this.modified_by = jsonObject.getString("modified_by");
+            this.modified_date = jsonObject.getString("modified_date");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -71,6 +89,12 @@ public class StockAdjustment implements Parcelable {
         dest.writeString(short_description);
         dest.writeString(notes);
         dest.writeString(approval_by);
+        dest.writeString(approval_date);
+        dest.writeString(approval_notes);
+        dest.writeString(created_by);
+        dest.writeString(created_date);
+        dest.writeString(modified_by);
+        dest.writeString(modified_date);
     }
 
     public int getStock_adjustment_id() {
@@ -95,5 +119,29 @@ public class StockAdjustment implements Parcelable {
 
     public String getApproval_by() {
         return approval_by;
+    }
+
+    public String getApproval_date() {
+        return approval_date;
+    }
+
+    public String getApproval_notes() {
+        return approval_notes;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
     }
 }

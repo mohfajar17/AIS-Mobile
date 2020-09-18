@@ -1,16 +1,11 @@
-package com.example.aismobile.Safety.GenbaSafety;
+package com.example.aismobile.Inventory.Material;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,10 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Safety.GenbaSafety;
-import com.example.aismobile.Data.Safety.GenbaSafetyDetail;
+import com.example.aismobile.Data.Inventory.MaterialReturn;
+import com.example.aismobile.Data.Inventory.MaterialReturnDetail;
 import com.example.aismobile.R;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,48 +36,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DetailGenbaSafetyActivity extends AppCompatActivity {
+public class DetailMaterialActivity extends AppCompatActivity {
 
-    private Dialog myDialog;
     private ViewGroup.LayoutParams params;
-    private GenbaSafety genbaSafety;
+    private MaterialReturn materialReturn;
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
-    private List<GenbaSafetyDetail> genbaSafetyDetails;
+    private List<MaterialReturnDetail> materialReturnDetails;
     private ProgressDialog progressDialog;
 
-    private TextView textNumber;
     private ImageView buttonBack;
     private TextView menuDetail;
     private TextView menuCatatan;
     private TextView menuHistory;
     private ScrollView layoutDetail;
-    private ScrollView layoutCatatan;
+    private LinearLayout layoutCatatan;
     private LinearLayout layoutHistory;
 
-    private TextView textGenbaDate;
-    private TextView textTime;
-    private TextView textNamaPembuat;
-    private TextView textWorkbase;
-    private TextView textChronology;
-    private TextView textCreatedBy;
-    private TextView textCreatedDate;
-    private TextView textModifiedBy;
-    private TextView textModifiedDate;
-    private ImageView downloadAtachment1;
-    private ImageView downloadAtachment2;
-    private ImageView downloadAtachment3;
+    private TextView textMrNumber;
+    private TextView textJobOrder;
+    private TextView textJoDescription;
+    private TextView textTglKembalian;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_genba_safety);
+        setContentView(R.layout.activity_detail_material);
 
         Bundle bundle = getIntent().getExtras();
-        genbaSafety = bundle.getParcelable("detail");
-        myDialog = new Dialog(this);
+        materialReturn = bundle.getParcelable("detail");
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
@@ -91,46 +74,29 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         context = getApplicationContext();
-        genbaSafetyDetails = new ArrayList<>();
+        materialReturnDetails = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
-        textGenbaDate = (TextView) findViewById(R.id.textGenbaDate);
-        textTime = (TextView) findViewById(R.id.textTime);
-        textNamaPembuat = (TextView) findViewById(R.id.textNamaPembuat);
-        textWorkbase = (TextView) findViewById(R.id.textWorkbase);
-        textChronology = (TextView) findViewById(R.id.textChronology);
-        textCreatedBy = (TextView) findViewById(R.id.textCreatedBy);
-        textCreatedDate = (TextView) findViewById(R.id.textCreatedDate);
-        textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
-        textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
+        textMrNumber = (TextView) findViewById(R.id.textMrNumber);
+        textJobOrder = (TextView) findViewById(R.id.textJobOrder);
+        textJoDescription = (TextView) findViewById(R.id.textJoDescription);
+        textTglKembalian = (TextView) findViewById(R.id.textTglKembalian);
 
-        textGenbaDate.setText(genbaSafety.getGenba_date());
-        textTime.setText(genbaSafety.getGenba_time());
-        textNamaPembuat.setText(genbaSafety.getCreated_by());
-        textWorkbase.setText(genbaSafety.getCompany_workbase_id());
-        textChronology.setText(genbaSafety.getNotes());
-        textCreatedBy.setText(genbaSafety.getCreated_by());
-        textCreatedDate.setText(genbaSafety.getCreated_date());
-        textModifiedBy.setText(genbaSafety.getModified_by());
-        textModifiedDate.setText(genbaSafety.getModified_date());
-        downloadAtachment1 = (ImageView) findViewById(R.id.downloadAtachment1);
-        downloadAtachment2 = (ImageView) findViewById(R.id.downloadAtachment2);
-        downloadAtachment3 = (ImageView) findViewById(R.id.downloadAtachment3);
+        textMrNumber.setText(materialReturn.getMaterial_return_number());
+        textJobOrder.setText(materialReturn.getJob_order_number());
+        textJoDescription.setText(materialReturn.getJob_order_description());
+        textTglKembalian.setText(materialReturn.getReturn_date());
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
-        textNumber = (TextView) findViewById(R.id.textNumber);
         menuDetail = (TextView) findViewById(R.id.menuDetail);
         menuCatatan = (TextView) findViewById(R.id.menuCatatan);
         menuHistory = (TextView) findViewById(R.id.menuHistory);
         layoutDetail = (ScrollView) findViewById(R.id.layoutDetail);
-        layoutCatatan = (ScrollView) findViewById(R.id.layoutCatatan);
-        layoutHistory = (LinearLayout) findViewById(R.id.layoutHistory);
-
-        textNumber.setText("Genba Safety #" + genbaSafety.getGenba_safety_number());
-        buttonBack.setOnClickListener(new View.OnClickListener() {
+        layoutCatatan = (LinearLayout) findViewById(R.id.layoutCatatan);
+        layoutHistory = (LinearLayout) findViewById(R.id.layoutHistory);buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -164,46 +130,7 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
             }
         });
 
-        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo1()).into(downloadAtachment1);
-        if (downloadAtachment1.getDrawable() == null)
-            downloadAtachment1.setImageResource(R.drawable.no_image);
-        downloadAtachment1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo1());
-            }
-        });
-        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo2()).into(downloadAtachment2);
-        if (downloadAtachment2.getDrawable() == null)
-            downloadAtachment2.setImageResource(R.drawable.no_image);
-        downloadAtachment2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo2());
-            }
-        });
-        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo3()).into(downloadAtachment3);
-        if (downloadAtachment3.getDrawable() == null)
-            downloadAtachment3.setImageResource(R.drawable.no_image);
-        downloadAtachment3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/genbaSafety/"+genbaSafety.getGenba_photo3());
-            }
-        });
-
         loadDetail();
-    }
-
-    public void showPopup(String url) {
-        ImageView imageView;
-        myDialog.setContentView(R.layout.custom_popup_image);
-        imageView = (ImageView) myDialog.findViewById(R.id.imageNo);
-        Picasso.get().load(url).into(imageView);
-        if (imageView.getDrawable() == null)
-            imageView.setImageResource(R.drawable.no_image);
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
     }
 
     private void hiddenLayout(){
@@ -222,27 +149,28 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
     public void loadDetail(){
         progressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_GENBA_SAFETY_DETAIL_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_MATERIAL_RETURN_DETAIL_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        double toDouble = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            genbaSafetyDetails.add(new GenbaSafetyDetail(jsonArray.getJSONObject(i)));
+                            materialReturnDetails.add(new MaterialReturnDetail(jsonArray.getJSONObject(i)));
                         }
 
-                        adapter = new MyRecyclerViewAdapter(genbaSafetyDetails, context);
+                        adapter = new MyRecyclerViewAdapter(materialReturnDetails, context);
                         recyclerView.setAdapter(adapter);
                     } else {
-                        Toast.makeText(DetailGenbaSafetyActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailMaterialActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {
                     progressDialog.dismiss();
-                    Toast.makeText(DetailGenbaSafetyActivity.this, "", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailMaterialActivity.this, "", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
@@ -250,26 +178,26 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(DetailGenbaSafetyActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailMaterialActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
-                param.put("gs_id", "" + genbaSafety.getGenba_safety_id());
+                param.put("jobOrder", "" + materialReturn.getMaterial_return_id());
                 return param;
             }
         };
-        Volley.newRequestQueue(DetailGenbaSafetyActivity.this).add(request);
+        Volley.newRequestQueue(DetailMaterialActivity.this).add(request);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
-        private final List<GenbaSafetyDetail> mValues;
+        private final List<MaterialReturnDetail> mValues;
         private Context context;
 
-        private MyRecyclerViewAdapter(List<GenbaSafetyDetail> mValues, Context context) {
+        private MyRecyclerViewAdapter(List<MaterialReturnDetail> mValues, Context context) {
             this.mValues = mValues;
             this.context = context;
         }
@@ -277,18 +205,16 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.activity_detail_genba_safety_list, parent, false);
+                    .inflate(R.layout.activity_detail_material_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            int nomor = position+1;
-            holder.textNo.setText("" + nomor);
-            holder.textKaryawan.setText(mValues.get(position).getEmployee_id());
-            holder.textKaryawanLuar.setText(mValues.get(position).getEmployee_name1());
-            holder.textPosisi.setText(mValues.get(position).getDepartemen());
-            holder.textDescription.setText(mValues.get(position).getNotes());
+            holder.textItem.setText(mValues.get(position).getItem_name());
+            holder.textSpesifikasi.setText(mValues.get(position).getItem_specification());
+            holder.textLoaction.setText(mValues.get(position).getWarehouse_name());
+            holder.textQty.setText(mValues.get(position).getQuantity()+ " " + mValues.get(position).getUnit_abbr());
 
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -302,11 +228,10 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            public final TextView textNo;
-            public final TextView textKaryawan;
-            public final TextView textKaryawanLuar;
-            public final TextView textPosisi;
-            public final TextView textDescription;
+            public final TextView textItem;
+            public final TextView textSpesifikasi;
+            public final TextView textLoaction;
+            public final TextView textQty;
 
             public final LinearLayout layout;
 
@@ -314,11 +239,10 @@ public class DetailGenbaSafetyActivity extends AppCompatActivity {
                 super(itemView);
 
                 mView = itemView;
-                textNo = (TextView) itemView.findViewById(R.id.textNo);
-                textKaryawan = (TextView) itemView.findViewById(R.id.textKaryawan);
-                textKaryawanLuar = (TextView) itemView.findViewById(R.id.textKaryawanLuar);
-                textPosisi = (TextView) itemView.findViewById(R.id.textPosisi);
-                textDescription = (TextView) itemView.findViewById(R.id.textDescription);
+                textItem = (TextView) itemView.findViewById(R.id.textItem);
+                textSpesifikasi = (TextView) itemView.findViewById(R.id.textSpesifikasi);
+                textLoaction = (TextView) itemView.findViewById(R.id.textLoaction);
+                textQty = (TextView) itemView.findViewById(R.id.textQty);
 
                 layout = (LinearLayout) itemView.findViewById(R.id.layout);
             }

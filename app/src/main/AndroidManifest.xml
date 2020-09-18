@@ -14,7 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Marketing.SalesOrder.DetailSalesOrderActivity"></activity>
+        <activity android:name=".Inventory.Material.DetailMaterialActivity"></activity>
+        <activity android:name=".Inventory.Stock.DetailStockActivity" />
+        <activity android:name=".Inventory.AsetRental.DetailAsetRentalActivity" />
+        <activity android:name=".Inventory.Aset.DetailAsetActivity" />
+        <activity android:name=".Inventory.Item.DetailItemActivity" />
+        <activity android:name=".Marketing.SalesOrder.DetailSalesOrderActivity" />
         <activity android:name=".Marketing.SalesQuotation.DetailSalesQuotationsActivity" />
         <activity android:name=".Contact.Perusahaan.DetailPerusahaanActivity" />
         <activity android:name=".Contact.Supplier.DetailSupplierActivity" />

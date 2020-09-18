@@ -93,7 +93,9 @@ public class Config {
     public static final String DATA_URL_ASET_LIST = DATA_URL+"getAsset";
     public static final String DATA_URL_ASET_RENTAL_LIST = DATA_URL+"getAssetRental";
     public static final String DATA_URL_STOCK_ADJUSMENT_LIST = DATA_URL+"getStockAdjustment";
+    public static final String DATA_URL_STOCK_ADJUSMENT_DETAIL_LIST = DATA_URL+"getStockAdjustmentDetail";
     public static final String DATA_URL_MATERIAL_RETURN_LIST = DATA_URL+"getMaterialReturn";
+    public static final String DATA_URL_MATERIAL_RETURN_DETAIL_LIST = DATA_URL+"getMaterialReturnDetail";
     public static final String DATA_URL_CHECK_CLOCK_LIST = DATA_URL+"getEmployeeCheckClock";
     public static final String DATA_URL_CUTI_LIST = DATA_URL+"getEmployeeLeave";
     public static final String DATA_URL_PENDIDIKAN_LIST = DATA_URL+"getEmployeeEducation";

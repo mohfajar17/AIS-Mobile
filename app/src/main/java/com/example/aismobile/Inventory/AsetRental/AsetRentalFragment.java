@@ -438,7 +438,7 @@ public class AsetRentalFragment extends Fragment {
             holder.arTextName.setText(""+mValues.get(position).getAsset_rental_name());
             holder.arTextModel.setText(""+mValues.get(position).getShort_description());
             holder.arTextRack.setText(""+mValues.get(position).getRack_code());
-            holder.arTextCost.setText("");
+            holder.arTextCost.setText("0");
             holder.arTextAktif.setText(""+mValues.get(position).getIs_active());
             holder.arTextKeterangan.setText(""+mValues.get(position).getRemark());
 
@@ -449,10 +449,9 @@ public class AsetRentalFragment extends Fragment {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity(), ""+mValues.get(position).getCreated_by(), Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-//                    intent.putExtra("detailJO", mValues.get(position));
-//                    holder.itemView.getContext().startActivity(intent);
+                    Intent intent = new Intent(getActivity(), DetailAsetRentalActivity.class);
+                    intent.putExtra("detail", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         }

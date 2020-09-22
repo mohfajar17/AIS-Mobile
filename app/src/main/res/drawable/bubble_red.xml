@@ -8,8 +8,6 @@
         android:color="#ee4043" >
     </solid>
 
-
-
     <!-- If you want to add some padding -->
     <padding
         android:left="10dp"

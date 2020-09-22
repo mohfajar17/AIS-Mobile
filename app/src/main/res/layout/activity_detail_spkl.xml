@@ -60,6 +60,11 @@
             android:textStyle="bold"
             android:text=" Detail "/>
 
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorWhite"/>
+
         <TextView
             android:id="@+id/menuSpklHistory"
             android:layout_width="0dp"

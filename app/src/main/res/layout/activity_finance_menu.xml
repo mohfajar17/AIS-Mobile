@@ -30,171 +30,210 @@
             android:text="FINANCE ACCOUNTING"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textViewSupplierInvoices"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Supplier Invoices"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewCustomerInvoice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Customer Invoice"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewSupplierInvoices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Supplier Invoices"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
 
-    <TextView
-        android:id="@+id/textViewBankTransaction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bank Transaction"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewCustomerInvoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer Invoice"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
 
-    <TextView
-        android:id="@+id/textViewExpenses"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Expenses"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewBankTransaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bank Transaction"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
 
-    <TextView
-        android:id="@+id/textViewCashAdvance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cash Advance"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Expenses"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
 
-    <TextView
-        android:id="@+id/textViewBudgeting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Budgeting"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewCashAdvance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cash Advance"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
 
-    <TextView
-        android:id="@+id/textViewPaymentSuppliers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Payment Suppliers"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewBudgeting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Budgeting"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
 
-    <TextView
-        android:id="@+id/textViewInstallment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Installment"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewPaymentSuppliers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Suppliers"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
 
-    <TextView
-        android:id="@+id/textViewBankAccounts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bank Accounts"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewInstallment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Installment"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
 
-    <TextView
-        android:id="@+id/textViewTaxReports"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tax Reports"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewBankAccounts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bank Accounts"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:src="@color/colorAsukaBlue"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
 
-    <TextView
-        android:id="@+id/textViewDaftarAkun"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Daftar Akun"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewTaxReports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tax Reports"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:src="@color/colorAsukaBlue"/>
 
-    <TextView
-        android:id="@+id/textViewEmployeeSalary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Employee Salary"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/textViewDaftarAkun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Daftar Akun"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:src="@color/colorAsukaBlue"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
+
+            <TextView
+                android:id="@+id/textViewEmployeeSalary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Employee Salary"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:src="@color/colorAsukaBlue"/>
+
+            <TextView
+                android:id="@+id/textViewEkspedisi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ekspedisi"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@color/colorAsukaRed"/>
+
+            <TextView
+                android:id="@+id/textViewCustomerReceive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer Receive"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:src="@color/colorAsukaBlue"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

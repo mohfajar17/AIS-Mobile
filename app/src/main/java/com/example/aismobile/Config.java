@@ -68,9 +68,12 @@ public class Config {
     public static final String DATA_URL_CUSTOMER_INVOICE_LIST = DATA_URL+"getCustomerInvoices";
     public static final String DATA_URL_BANK_TRANSACTION_LIST = DATA_URL+"getBankTransaction";
     public static final String DATA_URL_EXPENSE_LIST = DATA_URL+"getExpense";
+    public static final String DATA_URL_EXPENSE_DETAIL_LIST = DATA_URL+"getExpenseDetail";
     public static final String DATA_URL_CASH_ADVANCE_LIST = DATA_URL+"getCashAdvance";
     public static final String DATA_URL_BUDGETING_LIST = DATA_URL+"getBudgeting";
+    public static final String DATA_URL_BUDGETING_DETAIL_LIST = DATA_URL+"getBudgetingDetail";
     public static final String DATA_URL_PAYMENT_SUPPLIER_LIST = DATA_URL+"getPaymentSupplier";
+    public static final String DATA_URL_PAYMENT_SUPPLIER_DETAIL_LIST = DATA_URL+"getPaymentSupplierDetail";
     public static final String DATA_URL_BANK_ACCOUNT_LIST = DATA_URL+"getBankAccount";
     public static final String DATA_URL_DAFTAR_AKUN_LIST = DATA_URL+"getDaftarAkun";
     public static final String DATA_URL_SALES_QUOTATION_LIST = DATA_URL+"getSalesQuotation";
@@ -120,7 +123,9 @@ public class Config {
     public static final String DATA_URL_PROVINSI_LIST = DATA_URL+"getProvinsi";
     public static final String DATA_URL_KARYAWAN_LIST = DATA_URL+"getEmployee";
     public static final String DATA_URL_DEPARTEMEN_LIST = DATA_URL+"getDepartment";
+    public static final String DATA_URL_DEPARTEMEN_DETAIL_LIST = DATA_URL+"getDepartmentDetail";
     public static final String DATA_URL_EMPLOYEE_GRADE_LIST = DATA_URL+"getEmployeeGrade";
+    public static final String DATA_URL_EMPLOYEE_GRADE_DETAIL_LIST = DATA_URL+"getEmployeeGradeDetail";
     public static final String DATA_URL_JOB_TITLE_LIST = DATA_URL+"getJobTitle";
     public static final String DATA_URL_PERSONALIA_NEWS_LIST = DATA_URL+"getPersonaliaNews";
     public static final String DATA_URL_JOB_GRADE_LIST = DATA_URL+"getJobGrade";

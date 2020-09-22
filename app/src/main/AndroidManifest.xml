@@ -14,7 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Inventory.Material.DetailMaterialActivity"></activity>
+        <activity android:name=".Personalia.JenjangKaryawan.DetailJenjangKaryawanActivity"></activity>
+        <activity android:name=".Personalia.Departemen.DetailDepartemenActivity" />
+        <activity android:name=".Finance.PaymentSupplier.DetailPaymentSuppliersActivity" />
+        <activity android:name=".Finance.Budgeting.DetailBudgetingActivity" />
+        <activity android:name=".Finance.CashAdvance.DetailCashAdvanceActivity" />
+        <activity android:name=".Finance.Expenses.DetailExpensesActivity" />
+        <activity android:name=".Finance.BankTransaction.DetailBankTransactionActivity" />
+        <activity android:name=".Inventory.Material.DetailMaterialActivity" />
         <activity android:name=".Inventory.Stock.DetailStockActivity" />
         <activity android:name=".Inventory.AsetRental.DetailAsetRentalActivity" />
         <activity android:name=".Inventory.Aset.DetailAsetActivity" />

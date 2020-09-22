@@ -1,4 +1,4 @@
-package com.example.aismobile.Personalia;
+package com.example.aismobile.Personalia.JenjangKaryawan;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Personalia.Department;
+import com.example.aismobile.Data.Personalia.EmployeeGrade;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DepartemenFragment extends Fragment {
+public class JenjangKaryawanFragment extends Fragment {
 
     private LinearLayout kShowFilter;
     private LinearLayout kLayoutFilter;
@@ -68,24 +68,25 @@ public class DepartemenFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public DepartemenFragment.MyRecyclerViewAdapter adapter;
+    public JenjangKaryawanFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SpinnerSearch = {"Semua Data", "Kode", "Kode Item", "Nama Departemen", "Kepala Department",
-            "Catatan", "Atasnya", "Perusahaan"};
-    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Kode", "Berdasarkan Kode Item", "Berdasarkan Nama Departemen",
-            "Berdasarkan Kepala Department", "Berdasarkan Catatan", "Berdasarkan Atasnya", "Berdasarkan Perusahaan"};
+    public String[] SpinnerSearch = {"Semua Data", "Nama Jenjang", "Kode Laporan", "Pangkat", "Jabatan",
+            "Golongan Gaji", "Overtime Limit", "Aktif"};
+    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Nama Jenjang", "Berdasarkan Kode Laporan",
+            "Berdasarkan Pangkat", "Berdasarkan Jabatan", "Berdasarkan Golongan Gaji", "Berdasarkan Overtime Limit",
+            "Berdasarkan Aktif"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<Department> hariLiburs;
+    public List<EmployeeGrade> employeeGrades;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public DepartemenFragment() {
+    public JenjangKaryawanFragment() {
     }
 
-    public static DepartemenFragment newInstance() {
-        DepartemenFragment fragment = new DepartemenFragment();
+    public static JenjangKaryawanFragment newInstance() {
+        JenjangKaryawanFragment fragment = new JenjangKaryawanFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -101,7 +102,7 @@ public class DepartemenFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        hariLiburs = new ArrayList<>();
+        employeeGrades = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -111,11 +112,11 @@ public class DepartemenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_departemen, container, false);
+        View view = inflater.inflate(R.layout.fragment_jenjang_karyawan, container, false);
 
         //show filter
-        kShowFilter = (LinearLayout) view.findViewById(R.id.depShowFilter);
-        kLayoutFilter = (LinearLayout) view.findViewById(R.id.depLayoutFilter);
+        kShowFilter = (LinearLayout) view.findViewById(R.id.jkShowFilter);
+        kLayoutFilter = (LinearLayout) view.findViewById(R.id.jkLayoutFilter);
 
         kShowFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,24 +131,24 @@ public class DepartemenFragment extends Fragment {
         });
 
         // Set the adapter
-        recycler = (RecyclerView) view.findViewById(R.id.depRecycler);
+        recycler = (RecyclerView) view.findViewById(R.id.jkRecycler);
         if (mColumnCount <= 1) {
             recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
             recycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        fabAdd = (FloatingActionButton) view.findViewById(R.id.empFabAdd);
-        editSearch = (EditText) view.findViewById(R.id.depEditSearch);
-        textPaging = (TextView) view.findViewById(R.id.depTextPaging);
-        btnSearch = (ImageView) view.findViewById(R.id.depBtnSearch);
-        spinnerSearch = (Spinner) view.findViewById(R.id.depSpinnerSearch);
-        spinnerSort = (Spinner) view.findViewById(R.id.depSpinnerSort);
-        spinnerSortAD = (Spinner) view.findViewById(R.id.depSpinnerSortAD);
-        btnShowList = (Button) view.findViewById(R.id.depBtnShowList);
-        btnBefore = (ImageButton) view.findViewById(R.id.depBtnBefore);
-        btnNext = (ImageButton) view.findViewById(R.id.depBtnNext);
-        layoutPaging = (LinearLayout) view.findViewById(R.id.depLayoutPaging);
+        fabAdd = (FloatingActionButton) view.findViewById(R.id.jkFabAdd);
+        editSearch = (EditText) view.findViewById(R.id.jkEditSearch);
+        textPaging = (TextView) view.findViewById(R.id.jkTextPaging);
+        btnSearch = (ImageView) view.findViewById(R.id.jkBtnSearch);
+        spinnerSearch = (Spinner) view.findViewById(R.id.jkSpinnerSearch);
+        spinnerSort = (Spinner) view.findViewById(R.id.jkSpinnerSort);
+        spinnerSortAD = (Spinner) view.findViewById(R.id.jkSpinnerSortAD);
+        btnShowList = (Button) view.findViewById(R.id.jkBtnShowList);
+        btnBefore = (ImageButton) view.findViewById(R.id.jkBtnBefore);
+        btnNext = (ImageButton) view.findViewById(R.id.jkBtnNext);
+        layoutPaging = (LinearLayout) view.findViewById(R.id.jkLayoutPaging);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +178,7 @@ public class DepartemenFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("department_id ASC");
+                    loadDataAll("employee_grade_name ASC");
                     loadAll = true;
                     params = layoutPaging.getLayoutParams();
                     params.height = 0;
@@ -186,7 +187,7 @@ public class DepartemenFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("department_id ASC");
+                    loadData("employee_grade_name ASC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -225,91 +226,91 @@ public class DepartemenFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (editSearch.getText().toString().matches("")){
-                    loadData("department_id ASC");
+                    loadData("employee_grade_name ASC");
                 } else adapter.getFilter().filter(String.valueOf(editSearch.getText()));
             }
         });
 
-//        loadData("department_id ASC");
+//        loadData("employee_grade_name ASC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("department_code ASC");
+            loadDataAll("employee_grade_name ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("department_code DESC");
+            loadDataAll("employee_grade_name DESC");
         else if (position == 2 && posAD == 0)
-            loadDataAll("code_for_item ASC");
+            loadDataAll("report_code ASC");
         else if (position == 2 && posAD == 1)
-            loadDataAll("code_for_item DESC");
+            loadDataAll("report_code DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("department_name ASC");
+            loadDataAll("jobtitle_name ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("department_name DESC");
+            loadDataAll("jobtitle_name DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("head_department ASC");
+            loadDataAll("job_grade_name ASC");
         else if (position == 4 && posAD == 1)
-            loadDataAll("head_department DESC");
+            loadDataAll("job_grade_name DESC");
         else if (position == 5 && posAD == 0)
-            loadDataAll("department_notes ASC");
+            loadDataAll("salary_grade_name ASC");
         else if (position == 5 && posAD == 1)
-            loadDataAll("department_notes DESC");
+            loadDataAll("salary_grade_name DESC");
         else if (position == 6 && posAD == 0)
-            loadDataAll("atasan ASC");
+            loadDataAll("overtime_limit ASC");
         else if (position == 6 && posAD == 1)
-            loadDataAll("atasan DESC");
+            loadDataAll("overtime_limit DESC");
         else if (position == 7 && posAD == 0)
-            loadDataAll("company_name ASC");
+            loadDataAll("is_active ASC");
         else if (position == 7 && posAD == 1)
-            loadDataAll("company_name DESC");
-        else loadDataAll("department_id ASC");
+            loadDataAll("is_active DESC");
+        else loadDataAll("employee_grade_name ASC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("department_code ASC");
+            loadData("employee_grade_name ASC");
         else if (position == 1 && posAD == 1)
-            loadData("department_code DESC");
+            loadData("employee_grade_name DESC");
         else if (position == 2 && posAD == 0)
-            loadData("code_for_item ASC");
+            loadData("report_code ASC");
         else if (position == 2 && posAD == 1)
-            loadData("code_for_item DESC");
+            loadData("report_code DESC");
         else if (position == 3 && posAD == 0)
-            loadData("department_name ASC");
+            loadData("jobtitle_name ASC");
         else if (position == 3 && posAD == 1)
-            loadData("department_name DESC");
+            loadData("jobtitle_name DESC");
         else if (position == 4 && posAD == 0)
-            loadData("head_department ASC");
+            loadData("job_grade_name ASC");
         else if (position == 4 && posAD == 1)
-            loadData("head_department DESC");
+            loadData("job_grade_name DESC");
         else if (position == 5 && posAD == 0)
-            loadData("department_notes ASC");
+            loadData("salary_grade_name ASC");
         else if (position == 5 && posAD == 1)
-            loadData("department_notes DESC");
+            loadData("salary_grade_name DESC");
         else if (position == 6 && posAD == 0)
-            loadData("atasan ASC");
+            loadData("overtime_limit ASC");
         else if (position == 6 && posAD == 1)
-            loadData("atasan DESC");
+            loadData("overtime_limit DESC");
         else if (position == 7 && posAD == 0)
-            loadData("company_name ASC");
+            loadData("is_active ASC");
         else if (position == 7 && posAD == 1)
-            loadData("company_name DESC");
-        else loadData("department_id ASC");
+            loadData("is_active DESC");
+        else loadData("employee_grade_name ASC");
     }
 
     private void setAdapterList(){
-        adapter = new DepartemenFragment.MyRecyclerViewAdapter(hariLiburs, mListener);
+        adapter = new JenjangKaryawanFragment.MyRecyclerViewAdapter(employeeGrades, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        hariLiburs.clear();
+        employeeGrades.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DEPARTEMEN_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_EMPLOYEE_GRADE_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -318,7 +319,7 @@ public class DepartemenFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            hariLiburs.add(new Department(jsonArray.getJSONObject(i)));
+                            employeeGrades.add(new EmployeeGrade(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -359,9 +360,9 @@ public class DepartemenFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        hariLiburs.clear();
+        employeeGrades.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DEPARTEMEN_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_EMPLOYEE_GRADE_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -370,7 +371,7 @@ public class DepartemenFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            hariLiburs.add(new Department(jsonArray.getJSONObject(i)));
+                            employeeGrades.add(new EmployeeGrade(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -432,16 +433,16 @@ public class DepartemenFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Department item);
+        void onListFragmentInteraction(EmployeeGrade item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<Department> mValues;
-        private final List<Department> values;
+        private final List<EmployeeGrade> mValues;
+        private final List<EmployeeGrade> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<Department> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<EmployeeGrade> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -450,32 +451,31 @@ public class DepartemenFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_departemen_list, parent, false);
+                    .inflate(R.layout.fragment_jenjang_karyawan_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.depTextKode.setText(""+mValues.get(position).getDepartment_code());
-            holder.depTextKodeItem.setText(""+mValues.get(position).getCode_for_item());
-            holder.depTextNamaDep.setText(""+mValues.get(position).getDepartment_name());
-            holder.depTextKepalaDep.setText(""+mValues.get(position).getHead_department());
-            holder.depTextCatatan.setText(""+mValues.get(position).getDepartment_notes());
-            holder.depTextAtasnya.setText(""+mValues.get(position).getAtasan());
-            holder.depTextPerusahaan.setText(""+mValues.get(position).getCompany_name());
-            holder.depTextJumlah.setText("");
+            holder.jkTextNama.setText(""+mValues.get(position).getEmployee_grade_name());
+            holder.jkTextKode.setText(""+mValues.get(position).getReport_code());
+            holder.jkTextPangkat.setText(""+mValues.get(position).getJobtitle_name());
+            holder.jkTextJabatan.setText(""+mValues.get(position).getJob_grade_name());
+            holder.jkTextGolongan.setText(""+mValues.get(position).getSalary_grade_name());
+            holder.jkTextCount.setText("");
+            holder.jkTextLimit.setText(""+mValues.get(position).getOvertime_limit());
+            holder.jkTextAktif.setText(""+mValues.get(position).getIs_active());
 
             if (position%2==0)
-                holder.depLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.depLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.jkLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.jkLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity(), ""+mValues.get(position).getCreated_by(), Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-//                    intent.putExtra("detailJO", mValues.get(position));
-//                    holder.itemView.getContext().startActivity(intent);
+                    Intent intent = new Intent(getActivity(), DetailJenjangKaryawanActivity.class);
+                    intent.putExtra("detail", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         }
@@ -493,50 +493,56 @@ public class DepartemenFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<Department> filteredList = new ArrayList<>();
+                List<EmployeeGrade> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((Department) values);
+                    filteredList.add((EmployeeGrade) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (Department item : values){
+                    for (EmployeeGrade item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getDepartment_code().toLowerCase().contains(filterPattern)){
+                            if (item.getEmployee_grade_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getCode_for_item().toLowerCase().contains(filterPattern)){
+                            } else if (item.getReport_code().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getDepartment_name().toLowerCase().contains(filterPattern)){
+                            } else if (item.getJobtitle_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getHead_department().toLowerCase().contains(filterPattern)){
+                            } else if (item.getJob_grade_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getDepartment_notes().toLowerCase().contains(filterPattern)){
+                            } else if (item.getSalary_grade_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getCompany_name().toLowerCase().contains(filterPattern)){
+                            } else if (item.getOvertime_limit().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getIs_active().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getDepartment_code().toLowerCase().contains(filterPattern)){
+                            if (item.getEmployee_grade_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getCode_for_item().toLowerCase().contains(filterPattern)){
+                            if (item.getReport_code().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getDepartment_name().toLowerCase().contains(filterPattern)){
+                            if (item.getJobtitle_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==4){
-                            if (item.getHead_department().toLowerCase().contains(filterPattern)){
+                            if (item.getJob_grade_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==5){
-                            if (item.getDepartment_notes().toLowerCase().contains(filterPattern)){
+                            if (item.getSalary_grade_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==6){
-                            if (item.getCompany_name().toLowerCase().contains(filterPattern)){
+                            if (item.getOvertime_limit().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==7){
+                            if (item.getIs_active().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         }
@@ -560,31 +566,31 @@ public class DepartemenFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView depTextKode;
-            public final TextView depTextKodeItem;
-            public final TextView depTextNamaDep;
-            public final TextView depTextKepalaDep;
-            public final TextView depTextCatatan;
-            public final TextView depTextAtasnya;
-            public final TextView depTextPerusahaan;
-            public final TextView depTextJumlah;
+            public final TextView jkTextNama;
+            public final TextView jkTextKode;
+            public final TextView jkTextPangkat;
+            public final TextView jkTextJabatan;
+            public final TextView jkTextGolongan;
+            public final TextView jkTextCount;
+            public final TextView jkTextLimit;
+            public final TextView jkTextAktif;
 
-            public final LinearLayout depLayoutList;
+            public final LinearLayout jkLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                depTextKode = (TextView) view.findViewById(R.id.depTextKode);
-                depTextKodeItem = (TextView) view.findViewById(R.id.depTextKodeItem);
-                depTextNamaDep = (TextView) view.findViewById(R.id.depTextNamaDep);
-                depTextKepalaDep = (TextView) view.findViewById(R.id.depTextKepalaDep);
-                depTextCatatan = (TextView) view.findViewById(R.id.depTextCatatan);
-                depTextAtasnya = (TextView) view.findViewById(R.id.depTextAtasnya);
-                depTextPerusahaan = (TextView) view.findViewById(R.id.depTextPerusahaan);
-                depTextJumlah = (TextView) view.findViewById(R.id.depTextJumlah);
+                jkTextNama = (TextView) view.findViewById(R.id.jkTextNama);
+                jkTextKode = (TextView) view.findViewById(R.id.jkTextKode);
+                jkTextPangkat = (TextView) view.findViewById(R.id.jkTextPangkat);
+                jkTextJabatan = (TextView) view.findViewById(R.id.jkTextJabatan);
+                jkTextGolongan = (TextView) view.findViewById(R.id.jkTextGolongan);
+                jkTextCount = (TextView) view.findViewById(R.id.jkTextCount);
+                jkTextLimit = (TextView) view.findViewById(R.id.jkTextLimit);
+                jkTextAktif = (TextView) view.findViewById(R.id.jkTextAktif);
 
-                depLayoutList = (LinearLayout) view.findViewById(R.id.depLayoutList);
+                jkLayoutList = (LinearLayout) view.findViewById(R.id.jkLayoutList);
             }
         }
     }

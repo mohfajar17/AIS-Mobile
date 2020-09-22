@@ -50,6 +50,11 @@
             android:textStyle="bold"
             android:text=" Detail "/>
 
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorWhite"/>
+
         <TextView
             android:id="@+id/menuCatatan"
             android:layout_width="0dp"
@@ -61,6 +66,11 @@
             android:background="@color/colorRed"
             android:textStyle="bold"
             android:text=" Catatan "/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorWhite"/>
 
         <TextView
             android:id="@+id/menuHistory"
@@ -523,12 +533,12 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorBlack"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -537,13 +547,13 @@
                             android:gravity="right|top"
                             android:text="Total : "
                             android:padding="10dp"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textTotal"
@@ -552,24 +562,24 @@
                             android:gravity="right"
                             android:text="Rp. -"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorBlack"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -578,13 +588,13 @@
                             android:gravity="right|top"
                             android:text="Budget : "
                             android:padding="10dp"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textBudget"
@@ -593,24 +603,24 @@
                             android:gravity="right"
                             android:text="Rp. -"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorBlack"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -619,13 +629,13 @@
                             android:gravity="right|top"
                             android:text="Discount : "
                             android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textDiscount"
@@ -634,24 +644,24 @@
                             android:gravity="right"
                             android:text="Rp. -"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorBlack"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -660,13 +670,13 @@
                             android:gravity="right|top"
                             android:text="Efisiensi : "
                             android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textEfisiensi"
@@ -675,24 +685,24 @@
                             android:gravity="right"
                             android:text="Rp. -"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorBlack"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -701,13 +711,13 @@
                             android:gravity="right|top"
                             android:text="DPP : "
                             android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textDPP"
@@ -716,24 +726,24 @@
                             android:gravity="right"
                             android:text="Rp. -"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorBlack"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -742,13 +752,13 @@
                             android:gravity="right|top"
                             android:text="Pajak : "
                             android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textPajak"
@@ -757,24 +767,24 @@
                             android:gravity="right"
                             android:text="Rp. -"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorBlack"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -783,13 +793,13 @@
                             android:gravity="right|top"
                             android:text="GrandTotal : "
                             android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textGrandTotal"
@@ -798,14 +808,19 @@
                             android:gravity="right"
                             android:text="Rp. -"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold|italic"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorBlack"/>
                 </LinearLayout>
             </HorizontalScrollView>
 

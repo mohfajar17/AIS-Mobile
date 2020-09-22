@@ -71,6 +71,11 @@
                     android:textStyle="bold"
                     android:text=" Detail "/>
 
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
+
                 <TextView
                     android:id="@+id/menuSupplierInvoice"
                     android:layout_width="0dp"
@@ -82,6 +87,11 @@
                     android:background="@color/colorRed"
                     android:textStyle="bold"
                     android:text="Company Invoice"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
 
                 <TextView
                     android:id="@+id/menuCountInvoice"
@@ -95,6 +105,11 @@
                     android:textStyle="bold"
                     android:text="Count Invoice"/>
 
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
+
                 <TextView
                     android:id="@+id/menuCustomer"
                     android:layout_width="0dp"
@@ -106,6 +121,11 @@
                     android:background="@color/colorRed"
                     android:textStyle="bold"
                     android:text="Customer"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite"/>
 
                 <TextView
                     android:id="@+id/menuCatatan"

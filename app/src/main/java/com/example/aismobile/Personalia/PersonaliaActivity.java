@@ -32,6 +32,8 @@ import com.example.aismobile.Data.Personalia.SalaryCorrection;
 import com.example.aismobile.Data.Personalia.SalaryGrade;
 import com.example.aismobile.Data.Project.TunjanganKaryawan;
 import com.example.aismobile.Data.Project.TunjanganTemporary;
+import com.example.aismobile.Personalia.Departemen.DepartemenFragment;
+import com.example.aismobile.Personalia.JenjangKaryawan.JenjangKaryawanFragment;
 import com.example.aismobile.Personalia.Kerja.CheckClockFragment;
 import com.example.aismobile.Personalia.Kerja.CutiFragment;
 import com.example.aismobile.Personalia.Kerja.ExperienceFragment;

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/jkLayoutList"
-    tools:context=".Personalia.JenjangKaryawanFragment" >
+    tools:context=".Personalia.JenjangKaryawan.JenjangKaryawanFragment" >
 
     <TextView
         android:id="@+id/jkTextNama"

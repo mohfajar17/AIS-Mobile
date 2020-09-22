@@ -15,6 +15,17 @@ public class CashAdvance implements Parcelable {
     private String received_by;
     private String amount;
     private String status;
+    private String approved_status;
+    private String approved_by;
+    private String approved_date;
+    private String approved_comment;
+    private String reconciled_by;
+    private String reconciled_date;
+    private String notes;
+    private String created_by;
+    private String created_date;
+    private String modified_by;
+    private String modified_date;
 
     public CashAdvance(int advanced_id, String advanced_number, String advanced_date, String advanced_for,
                    String received_by, String amount, String status){
@@ -34,6 +45,17 @@ public class CashAdvance implements Parcelable {
         received_by = in.readString();
         amount = in.readString();
         status = in.readString();
+        approved_status = in.readString();
+        approved_by = in.readString();
+        approved_date = in.readString();
+        approved_comment = in.readString();
+        reconciled_by = in.readString();
+        reconciled_date = in.readString();
+        notes = in.readString();
+        created_by = in.readString();
+        created_date = in.readString();
+        modified_by = in.readString();
+        modified_date = in.readString();
     }
 
     public CashAdvance(JSONObject jsonObject){
@@ -45,6 +67,17 @@ public class CashAdvance implements Parcelable {
             this.received_by = jsonObject.getString("received_by");
             this.amount = jsonObject.getString("amount");
             this.status = jsonObject.getString("status");
+            this.approved_status = jsonObject.getString("approved_status");
+            this.approved_by = jsonObject.getString("approved_by");
+            this.approved_date = jsonObject.getString("approved_date");
+            this.approved_comment = jsonObject.getString("approved_comment");
+            this.reconciled_by = jsonObject.getString("reconciled_by");
+            this.reconciled_date = jsonObject.getString("reconciled_date");
+            this.notes = jsonObject.getString("notes");
+            this.created_by = jsonObject.getString("created_by");
+            this.created_date = jsonObject.getString("created_date");
+            this.modified_by = jsonObject.getString("modified_by");
+            this.modified_date = jsonObject.getString("modified_date");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -76,6 +109,17 @@ public class CashAdvance implements Parcelable {
         dest.writeString(received_by);
         dest.writeString(amount);
         dest.writeString(status);
+        dest.writeString(approved_status);
+        dest.writeString(approved_by);
+        dest.writeString(approved_date);
+        dest.writeString(approved_comment);
+        dest.writeString(reconciled_by);
+        dest.writeString(reconciled_date);
+        dest.writeString(notes);
+        dest.writeString(created_by);
+        dest.writeString(created_date);
+        dest.writeString(modified_by);
+        dest.writeString(modified_date);
     }
 
     public int getAdvanced_id() {
@@ -104,5 +148,49 @@ public class CashAdvance implements Parcelable {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getApproved_status() {
+        return approved_status;
+    }
+
+    public String getApproved_by() {
+        return approved_by;
+    }
+
+    public String getApproved_date() {
+        return approved_date;
+    }
+
+    public String getApproved_comment() {
+        return approved_comment;
+    }
+
+    public String getReconciled_by() {
+        return reconciled_by;
+    }
+
+    public String getReconciled_date() {
+        return reconciled_date;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
     }
 }

@@ -52,5 +52,13 @@
             android:id="@+id/nav_employeesalary"
             android:icon="@drawable/sub_menu_2"
             android:title="Employee Salary" />
+        <item
+            android:id="@+id/nav_ekspedisi"
+            android:icon="@drawable/sub_menu_3"
+            android:title="Ekspedisi" />
+        <item
+            android:id="@+id/nav_customerreceive"
+            android:icon="@drawable/sub_menu_3"
+            android:title="Customer Receives" />
     </group>
 </menu>

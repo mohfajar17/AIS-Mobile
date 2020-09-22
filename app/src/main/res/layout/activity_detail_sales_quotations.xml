@@ -72,6 +72,11 @@
             android:textStyle="bold"
             android:text=" Detail "/>
 
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorWhite"/>
+
         <TextView
             android:id="@+id/menuCatatan"
             android:layout_width="0dp"
@@ -83,6 +88,11 @@
             android:background="@color/colorRed"
             android:textStyle="bold"
             android:text=" Catatan "/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorWhite"/>
 
         <TextView
             android:id="@+id/menuHistory"

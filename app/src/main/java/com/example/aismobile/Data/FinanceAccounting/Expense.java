@@ -19,6 +19,18 @@ public class Expense implements Parcelable {
     private String total_amount;
     private String bank_account_name;
     private String done;
+    private String notes;
+    private String approval_date1;
+    private String approval_comment1;
+    private String approval_date2;
+    private String approval_comment2;
+    private String checked_date;
+    private String checked_comment;
+    private String created_by;
+    private String created_date;
+    private String modified_by;
+    private String modified_date;
+    private String expenses_file_name;
 
     public Expense(int expenses_id, String expenses_number, String expenses_desc, String checked_by,
                    String approval1, String approval2, String advanced_number, String expenses_date,
@@ -47,6 +59,18 @@ public class Expense implements Parcelable {
         total_amount = in.readString();
         bank_account_name = in.readString();
         done = in.readString();
+        notes = in.readString();
+        approval_date1 = in.readString();
+        approval_comment1 = in.readString();
+        approval_date2 = in.readString();
+        approval_comment2 = in.readString();
+        checked_date = in.readString();
+        checked_comment = in.readString();
+        created_by = in.readString();
+        created_date = in.readString();
+        modified_by = in.readString();
+        modified_date = in.readString();
+        expenses_file_name = in.readString();
     }
 
     public Expense(JSONObject jsonObject){
@@ -62,6 +86,18 @@ public class Expense implements Parcelable {
             this.total_amount = jsonObject.getString("total_amount");
             this.bank_account_name = jsonObject.getString("bank_account_name");
             this.done = jsonObject.getString("done");
+            this.notes = jsonObject.getString("notes");
+            this.approval_date1 = jsonObject.getString("approval_date1");
+            this.approval_comment1 = jsonObject.getString("approval_comment1");
+            this.approval_date2 = jsonObject.getString("approval_date2");
+            this.approval_comment2 = jsonObject.getString("approval_comment2");
+            this.checked_date = jsonObject.getString("checked_date");
+            this.checked_comment = jsonObject.getString("checked_comment");
+            this.created_by = jsonObject.getString("created_by");
+            this.created_date = jsonObject.getString("created_date");
+            this.modified_by = jsonObject.getString("modified_by");
+            this.modified_date = jsonObject.getString("modified_date");
+            this.expenses_file_name = jsonObject.getString("expenses_file_name");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -97,6 +133,18 @@ public class Expense implements Parcelable {
         dest.writeString(total_amount);
         dest.writeString(bank_account_name);
         dest.writeString(done);
+        dest.writeString(notes);
+        dest.writeString(approval_date1);
+        dest.writeString(approval_comment1);
+        dest.writeString(approval_date2);
+        dest.writeString(approval_comment2);
+        dest.writeString(checked_date);
+        dest.writeString(checked_comment);
+        dest.writeString(created_by);
+        dest.writeString(created_date);
+        dest.writeString(modified_by);
+        dest.writeString(modified_date);
+        dest.writeString(expenses_file_name);
     }
 
     public int getExpenses_id() {
@@ -141,5 +189,53 @@ public class Expense implements Parcelable {
 
     public String getDone() {
         return done;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getApproval_date1() {
+        return approval_date1;
+    }
+
+    public String getApproval_comment1() {
+        return approval_comment1;
+    }
+
+    public String getApproval_date2() {
+        return approval_date2;
+    }
+
+    public String getApproval_comment2() {
+        return approval_comment2;
+    }
+
+    public String getChecked_date() {
+        return checked_date;
+    }
+
+    public String getChecked_comment() {
+        return checked_comment;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
+    }
+
+    public String getExpenses_file_name() {
+        return expenses_file_name;
     }
 }

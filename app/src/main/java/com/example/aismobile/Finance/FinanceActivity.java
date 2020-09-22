@@ -19,6 +19,7 @@ import com.example.aismobile.Finance.BankTransaction.BankTransactionFragment;
 import com.example.aismobile.Finance.Budgeting.BudgetingFragment;
 import com.example.aismobile.Finance.CashAdvance.CashAdvanceFragment;
 import com.example.aismobile.Finance.CustomerInvoice.CustomerInvoiceFragment;
+import com.example.aismobile.Finance.CustomerReceives.CustomerReceivesFragment;
 import com.example.aismobile.Finance.DaftarAkun.DaftarAkunFragment;
 import com.example.aismobile.Finance.Expenses.ExpensesFragment;
 import com.example.aismobile.Finance.PaymentSupplier.PaymentSuppliersFragment;
@@ -103,6 +104,8 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
             swapFragment(R.id.nav_daftarakun);
         else if (menu == 11)
             swapFragment(R.id.nav_employeesalary);
+        else if (menu == 13)
+            swapFragment(R.id.nav_customerreceive);
         else swapFragment(R.id.nav_supplierinvoice);
     }
 
@@ -143,6 +146,9 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_employeesalary && access.toLowerCase().contains("employee_salary".toLowerCase())) {
             EmployeeSalaryFragment mainFragment = EmployeeSalaryFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_customerreceive) {
+            CustomerReceivesFragment mainFragment = CustomerReceivesFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else {
             ShowPopup();

@@ -42,6 +42,8 @@ public class FinanceMenuActivity extends AppCompatActivity {
     private TextView textViewTaxReports;
     private TextView textViewDaftarAkun;
     private TextView textViewEmployeeSalary;
+    private TextView textViewEkspedisi;
+    private TextView textViewCustomerReceive;
 
     private Dialog myDialog;
     private String access = "";
@@ -74,6 +76,8 @@ public class FinanceMenuActivity extends AppCompatActivity {
         textViewTaxReports = (TextView) findViewById(R.id.textViewTaxReports);
         textViewDaftarAkun = (TextView) findViewById(R.id.textViewDaftarAkun);
         textViewEmployeeSalary = (TextView) findViewById(R.id.textViewEmployeeSalary);
+        textViewEkspedisi = (TextView) findViewById(R.id.textViewEkspedisi);
+        textViewCustomerReceive = (TextView) findViewById(R.id.textViewCustomerReceive);
 
         textViewSupplierInvoices.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +175,12 @@ public class FinanceMenuActivity extends AppCompatActivity {
                 } else ShowPopup("Employee Salary");
             }
         });
+        textViewCustomerReceive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bukaActivity("13");
+            }
+        });
 
         getAccessModul();
     }
@@ -224,7 +234,7 @@ public class FinanceMenuActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressDialog.dismiss();
-                    onBackPressed();
+//                    onBackPressed();
                 }
             }
         }, new Response.ErrorListener() {

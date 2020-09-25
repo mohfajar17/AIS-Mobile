@@ -1,4 +1,4 @@
-package com.example.aismobile.Personalia;
+package com.example.aismobile.Personalia.Karyawan;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
-import com.example.aismobile.Data.Personalia.JobTitle;
+import com.example.aismobile.Data.Personalia.Employee.Employee;
 import com.example.aismobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PangkatFragment extends Fragment {
+public class KaryawanFragment extends Fragment {
 
     private LinearLayout kShowFilter;
     private LinearLayout kLayoutFilter;
@@ -68,23 +68,26 @@ public class PangkatFragment extends Fragment {
     public int mColumnCount = 1;
     public static final String ARG_COLUMN_COUNT = "column-count";
     public OnListFragmentInteractionListener mListener;
-    public PangkatFragment.MyRecyclerViewAdapter adapter;
+    public KaryawanFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] SpinnerSearch = {"Semua Data", "Kode Pangkat", "Nama Pangkat", "Deskripsi", "Aktif"};
-    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Kode Pangkat", "Berdasarkan Nama Pangkat",
-            "Berdasarkan Deskripsi", "Berdasarkan Aktif"};
+    public String[] SpinnerSearch = {"Semua Data", "Badge", "Nama Lengkap", "Jenjang Karyawan", "Status Kerja",
+            "Departemen", "Lokasi Kerja", "Tanggal Awal Kerja", "Tanggal Akhir Kontrak", "Salary", "Working Status"};
+    public String[] SpinnerSort = {"-- Sort By --", "Berdasarkan Badge", "Berdasarkan Nama Lengkap",
+            "Berdasarkan Jenjang Karyawan", "Berdasarkan Status Kerja", "Berdasarkan Departemen", "Berdasarkan Lokasi Kerja",
+            "Berdasarkan Tanggal Awal Kerja", "Berdasarkan Tanggal Akhir Kontrak", "Berdasarkan Salary",
+            "Working Status"};
     public String[] ADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
-    public List<JobTitle> jobTitles;
+    public List<Employee> hariLiburs;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
 
-    public PangkatFragment() {
+    public KaryawanFragment() {
     }
 
-    public static PangkatFragment newInstance() {
-        PangkatFragment fragment = new PangkatFragment();
+    public static KaryawanFragment newInstance() {
+        KaryawanFragment fragment = new KaryawanFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -100,7 +103,7 @@ public class PangkatFragment extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        jobTitles = new ArrayList<>();
+        hariLiburs = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -110,11 +113,11 @@ public class PangkatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pangkat, container, false);
+        View view = inflater.inflate(R.layout.fragment_karyawan, container, false);
 
         //show filter
-        kShowFilter = (LinearLayout) view.findViewById(R.id.pShowFilter);
-        kLayoutFilter = (LinearLayout) view.findViewById(R.id.pLayoutFilter);
+        kShowFilter = (LinearLayout) view.findViewById(R.id.empShowFilter);
+        kLayoutFilter = (LinearLayout) view.findViewById(R.id.empLayoutFilter);
 
         kShowFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,24 +132,24 @@ public class PangkatFragment extends Fragment {
         });
 
         // Set the adapter
-        recycler = (RecyclerView) view.findViewById(R.id.pRecycler);
+        recycler = (RecyclerView) view.findViewById(R.id.empRecycler);
         if (mColumnCount <= 1) {
             recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
         } else {
             recycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        fabAdd = (FloatingActionButton) view.findViewById(R.id.pFabAdd);
-        editSearch = (EditText) view.findViewById(R.id.pEditSearch);
-        textPaging = (TextView) view.findViewById(R.id.pTextPaging);
-        btnSearch = (ImageView) view.findViewById(R.id.pBtnSearch);
-        spinnerSearch = (Spinner) view.findViewById(R.id.pSpinnerSearch);
-        spinnerSort = (Spinner) view.findViewById(R.id.pSpinnerSort);
-        spinnerSortAD = (Spinner) view.findViewById(R.id.pSpinnerSortAD);
-        btnShowList = (Button) view.findViewById(R.id.pBtnShowList);
-        btnBefore = (ImageButton) view.findViewById(R.id.pBtnBefore);
-        btnNext = (ImageButton) view.findViewById(R.id.pBtnNext);
-        layoutPaging = (LinearLayout) view.findViewById(R.id.pLayoutPaging);
+        fabAdd = (FloatingActionButton) view.findViewById(R.id.empFabAdd);
+        editSearch = (EditText) view.findViewById(R.id.empEditSearch);
+        textPaging = (TextView) view.findViewById(R.id.empTextPaging);
+        btnSearch = (ImageView) view.findViewById(R.id.empBtnSearch);
+        spinnerSearch = (Spinner) view.findViewById(R.id.empSpinnerSearch);
+        spinnerSort = (Spinner) view.findViewById(R.id.empSpinnerSort);
+        spinnerSortAD = (Spinner) view.findViewById(R.id.empSpinnerSortAD);
+        btnShowList = (Button) view.findViewById(R.id.empBtnShowList);
+        btnBefore = (ImageButton) view.findViewById(R.id.empBtnBefore);
+        btnNext = (ImageButton) view.findViewById(R.id.empBtnNext);
+        layoutPaging = (LinearLayout) view.findViewById(R.id.empLayoutPaging);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +179,7 @@ public class PangkatFragment extends Fragment {
             public void onClick(View v) {
                 if (loadAll==false){
                     counter = -1;
-                    loadDataAll("jobtitle_name ASC");
+                    loadDataAll("fullname ASC");
                     loadAll = true;
                     params = layoutPaging.getLayoutParams();
                     params.height = 0;
@@ -185,7 +188,7 @@ public class PangkatFragment extends Fragment {
                 } else {
                     textPaging.setText("1");
                     counter = 0;
-                    loadData("jobtitle_name ASC");
+                    loadData("fullname ASC");
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
@@ -224,67 +227,115 @@ public class PangkatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (editSearch.getText().toString().matches("")){
-                    loadData("jobtitle_name ASC");
+                    loadData("fullname ASC");
                 } else adapter.getFilter().filter(String.valueOf(editSearch.getText()));
             }
         });
 
-//        loadData("jobtitle_name ASC");
+//        loadData("fullname ASC");
 
         return view;
     }
 
     private void setSortAll(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadDataAll("jobtitle_code ASC");
+            loadDataAll("employee_number ASC");
         else if (position == 1 && posAD == 1)
-            loadDataAll("jobtitle_code DESC");
+            loadDataAll("employee_number DESC");
         else if (position == 2 && posAD == 0)
-            loadDataAll("jobtitle_name ASC");
+            loadDataAll("fullname ASC");
         else if (position == 2 && posAD == 1)
-            loadDataAll("jobtitle_name DESC");
+            loadDataAll("fullname DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("jobtitle_description ASC");
+            loadDataAll("employee_grade_name ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("jobtitle_description DESC");
+            loadDataAll("employee_grade_name DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("is_active ASC");
+            loadDataAll("employee_status ASC");
         else if (position == 4 && posAD == 1)
+            loadDataAll("employee_status DESC");
+        else if (position == 5 && posAD == 0)
+            loadDataAll("department_name ASC");
+        else if (position == 5 && posAD == 1)
+            loadDataAll("department_name DESC");
+        else if (position == 6 && posAD == 0)
+            loadDataAll("company_workbase_name ASC");
+        else if (position == 6 && posAD == 1)
+            loadDataAll("company_workbase_name DESC");
+        else if (position == 7 && posAD == 0)
+            loadDataAll("join_date ASC");
+        else if (position == 7 && posAD == 1)
+            loadDataAll("join_date DESC");
+        else if (position == 8 && posAD == 0)
+            loadDataAll("termination_date ASC");
+        else if (position == 8 && posAD == 1)
+            loadDataAll("termination_date DESC");
+        else if (position == 9 && posAD == 0)
+            loadDataAll("is_active ASC");
+        else if (position == 9 && posAD == 1)
             loadDataAll("is_active DESC");
-        else loadDataAll("jobtitle_name ASC");
+        else if (position == 10 && posAD == 0)
+            loadDataAll("working_status ASC");
+        else if (position == 10 && posAD == 1)
+            loadDataAll("working_status DESC");
+        else loadDataAll("fullname ASC");
     }
 
     private void setSortHalf(int position, int posAD){
         if (position == 1 && posAD == 0)
-            loadData("jobtitle_code ASC");
+            loadData("employee_number ASC");
         else if (position == 1 && posAD == 1)
-            loadData("jobtitle_code DESC");
+            loadData("employee_number DESC");
         else if (position == 2 && posAD == 0)
-            loadData("jobtitle_name ASC");
+            loadData("fullname ASC");
         else if (position == 2 && posAD == 1)
-            loadData("jobtitle_name DESC");
+            loadData("fullname DESC");
         else if (position == 3 && posAD == 0)
-            loadData("jobtitle_description ASC");
+            loadData("employee_grade_name ASC");
         else if (position == 3 && posAD == 1)
-            loadData("jobtitle_description DESC");
+            loadData("employee_grade_name DESC");
         else if (position == 4 && posAD == 0)
-            loadData("is_active ASC");
+            loadData("employee_status ASC");
         else if (position == 4 && posAD == 1)
+            loadData("employee_status DESC");
+        else if (position == 5 && posAD == 0)
+            loadData("department_name ASC");
+        else if (position == 5 && posAD == 1)
+            loadData("department_name DESC");
+        else if (position == 6 && posAD == 0)
+            loadData("company_workbase_name ASC");
+        else if (position == 6 && posAD == 1)
+            loadData("company_workbase_name DESC");
+        else if (position == 7 && posAD == 0)
+            loadData("join_date ASC");
+        else if (position == 7 && posAD == 1)
+            loadData("join_date DESC");
+        else if (position == 8 && posAD == 0)
+            loadData("termination_date ASC");
+        else if (position == 8 && posAD == 1)
+            loadData("termination_date DESC");
+        else if (position == 9 && posAD == 0)
+            loadData("is_active ASC");
+        else if (position == 9 && posAD == 1)
             loadData("is_active DESC");
-        else loadData("jobtitle_name ASC");
+        else if (position == 10 && posAD == 0)
+            loadData("working_status ASC");
+        else if (position == 10 && posAD == 1)
+            loadData("working_status DESC");
+        else loadData("fullname ASC");
     }
 
     private void setAdapterList(){
-        adapter = new PangkatFragment.MyRecyclerViewAdapter(jobTitles, mListener);
+        adapter = new KaryawanFragment.MyRecyclerViewAdapter(hariLiburs, mListener);
         recycler.setAdapter(adapter);
     }
 
     private void loadDataAll(final String sortBy) {
         progressDialog.show();
         recycler.setAdapter(null);
-        jobTitles.clear();
+        hariLiburs.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_JOB_TITLE_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_KARYAWAN_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -293,7 +344,7 @@ public class PangkatFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            jobTitles.add(new JobTitle(jsonArray.getJSONObject(i)));
+                            hariLiburs.add(new Employee(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
 
@@ -334,9 +385,9 @@ public class PangkatFragment extends Fragment {
     public void loadData(final String sortBy){
         progressDialog.show();
         recycler.setAdapter(null);
-        jobTitles.clear();
+        hariLiburs.clear();
 
-        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_JOB_TITLE_LIST, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_KARYAWAN_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -345,7 +396,7 @@ public class PangkatFragment extends Fragment {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            jobTitles.add(new JobTitle(jsonArray.getJSONObject(i)));
+                            hariLiburs.add(new Employee(jsonArray.getJSONObject(i)));
                         }
                         setAdapterList();
                         if (filter){
@@ -407,16 +458,16 @@ public class PangkatFragment extends Fragment {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(JobTitle item);
+        void onListFragmentInteraction(Employee item);
     }
 
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<JobTitle> mValues;
-        private final List<JobTitle> values;
+        private final List<Employee> mValues;
+        private final List<Employee> values;
         private final OnListFragmentInteractionListener mListener;
 
-        private MyRecyclerViewAdapter(List<JobTitle> mValues, OnListFragmentInteractionListener mListener) {
+        private MyRecyclerViewAdapter(List<Employee> mValues, OnListFragmentInteractionListener mListener) {
             this.mValues = mValues;
             this.mListener = mListener;
             values = new ArrayList<>(mValues);
@@ -425,28 +476,33 @@ public class PangkatFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_pangkat_list, parent, false);
+                    .inflate(R.layout.fragment_karyawan_list, parent, false);
             return new MyRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.pTextKode.setText(""+mValues.get(position).getJobtitle_code());
-            holder.pTextNama.setText(""+mValues.get(position).getJobtitle_name());
-            holder.pTextDeskripsi.setText(""+mValues.get(position).getJobtitle_description());
-            holder.pTextAktif.setText(""+mValues.get(position).getIs_active());
+            holder.empTextNomor.setText(""+mValues.get(position).getEmployee_number());
+            holder.empTextNama.setText(""+mValues.get(position).getFullname());
+            holder.empTextJenjang.setText(""+mValues.get(position).getEmployee_grade_name());
+            holder.empTextStatusKerja.setText(""+mValues.get(position).getEmployee_status());
+            holder.empTextDepartemen.setText(""+mValues.get(position).getDepartment_name());
+            holder.empTextLokasi.setText(""+mValues.get(position).getCompany_workbase_name());
+            holder.empTextAwalKontrak.setText(""+mValues.get(position).getJoin_date());
+            holder.empTextAkhirKontrak.setText(""+mValues.get(position).getTermination_date());
+            holder.empTextSalary.setText(""+mValues.get(position).getIs_active());
+            holder.empTextStatus.setText(""+mValues.get(position).getWorking_status());
 
             if (position%2==0)
-                holder.pLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            else holder.pLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+                holder.empLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.empLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity(), ""+mValues.get(position).getCreated_by(), Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-//                    intent.putExtra("detailJO", mValues.get(position));
-//                    holder.itemView.getContext().startActivity(intent);
+                    Intent intent = new Intent(getActivity(), DetailKaryawanActivity.class);
+                    intent.putExtra("detail", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         }
@@ -464,38 +520,74 @@ public class PangkatFragment extends Fragment {
         private Filter exampleFilter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<JobTitle> filteredList = new ArrayList<>();
+                List<Employee> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0){
-                    filteredList.add((JobTitle) values);
+                    filteredList.add((Employee) values);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for (JobTitle item : values){
+                    for (Employee item : values){
                         if (spinnerSearch.getSelectedItemPosition()==0){
-                            if (item.getJobtitle_code().toLowerCase().contains(filterPattern)){
+                            if (item.getEmployee_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getJobtitle_name().toLowerCase().contains(filterPattern)){
+                            } else if (item.getFullname().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getJobtitle_description().toLowerCase().contains(filterPattern)){
+                            } else if (item.getEmployee_grade_name().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getEmployee_status().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getDepartment_name().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getCompany_workbase_name().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getJoin_date().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            } else if (item.getTermination_date().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getIs_active().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
+                            } else if (item.getWorking_status().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==1){
-                            if (item.getJobtitle_code().toLowerCase().contains(filterPattern)){
+                            if (item.getEmployee_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getJobtitle_name().toLowerCase().contains(filterPattern)){
+                            if (item.getFullname().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==3){
-                            if (item.getJobtitle_description().toLowerCase().contains(filterPattern)){
+                            if (item.getEmployee_grade_name().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (spinnerSearch.getSelectedItemPosition()==4){
+                            if (item.getEmployee_status().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==5){
+                            if (item.getDepartment_name().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==6){
+                            if (item.getCompany_workbase_name().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==7){
+                            if (item.getJoin_date().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==8){
+                            if (item.getTermination_date().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==9){
                             if (item.getIs_active().toLowerCase().contains(filterPattern)){
+                                filteredList.add(item);
+                            }
+                        } else if (spinnerSearch.getSelectedItemPosition()==10){
+                            if (item.getWorking_status().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         }
@@ -519,23 +611,35 @@ public class PangkatFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
 
-            public final TextView pTextKode;
-            public final TextView pTextNama;
-            public final TextView pTextDeskripsi;
-            public final TextView pTextAktif;
+            public final TextView empTextNomor;
+            public final TextView empTextNama;
+            public final TextView empTextJenjang;
+            public final TextView empTextStatusKerja;
+            public final TextView empTextDepartemen;
+            public final TextView empTextLokasi;
+            public final TextView empTextAwalKontrak;
+            public final TextView empTextAkhirKontrak;
+            public final TextView empTextSalary;
+            public final TextView empTextStatus;
 
-            public final LinearLayout pLayoutList;
+            public final LinearLayout empLayoutList;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
 
-                pTextKode = (TextView) view.findViewById(R.id.pTextKode);
-                pTextNama = (TextView) view.findViewById(R.id.pTextNama);
-                pTextDeskripsi = (TextView) view.findViewById(R.id.pTextDeskripsi);
-                pTextAktif = (TextView) view.findViewById(R.id.pTextAktif);
+                empTextNomor = (TextView) view.findViewById(R.id.empTextNomor);
+                empTextNama = (TextView) view.findViewById(R.id.empTextNama);
+                empTextJenjang = (TextView) view.findViewById(R.id.empTextJenjang);
+                empTextStatusKerja = (TextView) view.findViewById(R.id.empTextStatusKerja);
+                empTextDepartemen = (TextView) view.findViewById(R.id.empTextDepartemen);
+                empTextLokasi = (TextView) view.findViewById(R.id.empTextLokasi);
+                empTextAwalKontrak = (TextView) view.findViewById(R.id.empTextAwalKontrak);
+                empTextAkhirKontrak = (TextView) view.findViewById(R.id.empTextAkhirKontrak);
+                empTextSalary = (TextView) view.findViewById(R.id.empTextSalary);
+                empTextStatus = (TextView) view.findViewById(R.id.empTextStatus);
 
-                pLayoutList = (LinearLayout) view.findViewById(R.id.pLayoutList);
+                empLayoutList = (LinearLayout) view.findViewById(R.id.empLayoutList);
             }
         }
     }

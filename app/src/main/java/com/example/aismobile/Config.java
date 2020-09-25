@@ -2,9 +2,9 @@ package com.example.aismobile;
 
 public class Config {
 //    public static final String DATA_URL = "http://192.168.43.183/ais_web_service/apiAis.php?apicall=";   //IP thetering hp
-//    public static final String DATA_URL = "http://192.168.88.212/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
+    public static final String DATA_URL = "http://192.168.88.212/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
 //    public static final String DATA_URL = "http://192.168.0.103/ais_web_service/apiAis.php?apicall=";   //IP home wifi
-    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
+//    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
     public static final String DATA_URL_LOGIN = DATA_URL+"login";
     public static final String DATA_URL_USER_ACCESS = DATA_URL+"accessAllowModul";
     public static final String DATA_URL_USER_ISMOBILE = DATA_URL+"userActiveMobile";
@@ -122,6 +122,17 @@ public class Config {
     public static final String DATA_URL_KABUPATEN_LIST = DATA_URL+"getKabupaten";
     public static final String DATA_URL_PROVINSI_LIST = DATA_URL+"getProvinsi";
     public static final String DATA_URL_KARYAWAN_LIST = DATA_URL+"getEmployee";
+    public static final String DATA_URL_KARYAWAN_DETAIL_LIST = DATA_URL+"getEmployeeDetailFamily";
+    public static final String DATA_URL_KARYAWAN_ACHIEVEMENT_LIST = DATA_URL+"getEmployeeDetailAchievement";
+    public static final String DATA_URL_KARYAWAN_TRAINING_LIST = DATA_URL+"getEmployeeDetailTraining";
+    public static final String DATA_URL_KARYAWAN_EXPERIENCE_LIST = DATA_URL+"getEmployeeDetailExperience";
+    public static final String DATA_URL_KARYAWAN_EDUCATION_LIST = DATA_URL+"getEmployeeDetailEducation";
+    public static final String DATA_URL_KARYAWAN_HISTORY_LIST = DATA_URL+"getEmployeeDetailHistory";
+    public static final String DATA_URL_KARYAWAN_POTONGAN_LIST = DATA_URL+"getEmployeeDetailPotongan";
+    public static final String DATA_URL_KARYAWAN_TUNJANGAN_LIST = DATA_URL+"getEmployeeDetailTunjangan";
+    public static final String DATA_URL_KARYAWAN_FILE_LIST = DATA_URL+"getEmployeeDetailFile";
+    public static final String DATA_URL_KARYAWAN_LEAVE_LIST = DATA_URL+"getEmployeeDetailLeave";
+    public static final String DATA_URL_KARYAWAN_KERJA_LIST = DATA_URL+"getEmployeeDetailKerja";
     public static final String DATA_URL_DEPARTEMEN_LIST = DATA_URL+"getDepartment";
     public static final String DATA_URL_DEPARTEMEN_DETAIL_LIST = DATA_URL+"getDepartmentDetail";
     public static final String DATA_URL_EMPLOYEE_GRADE_LIST = DATA_URL+"getEmployeeGrade";

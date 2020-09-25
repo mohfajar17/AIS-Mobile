@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".Personalia.KaryawanFragment" >
+    tools:context=".Personalia.Karyawan.KaryawanFragment" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,104 +22,6 @@
             android:background="@color/colorAsukaBlue"
             android:textStyle="bold"
             android:text="Daftar Karyawan"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:src="@color/colorWhite" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorAsukaBlue"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/empMenuAll"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:padding="10dp"
-                        android:gravity="center"
-                        android:textColor="@color/colorBlack"
-                        android:background="@color/colorWhite"
-                        android:text=" All "/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:id="@+id/empMenuWorking"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:padding="10dp"
-                        android:gravity="center"
-                        android:textColor="@color/colorWhite"
-                        android:background="@color/colorAsukaBlue"
-                        android:text=" Working "/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:id="@+id/empMenuResign"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:padding="10dp"
-                        android:gravity="center"
-                        android:textColor="@color/colorWhite"
-                        android:background="@color/colorAsukaBlue"
-                        android:text=" Resign "/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:id="@+id/empMenuTemporary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:padding="10dp"
-                        android:gravity="center"
-                        android:textColor="@color/colorWhite"
-                        android:background="@color/colorAsukaBlue"
-                        android:text=" Temporary "/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:id="@+id/empMenuCetakSlip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:padding="10dp"
-                        android:gravity="center"
-                        android:textColor="@color/colorWhite"
-                        android:background="@color/colorAsukaBlue"
-                        android:text=" Cetak Slip "/>
-                </LinearLayout>
-            </LinearLayout>
-        </HorizontalScrollView>
 
         <LinearLayout
             android:id="@+id/empShowFilter"

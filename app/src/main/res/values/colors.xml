@@ -12,7 +12,8 @@
     <color name="colorLightGray">#DCDCDC</color>
     <color name="colorDarkGray">#444444</color>
 
-    <color name="colorRed">#fc4445</color>
+    <color name="colorRed">#ee4043</color>
+    <color name="colorRedOther">#ff7575</color>
     <color name="colorGreen">#6bd098</color>
     <color name="colorYellow">#ffff99</color>
     <color name="colorBlue">#8080ff</color>

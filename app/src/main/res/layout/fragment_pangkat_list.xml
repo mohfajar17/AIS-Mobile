@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/pLayoutList"
-    tools:context=".Personalia.PangkatFragment" >
+    tools:context=".Personalia.Pangkat.PangkatFragment" >
 
     <TextView
         android:id="@+id/pTextKode"

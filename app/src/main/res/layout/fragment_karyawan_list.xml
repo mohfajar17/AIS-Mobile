@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/empLayoutList"
-    tools:context=".Personalia.KaryawanFragment" >
+    tools:context=".Personalia.Karyawan.KaryawanFragment" >
 
     <TextView
         android:id="@+id/empTextNomor"

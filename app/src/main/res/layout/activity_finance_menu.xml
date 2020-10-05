@@ -137,19 +137,19 @@
                 android:layout_height="1dp"
                 android:src="@color/colorAsukaRed"/>
 
-            <TextView
-                android:id="@+id/textViewInstallment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Installment"
-                android:padding="10dp"
-                android:gravity="center"
-                android:textColor="@color/colorBlack"/>
+<!--            <TextView-->
+<!--                android:id="@+id/textViewInstallment"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Installment"-->
+<!--                android:padding="10dp"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/colorBlack"/>-->
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:src="@color/colorAsukaRed"/>
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:src="@color/colorAsukaRed"/>-->
 
             <TextView
                 android:id="@+id/textViewBankAccounts"
@@ -160,19 +160,19 @@
                 android:gravity="center"
                 android:textColor="@color/colorBlack"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:src="@color/colorAsukaRed"/>
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:src="@color/colorAsukaRed"/>-->
 
-            <TextView
-                android:id="@+id/textViewTaxReports"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tax Reports"
-                android:padding="10dp"
-                android:gravity="center"
-                android:textColor="@color/colorBlack"/>
+<!--            <TextView-->
+<!--                android:id="@+id/textViewTaxReports"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Tax Reports"-->
+<!--                android:padding="10dp"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/colorBlack"/>-->
 
             <ImageView
                 android:layout_width="match_parent"
@@ -188,19 +188,19 @@
                 android:gravity="center"
                 android:textColor="@color/colorBlack"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:src="@color/colorAsukaRed"/>
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:src="@color/colorAsukaRed"/>-->
 
-            <TextView
-                android:id="@+id/textViewEmployeeSalary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Employee Salary"
-                android:padding="10dp"
-                android:gravity="center"
-                android:textColor="@color/colorBlack"/>
+<!--            <TextView-->
+<!--                android:id="@+id/textViewEmployeeSalary"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Employee Salary"-->
+<!--                android:padding="10dp"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/colorBlack"/>-->
 
             <ImageView
                 android:layout_width="match_parent"

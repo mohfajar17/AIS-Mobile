@@ -97,19 +97,19 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
             swapFragment(R.id.nav_budgeting);
         else if (menu == 6)
             swapFragment(R.id.nav_paymentsuppliers);
+//        else if (menu == 7)
+//            swapFragment(R.id.nav_installment);
         else if (menu == 7)
-            swapFragment(R.id.nav_installment);
-        else if (menu == 8)
             swapFragment(R.id.nav_bankaccount);
-        else if (menu == 9)
-            swapFragment(R.id.nav_taxreports);
-        else if (menu == 10)
+//        else if (menu == 9)
+//            swapFragment(R.id.nav_taxreports);
+        else if (menu == 8)
             swapFragment(R.id.nav_daftarakun);
-        else if (menu == 11)
-            swapFragment(R.id.nav_employeesalary);
-        else if (menu == 12)
+//        else if (menu == 11)
+//            swapFragment(R.id.nav_employeesalary);
+        else if (menu == 9)
             swapFragment(R.id.nav_ekspedisi);
-        else if (menu == 13)
+        else if (menu == 10)
             swapFragment(R.id.nav_customerreceive);
         else swapFragment(R.id.nav_supplierinvoice);
     }
@@ -137,21 +137,21 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
         } else if (id == R.id.nav_paymentsuppliers && access.toLowerCase().contains("payment_supplier".toLowerCase())) {
             PaymentSuppliersFragment mainFragment = PaymentSuppliersFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_installment && access.toLowerCase().contains("installment".toLowerCase())) {
-            InstallmentFragment mainFragment = InstallmentFragment.newInstance();
-            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//        } else if (id == R.id.nav_installment && access.toLowerCase().contains("installment".toLowerCase())) {
+//            InstallmentFragment mainFragment = InstallmentFragment.newInstance();
+//            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_bankaccount && access.toLowerCase().contains("bank_account".toLowerCase())) {
             BankAccountsFragment mainFragment = BankAccountsFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_taxreports && access.toLowerCase().contains("tax_report".toLowerCase())) {
-            TaxReportsFragment mainFragment = TaxReportsFragment.newInstance();
-            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//        } else if (id == R.id.nav_taxreports && access.toLowerCase().contains("tax_report".toLowerCase())) {
+//            TaxReportsFragment mainFragment = TaxReportsFragment.newInstance();
+//            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_daftarakun && access.toLowerCase().contains("chart_of_account".toLowerCase())) {
             DaftarAkunFragment mainFragment = DaftarAkunFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_employeesalary && access.toLowerCase().contains("employee_salary".toLowerCase())) {
-            EmployeeSalaryFragment mainFragment = EmployeeSalaryFragment.newInstance();
-            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//        } else if (id == R.id.nav_employeesalary && access.toLowerCase().contains("employee_salary".toLowerCase())) {
+//            EmployeeSalaryFragment mainFragment = EmployeeSalaryFragment.newInstance();
+//            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_ekspedisi) {
             EkspedisiFragment mainFragment = EkspedisiFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);

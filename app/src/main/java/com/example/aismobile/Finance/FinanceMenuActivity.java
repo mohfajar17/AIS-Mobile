@@ -37,11 +37,11 @@ public class FinanceMenuActivity extends AppCompatActivity {
     private TextView textViewCashAdvance;
     private TextView textViewBudgeting;
     private TextView textViewPaymentSuppliers;
-    private TextView textViewInstallment;
+//    private TextView textViewInstallment;
     private TextView textViewBankAccounts;
-    private TextView textViewTaxReports;
+//    private TextView textViewTaxReports;
     private TextView textViewDaftarAkun;
-    private TextView textViewEmployeeSalary;
+//    private TextView textViewEmployeeSalary;
     private TextView textViewEkspedisi;
     private TextView textViewCustomerReceive;
 
@@ -71,11 +71,11 @@ public class FinanceMenuActivity extends AppCompatActivity {
         textViewCashAdvance = (TextView) findViewById(R.id.textViewCashAdvance);
         textViewBudgeting = (TextView) findViewById(R.id.textViewBudgeting);
         textViewPaymentSuppliers = (TextView) findViewById(R.id.textViewPaymentSuppliers);
-        textViewInstallment = (TextView) findViewById(R.id.textViewInstallment);
+//        textViewInstallment = (TextView) findViewById(R.id.textViewInstallment);
         textViewBankAccounts = (TextView) findViewById(R.id.textViewBankAccounts);
-        textViewTaxReports = (TextView) findViewById(R.id.textViewTaxReports);
+//        textViewTaxReports = (TextView) findViewById(R.id.textViewTaxReports);
         textViewDaftarAkun = (TextView) findViewById(R.id.textViewDaftarAkun);
-        textViewEmployeeSalary = (TextView) findViewById(R.id.textViewEmployeeSalary);
+//        textViewEmployeeSalary = (TextView) findViewById(R.id.textViewEmployeeSalary);
         textViewEkspedisi = (TextView) findViewById(R.id.textViewEkspedisi);
         textViewCustomerReceive = (TextView) findViewById(R.id.textViewCustomerReceive);
 
@@ -135,56 +135,56 @@ public class FinanceMenuActivity extends AppCompatActivity {
                 } else ShowPopup("Payment Supplier");
             }
         });
-        textViewInstallment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (access.toLowerCase().contains("installment".toLowerCase())){
-                    bukaActivity("7");
-                } else ShowPopup("Installment");
-            }
-        });
+//        textViewInstallment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (access.toLowerCase().contains("installment".toLowerCase())){
+//                    bukaActivity("7");
+//                } else ShowPopup("Installment");
+//            }
+//        });
         textViewBankAccounts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("bank_account".toLowerCase())){
-                    bukaActivity("8");
+                    bukaActivity("7");
                 } else ShowPopup("Bank Account");
             }
         });
-        textViewTaxReports.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (access.toLowerCase().contains("tax_report".toLowerCase())){
-                    bukaActivity("9");
-                } else ShowPopup("Tax Report");
-            }
-        });
+//        textViewTaxReports.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (access.toLowerCase().contains("tax_report".toLowerCase())){
+//                    bukaActivity("9");
+//                } else ShowPopup("Tax Report");
+//            }
+//        });
         textViewDaftarAkun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("chart_of_account".toLowerCase())){
-                    bukaActivity("10");
+                    bukaActivity("8");
                 } else ShowPopup("Daftar Akun");
             }
         });
-        textViewEmployeeSalary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (access.toLowerCase().contains("employee_salary".toLowerCase())){
-                    bukaActivity("11");
-                } else ShowPopup("Employee Salary");
-            }
-        });
+//        textViewEmployeeSalary.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (access.toLowerCase().contains("employee_salary".toLowerCase())){
+//                    bukaActivity("11");
+//                } else ShowPopup("Employee Salary");
+//            }
+//        });
         textViewEkspedisi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bukaActivity("12");
+                bukaActivity("9");
             }
         });
         textViewCustomerReceive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bukaActivity("13");
+                bukaActivity("10");
             }
         });
 

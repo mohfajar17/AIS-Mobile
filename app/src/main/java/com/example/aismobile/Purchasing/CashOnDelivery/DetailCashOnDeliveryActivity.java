@@ -115,7 +115,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
         context = getApplicationContext();
         cashOnDeliveryDetails = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
@@ -260,7 +260,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
                         }
                         efisiensi = budget - total;
                         dpp = total;
-                        pajak = total*10/100;
+                        pajak = total*Double.valueOf(cashOnDelivery.getTax_type_rate())/100;
                         grandTotal = dpp+pajak;
 
                         adapter = new MyRecyclerViewAdapter(cashOnDeliveryDetails, context);

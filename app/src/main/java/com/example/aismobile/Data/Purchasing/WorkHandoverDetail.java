@@ -12,12 +12,16 @@ public class WorkHandoverDetail implements Parcelable {
     private String quantity_received;
     private String unit_abbr;
     private String notes;
+    private String work_order_description;
+    private String wo_notes;
 
     protected WorkHandoverDetail(Parcel in) {
         item_name = in.readString();
         quantity_received = in.readString();
         unit_abbr = in.readString();
         notes = in.readString();
+        work_order_description = in.readString();
+        wo_notes = in.readString();
     }
 
     public WorkHandoverDetail(JSONObject jsonObject){
@@ -26,6 +30,8 @@ public class WorkHandoverDetail implements Parcelable {
             this.quantity_received = jsonObject.getString("quantity");
             this.unit_abbr = jsonObject.getString("unit_abbr");
             this.notes = jsonObject.getString("notes");
+            this.work_order_description = jsonObject.getString("work_order_description");
+            this.wo_notes = jsonObject.getString("wo_notes");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -54,6 +60,8 @@ public class WorkHandoverDetail implements Parcelable {
         dest.writeString(quantity_received);
         dest.writeString(unit_abbr);
         dest.writeString(notes);
+        dest.writeString(work_order_description);
+        dest.writeString(wo_notes);
     }
 
     public String getItem_name() {
@@ -70,5 +78,13 @@ public class WorkHandoverDetail implements Parcelable {
 
     public String getNotes() {
         return notes;
+    }
+
+    public String getWork_order_description() {
+        return work_order_description;
+    }
+
+    public String getWo_notes() {
+        return wo_notes;
     }
 }

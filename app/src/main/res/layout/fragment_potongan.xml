@@ -450,6 +450,20 @@
                         android:text="Penyesuaian"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Aktif"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <ImageView

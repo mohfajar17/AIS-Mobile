@@ -12,10 +12,10 @@
             android:id="@+id/nav_penggajian"
             android:icon="@drawable/sub_menu_1"
             android:title="Penggajian" />
-        <item
-            android:id="@+id/nav_kalender"
-            android:icon="@drawable/sub_menu_1"
-            android:title="Kalender" />
+<!--        <item-->
+<!--            android:id="@+id/nav_kalender"-->
+<!--            android:icon="@drawable/sub_menu_1"-->
+<!--            android:title="Kalender" />-->
         <item
             android:id="@+id/nav_karyawan"
             android:icon="@drawable/sub_menu_1"

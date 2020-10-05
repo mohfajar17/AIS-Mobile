@@ -79,16 +79,14 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
         else if (menu == 2)
             swapFragment(R.id.nav_kuesioner);
         else if (menu == 3)
-            swapFragment(R.id.nav_grafikkuesioner);
-        else if (menu == 4)
             swapFragment(R.id.nav_monitoring);
-        else if (menu == 5)
+        else if (menu == 4)
             swapFragment(R.id.nav_leads);
-        else if (menu == 6)
+        else if (menu == 5)
             swapFragment(R.id.nav_followup);
-        else if (menu == 7)
+        else if (menu == 6)
             swapFragment(R.id.nav_events);
-        else if (menu == 8)
+        else if (menu == 7)
             swapFragment(R.id.nav_schedule_visit);
         else swapFragment(R.id.nav_customerfeedback);
     }
@@ -103,9 +101,6 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_kuesioner && access.toLowerCase().contains("kuesioner".toLowerCase())) {
             KuesionerFragment mainFragment = KuesionerFragment.newInstance();
-            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_grafikkuesioner && access.toLowerCase().contains("grafik_kuesioner".toLowerCase())) {
-            GrafikKuesionerFragment mainFragment = GrafikKuesionerFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_monitoring && access.toLowerCase().contains("sales_quotation".toLowerCase())) {
             MonitoringFragment mainFragment = MonitoringFragment.newInstance();

@@ -75,7 +75,7 @@ public class AchievementKaryawanActivity extends AppCompatActivity {
         context = getApplicationContext();
         employeeDetAchievements = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 

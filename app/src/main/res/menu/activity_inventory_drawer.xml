@@ -20,10 +20,11 @@
             android:id="@+id/nav_stock"
             android:icon="@drawable/sub_menu_1"
             android:title="Stock Adjustment" />
-        <item
-            android:id="@+id/nav_harga"
-            android:icon="@drawable/sub_menu_1"
-            android:title="Daftar Harga" />
+
+<!--        <item-->
+<!--            android:id="@+id/nav_harga"-->
+<!--            android:icon="@drawable/sub_menu_1"-->
+<!--            android:title="Daftar Harga" />-->
         <item
             android:id="@+id/nav_material_req"
             android:icon="@drawable/sub_menu_1"

@@ -102,7 +102,7 @@ public class DetailSalesOrderActivity extends AppCompatActivity {
         context = getApplicationContext();
         joCods = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 

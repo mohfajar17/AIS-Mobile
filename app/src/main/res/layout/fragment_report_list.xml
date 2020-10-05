@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/rLayoutList"
-    tools:context=".Personalia.ReportFragment" >
+    tools:context=".Personalia.Report.ReportFragment" >
 
     <TextView
         android:id="@+id/rTextBulan"

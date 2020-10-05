@@ -16,6 +16,9 @@ public class MaterialReturn implements Parcelable {
     private String created_by;
     private String notes;
     private String recognized;
+    private String created_date;
+    private String modified_by;
+    private String modified_date;
 
     public MaterialReturn (int material_return_id, String material_return_number, String job_order_number,String job_order_description,
                             String return_date, String created_by, String notes, String recognized){
@@ -38,6 +41,9 @@ public class MaterialReturn implements Parcelable {
         created_by = in.readString();
         notes = in.readString();
         recognized = in.readString();
+        created_date = in.readString();
+        modified_by = in.readString();
+        modified_date = in.readString();
     }
 
     public MaterialReturn(JSONObject jsonObject){
@@ -50,6 +56,9 @@ public class MaterialReturn implements Parcelable {
             this.created_by = jsonObject.getString("created_by");
             this.notes = jsonObject.getString("notes");
             this.recognized = jsonObject.getString("recognized");
+            this.created_date = jsonObject.getString("created_date");
+            this.modified_by = jsonObject.getString("modified_by");
+            this.modified_date = jsonObject.getString("modified_date");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -82,6 +91,9 @@ public class MaterialReturn implements Parcelable {
         dest.writeString(created_by);
         dest.writeString(notes);
         dest.writeString(recognized);
+        dest.writeString(created_date);
+        dest.writeString(modified_by);
+        dest.writeString(modified_date);
     }
 
     public int getMaterial_return_id() {
@@ -114,5 +126,17 @@ public class MaterialReturn implements Parcelable {
 
     public String getRecognized() {
         return recognized;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
     }
 }

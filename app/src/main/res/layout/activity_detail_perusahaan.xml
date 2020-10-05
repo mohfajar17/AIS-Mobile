@@ -156,7 +156,6 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content" >
 
                 <TextView
@@ -588,10 +587,10 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="50dp"
+                        android:layout_width="110dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="No."
+                        android:text="INV Date"
                         android:padding="10dp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"/>
@@ -602,10 +601,10 @@
                         android:src="@color/colorWhite"/>
 
                     <TextView
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Item"
+                        android:text="INV Number"
                         android:padding="10dp"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"/>
@@ -616,52 +615,10 @@
                         android:src="@color/colorWhite"/>
 
                     <TextView
-                        android:layout_width="120dp"
+                        android:layout_width="110dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Qty"
-                        android:padding="10dp"
-                        android:textColor="@color/colorWhite"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite"/>
-
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Price"
-                        android:padding="10dp"
-                        android:textColor="@color/colorWhite"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite"/>
-
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Discount"
-                        android:padding="10dp"
-                        android:textColor="@color/colorWhite"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite"/>
-
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Budget"
+                        android:text="Due Date"
                         android:padding="10dp"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"/>
@@ -675,7 +632,26 @@
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Sub Total"
+                        android:text="Total"
+                        android:padding="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite"/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite"/>
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Vat 10%"
                         android:padding="10dp"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"/>
@@ -686,19 +662,56 @@
                         android:src="@color/colorWhite"/>
 
                     <TextView
-                        android:layout_width="100dp"
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="PPH"
+                        android:padding="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite"/>
+
+                    <TextView
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Approval 1"
+                        android:text="Adjusment"
+                        android:padding="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite"/>
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Grand Total"
+                        android:padding="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite"/>
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Status"
                         android:padding="10dp"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"/>
                 </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:src="@color/colorWhite"/>
 
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
@@ -706,15 +719,10 @@
                     android:fillViewport="true">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerViewCustomerInvoice"
+                        android:id="@+id/recyclerViewInvoice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </androidx.core.widget.NestedScrollView>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:src="@color/colorWhite"/>
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
@@ -743,82 +751,12 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="No."
-                        android:padding="10dp"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite"/>
-
-                    <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Item"
+                        android:text="Contact Name"
                         android:padding="10dp"
-                        android:textColor="@color/colorWhite"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite"/>
-
-                    <TextView
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Qty"
-                        android:padding="10dp"
-                        android:textColor="@color/colorWhite"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite"/>
-
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Price"
-                        android:padding="10dp"
-                        android:textColor="@color/colorWhite"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite"/>
-
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Discount"
-                        android:padding="10dp"
-                        android:textColor="@color/colorWhite"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite"/>
-
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Budget"
-                        android:padding="10dp"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@android:color/white"
                         android:textStyle="bold"/>
 
                     <ImageView
@@ -830,7 +768,7 @@
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Sub Total"
+                        android:text="Kategori Kontak"
                         android:padding="10dp"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"/>
@@ -841,10 +779,38 @@
                         android:src="@color/colorWhite"/>
 
                     <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Approval 1"
+                        android:text="Pangkat"
+                        android:padding="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite"/>
+
+                    <TextView
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Email"
+                        android:padding="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite"/>
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Telepon"
                         android:padding="10dp"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"/>
@@ -931,6 +897,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/textAmountNew"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -963,6 +930,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/textAmountDelivered"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -995,6 +963,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/textAmountPaid"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -1027,6 +996,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/textAmountCancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -1036,5 +1006,10 @@
                 android:textColor="@android:color/black"
                 android:textStyle="bold"/>
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/colorBlack"/>
     </LinearLayout>
 </LinearLayout>

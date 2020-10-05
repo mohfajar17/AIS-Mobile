@@ -19,7 +19,7 @@
             android:gravity="center"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"
-            android:text="Contact"/>
+            android:text="Customers"/>
 
         <LinearLayout
             android:layout_width="match_parent"

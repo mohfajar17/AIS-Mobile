@@ -115,7 +115,7 @@ public class DetailAsetActivity extends AppCompatActivity {
         textSatuanUnit.setText(asset.getUnit_abbr());
         textMataUang.setText(asset.getCurrency_symbol());
         textHargaBeli.setText(asset.getPrice_buy());
-        textCurrentPrice.setText(asset.getIs_base_currency());
+        textCurrentPrice.setText(asset.getPrice_buy());
         textCatatan.setText(asset.getNotes());
         textDescription.setText(asset.getDescription());
         textCreatedBy.setText(asset.getCreated_by());

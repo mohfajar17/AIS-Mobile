@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorLightGray"
+    tools:context=".Personalia.Penggajian.TunjanganDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAsukaBlue"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/buttonBack"
+            android:layout_width="50dp"
+            android:padding="7dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_ab_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:padding="10dp"
+            android:gravity="left|center"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:text="Detail Tunjangan"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textTunjangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Tunjangan"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textKodeLaporan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Kode Laporan"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textJenis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Jenis"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textKelompok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Kelompok"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textKeterangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Keterangan"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textMataUang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Mata Uang"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textNilai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Nilai"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textPenyesuaian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Penyesuaian"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textSatuanTunjangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Satuan Tunjang"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textHitungTHR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Hitung THR"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textAktif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Aktif"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

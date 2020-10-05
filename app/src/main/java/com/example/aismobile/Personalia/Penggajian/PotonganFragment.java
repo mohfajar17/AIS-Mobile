@@ -431,7 +431,7 @@ public class PotonganFragment extends Fragment {
             loadDataAll("adjustment ASC");
         else if (position == 5 && posAD == 1)
             loadDataAll("adjustment DESC");
-        else loadDataAll("deduction_id DESC");
+        else loadDataAll("deduction_id ASC");
     }
 
     private void setSortHalf(int position, int posAD){
@@ -455,7 +455,7 @@ public class PotonganFragment extends Fragment {
             loadData("adjustment ASC");
         else if (position == 5 && posAD == 1)
             loadData("adjustment DESC");
-        else loadData("deduction_id DESC");
+        else loadData("deduction_id ASC");
     }
 
     private void setAdapterList(){
@@ -615,17 +615,15 @@ public class PotonganFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.ppTextNama.setText(""+mValues.get(position).getDeduction_name());
-            holder.ppTextKode.setText(""+mValues.get(position).getReport_code());
-            holder.ppTextKeterangan.setText(""+mValues.get(position).getDescription());
-            holder.ppTextPenyesuaian.setText(""+mValues.get(position).getAdjustment());
+            holder.ppTextNama.setText(mValues.get(position).getDeduction_name());
+            holder.ppTextKode.setText(mValues.get(position).getReport_code());
+            holder.ppTextKeterangan.setText(mValues.get(position).getDescription());
+            holder.ppTextPenyesuaian.setText(mValues.get(position).getAdjustment());
+            holder.ppTextAktif.setText(""+mValues.get(position).getIs_active());
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.ppTextNilai.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getValue())));
-            } catch (NumberFormatException ex){ // handle your exception
-                holder.ppTextNilai.setText("Rp. "+ mValues.get(position).getValue());
-            }
+            NumberFormat formatter = new DecimalFormat("#,###");
+            double toDouble = Double.valueOf(mValues.get(position).getValue());
+            holder.ppTextNilai.setText("Rp. "+ formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.ppLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -721,6 +719,7 @@ public class PotonganFragment extends Fragment {
             public final TextView ppTextKeterangan;
             public final TextView ppTextNilai;
             public final TextView ppTextPenyesuaian;
+            public final TextView ppTextAktif;
 
             public final LinearLayout ppLayoutList;
 
@@ -733,6 +732,7 @@ public class PotonganFragment extends Fragment {
                 ppTextKeterangan = (TextView) view.findViewById(R.id.ppTextKeterangan);
                 ppTextNilai = (TextView) view.findViewById(R.id.ppTextNilai);
                 ppTextPenyesuaian = (TextView) view.findViewById(R.id.ppTextPenyesuaian);
+                ppTextAktif = (TextView) view.findViewById(R.id.ppTextAktif);
 
                 ppLayoutList = (LinearLayout) view.findViewById(R.id.ppLayoutList);
             }

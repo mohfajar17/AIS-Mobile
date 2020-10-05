@@ -33,7 +33,6 @@ public class CrmMenuActivity extends AppCompatActivity {
     private TextView textViewCustomerFeedback;
     private TextView textViewQuestion;
     private TextView textViewKuesioner;
-    private TextView textViewGrafikKuesioner;
     private TextView textViewMonitoring;
     private TextView textViewLeads;
     private TextView textViewFollowups;
@@ -62,7 +61,6 @@ public class CrmMenuActivity extends AppCompatActivity {
         textViewCustomerFeedback = (TextView) findViewById(R.id.textViewCustomerFeedback);
         textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
         textViewKuesioner = (TextView) findViewById(R.id.textViewKuesioner);
-        textViewGrafikKuesioner = (TextView) findViewById(R.id.textViewGrafikKuesioner);
         textViewMonitoring = (TextView) findViewById(R.id.textViewMonitoring);
         textViewLeads = (TextView) findViewById(R.id.textViewLeads);
         textViewFollowups = (TextView) findViewById(R.id.textViewFollowups);
@@ -93,19 +91,11 @@ public class CrmMenuActivity extends AppCompatActivity {
                 } else ShowPopup("Kuesioner");
             }
         });
-        textViewGrafikKuesioner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (access.toLowerCase().contains("grafik_kuesioner".toLowerCase())){
-                    bukaActivity("3");
-                } else ShowPopup("Grafik Kuesioner");
-            }
-        });
         textViewMonitoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("sales_quotation".toLowerCase())){
-                    bukaActivity("4");
+                    bukaActivity("3");
                 } else ShowPopup("Sales Quotation");
             }
         });
@@ -113,7 +103,7 @@ public class CrmMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("lead".toLowerCase())){
-                    bukaActivity("5");
+                    bukaActivity("4");
                 } else ShowPopup("Leads");
             }
         });
@@ -121,7 +111,7 @@ public class CrmMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("followup".toLowerCase())){
-                    bukaActivity("6");
+                    bukaActivity("5");
                 } else ShowPopup("Followup");
             }
         });
@@ -129,7 +119,7 @@ public class CrmMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("event".toLowerCase())){
-                    bukaActivity("7");
+                    bukaActivity("6");
                 } else ShowPopup("Events");
             }
         });
@@ -137,7 +127,7 @@ public class CrmMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("schedule_visits".toLowerCase())){
-                    bukaActivity("8");
+                    bukaActivity("7");
                 } else ShowPopup("Schedule Visits");
             }
         });

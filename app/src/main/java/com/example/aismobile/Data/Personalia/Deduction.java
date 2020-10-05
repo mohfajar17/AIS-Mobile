@@ -14,6 +14,7 @@ public class Deduction implements Parcelable {
     private String description;
     private String value;
     private String adjustment;
+    private String is_active;
 
     public Deduction (int deduction_id, String deduction_name, String report_code, String description,
                       String value){
@@ -31,6 +32,7 @@ public class Deduction implements Parcelable {
         description = in.readString();
         value = in.readString();
         adjustment = in.readString();
+        is_active = in.readString();
     }
 
     public Deduction (JSONObject jsonObject){
@@ -41,6 +43,7 @@ public class Deduction implements Parcelable {
             this.description = jsonObject.getString("description");
             this.value = jsonObject.getString("value");
             this.adjustment = jsonObject.getString("adjustment");
+            this.is_active = jsonObject.getString("is_active");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -71,6 +74,7 @@ public class Deduction implements Parcelable {
         dest.writeString(description);
         dest.writeString(value);
         dest.writeString(adjustment);
+        dest.writeString(is_active);
     }
 
     public int getDeduction_id() {
@@ -95,5 +99,9 @@ public class Deduction implements Parcelable {
 
     public String getAdjustment() {
         return adjustment;
+    }
+
+    public String getIs_active() {
+        return is_active;
     }
 }

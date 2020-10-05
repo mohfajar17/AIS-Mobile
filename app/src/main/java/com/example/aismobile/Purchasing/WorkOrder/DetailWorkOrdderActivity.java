@@ -115,7 +115,7 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
         context = getApplicationContext();
         purchaseServiceDetails = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
@@ -181,7 +181,7 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
         layoutCatatan = (LinearLayout) findViewById(R.id.layoutCatatan);
         layoutHistory = (LinearLayout) findViewById(R.id.layoutHistory);
 
-        textNumber.setText(purchaseService.getPurchase_service_number());
+        textNumber.setText("Detail WO #" + purchaseService.getPurchase_service_number());
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -259,8 +259,10 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
                             discount += jsonArray.getJSONObject(i).getDouble("discount");
                         }
                         efisiensi = budget - total;
+                        if (efisiensi < 0)
+                            efisiensi = 0;
                         dpp = total;
-                        pajak = total*10/100;
+                        pajak = total*Double.valueOf(purchaseService.getTax_type_rate())/100;
                         grandTotal = dpp+pajak;
 
                         adapter = new MyRecyclerViewAdapter(purchaseServiceDetails, context);

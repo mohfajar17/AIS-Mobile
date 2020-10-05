@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorLightGray"
+    tools:context=".Finance.SupplierInvoice.SupplierInvoiceDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAsukaBlue"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/buttonBack"
+            android:layout_width="50dp"
+            android:padding="7dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_ab_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:padding="10dp"
+            android:gravity="left|center"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:text="Supplier Invoice"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:gravity="left|center"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:text="#Supplier Invoice"/>
+
+    <TextView
+        android:id="@+id/textPaymentLate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:gravity="left|center"
+        android:textColor="@color/colorBlack"
+        android:text="Payment Late : Complete"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/menuDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:background="@color/colorLightGray"
+            android:textStyle="bold"
+            android:text=" Detail "/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorWhite"/>
+
+        <TextView
+            android:id="@+id/menuCatatan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorRed"
+            android:textStyle="bold"
+            android:text=" Notes "/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/colorWhite"/>
+
+        <TextView
+            android:id="@+id/menuHistory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorRed"
+            android:textStyle="bold"
+            android:text=" History "/>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/layoutDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textTransactionNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="No. Transaction"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textSupplier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Supplier"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Account"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textTaxNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Tax Number"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textNomorBuktiPotong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="No Bukti Potong"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textTanggalBuktiPotong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Tgl Bukti Potong"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textSiDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="SI Date"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textInvoiceDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Invoice Date"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textPaymentDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Payment Date"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textScheduleDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Schedule Date"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textDueDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="140dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Due Date"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Value Of Bill"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textBillDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textNilai"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_light_grey"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="140dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="-"
+                        android:textColor="@color/colorBlack"/>
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Nilai"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_light_grey"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="140dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="-"
+                        android:textColor="@color/colorBlack"/>
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Discount"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textPPN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_light_grey"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="140dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="-"
+                        android:textColor="@color/colorBlack"/>
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="PPN (10%)"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textPPH"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_light_grey"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="140dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="-"
+                        android:textColor="@color/colorBlack"/>
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="PPH"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textStamp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_light_grey"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="140dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="-"
+                        android:textColor="@color/colorBlack"/>
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Stamp"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textSubTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_light_grey"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="140dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="-"
+                        android:textColor="@color/colorBlack"/>
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Sub Total"
+                        android:textColor="@color/colorWhite"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textGrandTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_light_grey"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="45dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:textStyle="bold|italic"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:text="-"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Grand Total : "
+                        android:textColor="@color/colorWhite" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/textLunas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="LUNAS"
+                    android:textSize="50dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:background="@color/colorAsukaRed"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/colorWhite"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAsukaBlue"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="No."
+                            android:padding="10dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Goods Received Note"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Services Receipt"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Work Handover"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Purchase"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Supplier"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="250dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Catatan"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Amount"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Discount"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="PPN"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Akuntansi"
+                            android:padding="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <androidx.core.widget.NestedScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="true">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </androidx.core.widget.NestedScrollView>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorBlack"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textBankTransaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="45dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorBlack" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Bank Transaction Number : "
+                    android:textColor="@color/colorWhite" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="50dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/bubble">
+
+                    <ImageView
+                        android:id="@+id/downloadAtachment"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/pdf_download" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/colorBlack"
+                        android:text="Attachment" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Atachments"
+                    android:textColor="@color/colorWhite"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layoutCatatan"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        android:background="@color/colorLightGray"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textCatatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble"
+                android:paddingLeft="10dp"
+                android:paddingTop="45dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:text="-"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble_sub"
+                android:padding="10dp"
+                android:text="Catatan :"
+                android:textColor="@color/colorWhite" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textInvoiceDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble"
+                android:paddingLeft="10dp"
+                android:paddingTop="45dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:text="-"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble_sub"
+                android:padding="10dp"
+                android:text="Invoice Description :"
+                android:textColor="@color/colorWhite" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutHistory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        android:background="@color/colorLightGray"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textCreatedBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble"
+                android:paddingLeft="140dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:text="-"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble_sub"
+                android:padding="10dp"
+                android:text="Created By"
+                android:textColor="@color/colorWhite" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textCreatedDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble"
+                android:paddingLeft="140dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:text="-"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble_sub"
+                android:padding="10dp"
+                android:text="Created Date"
+                android:textColor="@color/colorWhite" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textModifiedBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble"
+                android:paddingLeft="140dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:text="-"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble_sub"
+                android:padding="10dp"
+                android:text="Modified By"
+                android:textColor="@color/colorWhite" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textModifiedDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble"
+                android:paddingLeft="140dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:text="-"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble_sub"
+                android:padding="10dp"
+                android:text="Modified Date"
+                android:textColor="@color/colorWhite" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

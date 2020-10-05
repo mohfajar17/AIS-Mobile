@@ -29,7 +29,7 @@
             android:gravity="left|center"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            android:text="Customer"/>
+            android:text="Customers"/>
     </LinearLayout>
 
     <ScrollView
@@ -54,6 +54,21 @@
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold|italic"
                 android:text="#Nama Customer"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:text="Detail Customer"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -476,6 +491,15 @@
                 android:layout_height="3dp"
                 android:layout_margin="10dp"
                 android:src="@drawable/bubble_red"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:text="Billing Info"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"

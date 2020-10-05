@@ -103,7 +103,7 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
         contextHalf = getApplicationContext();
         joPbHalfs = new ArrayList<>();
 
-        recyclerViewHalf = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerViewHalf = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManagerHalf = new LinearLayoutManager(contextHalf);
         recyclerViewHalf.setLayoutManager(recylerViewLayoutManagerHalf);
 

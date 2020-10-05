@@ -3,6 +3,7 @@ package com.example.aismobile.Purchasing.KontrakPerjanjian;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -446,7 +447,6 @@ public class KontrakPerjanjianFragment extends Fragment {
             holder.kpTextNomor.setText(""+mValues.get(position).getAgreement_number());
             holder.kpTextSupplier.setText(""+mValues.get(position).getSupplier_id());
             holder.kpTextKontak.setText(""+mValues.get(position).getContact_id());
-            holder.kpTextFile.setText("");
             holder.kpTextTglKontrak.setText(""+mValues.get(position).getAgreement_date());
             holder.kpTextTglAwal.setText(""+mValues.get(position).getBegin_date());
             holder.kpTextTglAkhir.setText(""+mValues.get(position).getEnd_date());
@@ -456,13 +456,25 @@ public class KontrakPerjanjianFragment extends Fragment {
                 holder.kpLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.kpLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
+            if (mValues.get(position).getAgreement_file_name().toLowerCase().contains("pdf".toLowerCase())){
+                holder.kpTextFile.setText("Download");
+
+                holder.kpTextFile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/contractAgreement/"+ mValues.get(position).getAgreement_file_name());
+                        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                        startActivity(launchBrowser);
+                    }
+                });
+            }
+
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity(), ""+mValues.get(position).getCreated_by(), Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-//                    intent.putExtra("detailJO", mValues.get(position));
-//                    holder.itemView.getContext().startActivity(intent);
+                    Intent intent = new Intent(getActivity(), KontrakPerjanjianDetailActivity.class);
+                    intent.putExtra("detail", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         }

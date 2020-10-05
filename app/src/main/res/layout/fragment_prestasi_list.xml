@@ -57,4 +57,18 @@
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/kprTextNotes"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:text="-"
+        android:padding="5dp"
+        android:textColor="@android:color/black" />
 </LinearLayout>

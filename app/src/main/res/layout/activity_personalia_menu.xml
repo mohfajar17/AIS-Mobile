@@ -53,19 +53,19 @@
         android:gravity="center"
         android:textColor="@color/colorBlack"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@color/colorAsukaRed"/>
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:src="@color/colorAsukaRed"/>-->
 
-    <TextView
-        android:id="@+id/textViewKalender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Kalender"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+<!--    <TextView-->
+<!--        android:id="@+id/textViewKalender"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Kalender"-->
+<!--        android:padding="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:textColor="@color/colorBlack"/>-->
 
     <ImageView
         android:layout_width="match_parent"

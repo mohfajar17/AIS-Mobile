@@ -215,7 +215,7 @@ public class SupplierInvoiceFragment extends Fragment {
             }
         });
 
-        loadData("invoice_receipt_date DESC");
+//        loadData("invoice_receipt_date DESC");
 
         return view;
     }
@@ -230,21 +230,21 @@ public class SupplierInvoiceFragment extends Fragment {
         else if (position == 2 && posAD == 1)
             loadDataAll("supplier_name DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("supplier_invoice_date ASC");
+            loadDataAll("si.supplier_invoice_date ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("supplier_invoice_date DESC");
+            loadDataAll("si.supplier_invoice_date DESC");
         else if (position == 4 && posAD == 0)
-            loadDataAll("invoice_receipt_date ASC");
+            loadDataAll("si.invoice_receipt_date ASC");
         else if (position == 4 && posAD == 1)
-            loadDataAll("invoice_receipt_date DESC");
+            loadDataAll("si.invoice_receipt_date DESC");
         else if (position == 5 && posAD == 0)
-            loadDataAll("due_date ASC");
+            loadDataAll("si.due_date ASC");
         else if (position == 5 && posAD == 1)
-            loadDataAll("due_date DESC");
+            loadDataAll("si.due_date DESC");
         else if (position == 6 && posAD == 0)
-            loadDataAll("payment_date ASC");
+            loadDataAll("si.payment_date ASC");
         else if (position == 6 && posAD == 1)
-            loadDataAll("payment_date DESC");
+            loadDataAll("si.payment_date DESC");
         else if (position == 7 && posAD == 0)
             loadDataAll("late_days ASC");
         else if (position == 7 && posAD == 1)
@@ -257,7 +257,7 @@ public class SupplierInvoiceFragment extends Fragment {
             loadDataAll("supplier_invoice_status ASC");
         else if (position == 9 && posAD == 1)
             loadDataAll("supplier_invoice_status DESC");
-        else loadDataAll("invoice_receipt_date DESC");
+        else loadDataAll("si.invoice_receipt_date DESC");
     }
 
     private void setSortHalf(int position, int posAD){
@@ -270,21 +270,21 @@ public class SupplierInvoiceFragment extends Fragment {
         else if (position == 2 && posAD == 1)
             loadData("supplier_name DESC");
         else if (position == 3 && posAD == 0)
-            loadData("supplier_invoice_date ASC");
+            loadData("si.supplier_invoice_date ASC");
         else if (position == 3 && posAD == 1)
-            loadData("supplier_invoice_date DESC");
+            loadData("si.supplier_invoice_date DESC");
         else if (position == 4 && posAD == 0)
-            loadData("invoice_receipt_date ASC");
+            loadData("si.invoice_receipt_date ASC");
         else if (position == 4 && posAD == 1)
-            loadData("invoice_receipt_date DESC");
+            loadData("si.invoice_receipt_date DESC");
         else if (position == 5 && posAD == 0)
-            loadData("due_date ASC");
+            loadData("si.due_date ASC");
         else if (position == 5 && posAD == 1)
-            loadData("due_date DESC");
+            loadData("si.due_date DESC");
         else if (position == 6 && posAD == 0)
-            loadData("payment_date ASC");
+            loadData("si.payment_date ASC");
         else if (position == 6 && posAD == 1)
-            loadData("payment_date DESC");
+            loadData("si.payment_date DESC");
         else if (position == 7 && posAD == 0)
             loadData("late_days ASC");
         else if (position == 7 && posAD == 1)
@@ -297,7 +297,7 @@ public class SupplierInvoiceFragment extends Fragment {
             loadData("supplier_invoice_status ASC");
         else if (position == 9 && posAD == 1)
             loadData("supplier_invoice_status DESC");
-        else loadData("invoice_receipt_date DESC");
+        else loadData("si.invoice_receipt_date DESC");
     }
 
     private void setAdapterList(){
@@ -467,15 +467,14 @@ public class SupplierInvoiceFragment extends Fragment {
             holder.siTextReceiptDate.setText(""+mValues.get(position).getInvoice_receipt_date());
             holder.siTextDueDate.setText(""+mValues.get(position).getDue_date());
             holder.siTextPaymentDate.setText(""+mValues.get(position).getPayment_date());
-            holder.siTextLateDays.setText(""+mValues.get(position).getLate_days());
+            if (Integer.valueOf(mValues.get(position).getLate_days()) < 1)
+                holder.siTextLateDays.setText("0");
+            else holder.siTextLateDays.setText(mValues.get(position).getLate_days());
             holder.siTextStatus.setText(""+mValues.get(position).getSupplier_invoice_status());
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.siTextTotalSI.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTotalSI())));
-            } catch (NumberFormatException ex){ // handle your exception
-                holder.siTextTotalSI.setText("Rp. "+ mValues.get(position).getTotalSI());
-            }
+            NumberFormat formatter = new DecimalFormat("#,###");
+            double toDouble = Double.valueOf(mValues.get(position).getTotalSI());
+            holder.siTextTotalSI.setText("Rp. "+ formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.siLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -484,10 +483,9 @@ public class SupplierInvoiceFragment extends Fragment {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity(), ""+mValues.get(position).getCreated_by(), Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-//                    intent.putExtra("detailJO", mValues.get(position));
-//                    holder.itemView.getContext().startActivity(intent);
+                    Intent intent = new Intent(getActivity(), SupplierInvoiceDetailActivity.class);
+                    intent.putExtra("detail", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         }

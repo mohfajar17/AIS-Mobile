@@ -10,12 +10,14 @@ public class EmployeeDetEducation implements Parcelable {
     private String education_name;
     private String school_name;
     private String major;
+    private String education_start;
     private String education_end;
 
     protected EmployeeDetEducation (Parcel in) {
         education_name = in.readString();
         school_name = in.readString();
         major = in.readString();
+        education_start = in.readString();
         education_end = in.readString();
     }
 
@@ -24,6 +26,7 @@ public class EmployeeDetEducation implements Parcelable {
             this.education_name = jsonObject.getString("education_name");
             this.school_name = jsonObject.getString("school_name");
             this.major = jsonObject.getString("major");
+            this.education_start = jsonObject.getString("education_start");
             this.education_end = jsonObject.getString("education_end");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -52,6 +55,7 @@ public class EmployeeDetEducation implements Parcelable {
         dest.writeString(education_name);
         dest.writeString(school_name);
         dest.writeString(major);
+        dest.writeString(education_start);
         dest.writeString(education_end);
     }
 
@@ -65,6 +69,10 @@ public class EmployeeDetEducation implements Parcelable {
 
     public String getMajor() {
         return major;
+    }
+
+    public String getEducation_start() {
+        return education_start;
     }
 
     public String getEducation_end() {

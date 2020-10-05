@@ -39,6 +39,7 @@ public class CashOnDelivery implements Parcelable {
     private String cod_file_name;
     private String cod_file_type;
     private String cod_discount_type;
+    private String tax_type_rate;
 
     public CashOnDelivery(int cash_on_delivery_id, String cash_on_delivery_number, String job_order_id, String job_order_description,
                           String used_by, String purchase_order_type_id, String tax_type_id, String purchase_order_status_id,
@@ -113,6 +114,7 @@ public class CashOnDelivery implements Parcelable {
         cod_file_name = in.readString();
         cod_file_type = in.readString();
         cod_discount_type = in.readString();
+        tax_type_rate = in.readString();
     }
 
     public CashOnDelivery(JSONObject jsonObject){
@@ -148,6 +150,7 @@ public class CashOnDelivery implements Parcelable {
             this.cod_file_name = jsonObject.getString("cod_file_name");
             this.cod_file_type = jsonObject.getString("cod_file_type");
             this.cod_discount_type = jsonObject.getString("cod_discount_type");
+            this.tax_type_rate = jsonObject.getString("tax_type_rate");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -203,6 +206,7 @@ public class CashOnDelivery implements Parcelable {
         dest.writeString(cod_file_name);
         dest.writeString(cod_file_type);
         dest.writeString(cod_discount_type);
+        dest.writeString(tax_type_rate);
     }
 
     public int getCash_on_delivery_id() {
@@ -327,5 +331,9 @@ public class CashOnDelivery implements Parcelable {
 
     public String getCod_discount_type() {
         return cod_discount_type;
+    }
+
+    public String getTax_type_rate() {
+        return tax_type_rate;
     }
 }

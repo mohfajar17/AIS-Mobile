@@ -24,13 +24,12 @@ public class ContractAgreement implements Parcelable {
     private String modified_by;
     private String modified_date;
     private String agreement_file_name;
-    private String agreement_file_type;
 
     public ContractAgreement(int contract_agreement_id, String agreement_number, String related_agreement,
                              String supplier_id, String contact_id, String agreement_date, String begin_date,
                              String end_date, String agreement_archive, String agreement_status, String notes,
                              String created_by, String created_date, String modified_by, String modified_date,
-                             String agreement_file_name, String agreement_file_type){
+                             String agreement_file_name){
         this.contract_agreement_id = contract_agreement_id;
         this.agreement_number = agreement_number;
         this.related_agreement = related_agreement;
@@ -47,7 +46,6 @@ public class ContractAgreement implements Parcelable {
         this.modified_by = modified_by;
         this.modified_date = modified_date;
         this.agreement_file_name = agreement_file_name;
-        this.agreement_file_type = agreement_file_type;
     }
 
     protected ContractAgreement(Parcel in) {
@@ -67,7 +65,6 @@ public class ContractAgreement implements Parcelable {
         modified_by = in.readString();
         modified_date = in.readString();
         agreement_file_name = in.readString();
-        agreement_file_type = in.readString();
     }
 
     public ContractAgreement(JSONObject jsonObject){
@@ -88,7 +85,6 @@ public class ContractAgreement implements Parcelable {
             this.modified_by = jsonObject.getString("modified_by");
             this.modified_date = jsonObject.getString("modified_date");
             this.agreement_file_name = jsonObject.getString("agreement_file_name");
-            this.agreement_file_type = jsonObject.getString("agreement_file_type");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -129,7 +125,6 @@ public class ContractAgreement implements Parcelable {
         dest.writeString(modified_by);
         dest.writeString(modified_date);
         dest.writeString(agreement_file_name);
-        dest.writeString(agreement_file_type);
     }
 
     public int getContract_agreement_id() {
@@ -194,9 +189,5 @@ public class ContractAgreement implements Parcelable {
 
     public String getAgreement_file_name() {
         return agreement_file_name;
-    }
-
-    public String getAgreement_file_type() {
-        return agreement_file_type;
     }
 }

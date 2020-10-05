@@ -87,7 +87,7 @@ public class DetailStockActivity extends AppCompatActivity {
         context = getApplicationContext();
         stockDetails = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
@@ -218,7 +218,7 @@ public class DetailStockActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
-                param.put("jobOrder", "" + stockAdjustment.getStock_adjustment_id());
+                param.put("saId", "" + stockAdjustment.getStock_adjustment_id());
                 return param;
             }
         };

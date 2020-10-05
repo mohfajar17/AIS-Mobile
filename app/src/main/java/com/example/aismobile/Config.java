@@ -2,9 +2,9 @@ package com.example.aismobile;
 
 public class Config {
 //    public static final String DATA_URL = "http://192.168.43.183/ais_web_service/apiAis.php?apicall=";   //IP thetering hp
-    public static final String DATA_URL = "http://192.168.88.212/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
+//    public static final String DATA_URL = "http://192.168.88.212/ais_web_service/apiAis.php?apicall=";   //IP asuka lt 3
 //    public static final String DATA_URL = "http://192.168.0.103/ais_web_service/apiAis.php?apicall=";   //IP home wifi
-//    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
+    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/apiAis.php?apicall=";   //IP server
     public static final String DATA_URL_LOGIN = DATA_URL+"login";
     public static final String DATA_URL_USER_ACCESS = DATA_URL+"accessAllowModul";
     public static final String DATA_URL_USER_ISMOBILE = DATA_URL+"userActiveMobile";
@@ -55,17 +55,24 @@ public class Config {
     public static final String DATA_URL_CONTTRACT_AGREEMENT_LIST = DATA_URL+"getContractAgreement";
     public static final String DATA_URL_GRN_LIST = DATA_URL+"getGoodReceivedNote";
     public static final String DATA_URL_GRN_DETAIL_LIST = DATA_URL+"getGoodReceivedNoteDetail";
+    public static final String DATA_URL_PURCHASING_DETAIL_SI_LIST = DATA_URL+"getPurchasingDetailSi";
     public static final String DATA_URL_WORK_HANDOVER_LIST = DATA_URL+"getWorkHandover";
     public static final String DATA_URL_WORK_HANDOVER_DETAIL_LIST = DATA_URL+"getWorkHandoverDetail";
     public static final String DATA_URL_SERCICES_RECEIPT_LIST = DATA_URL+"getServicesReceipt";
     public static final String DATA_URL_SERCICES_RECEIPT_DETAIL_LIST = DATA_URL+"getServicesReceiptDetail";
     public static final String DATA_URL_CONTACT_LIST = DATA_URL+"getContact";
     public static final String DATA_URL_SUPPLIER_LIST = DATA_URL+"getSupplier";
+    public static final String DATA_URL_SUPPLIER_DETAIL_LIST = DATA_URL+"getSupplierDetail";
     public static final String DATA_URL_COMPANY_LIST = DATA_URL+"getCompany";
+    public static final String DATA_URL_COMPANY_CONTACT_LIST = DATA_URL+"getCompanyDetContact";
+    public static final String DATA_URL_COMPANY_INVOICE_LIST = DATA_URL+"getCompanyDetInvoice";
     public static final String DATA_URL_ACCESS_REQUEST_LIST = DATA_URL+"getAccessRequest";
+    public static final String DATA_URL_ACCESS_REQUEST_DETAIL_LIST = DATA_URL+"getAccessRequestDetail";
     public static final String DATA_URL_NEWS_LIST = DATA_URL+"getNews";
     public static final String DATA_URL_SUPPLIER_INVOICE_LIST = DATA_URL+"getSupplierInvoice";
+    public static final String DATA_URL_SUPPLIER_INVOICE_DETAIL_LIST = DATA_URL+"getSupplierInvoiceDetail";
     public static final String DATA_URL_CUSTOMER_INVOICE_LIST = DATA_URL+"getCustomerInvoices";
+    public static final String DATA_URL_CUSTOMER_INVOICE_DETAIL_LIST = DATA_URL+"getCiDetWorkCompletion";
     public static final String DATA_URL_BANK_TRANSACTION_LIST = DATA_URL+"getBankTransaction";
     public static final String DATA_URL_EXPENSE_LIST = DATA_URL+"getExpense";
     public static final String DATA_URL_EXPENSE_DETAIL_LIST = DATA_URL+"getExpenseDetail";
@@ -76,6 +83,9 @@ public class Config {
     public static final String DATA_URL_PAYMENT_SUPPLIER_DETAIL_LIST = DATA_URL+"getPaymentSupplierDetail";
     public static final String DATA_URL_BANK_ACCOUNT_LIST = DATA_URL+"getBankAccount";
     public static final String DATA_URL_DAFTAR_AKUN_LIST = DATA_URL+"getDaftarAkun";
+    public static final String DATA_URL_EKSPEDISI_LIST = DATA_URL+"getEkspedisi";
+    public static final String DATA_URL_CUSTOMER_RECEIVES_LIST = DATA_URL+"getCustomerReceives";
+    public static final String DATA_URL_CUSTOMER_RECEIVES_DETAIL_LIST = DATA_URL+"getCustomerReceivesDetail";
     public static final String DATA_URL_SALES_QUOTATION_LIST = DATA_URL+"getSalesQuotation";
     public static final String DATA_URL_SALES_ORDER_LIST = DATA_URL+"getSalesOrder";
     public static final String DATA_URL_WORK_ACCIDENT_LIST = DATA_URL+"getWorkAccident";
@@ -85,6 +95,7 @@ public class Config {
     public static final String DATA_URL_CUSTOMER_FEEDBACK_LIST = DATA_URL+"getCustomerFeedback";
     public static final String DATA_URL_QUESTION_LIST = DATA_URL+"getQuestions";
     public static final String DATA_URL_KUESIONER_LIST = DATA_URL+"getKuesioner";
+    public static final String DATA_URL_KUESIONER_DETAIL_LIST = DATA_URL+"getKuesionerDetail";
     public static final String DATA_URL_LEAD_LIST = DATA_URL+"getLead";
     public static final String DATA_URL_FOLLOWUP_LIST = DATA_URL+"getFollowup";
     public static final String DATA_URL_EVENT_LIST = DATA_URL+"getEvent";
@@ -100,9 +111,12 @@ public class Config {
     public static final String DATA_URL_MATERIAL_RETURN_LIST = DATA_URL+"getMaterialReturn";
     public static final String DATA_URL_MATERIAL_RETURN_DETAIL_LIST = DATA_URL+"getMaterialReturnDetail";
     public static final String DATA_URL_CHECK_CLOCK_LIST = DATA_URL+"getEmployeeCheckClock";
+    public static final String DATA_URL_CHECK_CLOCK_DETAIL_LIST = DATA_URL+"getEmployeeCheckClockDetail";
     public static final String DATA_URL_CUTI_LIST = DATA_URL+"getEmployeeLeave";
+    public static final String DATA_URL_CUTI_DETAIL_LIST = DATA_URL+"getEmployeeLeaveDetail";
     public static final String DATA_URL_PENDIDIKAN_LIST = DATA_URL+"getEmployeeEducation";
     public static final String DATA_URL_KELUARGA_LIST = DATA_URL+"getEmployeeFamily";
+    public static final String DATA_URL_EMPLOYEE_HISTORY_DETAIL_LIST = DATA_URL+"getEmploymentHistoryDetail";
     public static final String DATA_URL_TRAINING_LIST = DATA_URL+"getTrainingList";
     public static final String DATA_URL_WORK_EXPERIENCE_LIST = DATA_URL+"getWorkExperience";
     public static final String DATA_URL_ACHIEVEMENT_LIST = DATA_URL+"getEmployeeAchievement";
@@ -141,6 +155,7 @@ public class Config {
     public static final String DATA_URL_PERSONALIA_NEWS_LIST = DATA_URL+"getPersonaliaNews";
     public static final String DATA_URL_JOB_GRADE_LIST = DATA_URL+"getJobGrade";
     public static final String DATA_URL_EMPLOYEE_REPORT_LIST = DATA_URL+"getEmployeeReport";
+    public static final String DATA_URL_EMPLOYEE_REPORT_DETAIL = DATA_URL+"getEmployeeReportDetail";
     public static final String DATA_URL_DETAIL_JO_MR_LIST = DATA_URL+"getDetailJOMR";
     public static final String DATA_URL_DETAIL_JO_PR_LIST = DATA_URL+"getDetailJOPR";
     public static final String DATA_URL_DETAIL_JO_TR_LIST = DATA_URL+"getDetailJOTR";

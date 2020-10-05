@@ -1,4 +1,4 @@
-package com.example.aismobile.Personalia;
+package com.example.aismobile.Personalia.Report;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -41,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -538,23 +540,37 @@ public class ReportFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            holder.rTextBulan.setText(""+mValues.get(position).getMonth_year());
-            holder.rTextKaryawan.setText(""+mValues.get(position).getEmployee());
-            holder.rTextJobCode.setText(""+mValues.get(position).getJob_order_number());
-            holder.rTextLokasiKerja.setText(""+mValues.get(position).getCompany_workbase_name());
-            holder.rTextGajiPokok.setText(""+mValues.get(position).getBasic_salary());
-            holder.rTextTotTunjangan.setText(""+mValues.get(position).getTotal_tunjangan());
-            holder.rTextLembur.setText(""+mValues.get(position).getOvertime());
-            holder.rTextAbsent.setText(""+mValues.get(position).getAbsent());
-            holder.rTextKoreksi.setText(""+mValues.get(position).getLess_payment());
-            holder.rTextTotPendapatan.setText(""+mValues.get(position).getTotal_pendapatan());
-            holder.rTextTunLokasi.setText(""+mValues.get(position).getLocation_project_allowance());
-            holder.rTextTunPerjalanan.setText(""+mValues.get(position).getOfficial_travel_allowance());
-            holder.rTextTotPotongan.setText(""+mValues.get(position).getTotal_potongan());
-            holder.rTextTakeHome.setText(""+mValues.get(position).getTotal_dibayar());
-            holder.rTextTotBiaya.setText(""+mValues.get(position).getTotal_biaya());
-            holder.rTextPerson.setText(""+mValues.get(position).getPerson());
-            holder.rTextStatus.setText(""+mValues.get(position).getEmployee_status());
+            double toDouble = 0;
+            NumberFormat formatter = new DecimalFormat("#,###");
+
+            holder.rTextBulan.setText(mValues.get(position).getMonth_year());
+            holder.rTextKaryawan.setText(mValues.get(position).getEmployee());
+            holder.rTextJobCode.setText(mValues.get(position).getJob_order_number());
+            holder.rTextLokasiKerja.setText(mValues.get(position).getCompany_workbase_name());
+            toDouble = Double.valueOf(mValues.get(position).getBasic_salary());
+            holder.rTextGajiPokok.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getTotal_tunjangan());
+            holder.rTextTotTunjangan.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getOvertime());
+            holder.rTextLembur.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getAbsent());
+            holder.rTextAbsent.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getLess_payment());
+            holder.rTextKoreksi.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getTotal_pendapatan());
+            holder.rTextTotPendapatan.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getLocation_project_allowance());
+            holder.rTextTunLokasi.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getOfficial_travel_allowance());
+            holder.rTextTunPerjalanan.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getTotal_potongan());
+            holder.rTextTotPotongan.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getTotal_dibayar());
+            holder.rTextTakeHome.setText(""+formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getTotal_biaya());
+            holder.rTextTotBiaya.setText(""+formatter.format((long) toDouble));
+            holder.rTextPerson.setText(mValues.get(position).getPerson());
+            holder.rTextStatus.setText(mValues.get(position).getEmployee_status());
 
             if (position%2==0)
                 holder.rLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -563,10 +579,9 @@ public class ReportFragment extends Fragment {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity(), ""+mValues.get(position).getCreated_by(), Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-//                    intent.putExtra("detailJO", mValues.get(position));
-//                    holder.itemView.getContext().startActivity(intent);
+                    Intent intent = new Intent(getActivity(), ReportDetailActivity.class);
+                    intent.putExtra("detail", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         }

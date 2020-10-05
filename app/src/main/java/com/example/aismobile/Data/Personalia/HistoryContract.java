@@ -14,6 +14,10 @@ public class HistoryContract implements Parcelable {
     private String description;
     private String start_date;
     private String end_date;
+    private String created_by;
+    private String created_date;
+    private String modified_by;
+    private String modified_date;
 
     public HistoryContract (int history_contract_id, String fullname, String employee_grade_name, String description,
                             String start_date, String end_date){
@@ -31,6 +35,10 @@ public class HistoryContract implements Parcelable {
         description = in.readString();
         start_date = in.readString();
         end_date = in.readString();
+        created_by = in.readString();
+        created_date = in.readString();
+        modified_by = in.readString();
+        modified_date = in.readString();
     }
 
     public HistoryContract (JSONObject jsonObject){
@@ -41,6 +49,10 @@ public class HistoryContract implements Parcelable {
             this.description = jsonObject.getString("description");
             this.start_date = jsonObject.getString("start_date");
             this.end_date = jsonObject.getString("end_date");
+            this.created_by = jsonObject.getString("created_by");
+            this.created_date = jsonObject.getString("created_date");
+            this.modified_by = jsonObject.getString("modified_by");
+            this.modified_date = jsonObject.getString("modified_date");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -71,6 +83,10 @@ public class HistoryContract implements Parcelable {
         dest.writeString(description);
         dest.writeString(start_date);
         dest.writeString(end_date);
+        dest.writeString(created_by);
+        dest.writeString(created_date);
+        dest.writeString(modified_by);
+        dest.writeString(modified_date);
     }
 
     public int getHistory_contract_id() {
@@ -95,5 +111,21 @@ public class HistoryContract implements Parcelable {
 
     public String getEnd_date() {
         return end_date;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
     }
 }

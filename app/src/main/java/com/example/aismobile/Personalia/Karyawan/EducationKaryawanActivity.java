@@ -267,6 +267,7 @@ public class EducationKaryawanActivity extends AppCompatActivity {
             holder.textPendidikan.setText(mValues.get(position).getEducation_name());
             holder.textNamaSekolah.setText(mValues.get(position).getSchool_name());
             holder.textJurusan.setText(mValues.get(position).getMajor());
+            holder.textMasuk.setText(mValues.get(position).getEducation_start());
             holder.textLulus.setText(mValues.get(position).getEducation_end());
 
             if (position%2==0)
@@ -285,6 +286,7 @@ public class EducationKaryawanActivity extends AppCompatActivity {
             public final TextView textPendidikan;
             public final TextView textNamaSekolah;
             public final TextView textJurusan;
+            public final TextView textMasuk;
             public final TextView textLulus;
 
             public final LinearLayout layout;
@@ -297,6 +299,7 @@ public class EducationKaryawanActivity extends AppCompatActivity {
                 textPendidikan = (TextView) itemView.findViewById(R.id.textPendidikan);
                 textNamaSekolah = (TextView) itemView.findViewById(R.id.textNamaSekolah);
                 textJurusan = (TextView) itemView.findViewById(R.id.textJurusan);
+                textMasuk = (TextView) itemView.findViewById(R.id.textMasuk);
                 textLulus = (TextView) itemView.findViewById(R.id.textLulus);
 
                 layout = (LinearLayout) itemView.findViewById(R.id.layout);

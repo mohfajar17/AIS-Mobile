@@ -38,6 +38,7 @@ public class DetailCustomerFeedbackActivity extends AppCompatActivity {
     private ImageView downloadAtachment1;
     private ImageView downloadAtachment2;
     private ImageView downloadAtachment3;
+    private ImageView buttonBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class DetailCustomerFeedbackActivity extends AppCompatActivity {
         downloadAtachment1 = (ImageView) findViewById(R.id.downloadAtachment1);
         downloadAtachment2 = (ImageView) findViewById(R.id.downloadAtachment2);
         downloadAtachment3 = (ImageView) findViewById(R.id.downloadAtachment3);
+        buttonBack = (ImageView) findViewById(R.id.buttonBack);
 
         textFeedbackNumber.setText(customerFeedback.getFeedback_number());
         textFeedbackSubject.setText(customerFeedback.getFeedback_subject());
@@ -109,6 +111,12 @@ public class DetailCustomerFeedbackActivity extends AppCompatActivity {
                 Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/customerComplaint/customer_complaint_"+customerFeedback.getFeedback_id()+"_3.pdf");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
+            }
+        });
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

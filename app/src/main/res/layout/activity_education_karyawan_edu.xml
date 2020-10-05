@@ -59,6 +59,19 @@
         android:src="@color/colorBlack"/>
 
     <TextView
+        android:id="@+id/textMasuk"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:padding="10dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:src="@color/colorBlack"/>
+
+    <TextView
         android:id="@+id/textLulus"
         android:layout_width="80dp"
         android:layout_height="wrap_content"

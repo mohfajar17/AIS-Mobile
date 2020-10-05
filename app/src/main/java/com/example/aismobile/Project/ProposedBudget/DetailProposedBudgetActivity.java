@@ -87,8 +87,12 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
     private TextView textTotalApproved;
     private TextView textTotalTransfered;
 
-    private int totalTransfered;
-    private int totalApproved;
+    private double total;
+    private double totalTransfered;
+    private double totalApproved;
+
+    private NumberFormat formatter;
+    private double toDouble;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,8 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         proposedBudget = bundle.getParcelable("detail");
 
+        formatter = new DecimalFormat("#,###");
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
         progressDialog.setMessage("Please wait...");
@@ -106,7 +112,7 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
         context = getApplicationContext();
         proposedBudgetDetails = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
@@ -238,17 +244,23 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        total += Double.valueOf(proposedBudget.getRest_value());
+                        totalApproved += Double.valueOf(proposedBudget.getRest_value());
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             proposedBudgetDetails.add(new ProposedBudgetDetail(jsonArray.getJSONObject(i)));
 
-                            double quantity = jsonArray.getJSONObject(i).getDouble("quantity");
-                            double price = jsonArray.getJSONObject(i).getDouble("unit_price");
-
-                            totalTransfered += (int) quantity * (int) price;
+                            total += jsonArray.getJSONObject(i).getDouble("quantity") * jsonArray.getJSONObject(i).getDouble("unit_price");
+                            if (jsonArray.getJSONObject(i).getString("advance_app3").toLowerCase().contains("Approved".toLowerCase()))
+                                totalApproved += jsonArray.getJSONObject(i).getDouble("quantity") * jsonArray.getJSONObject(i).getDouble("unit_price");
                         }
-                        double restValue = Double.valueOf(proposedBudget.getRest_value());
-                        totalApproved = totalTransfered + (int) restValue;
+
+                        totalTransfered = totalApproved - Double.valueOf(proposedBudget.getRest_value());
+
+                        textTotal.setText("Rp. " + formatter.format((long) total));
+                        textTotalApproved.setText("Rp. " + formatter.format((long) totalApproved));
+                        textTotalTransfered.setText("Rp. " + formatter.format((long) totalTransfered));
+
                         adapter = new MyRecyclerViewAdapter(proposedBudgetDetails, context);
                         recyclerView.setAdapter(adapter);
                     } else {
@@ -306,8 +318,6 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
             holder.textApproval2.setText(mValues.get(position).getAdvance_app2());
             holder.textApproval3.setText(mValues.get(position).getAdvance_app3());
 
-            NumberFormat formatter = new DecimalFormat("#,###");
-            double toDouble = 0;
             toDouble = Double.valueOf(mValues.get(position).getUnit_price());
             holder.textPrice.setText("Rp. " + formatter.format((long) toDouble));
             toDouble = Double.valueOf(mValues.get(position).getUnit_price())*Double.valueOf(mValues.get(position).getQuantity());

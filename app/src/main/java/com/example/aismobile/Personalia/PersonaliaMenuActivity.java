@@ -62,7 +62,7 @@ public class PersonaliaMenuActivity extends AppCompatActivity {
 
         textViewKerja = (TextView) findViewById(R.id.textViewKerja);
         textViewPenggajian = (TextView) findViewById(R.id.textViewPenggajian);
-        textViewKalender = (TextView) findViewById(R.id.textViewKalender);
+//        textViewKalender = (TextView) findViewById(R.id.textViewKalender);
         textViewKaryawan = (TextView) findViewById(R.id.textViewKaryawan);
         textViewDepartemen = (TextView) findViewById(R.id.textViewDepartemen);
         textViewJenjangKaryawan = (TextView) findViewById(R.id.textViewJenjangKaryawan);
@@ -87,19 +87,19 @@ public class PersonaliaMenuActivity extends AppCompatActivity {
                 } else ShowPopup("Penggajian");
             }
         });
-        textViewKalender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (access.toLowerCase().contains("calendar".toLowerCase())){
-                    bukaActivity("2");
-                } else ShowPopup("Kalender");
-            }
-        });
+//        textViewKalender.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (access.toLowerCase().contains("calendar".toLowerCase())){
+//                    bukaActivity("2");
+//                } else ShowPopup("Kalender");
+//            }
+//        });
         textViewKaryawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("employee".toLowerCase())){
-                    bukaActivity("3");
+                    bukaActivity("2");
                 } else ShowPopup("Karyawan");
             }
         });
@@ -107,7 +107,7 @@ public class PersonaliaMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("department".toLowerCase())){
-                    bukaActivity("4");
+                    bukaActivity("3");
                 } else ShowPopup("Departemen");
             }
         });
@@ -115,7 +115,7 @@ public class PersonaliaMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("employee_grade".toLowerCase())){
-                    bukaActivity("5");
+                    bukaActivity("4");
                 } else ShowPopup("Jenjang Karyawan");
             }
         });
@@ -123,7 +123,7 @@ public class PersonaliaMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("job_title".toLowerCase())){
-                    bukaActivity("6");
+                    bukaActivity("5");
                 } else ShowPopup("Pangkat");
             }
         });
@@ -131,7 +131,7 @@ public class PersonaliaMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("job_grade".toLowerCase())){
-                    bukaActivity("7");
+                    bukaActivity("6");
                 } else ShowPopup("Jabatan");
             }
         });
@@ -139,7 +139,7 @@ public class PersonaliaMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("news".toLowerCase())){
-                    bukaActivity("8");
+                    bukaActivity("7");
                 } else ShowPopup("News");
             }
         });
@@ -147,7 +147,7 @@ public class PersonaliaMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("employee_report".toLowerCase())){
-                    bukaActivity("9");
+                    bukaActivity("8");
                 } else ShowPopup("Report");
             }
         });

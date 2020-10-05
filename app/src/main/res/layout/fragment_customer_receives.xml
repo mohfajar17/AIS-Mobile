@@ -134,25 +134,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="130dp"
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Budgeting Number"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Created By"
+                        android:text="CR Number"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -166,7 +152,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Start Date"
+                        android:text="CR Date"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -176,11 +162,11 @@
                         android:src="@color/colorWhite" />
 
                     <TextView
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="End Date"
+                        android:text="Receipt Number"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -190,11 +176,11 @@
                         android:src="@color/colorWhite" />
 
                     <TextView
-                        android:layout_width="170dp"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Checked By"
+                        android:text="Expedisi"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -204,53 +190,11 @@
                         android:src="@color/colorWhite" />
 
                     <TextView
-                        android:layout_width="170dp"
+                        android:layout_width="300dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Approval 1"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Approval 2"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Approval 3"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:src="@color/colorWhite" />
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Done"
+                        android:text="Company"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </LinearLayout>

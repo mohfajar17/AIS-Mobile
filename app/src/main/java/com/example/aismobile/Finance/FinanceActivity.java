@@ -10,6 +10,7 @@ import com.example.aismobile.Data.FinanceAccounting.BankTransaction;
 import com.example.aismobile.Data.FinanceAccounting.Budgeting;
 import com.example.aismobile.Data.FinanceAccounting.CashAdvance;
 import com.example.aismobile.Data.FinanceAccounting.CustomerInvoice;
+import com.example.aismobile.Data.FinanceAccounting.CustomerReceives;
 import com.example.aismobile.Data.FinanceAccounting.DaftarAkun;
 import com.example.aismobile.Data.FinanceAccounting.Expense;
 import com.example.aismobile.Data.FinanceAccounting.PaymentSupplier;
@@ -21,6 +22,7 @@ import com.example.aismobile.Finance.CashAdvance.CashAdvanceFragment;
 import com.example.aismobile.Finance.CustomerInvoice.CustomerInvoiceFragment;
 import com.example.aismobile.Finance.CustomerReceives.CustomerReceivesFragment;
 import com.example.aismobile.Finance.DaftarAkun.DaftarAkunFragment;
+import com.example.aismobile.Finance.Ekspedisi.EkspedisiFragment;
 import com.example.aismobile.Finance.Expenses.ExpensesFragment;
 import com.example.aismobile.Finance.PaymentSupplier.PaymentSuppliersFragment;
 import com.example.aismobile.Finance.SupplierInvoice.SupplierInvoiceFragment;
@@ -53,7 +55,8 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
         BudgetingFragment.OnListFragmentInteractionListener,
         PaymentSuppliersFragment.OnListFragmentInteractionListener,
         BankAccountsFragment.OnListFragmentInteractionListener,
-        DaftarAkunFragment.OnListFragmentInteractionListener {
+        DaftarAkunFragment.OnListFragmentInteractionListener,
+        CustomerReceivesFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -104,6 +107,8 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
             swapFragment(R.id.nav_daftarakun);
         else if (menu == 11)
             swapFragment(R.id.nav_employeesalary);
+        else if (menu == 12)
+            swapFragment(R.id.nav_ekspedisi);
         else if (menu == 13)
             swapFragment(R.id.nav_customerreceive);
         else swapFragment(R.id.nav_supplierinvoice);
@@ -146,6 +151,9 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_employeesalary && access.toLowerCase().contains("employee_salary".toLowerCase())) {
             EmployeeSalaryFragment mainFragment = EmployeeSalaryFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_ekspedisi) {
+            EkspedisiFragment mainFragment = EkspedisiFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_customerreceive) {
             CustomerReceivesFragment mainFragment = CustomerReceivesFragment.newInstance();
@@ -232,6 +240,11 @@ public class FinanceActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(DaftarAkun item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(CustomerReceives item) {
 
     }
 }

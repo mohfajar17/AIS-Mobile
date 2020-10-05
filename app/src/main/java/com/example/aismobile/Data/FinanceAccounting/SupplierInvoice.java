@@ -18,6 +18,27 @@ public class SupplierInvoice implements Parcelable {
     private String supplier_invoice_status;
     private String late_days;
     private String TotalSI;
+    private String transaction_number;
+    private String category;
+    private String tax_number;
+    private String number_pieces_of_evidence;
+    private String date_pieces_of_evidence;
+    private String schedule_date;
+    private String bank_transaction_type_name;
+    private String amount;
+    private String discount;
+    private String ppn;
+    private String pph;
+    private String stamp;
+    private String adjustment_value;
+    private String bank_transaction_number;
+    private String supplier_invoice_file_name;
+    private String supplier_invoice_description;
+    private String notes;
+    private String created_by;
+    private String created_date;
+    private String modified_by;
+    private String modified_date;
 
     public SupplierInvoice(int supplier_invoice_id, String supplier_invoice_number, String supplier_name,
                            String supplier_invoice_date, String invoice_receipt_date, String due_date,
@@ -45,6 +66,27 @@ public class SupplierInvoice implements Parcelable {
         supplier_invoice_status = in.readString();
         late_days = in.readString();
         TotalSI = in.readString();
+        transaction_number = in.readString();
+        category = in.readString();
+        tax_number = in.readString();
+        number_pieces_of_evidence = in.readString();
+        date_pieces_of_evidence = in.readString();
+        schedule_date = in.readString();
+        bank_transaction_type_name = in.readString();
+        amount = in.readString();
+        discount = in.readString();
+        ppn = in.readString();
+        pph = in.readString();
+        stamp = in.readString();
+        adjustment_value = in.readString();
+        bank_transaction_number = in.readString();
+        supplier_invoice_file_name = in.readString();
+        supplier_invoice_description = in.readString();
+        notes = in.readString();
+        created_by = in.readString();
+        created_date = in.readString();
+        modified_by = in.readString();
+        modified_date = in.readString();
     }
 
     public SupplierInvoice(JSONObject jsonObject){
@@ -59,6 +101,27 @@ public class SupplierInvoice implements Parcelable {
             this.supplier_invoice_status = jsonObject.getString("supplier_invoice_status");
             this.late_days = jsonObject.getString("late_days");
             this.TotalSI = jsonObject.getString("TotalSI");
+            this.transaction_number = jsonObject.getString("transaction_number");
+            this.category = jsonObject.getString("category");
+            this.tax_number = jsonObject.getString("tax_number");
+            this.number_pieces_of_evidence = jsonObject.getString("number_pieces_of_evidence");
+            this.date_pieces_of_evidence = jsonObject.getString("date_pieces_of_evidence");
+            this.schedule_date = jsonObject.getString("schedule_date");
+            this.bank_transaction_type_name = jsonObject.getString("bank_transaction_type_name");
+            this.amount = jsonObject.getString("amount");
+            this.discount = jsonObject.getString("discount");
+            this.ppn = jsonObject.getString("ppn");
+            this.pph = jsonObject.getString("pph");
+            this.stamp = jsonObject.getString("stamp");
+            this.adjustment_value = jsonObject.getString("adjustment_value");
+            this.bank_transaction_number = jsonObject.getString("bank_transaction_number");
+            this.supplier_invoice_file_name = jsonObject.getString("supplier_invoice_file_name");
+            this.supplier_invoice_description = jsonObject.getString("supplier_invoice_description");
+            this.notes = jsonObject.getString("notes");
+            this.created_by = jsonObject.getString("created_by");
+            this.created_date = jsonObject.getString("created_date");
+            this.modified_by = jsonObject.getString("modified_by");
+            this.modified_date = jsonObject.getString("modified_date");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -93,6 +156,27 @@ public class SupplierInvoice implements Parcelable {
         dest.writeString(supplier_invoice_status);
         dest.writeString(late_days);
         dest.writeString(TotalSI);
+        dest.writeString(transaction_number);
+        dest.writeString(category);
+        dest.writeString(tax_number);
+        dest.writeString(number_pieces_of_evidence);
+        dest.writeString(date_pieces_of_evidence);
+        dest.writeString(schedule_date);
+        dest.writeString(bank_transaction_type_name);
+        dest.writeString(amount);
+        dest.writeString(discount);
+        dest.writeString(ppn);
+        dest.writeString(pph);
+        dest.writeString(stamp);
+        dest.writeString(adjustment_value);
+        dest.writeString(bank_transaction_number);
+        dest.writeString(supplier_invoice_file_name);
+        dest.writeString(supplier_invoice_description);
+        dest.writeString(notes);
+        dest.writeString(created_by);
+        dest.writeString(created_date);
+        dest.writeString(modified_by);
+        dest.writeString(modified_date);
     }
 
     public int getSupplier_invoice_id() {
@@ -133,5 +217,89 @@ public class SupplierInvoice implements Parcelable {
 
     public String getTotalSI() {
         return TotalSI;
+    }
+
+    public String getTransaction_number() {
+        return transaction_number;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getTax_number() {
+        return tax_number;
+    }
+
+    public String getNumber_pieces_of_evidence() {
+        return number_pieces_of_evidence;
+    }
+
+    public String getDate_pieces_of_evidence() {
+        return date_pieces_of_evidence;
+    }
+
+    public String getSchedule_date() {
+        return schedule_date;
+    }
+
+    public String getBank_transaction_type_name() {
+        return bank_transaction_type_name;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public String getPpn() {
+        return ppn;
+    }
+
+    public String getPph() {
+        return pph;
+    }
+
+    public String getStamp() {
+        return stamp;
+    }
+
+    public String getAdjustment_value() {
+        return adjustment_value;
+    }
+
+    public String getBank_transaction_number() {
+        return bank_transaction_number;
+    }
+
+    public String getSupplier_invoice_file_name() {
+        return supplier_invoice_file_name;
+    }
+
+    public String getSupplier_invoice_description() {
+        return supplier_invoice_description;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
     }
 }

@@ -60,7 +60,7 @@ public class InventoryMenuActivity extends AppCompatActivity {
         textViewAset = (TextView) findViewById(R.id.textViewAset);
         textViewAsetRental = (TextView) findViewById(R.id.textViewAsetRental);
         textViewStock = (TextView) findViewById(R.id.textViewStock);
-        textViewHarga = (TextView) findViewById(R.id.textViewHarga);
+//        textViewHarga = (TextView) findViewById(R.id.textViewHarga);
         textViewMaterial = (TextView) findViewById(R.id.textViewMaterial);
 
         textViewItem.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +82,7 @@ public class InventoryMenuActivity extends AppCompatActivity {
         textViewAsetRental.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (access.toLowerCase().contains("asset_rental".toLowerCase())){
+                if (access.toLowerCase().contains("aset_rental".toLowerCase())){
                     bukaActivity("2");
                 } else ShowPopup("Asset Rental");
             }
@@ -95,19 +95,19 @@ public class InventoryMenuActivity extends AppCompatActivity {
                 } else ShowPopup("Stock Adjustment");
             }
         });
-        textViewHarga.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (access.toLowerCase().contains("master_item_price".toLowerCase())){
-                    bukaActivity("4");
-                } else ShowPopup("Daftar Harga");
-            }
-        });
+//        textViewHarga.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (access.toLowerCase().contains("master_item_price".toLowerCase())){
+//                    bukaActivity("4");
+//                } else ShowPopup("Daftar Harga");
+//            }
+//        });
         textViewMaterial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("material_return".toLowerCase())){
-                    bukaActivity("5");
+                    bukaActivity("4");
                 } else ShowPopup("Material Return");
             }
         });
@@ -138,7 +138,7 @@ public class InventoryMenuActivity extends AppCompatActivity {
                         if (Integer.valueOf(jsonData.getString("asset")) == 1)
                             access = access+"asset, ";
                         if (Integer.valueOf(jsonData.getString("asset_rental")) == 1)
-                            access = access+"asset_rental, ";
+                            access = access+"aset_rental, ";
                         if (Integer.valueOf(jsonData.getString("stock_adjustment")) == 1)
                             access = access+"stock_adjustment, ";
                         if (Integer.valueOf(jsonData.getString("master_item_price")) == 1)

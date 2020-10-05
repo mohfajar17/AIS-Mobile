@@ -580,20 +580,11 @@ public class PrestasiFragment extends Fragment {
             holder.kprTextEvent.setText(""+mValues.get(position).getEvent());
             holder.kprTextAchievement.setText(""+mValues.get(position).getAchievement());
             holder.kprTextDate.setText(""+mValues.get(position).getAchievement_date());
+            holder.kprTextNotes.setText(""+mValues.get(position).getNotes());
 
             if (position%2==0)
                 holder.kprLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.kprLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
-
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Toast.makeText(getActivity(), ""+mValues.get(position).getCreated_by(), Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-//                    intent.putExtra("detailJO", mValues.get(position));
-//                    holder.itemView.getContext().startActivity(intent);
-                }
-            });
         }
 
         @Override
@@ -668,6 +659,7 @@ public class PrestasiFragment extends Fragment {
             public final TextView kprTextEvent;
             public final TextView kprTextAchievement;
             public final TextView kprTextDate;
+            public final TextView kprTextNotes;
 
             public final LinearLayout kprLayoutList;
 
@@ -679,6 +671,7 @@ public class PrestasiFragment extends Fragment {
                 kprTextEvent = (TextView) view.findViewById(R.id.kprTextEvent);
                 kprTextAchievement = (TextView) view.findViewById(R.id.kprTextAchievement);
                 kprTextDate = (TextView) view.findViewById(R.id.kprTextDate);
+                kprTextNotes = (TextView) view.findViewById(R.id.kprTextNotes);
 
                 kprLayoutList = (LinearLayout) view.findViewById(R.id.kprLayoutList);
             }

@@ -69,7 +69,7 @@ public class DetailJenjangKaryawanActivity extends AppCompatActivity {
         context = getApplicationContext();
         budgetingDetails = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 

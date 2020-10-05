@@ -10,20 +10,24 @@ public class Fullname implements Parcelable {
 
     private int id;
     private String fullname;
+    private String employee_id;
 
-    public Fullname (int id, String fullname){
+    public Fullname (int id, String fullname, String employee_id){
         this.id = id;
         this.fullname = fullname;
+        this.employee_id = employee_id;
     }
     protected Fullname (Parcel in) {
         id = in.readInt();
         fullname = in.readString();
+        employee_id = in.readString();
     }
 
     public Fullname (JSONObject jsonObject){
         try {
             this.id = jsonObject.getInt("id");
             this.fullname = jsonObject.getString("fullname");
+            this.employee_id = jsonObject.getString("employee_id");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -50,6 +54,7 @@ public class Fullname implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(fullname);
+        dest.writeString(employee_id);
     }
 
     public int getId() {
@@ -58,5 +63,9 @@ public class Fullname implements Parcelable {
 
     public String getFullname() {
         return fullname;
+    }
+
+    public String getEmployee_id() {
+        return employee_id;
     }
 }

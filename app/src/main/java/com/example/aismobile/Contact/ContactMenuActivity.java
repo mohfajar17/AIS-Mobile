@@ -124,7 +124,7 @@ public class ContactMenuActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressDialog.dismiss();
-                    onBackPressed();
+//                    onBackPressed();
                 }
             }
         }, new Response.ErrorListener() {

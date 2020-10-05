@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_contact"
             android:icon="@drawable/sub_menu_1"
-            android:title="Contacts" />
+            android:title="Customers" />
         <item
             android:id="@+id/nav_supplier"
             android:icon="@drawable/sub_menu_1"

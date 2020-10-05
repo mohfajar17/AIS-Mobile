@@ -126,7 +126,6 @@ public class HariLiburFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hari_libur, container, false);
 
-        //sub menu
         kMenuCheckClock = (TextView) view.findViewById(R.id.khlMenuCheckClock);
         kMenuPrestasi = (TextView) view.findViewById(R.id.khlMenuPrestasi);
         kMenuCuti = (TextView) view.findViewById(R.id.khlMenuCuti);
@@ -580,6 +579,7 @@ public class HariLiburFragment extends Fragment {
             holder.khlTextNama.setText(""+mValues.get(position).getHoliday_name());
             holder.khlTextJenis.setText(""+mValues.get(position).getHoliday_type_name());
             holder.khlTextTglLibur.setText(""+mValues.get(position).getHoliday_date());
+            holder.khlTextKeterangan.setText(""+mValues.get(position).getDescription());
             holder.khlTextDihitung.setText(""+mValues.get(position).getIs_overtime());
 
             if (position%2==0)
@@ -668,6 +668,7 @@ public class HariLiburFragment extends Fragment {
             public final TextView khlTextNama;
             public final TextView khlTextJenis;
             public final TextView khlTextTglLibur;
+            public final TextView khlTextKeterangan;
             public final TextView khlTextDihitung;
 
             public final LinearLayout khlLayoutList;
@@ -679,6 +680,7 @@ public class HariLiburFragment extends Fragment {
                 khlTextNama = (TextView) view.findViewById(R.id.khlTextNama);
                 khlTextJenis = (TextView) view.findViewById(R.id.khlTextJenis);
                 khlTextTglLibur = (TextView) view.findViewById(R.id.khlTextTglLibur);
+                khlTextKeterangan = (TextView) view.findViewById(R.id.khlTextKeterangan);
                 khlTextDihitung = (TextView) view.findViewById(R.id.khlTextDihitung);
 
                 khlLayoutList = (LinearLayout) view.findViewById(R.id.khlLayoutList);

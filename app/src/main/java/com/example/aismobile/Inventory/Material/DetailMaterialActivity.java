@@ -59,6 +59,11 @@ public class DetailMaterialActivity extends AppCompatActivity {
     private TextView textJobOrder;
     private TextView textJoDescription;
     private TextView textTglKembalian;
+    private TextView textNotes;
+    private TextView textCreatedBy;
+    private TextView textCreatedDate;
+    private TextView textModifiedBy;
+    private TextView textModifiedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +81,7 @@ public class DetailMaterialActivity extends AppCompatActivity {
         context = getApplicationContext();
         materialReturnDetails = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
@@ -84,11 +89,21 @@ public class DetailMaterialActivity extends AppCompatActivity {
         textJobOrder = (TextView) findViewById(R.id.textJobOrder);
         textJoDescription = (TextView) findViewById(R.id.textJoDescription);
         textTglKembalian = (TextView) findViewById(R.id.textTglKembalian);
+        textNotes = (TextView) findViewById(R.id.textCatatan);
+        textCreatedBy = (TextView) findViewById(R.id.textCreatedBy);
+        textCreatedDate = (TextView) findViewById(R.id.textCreatedDate);
+        textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
+        textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
 
         textMrNumber.setText(materialReturn.getMaterial_return_number());
         textJobOrder.setText(materialReturn.getJob_order_number());
         textJoDescription.setText(materialReturn.getJob_order_description());
         textTglKembalian.setText(materialReturn.getReturn_date());
+        textNotes.setText(materialReturn.getNotes());
+        textCreatedBy.setText(materialReturn.getCreated_by());
+        textCreatedDate.setText(materialReturn.getCreated_date());
+        textModifiedBy.setText(materialReturn.getModified_by());
+        textModifiedDate.setText(materialReturn.getModified_date());
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
         menuDetail = (TextView) findViewById(R.id.menuDetail);
@@ -185,7 +200,7 @@ public class DetailMaterialActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
-                param.put("jobOrder", "" + materialReturn.getMaterial_return_id());
+                param.put("mrId", "" + materialReturn.getMaterial_return_id());
                 return param;
             }
         };

@@ -15,6 +15,7 @@ public class Provinsi implements Parcelable {
         this.prov_id = prov_id;
         this.prov_name = prov_name;
     }
+
     protected Provinsi (Parcel in) {
         prov_id = in.readInt();
         prov_name = in.readString();

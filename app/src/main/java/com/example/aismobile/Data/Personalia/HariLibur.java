@@ -12,6 +12,7 @@ public class HariLibur implements Parcelable {
     private String holiday_name;
     private String holiday_type_name;
     private String holiday_date;
+    private String description;
     private String is_overtime;
 
     public HariLibur (int holiday_id, String holiday_name, String holiday_type_name, String holiday_date,
@@ -27,6 +28,7 @@ public class HariLibur implements Parcelable {
         holiday_name = in.readString();
         holiday_type_name = in.readString();
         holiday_date = in.readString();
+        description = in.readString();
         is_overtime = in.readString();
     }
 
@@ -36,6 +38,7 @@ public class HariLibur implements Parcelable {
             this.holiday_name = jsonObject.getString("holiday_name");
             this.holiday_type_name = jsonObject.getString("holiday_type_name");
             this.holiday_date = jsonObject.getString("holiday_date");
+            this.description = jsonObject.getString("description");
             this.is_overtime = jsonObject.getString("is_overtime");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -65,6 +68,7 @@ public class HariLibur implements Parcelable {
         dest.writeString(holiday_name);
         dest.writeString(holiday_type_name);
         dest.writeString(holiday_date);
+        dest.writeString(description);
         dest.writeString(is_overtime);
     }
 
@@ -82,6 +86,10 @@ public class HariLibur implements Parcelable {
 
     public String getHoliday_date() {
         return holiday_date;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String getIs_overtime() {

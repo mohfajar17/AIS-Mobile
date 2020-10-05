@@ -10,14 +10,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.aismobile.Config;
 import com.example.aismobile.Data.Safety.WorkAccident;
 import com.example.aismobile.R;
 import com.squareup.picasso.Picasso;
 
 public class DetailWorkAccidentActivity extends AppCompatActivity {
 
-    private WorkAccident scheduleVisit;
+    private WorkAccident workAccident;
     private Dialog myDialog;
 
     private ImageView buttonBack;
@@ -47,7 +46,7 @@ public class DetailWorkAccidentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_work_accident);
 
         Bundle bundle = getIntent().getExtras();
-        scheduleVisit = bundle.getParcelable("detail");
+        workAccident = bundle.getParcelable("detail");
         myDialog = new Dialog(this);
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
@@ -71,52 +70,52 @@ public class DetailWorkAccidentActivity extends AppCompatActivity {
         downloadAtachment2 = (ImageView) findViewById(R.id.downloadAtachment2);
         downloadAtachment3 = (ImageView) findViewById(R.id.downloadAtachment3);
 
-        if (scheduleVisit.getEmployee_id().matches(""))
-            textNamaKaryawan.setText("#" + scheduleVisit.getEmployee_name());
-        else textNamaKaryawan.setText("#" + scheduleVisit.getEmployee_id());
-        textDay.setText(scheduleVisit.getDay_accident());
-        textDate.setText(scheduleVisit.getDate_accident());
-        textTime.setText(scheduleVisit.getTime_accident());
-        textJobGrade.setText(scheduleVisit.getJob_grade_id());
-        textWorkbase.setText(scheduleVisit.getCompany_workbase_id());
-        textAccidentType.setText(scheduleVisit.getAccident_type());
-        textDiLokasiKerja.setText(scheduleVisit.getIs_work_location());
-        textSaksiMata.setText(scheduleVisit.getWitness());
-        textChronology.setText(scheduleVisit.getNotes());
-        textAction.setText(scheduleVisit.getAction());
-        textCounterMeassure.setText(scheduleVisit.getCounter_meassure());
-        textCreatedBy.setText(scheduleVisit.getCreated_by());
-        textCreatedDate.setText(scheduleVisit.getCreated_date());
-        textModifiedBy.setText(scheduleVisit.getModified_by());
-        textModifiedDate.setText(scheduleVisit.getModified_date());
+        if (workAccident.getEmployee_id().matches(""))
+            textNamaKaryawan.setText("#" + workAccident.getEmployee_name());
+        else textNamaKaryawan.setText("#" + workAccident.getEmployee_id());
+        textDay.setText(workAccident.getDay_accident());
+        textDate.setText(workAccident.getDate_accident());
+        textTime.setText(workAccident.getTime_accident());
+        textJobGrade.setText(workAccident.getJob_grade_id());
+        textWorkbase.setText(workAccident.getCompany_workbase_id());
+        textAccidentType.setText(workAccident.getAccident_type());
+        textDiLokasiKerja.setText(workAccident.getIs_work_location());
+        textSaksiMata.setText(workAccident.getWitness());
+        textChronology.setText(workAccident.getNotes());
+        textAction.setText(workAccident.getAction());
+        textCounterMeassure.setText(workAccident.getCounter_meassure());
+        textCreatedBy.setText(workAccident.getCreated_by());
+        textCreatedDate.setText(workAccident.getCreated_date());
+        textModifiedBy.setText(workAccident.getModified_by());
+        textModifiedDate.setText(workAccident.getModified_date());
 
-        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+scheduleVisit.getAccident_photo_1()).into(downloadAtachment1);
+        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+ workAccident.getAccident_photo_1()).into(downloadAtachment1);
         if (downloadAtachment1.getDrawable() == null)
             downloadAtachment1.setImageResource(R.drawable.no_image);
         downloadAtachment1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+scheduleVisit.getAccident_photo_1());
+                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+ workAccident.getAccident_photo_1());
             }
         });
 
-        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+scheduleVisit.getAccident_photo_2()).into(downloadAtachment2);
+        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+ workAccident.getAccident_photo_2()).into(downloadAtachment2);
         if (downloadAtachment2.getDrawable() == null)
             downloadAtachment2.setImageResource(R.drawable.no_image);
         downloadAtachment2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+scheduleVisit.getAccident_photo_2());
+                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+ workAccident.getAccident_photo_2());
             }
         });
 
-        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+scheduleVisit.getAccident_photo_3()).into(downloadAtachment3);
+        Picasso.get().load("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+ workAccident.getAccident_photo_3()).into(downloadAtachment3);
         if (downloadAtachment3.getDrawable() == null)
             downloadAtachment3.setImageResource(R.drawable.no_image);
         downloadAtachment3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+scheduleVisit.getAccident_photo_3());
+                showPopup("https://ais.asukaindonesia.co.id/protected/attachments/workAccident/"+ workAccident.getAccident_photo_3());
             }
         });
 

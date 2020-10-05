@@ -175,6 +175,12 @@ public class FinanceMenuActivity extends AppCompatActivity {
                 } else ShowPopup("Employee Salary");
             }
         });
+        textViewEkspedisi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bukaActivity("12");
+            }
+        });
         textViewCustomerReceive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -16,13 +16,13 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:srcCompat="@drawable/icon_personalia" />
+        app:srcCompat="@drawable/icon_safety" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="PERSONALIA"
+        android:text="SAFETY"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 </LinearLayout>

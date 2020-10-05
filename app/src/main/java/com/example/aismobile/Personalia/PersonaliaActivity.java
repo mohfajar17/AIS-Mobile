@@ -1,6 +1,7 @@
 package com.example.aismobile.Personalia;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import com.example.aismobile.Data.Personalia.SalaryCorrection;
 import com.example.aismobile.Data.Personalia.SalaryGrade;
 import com.example.aismobile.Data.Project.TunjanganKaryawan;
 import com.example.aismobile.Data.Project.TunjanganTemporary;
+import com.example.aismobile.News.NewsActivity;
 import com.example.aismobile.Personalia.Departemen.DepartemenFragment;
 import com.example.aismobile.Personalia.JenjangKaryawan.JenjangKaryawanFragment;
 import com.example.aismobile.Personalia.Karyawan.KaryawanFragment;
@@ -62,6 +64,7 @@ import com.example.aismobile.Personalia.Penggajian.TunjanganFragment;
 import com.example.aismobile.Personalia.Penggajian.TunjanganJenjangFragment;
 import com.example.aismobile.Personalia.Penggajian.TunjanganKaryawanFragment;
 import com.example.aismobile.Personalia.Penggajian.TunjanganTemporaryFragment;
+import com.example.aismobile.Personalia.Report.ReportFragment;
 import com.example.aismobile.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -120,21 +123,21 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
             swapFragment(R.id.nav_kerja);
         else if (menu == 1)
             swapFragment(R.id.nav_penggajian);
+//        else if (menu == 2)
+//            swapFragment(R.id.nav_kalender);
         else if (menu == 2)
-            swapFragment(R.id.nav_kalender);
-        else if (menu == 3)
             swapFragment(R.id.nav_karyawan);
-        else if (menu == 4)
+        else if (menu == 3)
             swapFragment(R.id.nav_departemen);
-        else if (menu == 5)
+        else if (menu == 4)
             swapFragment(R.id.nav_jenjangkaryawan);
-        else if (menu == 6)
+        else if (menu == 5)
             swapFragment(R.id.nav_pangkat);
-        else if (menu == 7)
+        else if (menu == 6)
             swapFragment(R.id.nav_jabatan);
-        else if (menu == 8)
+        else if (menu == 7)
             swapFragment(R.id.nav_news);
-        else if (menu == 9)
+        else if (menu == 8)
             swapFragment(R.id.nav_report);
         else swapFragment(R.id.nav_kerja);
     }
@@ -147,9 +150,9 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
         } else if (id == R.id.nav_penggajian && access.toLowerCase().contains("payroll".toLowerCase())) {
             PenggajianFragment mainFragment = PenggajianFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_kalender && access.toLowerCase().contains("calendar".toLowerCase())) {
-            KalenderFragment mainFragment = KalenderFragment.newInstance();
-            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//        } else if (id == R.id.nav_kalender && access.toLowerCase().contains("calendar".toLowerCase())) {
+//            KalenderFragment mainFragment = KalenderFragment.newInstance();
+//            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_karyawan && access.toLowerCase().contains("employee".toLowerCase())) {
             KaryawanFragment mainFragment = KaryawanFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
@@ -166,8 +169,8 @@ public class PersonaliaActivity extends AppCompatActivity implements NavigationV
             JabatanFragment mainFragment = JabatanFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_news && access.toLowerCase().contains("news".toLowerCase())) {
-            NewsFragment mainFragment = NewsFragment.newInstance();
-            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+            Intent bukaMenuActivity = new Intent(PersonaliaActivity.this, NewsActivity.class);
+            startActivityForResult(bukaMenuActivity,1);
         } else if (id == R.id.nav_report && access.toLowerCase().contains("employee_report".toLowerCase())) {
             ReportFragment mainFragment = ReportFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);

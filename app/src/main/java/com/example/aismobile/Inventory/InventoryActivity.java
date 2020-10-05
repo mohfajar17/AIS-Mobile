@@ -78,9 +78,9 @@ public class InventoryActivity extends AppCompatActivity implements NavigationVi
             swapFragment(R.id.nav_aset_rental);
         else if (menu == 3)
             swapFragment(R.id.nav_stock);
+//        else if (menu == 4)
+//            swapFragment(R.id.nav_harga);
         else if (menu == 4)
-            swapFragment(R.id.nav_harga);
-        else if (menu == 5)
             swapFragment(R.id.nav_material_req);
         else swapFragment(R.id.nav_item);
     }
@@ -93,15 +93,15 @@ public class InventoryActivity extends AppCompatActivity implements NavigationVi
         } else if (id == R.id.nav_aset && access.toLowerCase().contains("asset".toLowerCase())) {
             AsetFragment mainFragment = AsetFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_aset_rental && access.toLowerCase().contains("asset_rental".toLowerCase())) {
+        } else if (id == R.id.nav_aset_rental && access.toLowerCase().contains("aset_rental".toLowerCase())) {
             AsetRentalFragment mainFragment = AsetRentalFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_stock && access.toLowerCase().contains("stock_adjustment".toLowerCase())) {
             StockFragment mainFragment = StockFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
-        } else if (id == R.id.nav_harga && access.toLowerCase().contains("master_item_price".toLowerCase())) {
-            HargaFragment mainFragment = HargaFragment.newInstance();
-            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+//        } else if (id == R.id.nav_harga && access.toLowerCase().contains("master_item_price".toLowerCase())) {
+//            HargaFragment mainFragment = HargaFragment.newInstance();
+//            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_material_req && access.toLowerCase().contains("material_return".toLowerCase())) {
             MaterialFragment mainFragment = MaterialFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);

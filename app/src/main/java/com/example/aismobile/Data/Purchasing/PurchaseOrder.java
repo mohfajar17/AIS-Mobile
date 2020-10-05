@@ -45,6 +45,7 @@ public class PurchaseOrder implements Parcelable {
     private String purchase_file_type;
     private String purchase_order_discount_type;
     private String job_order_number;
+    private String tax_type_rate;
 
     public PurchaseOrder(int purchase_order_id, String purchase_order_number, String purchase_order_type_id, String tax_type_id, String purchase_order_status_id,
                          String contract_agreement_id, String supplier_id, String purchase_quotation_number,
@@ -135,6 +136,7 @@ public class PurchaseOrder implements Parcelable {
         purchase_file_type = in.readString();
         purchase_order_discount_type = in.readString();
         job_order_number = in.readString();
+        tax_type_rate = in.readString();
     }
 
     public PurchaseOrder(JSONObject jsonObject){
@@ -177,6 +179,7 @@ public class PurchaseOrder implements Parcelable {
             this.purchase_file_type = jsonObject.getString("purchase_file_type");
             this.purchase_order_discount_type = jsonObject.getString("purchase_order_discount_type");
             this.job_order_number = jsonObject.getString("job_order_number");
+            this.tax_type_rate = jsonObject.getString("tax_type_rate");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -239,6 +242,7 @@ public class PurchaseOrder implements Parcelable {
         dest.writeString(purchase_file_type);
         dest.writeString(purchase_order_discount_type);
         dest.writeString(job_order_number);
+        dest.writeString(tax_type_rate);
     }
 
     public int getPurchase_order_id() {
@@ -391,5 +395,9 @@ public class PurchaseOrder implements Parcelable {
 
     public String getJob_order_number() {
         return job_order_number;
+    }
+
+    public String getTax_type_rate() {
+        return tax_type_rate;
     }
 }

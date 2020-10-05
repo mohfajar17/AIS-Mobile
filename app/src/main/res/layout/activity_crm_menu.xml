@@ -71,19 +71,19 @@
         android:layout_height="3dp"
         android:src="@color/colorAsukaBlue"/>
 
-    <TextView
-        android:id="@+id/textViewGrafikKuesioner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Grafik Kuesioner"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"/>
+<!--    <TextView-->
+<!--        android:id="@+id/textViewGrafikKuesioner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Grafik Kuesioner"-->
+<!--        android:padding="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:textColor="@color/colorBlack"/>-->
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:src="@color/colorAsukaBlue"/>
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="3dp"-->
+<!--        android:src="@color/colorAsukaBlue"/>-->
 
     <TextView
         android:id="@+id/textViewMonitoring"

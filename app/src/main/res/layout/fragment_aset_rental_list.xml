@@ -53,7 +53,7 @@
         android:id="@+id/arTextRack"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:gravity="top|left"
+        android:gravity="top|center"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />
@@ -81,7 +81,7 @@
         android:id="@+id/arTextAktif"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:gravity="top|left"
+        android:gravity="top|center"
         android:text="-"
         android:padding="5dp"
         android:textColor="@android:color/black" />

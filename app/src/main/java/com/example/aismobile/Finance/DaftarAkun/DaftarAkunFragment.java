@@ -212,7 +212,7 @@ public class DaftarAkunFragment extends Fragment {
             }
         });
 
-        loadData("account_id ASC");
+//        loadData("account_id ASC");
 
         return view;
     }

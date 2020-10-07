@@ -38,6 +38,7 @@ public class CashProjectReport implements Parcelable {
     private String bank_transaction_type_id;
     private String category;
     private String ra_discount_type;
+    private String cash_advance_number;
 
     public CashProjectReport(int responsbility_advance_id, String responsbility_advance_number, String cash_advance_id, String job_order_id, String job_order_number,
                              String begin_date, String end_date, String notes, String created_by, String created_date,
@@ -109,6 +110,7 @@ public class CashProjectReport implements Parcelable {
         bank_transaction_type_id = in.readString();
         category = in.readString();
         ra_discount_type = in.readString();
+        cash_advance_number = in.readString();
     }
 
     public CashProjectReport(JSONObject jsonObject){
@@ -143,6 +145,7 @@ public class CashProjectReport implements Parcelable {
             this.bank_transaction_type_id = jsonObject.getString("bank_transaction_type_id");
             this.category = jsonObject.getString("category");
             this.ra_discount_type = jsonObject.getString("ra_discount_type");
+            this.cash_advance_number = jsonObject.getString("cash_advance_number");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -197,6 +200,7 @@ public class CashProjectReport implements Parcelable {
         dest.writeString(bank_transaction_type_id);
         dest.writeString(category);
         dest.writeString(ra_discount_type);
+        dest.writeString(cash_advance_number);
     }
 
     public int getResponsbility_advance_id() {
@@ -317,5 +321,9 @@ public class CashProjectReport implements Parcelable {
 
     public String getRa_discount_type() {
         return ra_discount_type;
+    }
+
+    public String getCash_advance_number() {
+        return cash_advance_number;
     }
 }

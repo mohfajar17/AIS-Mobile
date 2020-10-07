@@ -34,6 +34,7 @@ public class Config {
     public static final String DATA_URL_WORK_COMPLETION_DETAIL_LIST = DATA_URL+"getWorkCompletionDetail";
     public static final String DATA_URL_MATERIAL_REQUISITION_LIST = DATA_URL+"getMaterialRequisition";
     public static final String DATA_URL_MATERIAL_REQUISITION_DETAIL = DATA_URL+"getMaterialReqDetail";
+    public static final String DATA_URL_MATERIAL_REQUISITION_PICKUP = DATA_URL+"getMaterialReqPickup";
     public static final String DATA_URL_WORK_ORDER_LIST = DATA_URL+"getWorkOrder";
     public static final String DATA_URL_WORK_ORDER_DETAIL_LIST = DATA_URL+"getWorkOrderDetail";
     public static final String DATA_URL_PICKUP_LIST = DATA_URL+"getPickup";
@@ -43,6 +44,7 @@ public class Config {
     public static final String DATA_URL_PROPOSE_BUDGET_DETAIL_LIST = DATA_URL+"getProposedBudgetDetail";
     public static final String DATA_URL_CASH_PROJECT_LIST = DATA_URL+"getCashProjectReport";
     public static final String DATA_URL_CASH_PROJECT_DETAIL_LIST = DATA_URL+"getCashProjectReportDetail";
+    public static final String DATA_URL_CASH_PROJECT_DETAIL_PB_LIST = DATA_URL+"getCashProjectReportPbReceived";
     public static final String DATA_URL_SPKL_LIST = DATA_URL+"getSpkl";
     public static final String DATA_URL_TUNJANGAN_KARYAWAN_LIST = DATA_URL+"getTunjanganKaryawan";
     public static final String DATA_URL_TUNJANGAN_TEMPORARY_LIST = DATA_URL+"getTunjanganTemporary";
@@ -74,6 +76,7 @@ public class Config {
     public static final String DATA_URL_CUSTOMER_INVOICE_LIST = DATA_URL+"getCustomerInvoices";
     public static final String DATA_URL_CUSTOMER_INVOICE_DETAIL_LIST = DATA_URL+"getCiDetWorkCompletion";
     public static final String DATA_URL_BANK_TRANSACTION_LIST = DATA_URL+"getBankTransaction";
+    public static final String DATA_URL_BANK_TRANSACTION_DETAIL_LIST = DATA_URL+"getBankTransactionDetail";
     public static final String DATA_URL_EXPENSE_LIST = DATA_URL+"getExpense";
     public static final String DATA_URL_EXPENSE_DETAIL_LIST = DATA_URL+"getExpenseDetail";
     public static final String DATA_URL_CASH_ADVANCE_LIST = DATA_URL+"getCashAdvance";

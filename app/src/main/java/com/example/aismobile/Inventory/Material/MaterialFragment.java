@@ -212,7 +212,7 @@ public class MaterialFragment extends Fragment {
             }
         });
 
-        loadData("material_return_id DESC");
+//        loadData("material_return_id DESC");
 
         return view;
     }
@@ -227,9 +227,9 @@ public class MaterialFragment extends Fragment {
         else if (position == 2 && posAD == 1)
             loadDataAll("job_order_number DESC");
         else if (position == 3 && posAD == 0)
-            loadDataAll("return_date ASC");
+            loadDataAll("t.return_date ASC");
         else if (position == 3 && posAD == 1)
-            loadDataAll("return_date DESC");
+            loadDataAll("t.return_date DESC");
         else if (position == 4 && posAD == 0)
             loadDataAll("created_by ASC");
         else if (position == 4 && posAD == 1)
@@ -242,7 +242,7 @@ public class MaterialFragment extends Fragment {
             loadDataAll("recognized ASC");
         else if (position == 6 && posAD == 1)
             loadDataAll("recognized DESC");
-        else loadDataAll("material_return_id DESC");
+        else loadDataAll("t.return_date DESC");
     }
 
     private void setSortHalf(int position, int posAD){
@@ -255,9 +255,9 @@ public class MaterialFragment extends Fragment {
         else if (position == 2 && posAD == 1)
             loadData("job_order_number DESC");
         else if (position == 3 && posAD == 0)
-            loadData("return_date ASC");
+            loadData("t.return_date ASC");
         else if (position == 3 && posAD == 1)
-            loadData("return_date DESC");
+            loadData("t.return_date DESC");
         else if (position == 4 && posAD == 0)
             loadData("created_by ASC");
         else if (position == 4 && posAD == 1)
@@ -270,7 +270,7 @@ public class MaterialFragment extends Fragment {
             loadData("recognized ASC");
         else if (position == 6 && posAD == 1)
             loadData("recognized DESC");
-        else loadData("material_return_id DESC");
+        else loadData("t.return_date DESC");
     }
 
     private void setAdapterList(){

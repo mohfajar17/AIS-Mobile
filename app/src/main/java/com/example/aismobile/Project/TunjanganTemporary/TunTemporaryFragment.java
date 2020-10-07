@@ -215,7 +215,7 @@ public class TunTemporaryFragment extends Fragment {
             }
         });
 
-        loadData("employee_allowance_id DESC");
+//        loadData("employee_allowance_id DESC");
 
         return view;
     }

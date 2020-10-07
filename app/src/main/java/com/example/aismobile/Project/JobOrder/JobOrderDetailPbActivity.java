@@ -30,6 +30,7 @@ import com.example.aismobile.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -74,6 +75,7 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
     private TextView menuJoMatRet;
     private TextView menuJoNotes;
     private TextView menuJoHistory;
+    private TextView totalJobOrderTemp;
 
     private TextView jodJobOrder;
     private TextView jodDepartemen;
@@ -121,6 +123,7 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
         menuJoMatRet = (TextView) findViewById(R.id.menuJoMatRet);
         menuJoNotes = (TextView) findViewById(R.id.menuJoNotes);
         menuJoHistory = (TextView) findViewById(R.id.menuJoHistory);
+        totalJobOrderTemp = (TextView) findViewById(R.id.totalJobOrderTemp);
 
         jodJobOrder = (TextView) findViewById(R.id.jodJobOrder);
         jodDepartemen = (TextView) findViewById(R.id.jodDepartemen);
@@ -276,10 +279,14 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        double toDouble = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joPbHalfs.add(new JoPb(jsonArray.getJSONObject(i)));
+                            toDouble += jsonArray.getJSONObject(i).getDouble("rest_value");
                         }
+                        NumberFormat formatter = new DecimalFormat("#,###");
+                        totalJobOrderTemp.setText("Rp. " + formatter.format((long) toDouble) + " ");
                         adapterHalf = new MyHalfRecyclerViewAdapter(joPbHalfs, contextHalf);
                         recyclerViewHalf.setAdapter(adapterHalf);
                     }
@@ -474,11 +481,11 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
 
             double quantity = Double.valueOf(mValues.get(position).getQuantity());
             double price = Double.valueOf(mValues.get(position).getUnit_price());
-            int subTotal = (int) quantity * (int) price;
+            double subTotal = quantity * price;
 
             NumberFormat formatter = new DecimalFormat("#,###");
-            holder.joTextUnitPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) price)));
-            holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf(subTotal)));
+            holder.joTextUnitPrice.setText("Rp. "+ formatter.format((long) price));
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format((long) subTotal));
         }
 
         @Override

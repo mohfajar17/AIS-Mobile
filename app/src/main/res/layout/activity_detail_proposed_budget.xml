@@ -658,10 +658,15 @@
                             android:layout_height="wrap_content"/>
                     </androidx.core.widget.NestedScrollView>
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorBlack"/>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -694,13 +699,13 @@
                             android:gravity="right"
                             android:text="Total"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textTotal"
@@ -709,24 +714,24 @@
                             android:gravity="right|top"
                             android:text="Rp.-"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorBlack"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -759,13 +764,13 @@
                             android:gravity="right"
                             android:text="Total Approved"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textTotalApproved"
@@ -774,24 +779,24 @@
                             android:gravity="right|top"
                             android:text="Rp.-"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorBlack"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorAsukaBlue"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal">
 
                         <TextView
@@ -824,13 +829,13 @@
                             android:gravity="right"
                             android:text="Total Transfered"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
 
                         <TextView
                             android:id="@+id/textTotalTransfered"
@@ -839,14 +844,19 @@
                             android:gravity="right|top"
                             android:text="Rp.-"
                             android:padding="10dp"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold"/>
 
                         <ImageView
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:src="@color/colorWhite"/>
+                            android:src="@color/colorBlack"/>
                     </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorBlack"/>
                 </LinearLayout>
             </HorizontalScrollView>
 

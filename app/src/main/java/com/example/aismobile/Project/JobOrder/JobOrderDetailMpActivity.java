@@ -411,8 +411,8 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
             holder.joTextTunjanganLokasi.setText("Rp. "+ formatter.format(Long.valueOf((int) four)));
             holder.joTextPotonganAbsent.setText("Rp. "+ formatter.format(Long.valueOf((int) five)));
             if (position == joMppks.size()-1) {
-                totalJobOrderPermanen.setText("Rp. " + formatter.format(Long.valueOf(totalPricePermanen)));
-                totalKeseluruhanMp.setText("Rp. " + formatter.format(Long.valueOf(totalPriceAll)));
+                totalJobOrderPermanen.setText("Rp. " + formatter.format(Long.valueOf(totalPricePermanen)) + " ");
+                totalKeseluruhanMp.setText("Rp. " + formatter.format(Long.valueOf(totalPriceAll)) + " ");
             }
             if (position%2==0)
                 holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
@@ -493,9 +493,10 @@ public class JobOrderDetailMpActivity extends AppCompatActivity {
             holder.joTextGajiPokok.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getGP())));
             holder.joTextGajiLembur.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getGL())));
             holder.joTextTunjangan.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTunjangan())));
+
             if (position == joMptms.size()-1) {
-                totalJobOrderTemp.setText("Rp. " + formatter.format(Long.valueOf(totalPriceTemp)));
-                totalKeseluruhanMp.setText("Rp. " + formatter.format(Long.valueOf(totalPriceAll)));
+                totalJobOrderTemp.setText("Rp. " + formatter.format(Long.valueOf(totalPriceTemp)) + " ");
+                totalKeseluruhanMp.setText("Rp. " + formatter.format(Long.valueOf(totalPriceAll)) + " ");
             }
 
             if (position%2==0)

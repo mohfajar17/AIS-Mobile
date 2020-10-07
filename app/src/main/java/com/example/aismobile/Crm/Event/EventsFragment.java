@@ -214,7 +214,7 @@ public class EventsFragment extends Fragment {
             }
         });
 
-        loadData("event_id DESC");
+//        loadData("event_id DESC");
 
         return view;
     }

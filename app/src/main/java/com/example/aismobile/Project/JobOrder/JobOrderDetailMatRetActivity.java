@@ -417,11 +417,11 @@ public class JobOrderDetailMatRetActivity extends AppCompatActivity {
 
             double quantity = Double.valueOf(mValues.get(position).getQuantity());
             double price = Double.valueOf(mValues.get(position).getUnit_price_stock());
-            int subTotal = (int) quantity * (int) price;
+            double subTotal = quantity * price;
 
             NumberFormat formatter = new DecimalFormat("#,###");
-            holder.joTextUnitPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) price)));
-            holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf(subTotal)));
+            holder.joTextUnitPrice.setText("Rp. "+ formatter.format((long) price));
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format((long) subTotal));
         }
 
         @Override

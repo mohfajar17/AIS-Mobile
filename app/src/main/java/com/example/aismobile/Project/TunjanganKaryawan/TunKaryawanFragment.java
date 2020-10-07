@@ -215,7 +215,7 @@ public class TunKaryawanFragment extends Fragment {
             }
         });
 
-        loadData("employee_allowance_id DESC");
+//        loadData("employee_allowance_id DESC");
 
         return view;
     }

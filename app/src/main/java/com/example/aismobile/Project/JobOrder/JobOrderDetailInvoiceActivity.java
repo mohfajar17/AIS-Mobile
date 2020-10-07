@@ -50,7 +50,7 @@ public class JobOrderDetailInvoiceActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoInvoice> joInvoices;
     private ProgressDialog progressDialog;
-    private long totalPrice = 0;
+    private double totalPrice = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -266,7 +266,7 @@ public class JobOrderDetailInvoiceActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joInvoices.add(new JoInvoice(jsonArray.getJSONObject(i)));
-                            totalPrice += (long) jsonArray.getJSONObject(i).getDouble("service_amount");
+                            totalPrice += jsonArray.getJSONObject(i).getDouble("service_amount");
                         }
                         adapter = new MyRecyclerViewAdapter(joInvoices, context);
                         recyclerView.setAdapter(adapter);
@@ -332,9 +332,9 @@ public class JobOrderDetailInvoiceActivity extends AppCompatActivity {
             double harga = Double.valueOf(mValues.get(position).getService_amount());
 
             NumberFormat formatter = new DecimalFormat("#,###");
-            holder.joTextTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) harga)));
+            holder.joTextTotal.setText("Rp. "+ formatter.format((long) harga));
             if (position == joInvoices.size()-1)
-                totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
+                totalJobOrder.setText("Rp. "+formatter.format((long) totalPrice));
 
             if (position%2==0)
                 holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorLightGray));

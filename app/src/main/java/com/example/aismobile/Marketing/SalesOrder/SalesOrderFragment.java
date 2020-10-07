@@ -212,7 +212,7 @@ public class SalesOrderFragment extends Fragment {
             }
         });
 
-        loadData("sales_quotation_id DESC");
+//        loadData("sales_quotation_id DESC");
 
         return view;
     }

@@ -50,7 +50,7 @@ public class JobOrderDetailTrActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoTr> joTrs;
     private ProgressDialog progressDialog;
-    private int totalPrice = 0;
+    private double totalPrice = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -275,7 +275,7 @@ public class JobOrderDetailTrActivity extends AppCompatActivity {
                             }
                             double Price = jsonArray.getJSONObject(i).getDouble("price");
                             double subTotal = quantity * Price;
-                            totalPrice += (int) subTotal;
+                            totalPrice += subTotal;
                         }
                         adapter = new MyRecyclerViewAdapter(joTrs, context);
                         recyclerView.setAdapter(adapter);
@@ -345,7 +345,7 @@ public class JobOrderDetailTrActivity extends AppCompatActivity {
             holder.joTextPrice.setText("Rp. "+ formatter.format((long) Price));
             holder.joTextSubTotal.setText("Rp. "+ formatter.format((long) subTotal));
             if (position == joTrs.size()-1)
-                totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
+                totalJobOrder.setText("Rp. "+formatter.format((long) totalPrice) + " ");
 
             if (position%2==0)
                 holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorLightGray));

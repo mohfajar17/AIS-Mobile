@@ -212,7 +212,7 @@ public class ServicesReceiptFragment extends Fragment {
             }
         });
 
-        loadData("services_receipt_id DESC");
+//        loadData("services_receipt_id DESC");
 
         return view;
     }

@@ -341,8 +341,9 @@ public class JobOrderDetailCodActivity extends AppCompatActivity {
             holder.joTextUnitPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) satuan)));
             holder.joTextDiscount.setText("Rp. "+ formatter.format(Long.valueOf((int) diskon)));
             holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) qty)));
+
             if (position == joCods.size()-1)
-                totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
+                totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)) + " ");
 
             if (position%2==0)
                 holder.layoutJoMr.setBackgroundColor(getResources().getColor(R.color.colorLightGray));

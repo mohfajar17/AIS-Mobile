@@ -213,7 +213,7 @@ public class CustomerFeedbackFragment extends Fragment {
             }
         });
 
-        loadData("feedback_id DESC");
+//        loadData("feedback_id DESC");
 
         return view;
     }

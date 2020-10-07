@@ -19,7 +19,7 @@
         <activity android:name=".Purchasing.KontrakPerjanjian.KontrakPerjanjianDetailActivity" />
         <activity android:name=".Crm.Event.EventsDetailActivity" />
         <activity android:name=".Crm.Followup.FollowupsCustomerDetailActivity" />
-        <activity android:name=".Crm.Followup.FollowupLeadDetailActivity" />
+        <activity android:name=".Crm.Followup.FollowupsLeadDetailActivity" />
         <activity android:name=".Crm.Kuesioner.KuesionerDetailActivity" />
         <activity android:name=".Crm.Question.QuestionDetailActivity" />
         <activity android:name=".Safety.SafetyFileReport.SafetyFileReportDetailActivity" />

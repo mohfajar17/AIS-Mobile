@@ -104,6 +104,8 @@ public class CustomerInvoiceDetailActivity extends AppCompatActivity {
     private TextView textPPHJasaFinal;
     private TextView textGrandTotalNoWHT;
     private TextView textGrandTotalWHT;
+    private TextView textMaterialIncomeType;
+    private TextView textServiceIncomeType;
 
     private double toDouble;
 
@@ -170,6 +172,8 @@ public class CustomerInvoiceDetailActivity extends AppCompatActivity {
         textPPHJasaFinal = (TextView) findViewById(R.id.textPPHJasaFinal);
         textGrandTotalNoWHT = (TextView) findViewById(R.id.textGrandTotalNoWHT);
         textGrandTotalWHT = (TextView) findViewById(R.id.textGrandTotalWHT);
+        textMaterialIncomeType = (TextView) findViewById(R.id.textMaterialIncomeType);
+        textServiceIncomeType = (TextView) findViewById(R.id.textServiceIncomeType);
 
         double commercialValue = Double.valueOf(customerInvoice.getService_amount());
         textCommercialValue.setText("Rp. " + formatter.format((long) commercialValue));
@@ -181,9 +185,9 @@ public class CustomerInvoiceDetailActivity extends AppCompatActivity {
         textPPN10.setText("Rp. " + formatter.format((long) ppn));
         double pph = Double.valueOf(customerInvoice.getService_amount()) * Double.valueOf(customerInvoice.getTax_type_rate()) / 100;
         textPPHJasaFinal.setText("Rp. " + formatter.format((long) pph));
-        double gtWithoutWHT = totalAfterDiscount + ppn + pph;
+        double gtWithoutWHT = totalAfterDiscount + ppn;
         textGrandTotalNoWHT.setText("Rp. " + formatter.format((long) gtWithoutWHT));
-        double gtWHT = totalAfterDiscount + ppn;
+        double gtWHT = totalAfterDiscount + ppn - pph;
         textGrandTotalWHT.setText("Rp. " + formatter.format((long) gtWHT));
 
         textWorkCompletion.setText(customerInvoice.getSales_order_invoice_number());
@@ -234,6 +238,8 @@ public class CustomerInvoiceDetailActivity extends AppCompatActivity {
         textCreatedDate.setText(customerInvoice.getCreated_date());
         textModifiedBy.setText(customerInvoice.getModified_by());
         textModifiedDate.setText(customerInvoice.getModified_date());
+        textMaterialIncomeType.setText(customerInvoice.getMaterial_income_type());
+        textServiceIncomeType.setText(customerInvoice.getService_income_type());
 
         downloadAtachment = (ImageView) findViewById(R.id.downloadAtachment);
         buttonBack = (ImageView) findViewById(R.id.buttonBack);

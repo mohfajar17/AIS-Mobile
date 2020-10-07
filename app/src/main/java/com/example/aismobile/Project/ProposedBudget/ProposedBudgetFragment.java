@@ -215,7 +215,7 @@ public class ProposedBudgetFragment extends Fragment {
             }
         });
 
-        loadData("cash_advance_id DESC");
+//        loadData("cash_advance_id DESC");
 
         return view;
     }

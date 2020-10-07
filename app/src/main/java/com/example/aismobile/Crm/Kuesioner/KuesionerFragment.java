@@ -212,7 +212,7 @@ public class KuesionerFragment extends Fragment {
             }
         });
 
-        loadData("survey_id ASC");
+//        loadData("survey_id ASC");
 
         return view;
     }

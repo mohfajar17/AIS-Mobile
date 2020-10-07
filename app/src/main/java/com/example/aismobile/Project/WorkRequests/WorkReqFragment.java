@@ -214,7 +214,7 @@ public class WorkReqFragment extends Fragment {
             }
         });
 
-        loadData("work_order_id DESC");
+//        loadData("work_order_id DESC");
 
         return view;
     }

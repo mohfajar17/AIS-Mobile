@@ -50,6 +50,7 @@ import java.util.Map;
 
 public class BankAccountsFragment extends Fragment {
 
+    public TextView textGrandTotal;
     public TextView baTextPaging;
     public EditText baEditSearch;
     public ImageView baBtnSearch;
@@ -80,6 +81,7 @@ public class BankAccountsFragment extends Fragment {
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
+    public double grandTotal;
 
     public BankAccountsFragment() {
     }
@@ -120,6 +122,8 @@ public class BankAccountsFragment extends Fragment {
         } else {
             baRecycler.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
+
+        textGrandTotal = (TextView) view.findViewById(R.id.textGrandTotal);
 
         baFabAdd = (FloatingActionButton) view.findViewById(R.id.baFabAdd);
         baEditSearch = (EditText) view.findViewById(R.id.baEditSearch);
@@ -215,7 +219,7 @@ public class BankAccountsFragment extends Fragment {
             }
         });
 
-        loadData("bank_account_id ASC");
+//        loadData("bank_account_id ASC");
 
         return view;
     }
@@ -301,10 +305,15 @@ public class BankAccountsFragment extends Fragment {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        grandTotal = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             bankAccounts.add(new BankAccount(jsonArray.getJSONObject(i)));
+                            grandTotal += jsonArray.getJSONObject(i).getDouble("ending_reconcile_balance");
                         }
+                        NumberFormat formatter = new DecimalFormat("#,###");
+                        textGrandTotal.setText("Rp. " + formatter.format((long) grandTotal));
+
                         setAdapterList();
 
                         if (filter){
@@ -358,7 +367,11 @@ public class BankAccountsFragment extends Fragment {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             bankAccounts.add(new BankAccount(jsonArray.getJSONObject(i)));
+                            grandTotal += jsonArray.getJSONObject(i).getDouble("ending_reconcile_balance");
                         }
+                        NumberFormat formatter = new DecimalFormat("#,###");
+                        textGrandTotal.setText("Rp. " + formatter.format((long) grandTotal));
+
                         setAdapterList();
                         if (filter){
                             if (baEditSearch.getText().toString().matches("")){
@@ -452,12 +465,9 @@ public class BankAccountsFragment extends Fragment {
             holder.baTextDate.setText(""+mValues.get(position).getLast_reconciled_date());
             holder.baTextIsActive.setText(""+mValues.get(position).getIs_active());
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.baTextBalance.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getEnding_reconcile_balance())));
-            } catch (NumberFormatException ex){ // handle your exception
-                holder.baTextBalance.setText("Rp. "+ mValues.get(position).getEnding_reconcile_balance());
-            }
+            double toDouble = Double.valueOf(mValues.get(position).getEnding_reconcile_balance());
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.baTextBalance.setText("Rp. "+ formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.baLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

@@ -214,7 +214,7 @@ public class WorkAccidentsFragment extends Fragment {
             }
         });
 
-        loadData("work_accident_id DESC");
+//        loadData("work_accident_id DESC");
 
         return view;
     }

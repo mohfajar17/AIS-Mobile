@@ -51,7 +51,7 @@ public class JobOrderDetailPrActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoPr> joprs;
     private ProgressDialog progressDialog;
-    private long totalPrice = 0;
+    private double totalPrice = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -281,7 +281,7 @@ public class JobOrderDetailPrActivity extends AppCompatActivity {
                             if ((int) qty > 0) {
                                 qty -= diskon;
                             }
-                            totalPrice += (long) qty;
+                            totalPrice += qty;
                         }
                         adapter = new MyRecyclerViewAdapter(joprs, context);
                         recyclerView.setAdapter(adapter);
@@ -358,11 +358,11 @@ public class JobOrderDetailPrActivity extends AppCompatActivity {
             holder.joTextStatus.setText(mValues.get(position).getStatus());
 
             NumberFormat formatter = new DecimalFormat("#,###");
-            holder.joTextUnitPrice.setText("Rp. "+ formatter.format((int) price));
-            holder.joTextDiscount.setText("Rp. "+ formatter.format((int) diskon));
-            holder.joTextSubTotal.setText("Rp. "+ formatter.format((int) qty));
+            holder.joTextUnitPrice.setText("Rp. "+ formatter.format((long) price));
+            holder.joTextDiscount.setText("Rp. "+ formatter.format((long) diskon));
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format((long) qty));
             if (position == joprs.size()-1)
-                totalJobOrder.setText("Rp. "+formatter.format(totalPrice));
+                totalJobOrder.setText("Rp. "+formatter.format((long) totalPrice) + " ");
 
             if (position%2==0)
                 holder.layoutJoMr.setBackgroundColor(getResources().getColor(R.color.colorLightGray));

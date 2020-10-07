@@ -215,7 +215,7 @@ public class CashAdvanceFragment extends Fragment {
             }
         });
 
-        loadData("advanced_id DESC");
+//        loadData("advanced_id DESC");
 
         return view;
     }
@@ -443,12 +443,9 @@ public class CashAdvanceFragment extends Fragment {
             holder.caTextReceived.setText(""+mValues.get(position).getReceived_by());
             holder.caTextStatus.setText(""+mValues.get(position).getStatus());
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.caTextNilai.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getAmount())));
-            } catch (NumberFormatException ex){ // handle your exception
-                holder.caTextNilai.setText("Rp. "+ mValues.get(position).getAmount());
-            }
+            double toDouble = Double.valueOf(mValues.get(position).getAmount());
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.caTextNilai.setText("Rp. "+ formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.caLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

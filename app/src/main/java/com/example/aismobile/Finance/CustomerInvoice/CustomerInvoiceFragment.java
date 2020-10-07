@@ -216,7 +216,7 @@ public class CustomerInvoiceFragment extends Fragment {
             }
         });
 
-        loadData("sales_order_invoice_id DESC");
+//        loadData("sales_order_invoice_id DESC");
 
         return view;
     }
@@ -480,12 +480,9 @@ public class CustomerInvoiceFragment extends Fragment {
             holder.ciTextStatus.setText(""+mValues.get(position).getSales_order_invoice_status());
             holder.ciTextPaymentLate.setText(""+mValues.get(position).getPayment_late());
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.ciTextTotal.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getGrand_total())));
-            } catch (NumberFormatException ex){ // handle your exception
-                holder.ciTextTotal.setText("Rp. "+ mValues.get(position).getGrand_total());
-            }
+            double toDouble = Double.valueOf(mValues.get(position).getGrand_total());
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.ciTextTotal.setText("Rp. "+ formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.ciLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

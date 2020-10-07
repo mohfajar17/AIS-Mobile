@@ -213,7 +213,7 @@ public class CashProjectFragment extends Fragment {
             }
         });
 
-        loadData("responsbility_advance_id DESC");
+//        loadData("responsbility_advance_id DESC");
 
         return view;
     }
@@ -453,7 +453,7 @@ public class CashProjectFragment extends Fragment {
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
             holder.pcpTextNomorCashProject.setText(""+mValues.get(position).getResponsbility_advance_number());
-            holder.pcpTextProposedBudget.setText(""+mValues.get(position).getCash_advance_id());
+            holder.pcpTextProposedBudget.setText(""+mValues.get(position).getCash_advance_number());
             holder.pcpTextKetJobOrder.setText(""+mValues.get(position).getJob_order_id()); //untuk ket job order
             holder.pcpTextDibuat.setText(""+mValues.get(position).getCreated_by());
             holder.pcpTextApproval1.setText(""+mValues.get(position).getApproval1());
@@ -502,7 +502,7 @@ public class CashProjectFragment extends Fragment {
                         if (pcpSpinnerSearch.getSelectedItemPosition()==0){
                             if (item.getResponsbility_advance_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
-                            } else if (item.getCash_advance_id().toLowerCase().contains(filterPattern)){
+                            } else if (item.getCash_advance_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             } else if (item.getJob_order_id().toLowerCase().contains(filterPattern)){   //untuk ket job order
                                 filteredList.add(item);
@@ -522,7 +522,7 @@ public class CashProjectFragment extends Fragment {
                                 filteredList.add(item);
                             }
                         } else if (pcpSpinnerSearch.getSelectedItemPosition()==2){
-                            if (item.getCash_advance_id().toLowerCase().contains(filterPattern)){
+                            if (item.getCash_advance_number().toLowerCase().contains(filterPattern)){
                                 filteredList.add(item);
                             }
                         } else if (pcpSpinnerSearch.getSelectedItemPosition()==3){

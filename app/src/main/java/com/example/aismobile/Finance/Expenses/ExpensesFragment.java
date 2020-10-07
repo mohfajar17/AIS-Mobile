@@ -216,7 +216,7 @@ public class ExpensesFragment extends Fragment {
             }
         });
 
-        loadData("begin_date DESC");
+//        loadData("begin_date DESC");
 
         return view;
     }
@@ -480,12 +480,9 @@ public class ExpensesFragment extends Fragment {
             holder.eTextRekBank.setText(""+mValues.get(position).getBank_account_name());
             holder.eTextDone.setText(""+mValues.get(position).getDone());
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.eTextTotal.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTotal_amount())));
-            } catch (NumberFormatException ex){ // handle your exception
-                holder.eTextTotal.setText("Rp. "+ mValues.get(position).getTotal_amount());
-            }
+            double toDouble = Double.valueOf(mValues.get(position).getTotal_amount());
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.eTextTotal.setText("Rp. "+ formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.eLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

@@ -213,7 +213,7 @@ public class LeadsFragment extends Fragment {
             }
         });
 
-        loadData("lead_name ASC");
+//        loadData("lead_name ASC");
 
         return view;
     }

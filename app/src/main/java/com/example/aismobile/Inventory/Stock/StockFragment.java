@@ -212,7 +212,7 @@ public class StockFragment extends Fragment {
             }
         });
 
-        loadData("stock_adjustment_id DESC");
+//        loadData("stock_adjustment_id DESC");
 
         return view;
     }

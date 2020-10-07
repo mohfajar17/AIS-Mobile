@@ -464,11 +464,11 @@ public class JobOrderDetailActivity extends AppCompatActivity {
                         else detailExpensesPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
 
                         toDouble = Double.valueOf(jobOrder.getAmount()) - totalPengeluaran;
-                        detailLabaRugi.setText("Rp. " + formatter.format((long) toDouble));
+                        detailLabaRugi.setText("Rp. " + formatter.format((long) toDouble) + " ");
                         toDouble = Double.valueOf(jobOrder.getBudgeting_amount()) - totalPengeluaran;
-                        detailSisaBudget.setText("Rp. " + formatter.format((long) toDouble));
+                        detailSisaBudget.setText("Rp. " + formatter.format((long) toDouble) + " ");
                         toDouble = json.getDouble("invoice") - totalPengeluaran;
-                        detailLabaRugiBerjalan.setText("Rp. " + formatter.format((long) toDouble));
+                        detailLabaRugiBerjalan.setText("Rp. " + formatter.format((long) toDouble) + " ");
                         toDouble = json.getDouble("payment");
                         detailCustomerPayment.setText("Rp. " + formatter.format((long) toDouble));
                         toDouble = json.getDouble("invoice");

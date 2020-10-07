@@ -212,7 +212,7 @@ public class GenbaSafetyFragment extends Fragment {
             }
         });
 
-        loadData("genba_safety_id DESC");
+//        loadData("genba_safety_id DESC");
 
         return view;
     }

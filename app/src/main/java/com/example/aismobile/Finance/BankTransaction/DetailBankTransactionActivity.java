@@ -1,20 +1,53 @@
 package com.example.aismobile.Finance.BankTransaction;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.aismobile.Config;
 import com.example.aismobile.Data.FinanceAccounting.BankTransaction;
+import com.example.aismobile.Data.FinanceAccounting.BankTransactionDetail;
 import com.example.aismobile.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DetailBankTransactionActivity extends AppCompatActivity {
 
     private BankTransaction bankTransaction;
+    private Context context;
+    private RecyclerView recyclerView;
+    private MyRecyclerViewAdapter adapter;
+    private RecyclerView.LayoutManager recylerViewLayoutManager;
+    private List<BankTransactionDetail> bankTransactionDetails;
+    private ProgressDialog progressDialog;
 
     private ImageView buttonBack;
     private ImageView downloadAtachment;
@@ -42,6 +75,12 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
     private TextView textCreatedDate;
     private TextView textModifiedBy;
     private TextView textModifiedDate;
+    private TextView textGrandTotal;
+
+    private double toDouble;
+    private double grandTotal;
+    private double totalPenyesuaian;
+    private NumberFormat formatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +89,20 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         bankTransaction = bundle.getParcelable("detail");
+
+        formatter = new DecimalFormat("#,###");
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading data");
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
+
+        context = getApplicationContext();
+        bankTransactionDetails = new ArrayList<>();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
+        recylerViewLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(recylerViewLayoutManager);
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
         downloadAtachment = (ImageView) findViewById(R.id.downloadAtachment);
@@ -77,6 +130,7 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
         textCreatedDate = (TextView) findViewById(R.id.textCreatedDate);
         textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
         textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
+        textGrandTotal = (TextView) findViewById(R.id.textGrandTotal);
 
         textNumber.setText("Bank Transaction #" + bankTransaction.getBank_transaction_number());
         textBtNumber.setText(bankTransaction.getBank_transaction_number());
@@ -117,5 +171,137 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
                 startActivity(launchBrowser);
             }
         });
+
+        loadDetail();
+    }
+
+    public void loadDetail(){
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_BANK_TRANSACTION_DETAIL_LIST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        grandTotal = 0;
+                        totalPenyesuaian = 0;
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for(int i=0;i<jsonArray.length();i++){
+                            bankTransactionDetails.add(new BankTransactionDetail(jsonArray.getJSONObject(i)));
+                            grandTotal += jsonArray.getJSONObject(i).getDouble("amount");
+                            totalPenyesuaian += Math.abs(jsonArray.getJSONObject(i).getDouble("adjustment_value"));
+                        }
+                        toDouble = grandTotal - totalPenyesuaian;
+                        textGrandTotal.setText("Rp. " + formatter.format((long) toDouble));
+
+                        adapter = new MyRecyclerViewAdapter(bankTransactionDetails, context);
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(DetailBankTransactionActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(DetailBankTransactionActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailBankTransactionActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("btId", "" + bankTransaction.getBank_transaction_id());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailBankTransactionActivity.this).add(request);
+    }
+
+    private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+
+        private final List<BankTransactionDetail> mValues;
+        private Context context;
+
+        private MyRecyclerViewAdapter(List<BankTransactionDetail> mValues, Context context) {
+            this.mValues = mValues;
+            this.context = context;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_detail_bank_transaction_list, parent, false);
+            return new MyRecyclerViewAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
+            int nomor = position+1;
+            holder.textNo.setText("" + nomor);
+            holder.textSupplierInvoice.setText(mValues.get(position).getSupplier_invoice());
+            holder.textProposedBudget.setText(mValues.get(position).getProposed_budget());
+            holder.textCustomerInvoice.setText(mValues.get(position).getCustomer_invoice());
+            holder.textCashProjectReport.setText(mValues.get(position).getCash_project_report());
+            holder.textDestination.setText(mValues.get(position).getDestination());
+            holder.textTransactionDetailName.setText(mValues.get(position).getTransaction_detail_name());
+            holder.textAccount.setText(mValues.get(position).getCategory() + " | " + mValues.get(position).getBank_transaction_type_name());
+
+            toDouble = Math.abs(Double.valueOf(mValues.get(position).getAdjustment_value()));
+            holder.textPenyesuaian.setText(formatter.format((long) toDouble));
+            toDouble = Double.valueOf(mValues.get(position).getAmount());
+            holder.textNilai.setText(formatter.format((long) toDouble));
+
+            if (position%2==0)
+                holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.layout.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public final View mView;
+            public final TextView textNo;
+            public final TextView textSupplierInvoice;
+            public final TextView textProposedBudget;
+            public final TextView textCustomerInvoice;
+            public final TextView textCashProjectReport;
+            public final TextView textTransactionDetailName;
+            public final TextView textDestination;
+            public final TextView textPenyesuaian;
+            public final TextView textNilai;
+            public final TextView textAccount;
+
+            public final LinearLayout layout;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+
+                mView = itemView;
+                textNo = (TextView) itemView.findViewById(R.id.textNo);
+                textSupplierInvoice = (TextView) itemView.findViewById(R.id.textSupplierInvoice);
+                textProposedBudget = (TextView) itemView.findViewById(R.id.textProposedBudget);
+                textCustomerInvoice = (TextView) itemView.findViewById(R.id.textCustomerInvoice);
+                textCashProjectReport = (TextView) itemView.findViewById(R.id.textCashProjectReport);
+                textTransactionDetailName = (TextView) itemView.findViewById(R.id.textTransactionDetailName);
+                textDestination = (TextView) itemView.findViewById(R.id.textDestination);
+                textPenyesuaian = (TextView) itemView.findViewById(R.id.textPenyesuaian);
+                textNilai = (TextView) itemView.findViewById(R.id.textNilai);
+                textAccount = (TextView) itemView.findViewById(R.id.textAccount);
+
+                layout = (LinearLayout) itemView.findViewById(R.id.layout);
+            }
+        }
     }
 }

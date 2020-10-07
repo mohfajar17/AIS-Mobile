@@ -212,7 +212,7 @@ public class ScheduleFragment extends Fragment {
             }
         });
 
-        loadData("schedule_visits_id DESC");
+//        loadData("schedule_visits_id DESC");
 
         return view;
     }

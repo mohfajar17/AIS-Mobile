@@ -213,7 +213,7 @@ public class MaterialReqFragment extends Fragment {
             }
         });
 
-        loadMaterial("material_request_id DESC");
+//        loadMaterial("material_request_id DESC");
 
         return view;
     }

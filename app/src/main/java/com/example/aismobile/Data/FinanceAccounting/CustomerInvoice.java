@@ -48,6 +48,8 @@ public class CustomerInvoice implements Parcelable {
     private String created_date;
     private String modified_by;
     private String modified_date;
+    private String material_income_type;
+    private String service_income_type;
 
     protected CustomerInvoice(Parcel in) {
         sales_order_invoice_id = in.readInt();
@@ -90,6 +92,8 @@ public class CustomerInvoice implements Parcelable {
         created_date = in.readString();
         modified_by = in.readString();
         modified_date = in.readString();
+        material_income_type = in.readString();
+        service_income_type = in.readString();
     }
 
     public CustomerInvoice(JSONObject jsonObject){
@@ -134,6 +138,8 @@ public class CustomerInvoice implements Parcelable {
             this.created_date = jsonObject.getString("created_date");
             this.modified_by = jsonObject.getString("modified_by");
             this.modified_date = jsonObject.getString("modified_date");
+            this.material_income_type = jsonObject.getString("material_income_type");
+            this.service_income_type = jsonObject.getString("service_income_type");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -198,6 +204,8 @@ public class CustomerInvoice implements Parcelable {
         dest.writeString(created_date);
         dest.writeString(modified_by);
         dest.writeString(modified_date);
+        dest.writeString(material_income_type);
+        dest.writeString(service_income_type);
     }
 
     public CustomerInvoice(int sales_order_invoice_id, String sales_order_invoice_number, String sales_order_invoice_description,
@@ -375,5 +383,13 @@ public class CustomerInvoice implements Parcelable {
 
     public String getModified_date() {
         return modified_date;
+    }
+
+    public String getMaterial_income_type() {
+        return material_income_type;
+    }
+
+    public String getService_income_type() {
+        return service_income_type;
     }
 }

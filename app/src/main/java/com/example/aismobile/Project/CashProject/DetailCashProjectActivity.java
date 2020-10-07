@@ -77,6 +77,18 @@ public class DetailCashProjectActivity extends AppCompatActivity {
     private TextView textModifiedBy;
     private TextView textModifiedDate;
 
+    private TextView textTotal;
+    private TextView textTotalApproved;
+    private TextView textTotalPbReceived;
+    private TextView textResiduals;
+
+    private NumberFormat formatter;
+    private double toDouble = 0;
+    private double total = 0;
+    private double totalApproved = 0;
+    private double totalpb = 0;
+    private double totalResidual = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +96,7 @@ public class DetailCashProjectActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         cashProjectReport = bundle.getParcelable("detail");
+        formatter = new DecimalFormat("#,###");
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
@@ -125,9 +138,14 @@ public class DetailCashProjectActivity extends AppCompatActivity {
         textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
         textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
 
+        textTotal = (TextView) findViewById(R.id.textGrandTotal);
+        textTotalApproved = (TextView) findViewById(R.id.textTotalApproved);
+        textTotalPbReceived = (TextView) findViewById(R.id.textTotalPbReceived);
+        textResiduals = (TextView) findViewById(R.id.textResiduals);
+
         textJobOrder.setText(cashProjectReport.getJob_order_number());
         textKeterangan.setText(cashProjectReport.getJob_order_id());
-        textProposedBudget.setText(cashProjectReport.getCash_advance_id());
+        textProposedBudget.setText(cashProjectReport.getCash_advance_number());
         textTglAwal.setText(cashProjectReport.getBegin_date());
         textTglAkhir.setText(cashProjectReport.getEnd_date());
         textAccount.setText(cashProjectReport.getCategory());
@@ -210,7 +228,56 @@ public class DetailCashProjectActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             cashProjectReportDetails.add(new CashProjectReportDetail(jsonArray.getJSONObject(i)));
+                            toDouble = (jsonArray.getJSONObject(i).getDouble("unit_price")*jsonArray.getJSONObject(i).getDouble("quantity"))-jsonArray.getJSONObject(i).getDouble("discount");
+                            total += toDouble;
+                            if (jsonArray.getJSONObject(i).getString("respons_advance_app3").toLowerCase().contains("Approved".toLowerCase()))
+                                totalApproved += toDouble;
                         }
+
+                        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_CASH_PROJECT_DETAIL_PB_LIST, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    int status=jsonObject.getInt("status");
+                                    if(status==1){
+                                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                                        totalpb = jsonArray.getJSONObject(0).getDouble("total");
+
+                                        if (totalpb > totalApproved)
+                                            totalResidual = totalpb - totalApproved;
+                                        else totalResidual = 0;
+
+                                        textTotalPbReceived.setText("Rp. " + formatter.format((long) totalpb));
+                                        textResiduals.setText("Rp. " + formatter.format((long) totalResidual));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }){
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> param=new HashMap<>();
+                                param.put("id", "" + cashProjectReport.getCash_advance_id());
+                                return param;
+                            }
+                        };
+                        Volley.newRequestQueue(DetailCashProjectActivity.this).add(request);
+
+                        if (totalpb > totalApproved)
+                            totalResidual = totalpb - totalApproved;
+                        else totalResidual = 0;
+                        textTotal.setText("Rp. " + formatter.format((long) total));
+                        textTotalApproved.setText("Rp. " + formatter.format((long) totalApproved));
+                        textTotalPbReceived.setText("Rp. " + formatter.format((long) totalpb));
+                        textResiduals.setText("Rp. " + formatter.format((long) totalResidual));
+
                         adapter = new MyRecyclerViewAdapter(cashProjectReportDetails, context);
                         recyclerView.setAdapter(adapter);
                     } else {
@@ -269,8 +336,6 @@ public class DetailCashProjectActivity extends AppCompatActivity {
             holder.textApproval2.setText(mValues.get(position).getRespons_advance_app2());
             holder.textApproval3.setText(mValues.get(position).getRespons_advance_app3());
 
-            NumberFormat formatter = new DecimalFormat("#,###");
-            double toDouble = 0;
             toDouble = Double.valueOf(mValues.get(position).getUnit_price());
             holder.textPrice.setText("Rp. " + formatter.format((long) toDouble));
             toDouble = Double.valueOf(mValues.get(position).getDiscount());

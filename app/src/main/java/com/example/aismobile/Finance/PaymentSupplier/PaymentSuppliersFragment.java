@@ -213,7 +213,7 @@ public class PaymentSuppliersFragment extends Fragment {
             }
         });
 
-        loadData("budget_supplier_id DESC");
+//        loadData("budget_supplier_id DESC");
 
         return view;
     }

@@ -50,7 +50,7 @@ public class JobOrderDetailExpensesActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoExpenses> joExpenses;
     private ProgressDialog progressDialog;
-    private long totalPrice = 0;
+    private double totalPrice = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -269,7 +269,7 @@ public class JobOrderDetailExpensesActivity extends AppCompatActivity {
                             joExpenses.add(new JoExpenses(jsonArray.getJSONObject(i)));
 
                             double harga = jsonArray.getJSONObject(i).getDouble("amount");
-                            totalPrice += (long) harga;
+                            totalPrice += harga;
                         }
                         adapter = new MyRecyclerViewAdapter(joExpenses, context);
                         recyclerView.setAdapter(adapter);
@@ -331,9 +331,9 @@ public class JobOrderDetailExpensesActivity extends AppCompatActivity {
             holder.joTextRekBank.setText(mValues.get(position).getBank_account_name());
 
             NumberFormat formatter = new DecimalFormat("#,###");
-            holder.joTextNilai.setText("Rp. "+ formatter.format(Long.valueOf((int) harga)));
+            holder.joTextNilai.setText("Rp. "+ formatter.format((long) harga));
             if (position == joExpenses.size()-1)
-                totalJobOrder.setText("Rp. "+formatter.format(Long.valueOf(totalPrice)));
+                totalJobOrder.setText("Rp. "+formatter.format((long) totalPrice));
 
             if (position%2==0)
                 holder.layoutJo.setBackgroundColor(getResources().getColor(R.color.colorLightGray));

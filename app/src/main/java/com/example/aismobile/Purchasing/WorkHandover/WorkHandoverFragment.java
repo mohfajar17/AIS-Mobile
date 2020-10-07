@@ -212,7 +212,7 @@ public class WorkHandoverFragment extends Fragment {
             }
         });
 
-        loadData("work_handover_id DESC");
+//        loadData("work_handover_id DESC");
 
         return view;
     }

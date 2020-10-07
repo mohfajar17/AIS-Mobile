@@ -214,7 +214,7 @@ public class KontrakPerjanjianFragment extends Fragment {
             }
         });
 
-        loadData("contract_agreement_id DESC");
+//        loadData("contract_agreement_id DESC");
 
         return view;
     }

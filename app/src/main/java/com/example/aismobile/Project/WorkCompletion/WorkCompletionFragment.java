@@ -213,7 +213,7 @@ public class WorkCompletionFragment extends Fragment {
             }
         });
 
-        loadWorkCompletion("job_order_id DESC");
+//        loadWorkCompletion("job_order_id DESC");
 
         return view;
     }

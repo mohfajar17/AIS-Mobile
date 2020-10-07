@@ -210,7 +210,7 @@ public class QuestionFragment extends Fragment {
             }
         });
 
-        loadData("question_id ASC");
+//        loadData("question_id ASC");
 
         return view;
     }

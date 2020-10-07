@@ -214,7 +214,7 @@ public class PengambilanFragment extends Fragment {
             }
         });
 
-        loadData("pickup_id DESC");
+//        loadData("pickup_id DESC");
 
         return view;
     }

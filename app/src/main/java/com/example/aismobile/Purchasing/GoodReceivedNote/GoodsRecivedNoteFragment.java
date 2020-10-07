@@ -212,7 +212,7 @@ public class GoodsRecivedNoteFragment extends Fragment {
             }
         });
 
-        loadData("grn_id DESC");
+//        loadData("grn_id DESC");
 
         return view;
     }

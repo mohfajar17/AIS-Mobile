@@ -212,7 +212,7 @@ public class BudgetingFragment extends Fragment {
             }
         });
 
-        loadData("budget_id DESC");
+//        loadData("budget_id DESC");
 
         return view;
     }

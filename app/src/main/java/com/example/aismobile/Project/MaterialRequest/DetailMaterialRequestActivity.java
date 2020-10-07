@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
 import com.example.aismobile.Data.Project.MaterialRequest;
 import com.example.aismobile.Data.Project.MaterialRequestDetail;
+import com.example.aismobile.Data.Project.MaterialRequestPickup;
 import com.example.aismobile.R;
 
 import org.json.JSONArray;
@@ -43,8 +44,11 @@ public class DetailMaterialRequestActivity extends AppCompatActivity {
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
-    private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<MaterialRequestDetail> materialRequestDetails;
+    private RecyclerView recyclerViewPickup;
+    private MyPickupRecyclerViewAdapter adapterPickup;
+    private List<MaterialRequestPickup> materialRequestPickups;
+    private RecyclerView.LayoutManager recylerViewLayoutManager;
     private ProgressDialog progressDialog;
 
     private TextView textNumber;
@@ -87,10 +91,14 @@ public class DetailMaterialRequestActivity extends AppCompatActivity {
 
         context = getApplicationContext();
         materialRequestDetails = new ArrayList<>();
-
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
+
+        materialRequestPickups = new ArrayList<>();
+        recyclerViewPickup = (RecyclerView) findViewById(R.id.recyclerViewPickup);
+        recylerViewLayoutManager = new LinearLayoutManager(context);
+        recyclerViewPickup.setLayoutManager(recylerViewLayoutManager);
 
         textJobOrder = (TextView) findViewById(R.id.textJobOrder);
         textKeterangan = (TextView) findViewById(R.id.textKeterangan);
@@ -176,6 +184,7 @@ public class DetailMaterialRequestActivity extends AppCompatActivity {
         });
 
         loadDetail();
+        loadPickup();
     }
 
     public void loadDetail(){
@@ -316,6 +325,102 @@ public class DetailMaterialRequestActivity extends AppCompatActivity {
                 textApproval3 = (TextView) itemView.findViewById(R.id.textApproval3);
                 textStatus = (TextView) itemView.findViewById(R.id.textStatus);
                 textStockGudang = (TextView) itemView.findViewById(R.id.textStockGudang);
+
+                layout = (LinearLayout) itemView.findViewById(R.id.layout);
+            }
+        }
+    }
+
+    public void loadPickup(){
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_MATERIAL_REQUISITION_PICKUP, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for(int i=0;i<jsonArray.length();i++){
+                            materialRequestPickups.add(new MaterialRequestPickup(jsonArray.getJSONObject(i)));
+                        }
+                        adapterPickup = new MyPickupRecyclerViewAdapter(materialRequestPickups, context);
+                        recyclerViewPickup.setAdapter(adapterPickup);
+                    } else {
+                        Toast.makeText(DetailMaterialRequestActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+//                    Toast.makeText(DetailMaterialRequestActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailMaterialRequestActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("materialId", "" + materialRequest.getMaterial_request_id());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailMaterialRequestActivity.this).add(request);
+    }
+
+    private class MyPickupRecyclerViewAdapter extends RecyclerView.Adapter<MyPickupRecyclerViewAdapter.ViewHolder> {
+
+        private final List<MaterialRequestPickup> mValues;
+        private Context context;
+
+        private MyPickupRecyclerViewAdapter(List<MaterialRequestPickup> mValues, Context context) {
+            this.mValues = mValues;
+            this.context = context;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_detail_material_request_pickup, parent, false);
+            return new MyPickupRecyclerViewAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final MyPickupRecyclerViewAdapter.ViewHolder holder, final int position) {
+            holder.textNomorPengambilan.setText(mValues.get(position).getPickup_number());
+            holder.textDiambilOleh.setText(mValues.get(position).getPickup_by());
+            holder.textTanggalPengambilan.setText(mValues.get(position).getTaken_date());
+            holder.textDiakui.setText(mValues.get(position).getRecognized());
+
+            if (position%2==0)
+                holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            else holder.layout.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public final View mView;
+            public final TextView textNomorPengambilan;
+            public final TextView textDiambilOleh;
+            public final TextView textTanggalPengambilan;
+            public final TextView textDiakui;
+
+            public final LinearLayout layout;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+
+                mView = itemView;
+                textNomorPengambilan = (TextView) itemView.findViewById(R.id.textNomorPengambilan);
+                textDiambilOleh = (TextView) itemView.findViewById(R.id.textDiambilOleh);
+                textTanggalPengambilan = (TextView) itemView.findViewById(R.id.textTanggalPengambilan);
+                textDiakui = (TextView) itemView.findViewById(R.id.textDiakui);
 
                 layout = (LinearLayout) itemView.findViewById(R.id.layout);
             }

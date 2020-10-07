@@ -51,7 +51,7 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoMr> jomrs;
     private ProgressDialog progressDialog;
-    private long totalPrice = 0;
+    private double totalPrice = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -277,7 +277,7 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
                             }
 
                             double price = jsonArray.getJSONObject(i).getDouble("unit_price");
-                            int qty = (int) quantity*(int) price;
+                            double qty = quantity*price;
                             totalPrice +=  qty;
                         }
                         adapter = new MyRecyclerViewAdapter(jomrs, context);
@@ -356,7 +356,7 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
             holder.joTextUnitPrice.setText("Rp. "+ formatter.format((int) toDouble));
             holder.joTextSubTotal.setText("Rp. "+ formatter.format(qty));
             if (position == jomrs.size()-1)
-                totalJobOrder.setText("Rp. "+formatter.format(totalPrice));
+                totalJobOrder.setText("Rp. "+formatter.format((long) totalPrice) + " ");
             if (position%2==0)
                 holder.layoutJoMr.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
             else holder.layoutJoMr.setBackgroundColor(getResources().getColor(R.color.colorWhite));

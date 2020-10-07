@@ -211,7 +211,7 @@ public class SafetyFileReportFragment extends Fragment {
             }
         });
 
-        loadData("job_order_safety_id ASC");
+//        loadData("job_order_safety_id ASC");
 
         return view;
     }

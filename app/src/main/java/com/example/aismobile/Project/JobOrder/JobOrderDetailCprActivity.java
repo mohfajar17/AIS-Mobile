@@ -45,7 +45,7 @@ import java.util.concurrent.TimeUnit;
 
 public class JobOrderDetailCprActivity extends AppCompatActivity {
 
-    private long totalCpr;
+    private double totalCpr;
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
@@ -345,7 +345,7 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
                                 double quantity = jsonArray.getJSONObject(i).getDouble("quantity");
                                 double price = jsonArray.getJSONObject(i).getDouble("unit_price");
                                 double diskon = jsonArray.getJSONObject(i).getDouble("discount");
-                                long subTotal = ((long) quantity * (long) price) - (long) diskon;
+                                double subTotal = (quantity * price) - diskon;
 
                                 totalCpr += subTotal;
                             }
@@ -354,7 +354,7 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
 
                             holder.joTextTotalNumber.setText("Total CPR ( " + mValues.get(position).getResponsbility_advance_number() + " )");
                             NumberFormat formatter = new DecimalFormat("#,###");
-                            holder.joTextTotalCpr.setText("Rp. " + formatter.format(totalCpr));
+                            holder.joTextTotalCpr.setText("Rp. " + formatter.format((long) totalCpr));
                         } else {
                             Toast.makeText(JobOrderDetailCprActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                         }
@@ -436,12 +436,12 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
             double quantity = Double.valueOf(mValues.get(position).getQuantity());
             double price = Double.valueOf(mValues.get(position).getUnit_price());
             double diskon = Double.valueOf(mValues.get(position).getDiscount());
-            int subTotal = ((int) quantity * (int) price) - (int) diskon;
+            double subTotal = (quantity * price) - diskon;
 
             NumberFormat formatter = new DecimalFormat("#,###");
-            holder.joTextUnitPrice.setText("Rp. "+ formatter.format(Long.valueOf((int) price)));
-            holder.joTextDiscount.setText("Rp. "+ formatter.format(Long.valueOf((int) diskon)));
-            holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf(subTotal)));
+            holder.joTextUnitPrice.setText("Rp. "+ formatter.format((long) price));
+            holder.joTextDiscount.setText("Rp. "+ formatter.format((long) diskon));
+            holder.joTextSubTotal.setText("Rp. "+ formatter.format((long) subTotal));
         }
 
         @Override

@@ -215,7 +215,7 @@ public class BankTransactionFragment extends Fragment {
             }
         });
 
-        loadData("transaction_date DESC");
+//        loadData("transaction_date DESC");
 
         return view;
     }
@@ -242,9 +242,9 @@ public class BankTransactionFragment extends Fragment {
         else if (position == 5 && posAD == 1)
             loadDataAll("approval2 DESC");
         else if (position == 6 && posAD == 0)
-            loadDataAll("transaction_date ASC");
+            loadDataAll("bt.transaction_date ASC");
         else if (position == 6 && posAD == 1)
-            loadDataAll("transaction_date DESC");
+            loadDataAll("bt.transaction_date DESC");
         else if (position == 7 && posAD == 0)
             loadDataAll("total_amount ASC");
         else if (position == 7 && posAD == 1)
@@ -257,7 +257,7 @@ public class BankTransactionFragment extends Fragment {
             loadDataAll("reconciled ASC");
         else if (position == 9 && posAD == 1)
             loadDataAll("reconciled DESC");
-        else loadDataAll("transaction_date DESC");
+        else loadDataAll("bt.transaction_date DESC");
     }
 
     private void setSortHalf(int position, int posAD){
@@ -282,9 +282,9 @@ public class BankTransactionFragment extends Fragment {
         else if (position == 5 && posAD == 1)
             loadData("approval2 DESC");
         else if (position == 6 && posAD == 0)
-            loadData("transaction_date ASC");
+            loadData("bt.transaction_date ASC");
         else if (position == 6 && posAD == 1)
-            loadData("transaction_date DESC");
+            loadData("bt.transaction_date DESC");
         else if (position == 7 && posAD == 0)
             loadData("total_amount ASC");
         else if (position == 7 && posAD == 1)
@@ -297,7 +297,7 @@ public class BankTransactionFragment extends Fragment {
             loadData("reconciled ASC");
         else if (position == 9 && posAD == 1)
             loadData("reconciled DESC");
-        else loadData("transaction_date DESC");
+        else loadData("bt.transaction_date DESC");
     }
 
     private void setAdapterList(){
@@ -470,12 +470,9 @@ public class BankTransactionFragment extends Fragment {
             holder.btTextStatus.setText(""+mValues.get(position).getStatus());
             holder.btTextReconciled.setText(""+mValues.get(position).getReconciled());
 
-            try{
-                NumberFormat formatter = new DecimalFormat("#,###");
-                holder.btTextTotal.setText("Rp. "+ formatter.format(Long.valueOf(mValues.get(position).getTotal_amount())));
-            } catch (NumberFormatException ex){ // handle your exception
-                holder.btTextTotal.setText("Rp. "+ mValues.get(position).getTotal_amount());
-            }
+            double toDouble = Double.valueOf(mValues.get(position).getTotal_amount());
+            NumberFormat formatter = new DecimalFormat("#,###");
+            holder.btTextTotal.setText("Rp. "+ formatter.format((long) toDouble));
 
             if (position%2==0)
                 holder.btLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));

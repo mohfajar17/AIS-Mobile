@@ -212,8 +212,7 @@ public class ProjectMenuActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressDialog.dismiss();
-//                    onBackPressed();
-                    access = access+"job_order, ";
+                    onBackPressed();
                 }
             }
         }, new Response.ErrorListener() {

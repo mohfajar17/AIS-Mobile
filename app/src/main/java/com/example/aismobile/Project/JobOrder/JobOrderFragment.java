@@ -227,7 +227,7 @@ public class JobOrderFragment extends Fragment {
             }
         });
 
-        loadJobOrder("job_order_id DESC");
+//        loadJobOrder("job_order_id DESC");
         loadEmployeeData();
 
         return view;

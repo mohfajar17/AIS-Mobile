@@ -527,6 +527,175 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                     </androidx.core.widget.NestedScrollView>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorBlack"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="785dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Total : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textGrandTotal"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorBlack"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="785dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Total Approved : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textTotalApproved"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorBlack"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="785dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Propose Budget Received : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textTotalPbReceived"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorBlack"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="785dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Residuals : "
+                            android:padding="10dp"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/textResiduals"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="Rp. -"
+                            android:padding="10dp"
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:src="@color/colorBlack"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorBlack"/>
                 </LinearLayout>
             </HorizontalScrollView>
 

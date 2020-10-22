@@ -84,37 +84,73 @@
         android:layout_height="match_parent"
         android:src="@color/colorBlack"/>
 
-    <TextView
-        android:id="@+id/textApproval1"
+    <LinearLayout
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:gravity="center|top"
-        android:padding="10dp"
-        android:textColor="@android:color/black"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textApproval1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:padding="10dp"
+            android:textColor="@android:color/black"/>
+
+        <Spinner
+            android:id="@+id/editApproval1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
 
     <ImageView
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:src="@color/colorBlack"/>
 
-    <TextView
-        android:id="@+id/textApproval2"
+    <LinearLayout
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:gravity="center|top"
-        android:padding="10dp"
-        android:textColor="@android:color/black"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textApproval2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:padding="10dp"
+            android:textColor="@android:color/black"/>
+
+        <Spinner
+            android:id="@+id/editApproval2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
 
     <ImageView
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:src="@color/colorBlack"/>
 
-    <TextView
-        android:id="@+id/textApproval3"
+    <LinearLayout
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:gravity="center|top"
-        android:padding="10dp"
-        android:textColor="@android:color/black"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textApproval3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:padding="10dp"
+            android:textColor="@android:color/black"/>
+
+        <Spinner
+            android:id="@+id/editApproval3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
 </LinearLayout>

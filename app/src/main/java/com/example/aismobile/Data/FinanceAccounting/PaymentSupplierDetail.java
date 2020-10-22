@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PaymentSupplierDetail implements Parcelable {
+    private String budget_supplier_detail_id;
     private String supplier_id;
     private String bank_account;
     private String bank_name;
@@ -17,6 +18,7 @@ public class PaymentSupplierDetail implements Parcelable {
     private String budget_supplier_app3;
 
     protected PaymentSupplierDetail(Parcel in) {
+        budget_supplier_detail_id = in.readString();
         supplier_id = in.readString();
         bank_account = in.readString();
         bank_name = in.readString();
@@ -29,6 +31,7 @@ public class PaymentSupplierDetail implements Parcelable {
 
     public PaymentSupplierDetail(JSONObject jsonObject){
         try {
+            this.budget_supplier_detail_id = jsonObject.getString("budget_supplier_detail_id");
             this.supplier_id = jsonObject.getString("supplier_id");
             this.bank_account = jsonObject.getString("bank_account");
             this.bank_name = jsonObject.getString("bank_name");
@@ -61,6 +64,7 @@ public class PaymentSupplierDetail implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(budget_supplier_detail_id);
         dest.writeString(supplier_id);
         dest.writeString(bank_account);
         dest.writeString(bank_name);
@@ -69,6 +73,10 @@ public class PaymentSupplierDetail implements Parcelable {
         dest.writeString(budget_supplier_app1);
         dest.writeString(budget_supplier_app2);
         dest.writeString(budget_supplier_app3);
+    }
+
+    public String getBudget_supplier_detail_id() {
+        return budget_supplier_detail_id;
     }
 
     public String getSupplier_id() {

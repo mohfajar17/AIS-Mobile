@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 public class CashOnDeliveryDetail implements Parcelable {
 
+    private String cash_on_delivery_detail_id;
     private String item_name;
     private String quantity;
     private String unit_abbr;
@@ -17,6 +18,7 @@ public class CashOnDeliveryDetail implements Parcelable {
     private String cod_app1;
 
     protected CashOnDeliveryDetail(Parcel in) {
+        cash_on_delivery_detail_id = in.readString();
         item_name = in.readString();
         quantity = in.readString();
         unit_abbr = in.readString();
@@ -28,6 +30,7 @@ public class CashOnDeliveryDetail implements Parcelable {
 
     public CashOnDeliveryDetail(JSONObject jsonObject){
         try {
+            this.cash_on_delivery_detail_id = jsonObject.getString("cash_on_delivery_detail_id");
             this.item_name = jsonObject.getString("item_name");
             this.quantity = jsonObject.getString("quantity");
             this.unit_abbr = jsonObject.getString("unit_abbr");
@@ -59,6 +62,7 @@ public class CashOnDeliveryDetail implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(cash_on_delivery_detail_id);
         dest.writeString(item_name);
         dest.writeString(quantity);
         dest.writeString(unit_abbr);
@@ -66,6 +70,10 @@ public class CashOnDeliveryDetail implements Parcelable {
         dest.writeString(max_budget);
         dest.writeString(discount);
         dest.writeString(cod_app1);
+    }
+
+    public String getCash_on_delivery_detail_id() {
+        return cash_on_delivery_detail_id;
     }
 
     public String getItem_name() {

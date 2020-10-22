@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -26,6 +28,8 @@ import com.example.aismobile.Config;
 import com.example.aismobile.Data.Inventory.StockAdjustment;
 import com.example.aismobile.Data.Inventory.StockDetail;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,6 +75,16 @@ public class DetailStockActivity extends AppCompatActivity {
     private TextView textModifiedDate;
     private TextView textTotal;
 
+    private int code = 0, approval = 0, akses1 = 0;
+    private ArrayAdapter<String> adapterApproval;
+    private LinearLayout layoutApproval;
+    private TextView btnApprove1;
+    private TextView btnApprove2;
+    private EditText editCommand;
+    private TextView btnSaveApprove;
+    private FloatingActionButton fabRefresh;
+    private SharedPrefManager sharedPrefManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +92,8 @@ public class DetailStockActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         stockAdjustment = bundle.getParcelable("detail");
+        code = bundle.getInt("code");
+        sharedPrefManager = new SharedPrefManager(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
@@ -90,6 +106,69 @@ public class DetailStockActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
+
+        layoutApproval = (LinearLayout) findViewById(R.id.layoutApproval);
+        if (code > 0){
+            params = layoutApproval.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutApproval.setLayoutParams(params);
+            loadAccess();
+        }
+        btnApprove1 = (TextView) findViewById(R.id.btnApprove1);
+        btnApprove2 = (TextView) findViewById(R.id.btnApprove2);
+        editCommand = (EditText) findViewById(R.id.editCommand);
+        btnSaveApprove = (TextView) findViewById(R.id.btnSaveApprove);
+        fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
+
+        btnApprove1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 1){
+                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 1;
+                    recyclerView.setAdapter(null);
+                    adapter = new MyRecyclerViewAdapter(stockDetails, context);
+                    recyclerView.setAdapter(adapter);
+                } else approval = 0;
+            }
+        });
+        btnApprove2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 2){
+                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 2;
+                    recyclerView.setAdapter(null);
+                    adapter = new MyRecyclerViewAdapter(stockDetails, context);
+                    recyclerView.setAdapter(adapter);
+                } else approval = 0;
+            }
+        });
+        btnSaveApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (approval == 1 && akses1 > 0){
+                    if (stockAdjustment.getApproval_by().toLowerCase().contains("-".toLowerCase()))
+                        Toast.makeText(DetailStockActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
+                    else updateApprovalId();
+                } else if (approval == 2){
+                    for (int i = 0; i<stockDetails.size(); i++)
+                        updateApproval(String.valueOf(stockDetails.get(i).getStock_adjustment_detail_id()),
+                                ((EditText) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getText().toString());
+                    updateApprovalId();
+                } else Toast.makeText(DetailStockActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
+            }
+        });
+        fabRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                approval = 0;
+                changeColor();
+                loadDetail();
+            }
+        });
 
         textAdjustmentNumber = (TextView) findViewById(R.id.textAdjustmentNumber);
         textPenjelasanSingkat = (TextView) findViewById(R.id.textPenjelasanSingkat);
@@ -163,6 +242,113 @@ public class DetailStockActivity extends AppCompatActivity {
         loadDetail();
     }
 
+    private void loadAccess() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_APPROVAL_ALLOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    akses1 = jsonObject.getInt("access1");
+                } catch (JSONException e) {
+                    Toast.makeText(DetailStockActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailStockActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("code", "12");
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailStockActivity.this).add(request);
+    }
+
+    public void changeColor(){
+        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
+        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
+    }
+
+    public void updateApproval(final String id, final String approve1){
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_APPROVAL_STOCK_ADJUSMENT, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                    } else {
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", id);
+                param.put("command", approve1);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailStockActivity.this).add(request);
+    }
+
+    public void updateApprovalId(){
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_ID_APPROVAL_STOCK_ADJUSMENT, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Toast.makeText(DetailStockActivity.this, "Success update data", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(DetailStockActivity.this, "Filed update data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    Toast.makeText(DetailStockActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailStockActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", "" + stockAdjustment.getStock_adjustment_id());
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("command", editCommand.getText().toString() + " ");
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailStockActivity.this).add(request);
+    }
+
     private void hiddenLayout(){
         menuDetail.setBackgroundColor(getResources().getColor(R.color.colorAsukaRed));
         menuDetail.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -178,6 +364,8 @@ public class DetailStockActivity extends AppCompatActivity {
 
     public void loadDetail(){
         progressDialog.show();
+        stockDetails.clear();
+        recyclerView.setAdapter(null);
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_STOCK_ADJUSMENT_DETAIL_LIST, new Response.Listener<String>() {
             @Override
@@ -244,7 +432,6 @@ public class DetailStockActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            int nomor = position+1;
             holder.textItem.setText(mValues.get(position).getItem_name());
             holder.textSpesifikasi.setText(mValues.get(position).getItem_specification());
             holder.textStockSekarang.setText(mValues.get(position).getCurrent_stock());
@@ -262,6 +449,15 @@ public class DetailStockActivity extends AppCompatActivity {
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.layout.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+
+            if (approval == 2 && code == 1){
+                params =  holder.editApproval1.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                holder.editApproval1.setLayoutParams(params);
+                params =  holder.textCatatan.getLayoutParams();
+                params.height = 0;
+                holder.textCatatan.setLayoutParams(params);
+            }
         }
 
         @Override
@@ -279,6 +475,7 @@ public class DetailStockActivity extends AppCompatActivity {
             public final TextView textHargaSatuan;
             public final TextView textSubTotal;
             public final TextView textCatatan;
+            public final EditText editApproval1;
 
             public final LinearLayout layout;
 
@@ -294,6 +491,7 @@ public class DetailStockActivity extends AppCompatActivity {
                 textHargaSatuan = (TextView) itemView.findViewById(R.id.textHargaSatuan);
                 textSubTotal = (TextView) itemView.findViewById(R.id.textSubTotal);
                 textCatatan = (TextView) itemView.findViewById(R.id.textCatatan);
+                editApproval1 = (EditText) itemView.findViewById(R.id.editApproval1);
 
                 layout = (LinearLayout) itemView.findViewById(R.id.layout);
             }

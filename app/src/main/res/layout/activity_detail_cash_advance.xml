@@ -474,6 +474,72 @@
                     android:text="Notes :"
                     android:textColor="@color/colorWhite" />
             </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bubble_red"/>
+
+            <LinearLayout
+                android:id="@+id/layoutApproval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="-5dp"
+                    android:gravity="center"
+                    android:text="Click to approve"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:id="@+id/btnApprove1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle_green"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:text="APPROVE"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"/>
+
+                <EditText
+                    android:id="@+id/editCommand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:hint="Command"
+                    android:textColor="@color/colorBlack"
+                    android:inputType="text" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/bubble_red"/>
+
+                <TextView
+                    android:id="@+id/btnSaveApprove"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble_red"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:text="SAVE APPROVAL"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/bubble_red"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

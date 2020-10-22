@@ -2,16 +2,36 @@ package com.example.aismobile.Project.TunjanganTemporary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.aismobile.Config;
 import com.example.aismobile.Data.Project.TunjanganTemporary;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DetailTunTemporaryActivity extends AppCompatActivity {
 
@@ -53,6 +73,20 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
     private TextView textListApproval2;
     private TextView textListPaid;
 
+    private int code = 0, approval = 0, akses1 = 0, akses2 = 0, approve1 = 0, approve2 = 0;
+    private ArrayAdapter<String> adapterApproval;
+    private LinearLayout layoutApproval;
+    private TextView btnApprove1;
+    private TextView btnApprove2;
+    private TextView btnApprove3;
+    private TextView btnSaveApprove;
+    private EditText editCommand;
+    public Spinner editApproval1;
+    public Spinner editApproval2;
+    private FloatingActionButton fabRefresh;
+    private SharedPrefManager sharedPrefManager;
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +94,92 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         tunjanganTemporary = bundle.getParcelable("detail");
+        code = bundle.getInt("code");
+        sharedPrefManager = new SharedPrefManager(this);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading data");
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
+
+        layoutApproval = (LinearLayout) findViewById(R.id.layoutApproval);
+        if (code > 0){
+            params = layoutApproval.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutApproval.setLayoutParams(params);
+            loadAccess();
+            loadAccessApproval();
+        }
+        btnApprove1 = (TextView) findViewById(R.id.btnApprove1);
+        btnApprove2 = (TextView) findViewById(R.id.btnApprove2);
+        btnApprove3 = (TextView) findViewById(R.id.btnApprove3);
+        btnSaveApprove = (TextView) findViewById(R.id.btnSaveApprove);
+        editCommand = (EditText) findViewById(R.id.editCommand);
+        fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
+        editApproval1 = (Spinner) findViewById(R.id.editApproval1);
+        editApproval2 = (Spinner) findViewById(R.id.editApproval2);
+
+        btnApprove1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 1){
+                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 1;
+                } else approval = 0;
+                openApproval();
+            }
+        });
+        btnApprove2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 2){
+                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 2;
+                } else approval = 0;
+                openApproval();
+            }
+        });
+        btnApprove3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 3){
+                    btnApprove3.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 3;
+                } else approval = 0;
+                openApproval();
+            }
+        });
+        btnSaveApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (approval == 1 && akses1 > 0 && approve1 > 0){
+                    updateApproval(String.valueOf(tunjanganTemporary.getEmployee_allowance_id()),
+                            editApproval1.getSelectedItem().toString(),
+                            textListApproval2.getText().toString());
+                    updateApprovalId();
+                    textListApproval1.setText(editApproval1.getSelectedItem().toString());
+                } else if (approval == 2 && akses2 > 0 && approve2 > 0){
+                    updateApproval(String.valueOf(tunjanganTemporary.getEmployee_allowance_id()),
+                            textListApproval1.getText().toString(),
+                            editApproval2.getSelectedItem().toString());
+                    updateApprovalId();
+                    textListApproval2.setText(editApproval2.getSelectedItem().toString());
+                } else if (approval == 3){
+                    updateApprovalId();
+                } else Toast.makeText(DetailTunTemporaryActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
+            }
+        });
+        fabRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                approval = 0;
+                changeColor();
+                openApproval();
+            }
+        });
 
         textListNama = (TextView) findViewById(R.id.textListNama);
         textListJenjang = (TextView) findViewById(R.id.textListJenjang);
@@ -159,6 +279,105 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
         });
     }
 
+    private void loadAccessApproval() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_APPROVAL_ALLOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    approve1 = jsonObject.getInt("access1");
+                    approve2 = jsonObject.getInt("access2");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailTunTemporaryActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("id", "" + tunjanganTemporary.getEmployee_allowance_id());
+                param.put("code", "7");
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailTunTemporaryActivity.this).add(request);
+    }
+
+    private void loadAccess() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_APPROVAL_ALLOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    akses1 = jsonObject.getInt("access1");
+                    akses2 = jsonObject.getInt("access2");
+                } catch (JSONException e) {
+                    Toast.makeText(DetailTunTemporaryActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailTunTemporaryActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("code", "7");
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailTunTemporaryActivity.this).add(request);
+    }
+
+    private void openApproval(){
+        if (approval == 1 && code == 1){
+            params =  editApproval1.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            editApproval1.setLayoutParams(params);
+            params =  textListApproval1.getLayoutParams();
+            params.height = 0;
+            textListApproval1.setLayoutParams(params);
+        } else if (approval == 2 && code == 1) {
+            params =  editApproval2.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            editApproval2.setLayoutParams(params);
+            params =  textListApproval2.getLayoutParams();
+            params.height = 0;
+            textListApproval2.setLayoutParams(params);
+        } else {
+            params =  textListApproval1.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            textListApproval1.setLayoutParams(params);
+            params =  editApproval1.getLayoutParams();
+            params.height = 0;
+            editApproval1.setLayoutParams(params);
+
+            params =  textListApproval2.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            textListApproval2.setLayoutParams(params);
+            params =  editApproval2.getLayoutParams();
+            params.height = 0;
+            editApproval2.setLayoutParams(params);
+        }
+
+        String[] approve = {"Approved", "Reject", "-"};
+        adapterApproval = new ArrayAdapter<String>(DetailTunTemporaryActivity.this, android.R.layout.simple_spinner_dropdown_item, approve);
+        editApproval1.setAdapter(adapterApproval);
+        editApproval2.setAdapter(adapterApproval);
+    }
+
     private void hiddenLayout(){
         menuDetail.setBackgroundColor(getResources().getColor(R.color.colorAsukaRed));
         menuDetail.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -170,5 +389,85 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
         params = layoutDetail.getLayoutParams(); params.height = 0; layoutDetail.setLayoutParams(params);
         params = layoutCatatan.getLayoutParams(); params.height = 0; layoutCatatan.setLayoutParams(params);
         params = layoutHistory.getLayoutParams(); params.height = 0; layoutHistory.setLayoutParams(params);
+    }
+
+    public void changeColor(){
+        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
+        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
+        btnApprove3.setTextColor(getResources().getColor(R.color.colorWhite));
+    }
+
+    public void updateApproval(final String id, final String approve1, final String approve2){
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_APPROVAL_TUN_TEMPORARY, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                    } else {
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", id);
+                param.put("approve1", approve1);
+                param.put("approve2", approve2);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailTunTemporaryActivity.this).add(request);
+    }
+
+    public void updateApprovalId(){
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_ID_APPROVAL_TUN_TEMPORARY, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Toast.makeText(DetailTunTemporaryActivity.this, "Success update data", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(DetailTunTemporaryActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    Toast.makeText(DetailTunTemporaryActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailTunTemporaryActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", "" + tunjanganTemporary.getEmployee_allowance_id());
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("command", editCommand.getText().toString() + " ");
+                param.put("code", "" + approval);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailTunTemporaryActivity.this).add(request);
     }
 }

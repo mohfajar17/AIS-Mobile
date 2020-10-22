@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -26,6 +27,7 @@ import com.example.aismobile.Config;
 import com.example.aismobile.Data.Inventory.MaterialReturn;
 import com.example.aismobile.Data.Inventory.MaterialReturnDetail;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,6 +67,12 @@ public class DetailMaterialActivity extends AppCompatActivity {
     private TextView textModifiedBy;
     private TextView textModifiedDate;
 
+    private int code = 0, approval = 0, akses1 = 0;
+    private LinearLayout layoutApproval;
+    private TextView btnApprove1;
+    private TextView btnSaveApprove;
+    private SharedPrefManager sharedPrefManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +80,8 @@ public class DetailMaterialActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         materialReturn = bundle.getParcelable("detail");
+        code = bundle.getInt("code");
+        sharedPrefManager = new SharedPrefManager(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
@@ -84,6 +94,38 @@ public class DetailMaterialActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
+
+        btnApprove1 = (TextView) findViewById(R.id.btnApprove1);
+        btnSaveApprove = (TextView) findViewById(R.id.btnSaveApprove);
+        layoutApproval = (LinearLayout) findViewById(R.id.layoutApproval);
+        if (code > 0){
+            params = layoutApproval.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutApproval.setLayoutParams(params);
+            loadAccess();
+        }
+        btnApprove1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (approval == 0){
+                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 1;
+                } else {
+                    btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
+                    approval = 0;
+                }
+            }
+        });
+        btnSaveApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (approval == 1 && akses1 > 0){
+                    updateApprovalId();
+                    btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
+                    approval = 0;
+                } else Toast.makeText(DetailMaterialActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
+            }
+        });
 
         textMrNumber = (TextView) findViewById(R.id.textMrNumber);
         textJobOrder = (TextView) findViewById(R.id.textJobOrder);
@@ -146,6 +188,75 @@ public class DetailMaterialActivity extends AppCompatActivity {
         });
 
         loadDetail();
+    }
+
+    private void loadAccess() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_APPROVAL_ALLOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    akses1 = jsonObject.getInt("access1");
+                } catch (JSONException e) {
+                    Toast.makeText(DetailMaterialActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailMaterialActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("code", "11");
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailMaterialActivity.this).add(request);
+    }
+
+    public void updateApprovalId(){
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_ID_APPROVAL_MATERIAL_RETURN, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Toast.makeText(DetailMaterialActivity.this, "Success update data", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(DetailMaterialActivity.this, "Filed update data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    Toast.makeText(DetailMaterialActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailMaterialActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", "" + materialReturn.getMaterial_return_id());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailMaterialActivity.this).add(request);
     }
 
     private void hiddenLayout(){

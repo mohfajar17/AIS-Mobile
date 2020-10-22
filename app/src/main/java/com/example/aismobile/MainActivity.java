@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Contact.ContactMenuActivity;
+import com.example.aismobile.Dashboard.DashboardActivity;
 import com.example.aismobile.Inventory.InventoryMenuActivity;
 import com.example.aismobile.Finance.FinanceMenuActivity;
 import com.example.aismobile.Kalender.HomeCollection;
@@ -170,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         textName.setText(sharedPrefManager.getUserDisplayName());
 
         getDataLeave(sharedPrefManager.getEmployeeId());
-        getDataMoneybox(sharedPrefManager.getEmployeeNumber());
+        getDataMoneybox(sharedPrefManager.getEmployeeId());
         getDataCustomerInvoice();
         getDataSupplierInvoice();
         getDataBank();

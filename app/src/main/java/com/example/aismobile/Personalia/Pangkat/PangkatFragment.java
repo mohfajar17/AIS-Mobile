@@ -35,6 +35,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
 import com.example.aismobile.Data.Personalia.JobTitle;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -47,6 +48,8 @@ import java.util.List;
 import java.util.Map;
 
 public class PangkatFragment extends Fragment {
+
+    public SharedPrefManager sharedPrefManager;
 
     private LinearLayout kShowFilter;
     private LinearLayout kLayoutFilter;
@@ -99,6 +102,8 @@ public class PangkatFragment extends Fragment {
         progressDialog.setTitle("Loading data");
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
+
+        sharedPrefManager = new SharedPrefManager(getContext());
 
         jobTitles = new ArrayList<>();
 
@@ -443,9 +448,7 @@ public class PangkatFragment extends Fragment {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), DetailPangkatActivity.class);
-                    intent.putExtra("detail", mValues.get(position));
-                    holder.itemView.getContext().startActivity(intent);
+                    loadAccess("" + mValues.get(position).getJobtitle_id(), mValues.get(position));
                 }
             });
         }
@@ -537,5 +540,49 @@ public class PangkatFragment extends Fragment {
                 pLayoutList = (LinearLayout) view.findViewById(R.id.pLayoutList);
             }
         }
+    }
+
+    private void loadAccess(final String id, final JobTitle jobTitle) {
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_VIEW_ACCESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Intent intent = new Intent(getActivity(), DetailPangkatActivity.class);
+                        intent.putExtra("detail", jobTitle);
+                        getContext().startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "You don't have access", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", "" + sharedPrefManager.getUserId());
+                param.put("feature", "" + "job-title");
+                param.put("access", "" + "job-title:view");
+                param.put("id", "" + id);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(getActivity()).add(request);
     }
 }

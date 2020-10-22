@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightGray"
-    tools:context=".DashboardActivity">
+    tools:context=".Dashboard.DashboardActivity">
 
 
     <ScrollView
@@ -51,7 +51,7 @@
                 <LinearLayout
                     android:id="@+id/layoutProject"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_margin="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -60,6 +60,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/layoutMaterialRequest"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -75,6 +76,7 @@
                             android:text="Material Request"/>
 
                         <TextView
+                            android:id="@+id/textMaterialRequest"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -90,6 +92,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutWorkRequest"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -105,6 +108,7 @@
                             android:text="Work Request"/>
 
                         <TextView
+                            android:id="@+id/textWorkRequest"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -120,6 +124,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutSpkl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -135,6 +140,7 @@
                             android:text="SPKL"/>
 
                         <TextView
+                            android:id="@+id/textSPKL"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -150,6 +156,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutProposedBudget"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -165,6 +172,7 @@
                             android:text="Proposed Budget"/>
 
                         <TextView
+                            android:id="@+id/textProposedBudget"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -180,6 +188,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutCashProjectReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -195,6 +204,7 @@
                             android:text="Cash Project Report"/>
 
                         <TextView
+                            android:id="@+id/textCashProjectReport"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -210,6 +220,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutTunjanganLokasi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -222,9 +233,10 @@
                             android:gravity="center|left"
                             android:textColor="@color/colorWhite"
                             android:textSize="16dp"
-                            android:text="Tunjangan Lokasi"/>
+                            android:text="Tunjangan Karyawan"/>
 
                         <TextView
+                            android:id="@+id/textTunjanganLokasi"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -240,6 +252,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutTunjanganPerjalanan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -252,9 +265,10 @@
                             android:gravity="center|left"
                             android:textColor="@color/colorWhite"
                             android:textSize="16dp"
-                            android:text="Tunjangan Perjalanan Dinas"/>
+                            android:text="Tunjangan Temporary"/>
 
                         <TextView
+                            android:id="@+id/textTunjanganPerjalananDinas"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -280,6 +294,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/icon_project"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -287,6 +302,20 @@
                         android:textSize="20dp"
                         android:textStyle="bold"
                         android:text="Project"/>
+
+                    <TextView
+                        android:id="@+id/textJmlProject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:background="@drawable/circle_blue"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="0"/>
                 </LinearLayout>
             </RelativeLayout>
 
@@ -301,7 +330,7 @@
                 <LinearLayout
                     android:id="@+id/layoutPurchasing"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_margin="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -310,6 +339,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/layoutPurchaseOrder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -325,6 +355,7 @@
                             android:text="Purchase Order"/>
 
                         <TextView
+                            android:id="@+id/textPurchaseOrder"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -340,6 +371,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutWorkOrder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -355,6 +387,7 @@
                             android:text="Work Order"/>
 
                         <TextView
+                            android:id="@+id/textWorkOrder"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -370,6 +403,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutCashOnDelivery"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -385,6 +419,7 @@
                             android:text="Cash On Delivery"/>
 
                         <TextView
+                            android:id="@+id/textCashOnDelivery"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -410,6 +445,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/icon_purchasing"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -417,6 +453,20 @@
                         android:textSize="20dp"
                         android:textStyle="bold"
                         android:text="Purchasing"/>
+
+                    <TextView
+                        android:id="@+id/textJmlPurchsing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:background="@drawable/circle_blue"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="0"/>
                 </LinearLayout>
             </RelativeLayout>
 
@@ -431,7 +481,7 @@
                 <LinearLayout
                     android:id="@+id/layoutInventory"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_margin="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -440,6 +490,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/layoutMaterialReturn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -455,6 +506,7 @@
                             android:text="Material Return"/>
 
                         <TextView
+                            android:id="@+id/textMaterialReturn"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -470,6 +522,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutStockAdjustment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -485,6 +538,7 @@
                             android:text="Stock Adjustment"/>
 
                         <TextView
+                            android:id="@+id/textStockAdjustment"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -510,6 +564,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/icon_inventory"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -517,21 +572,33 @@
                         android:textSize="20dp"
                         android:textStyle="bold"
                         android:text="Inventory"/>
+
+                    <TextView
+                        android:id="@+id/textJmlInventory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:background="@drawable/circle_blue"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="0"/>
                 </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="10dp"
                 android:gravity="center|top" >
 
                 <LinearLayout
                     android:id="@+id/layoutFinance"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_margin="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -540,6 +607,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/layoutBudgeting"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -555,6 +623,7 @@
                             android:text="Budgeting"/>
 
                         <TextView
+                            android:id="@+id/textBudgeting"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -570,6 +639,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutPaymentSupplier"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -585,6 +655,7 @@
                             android:text="Payment Supplier"/>
 
                         <TextView
+                            android:id="@+id/textPaymentSupplier"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -600,6 +671,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutBankTransaction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -615,6 +687,7 @@
                             android:text="Bank Transaction"/>
 
                         <TextView
+                            android:id="@+id/textBankTransaction"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -630,6 +703,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutExpense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -645,6 +719,7 @@
                             android:text="Expense"/>
 
                         <TextView
+                            android:id="@+id/textExpense"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -660,6 +735,7 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutCashAdvance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -672,9 +748,10 @@
                             android:gravity="center|left"
                             android:textColor="@color/colorWhite"
                             android:textSize="16dp"
-                            android:text="Advance"/>
+                            android:text="Cash Advance"/>
 
                         <TextView
+                            android:id="@+id/textCashAdvance"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:background="@drawable/circle"
@@ -700,6 +777,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/icon_finance"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -707,6 +785,20 @@
                         android:textSize="20dp"
                         android:textStyle="bold"
                         android:text="Finance Accounting"/>
+
+                    <TextView
+                        android:id="@+id/textJmlFinance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:background="@drawable/circle_blue"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="0"/>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>

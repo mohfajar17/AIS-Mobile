@@ -125,6 +125,9 @@ public class ContactMenuActivity extends AppCompatActivity {
                     e.printStackTrace();
                     progressDialog.dismiss();
 //                    onBackPressed();
+                    access = access+"contact, ";
+                    access = access+"supplier, ";
+                    access = access+"company, ";
                 }
             }
         }, new Response.ErrorListener() {

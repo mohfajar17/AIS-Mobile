@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,8 @@ import com.example.aismobile.Config;
 import com.example.aismobile.Data.Project.WorkOrder;
 import com.example.aismobile.Data.Project.WorkOrderDetail;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,6 +82,17 @@ public class DetailWorkReqActivity extends AppCompatActivity {
     private TextView textModifiedDate;
     private TextView textGrandTotal;
 
+    private int code = 0, approval = 0, akses1 = 0, akses2 = 0, akses3 = 0, approve1 = 0, approve2 = 0, approve3 = 0;
+    private ArrayAdapter<String> adapterApproval;
+    private LinearLayout layoutApproval;
+    private TextView btnApprove1;
+    private TextView btnApprove2;
+    private TextView btnApprove3;
+    private TextView btnSaveApprove;
+    private EditText editCommand;
+    private FloatingActionButton fabRefresh;
+    private SharedPrefManager sharedPrefManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +100,8 @@ public class DetailWorkReqActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         workOrder = bundle.getParcelable("detail");
+        code = bundle.getInt("code");
+        sharedPrefManager = new SharedPrefManager(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
@@ -96,6 +114,96 @@ public class DetailWorkReqActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
+
+        layoutApproval = (LinearLayout) findViewById(R.id.layoutApproval);
+        if (code > 0){
+            params = layoutApproval.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutApproval.setLayoutParams(params);
+            loadAccess();
+            loadAccessApproval();
+        }
+        btnApprove1 = (TextView) findViewById(R.id.btnApprove1);
+        btnApprove2 = (TextView) findViewById(R.id.btnApprove2);
+        btnApprove3 = (TextView) findViewById(R.id.btnApprove3);
+        btnSaveApprove = (TextView) findViewById(R.id.btnSaveApprove);
+        editCommand = (EditText) findViewById(R.id.editCommand);
+        fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
+
+        btnApprove1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 1){
+                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 1;
+                    recyclerView.setAdapter(null);
+                    adapter = new MyRecyclerViewAdapter(workOrderDetails, context);
+                    recyclerView.setAdapter(adapter);
+                } else approval = 0;
+            }
+        });
+        btnApprove2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 2){
+                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 2;
+                    recyclerView.setAdapter(null);
+                    adapter = new MyRecyclerViewAdapter(workOrderDetails, context);
+                    recyclerView.setAdapter(adapter);
+                } else approval = 0;
+            }
+        });
+        btnApprove3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 3){
+                    btnApprove3.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 3;
+                    recyclerView.setAdapter(null);
+                    adapter = new MyRecyclerViewAdapter(workOrderDetails, context);
+                    recyclerView.setAdapter(adapter);
+                } else approval = 0;
+            }
+        });
+        btnSaveApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (approval == 1 && akses1 > 0 && approve1 > 0){
+                    for (int i = 0; i<workOrderDetails.size(); i++)
+                        updateApproval(String.valueOf(workOrderDetails.get(i).getWork_order_detail_id()),
+                                ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
+                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
+                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                    updateApprovalId();
+                } else if (approval == 2 && akses2 > 0 && approve2 > 0){
+                    for (int i = 0; i<workOrderDetails.size(); i++)
+                        updateApproval(String.valueOf(workOrderDetails.get(i).getWork_order_detail_id()),
+                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
+                                ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
+                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                    updateApprovalId();
+                } else if (approval == 3 && akses3 > 0 && approve3 > 0){
+                    for (int i = 0; i<workOrderDetails.size(); i++)
+                        updateApproval(String.valueOf(workOrderDetails.get(i).getWork_order_detail_id()),
+                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
+                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
+                                ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
+                    updateApprovalId();
+                } else Toast.makeText(DetailWorkReqActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
+            }
+        });
+        fabRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadDetail();
+                changeColor();
+                approval = 0;
+            }
+        });
 
         textWoDescript = (TextView) findViewById(R.id.textWoDescript);
         textJobOrder = (TextView) findViewById(R.id.textJobOrder);
@@ -179,6 +287,75 @@ public class DetailWorkReqActivity extends AppCompatActivity {
         loadDetail();
     }
 
+    private void loadAccessApproval() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_APPROVAL_ALLOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    approve1 = jsonObject.getInt("access1");
+                    approve2 = jsonObject.getInt("access2");
+                    approve3 = jsonObject.getInt("access3");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailWorkReqActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("id", "" + workOrder.getWork_order_id());
+                param.put("code", "2");
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailWorkReqActivity.this).add(request);
+    }
+
+    private void loadAccess() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_APPROVAL_ALLOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    akses1 = jsonObject.getInt("access1");
+                    akses2 = jsonObject.getInt("access2");
+                    akses3 = jsonObject.getInt("access3");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailWorkReqActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("code", "2");
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailWorkReqActivity.this).add(request);
+    }
+
+    public void changeColor(){
+        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
+        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
+        btnApprove3.setTextColor(getResources().getColor(R.color.colorWhite));
+    }
+
     private void hiddenLayout(){
         menuDetail.setBackgroundColor(getResources().getColor(R.color.colorAsukaRed));
         menuDetail.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -192,8 +369,85 @@ public class DetailWorkReqActivity extends AppCompatActivity {
         params = layoutHistory.getLayoutParams(); params.height = 0; layoutHistory.setLayoutParams(params);
     }
 
+    public void updateApproval(final String id, final String approve1, final String approve2, final String approve3){
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_APPROVAL_WORK_REQUEST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                    } else {
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", id);
+                param.put("approve1", approve1);
+                param.put("approve2", approve2);
+                param.put("approve3", approve3);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailWorkReqActivity.this).add(request);
+    }
+
+    public void updateApprovalId(){
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_ID_APPROVAL_WORK_REQUEST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Toast.makeText(DetailWorkReqActivity.this, "Success update data", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(DetailWorkReqActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    Toast.makeText(DetailWorkReqActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailWorkReqActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", "" + workOrder.getWork_order_id());
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("command", editCommand.getText().toString() + " ");
+                param.put("code", "" + approval);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailWorkReqActivity.this).add(request);
+    }
+
     public void loadDetail(){
         progressDialog.show();
+        recyclerView.setAdapter(null);
+        workOrderDetails.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_WORK_ORDER_DETAIL_LIST, new Response.Listener<String>() {
             @Override
@@ -281,6 +535,35 @@ public class DetailWorkReqActivity extends AppCompatActivity {
 
             if (position+1 == mValues.size())
                 textGrandTotal.setText("Rp. " + formatter.format((long) totalNilai));
+
+            if (approval == 1 && code == 1){
+                params =  holder.editApproval1.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                holder.editApproval1.setLayoutParams(params);
+                params =  holder.textApproval1.getLayoutParams();
+                params.height = 0;
+                holder.textApproval1.setLayoutParams(params);
+            } else if (approval == 2 && code == 1) {
+                params =  holder.editApproval2.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                holder.editApproval2.setLayoutParams(params);
+                params =  holder.textApproval2.getLayoutParams();
+                params.height = 0;
+                holder.textApproval2.setLayoutParams(params);
+            } else if (approval == 3 && code == 1){
+                params =  holder.editApproval3.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                holder.editApproval3.setLayoutParams(params);
+                params =  holder.textApproval3.getLayoutParams();
+                params.height = 0;
+                holder.textApproval3.setLayoutParams(params);
+            }
+
+            String[] approve = {"Approved", "Reject", "-"};
+            adapterApproval = new ArrayAdapter<String>(DetailWorkReqActivity.this, android.R.layout.simple_spinner_dropdown_item, approve);
+            holder.editApproval1.setAdapter(adapterApproval);
+            holder.editApproval2.setAdapter(adapterApproval);
+            holder.editApproval3.setAdapter(adapterApproval);
         }
 
         @Override
@@ -299,6 +582,9 @@ public class DetailWorkReqActivity extends AppCompatActivity {
             public final TextView textApproval1;
             public final TextView textApproval2;
             public final TextView textApproval3;
+            public final Spinner editApproval1;
+            public final Spinner editApproval2;
+            public final Spinner editApproval3;
 
             public final LinearLayout layout;
 
@@ -315,6 +601,9 @@ public class DetailWorkReqActivity extends AppCompatActivity {
                 textApproval1 = (TextView) itemView.findViewById(R.id.textApproval1);
                 textApproval2 = (TextView) itemView.findViewById(R.id.textApproval2);
                 textApproval3 = (TextView) itemView.findViewById(R.id.textApproval3);
+                editApproval1 = (Spinner) itemView.findViewById(R.id.editApproval1);
+                editApproval2 = (Spinner) itemView.findViewById(R.id.editApproval2);
+                editApproval3 = (Spinner) itemView.findViewById(R.id.editApproval3);
 
                 layout = (LinearLayout) itemView.findViewById(R.id.layout);
             }

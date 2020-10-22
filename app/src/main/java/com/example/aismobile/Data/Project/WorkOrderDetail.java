@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 public class WorkOrderDetail implements Parcelable {
 
+    private String work_order_detail_id;
     private String item_name;
     private String wo_notes;
     private String quantity;
@@ -19,6 +20,7 @@ public class WorkOrderDetail implements Parcelable {
     private String wo_app3;
 
     protected WorkOrderDetail(Parcel in) {
+        work_order_detail_id = in.readString();
         item_name = in.readString();
         wo_notes = in.readString();
         quantity = in.readString();
@@ -32,6 +34,7 @@ public class WorkOrderDetail implements Parcelable {
 
     public WorkOrderDetail(JSONObject jsonObject){
         try {
+            this.work_order_detail_id = jsonObject.getString("work_order_detail_id");
             this.item_name = jsonObject.getString("item_name");
             this.wo_notes = jsonObject.getString("wo_notes");
             this.quantity = jsonObject.getString("quantity");
@@ -65,6 +68,7 @@ public class WorkOrderDetail implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(work_order_detail_id);
         dest.writeString(item_name);
         dest.writeString(wo_notes);
         dest.writeString(quantity);
@@ -74,6 +78,10 @@ public class WorkOrderDetail implements Parcelable {
         dest.writeString(wo_app1);
         dest.writeString(wo_app2);
         dest.writeString(wo_app3);
+    }
+
+    public String getWork_order_detail_id() {
+        return work_order_detail_id;
     }
 
     public String getItem_name() {

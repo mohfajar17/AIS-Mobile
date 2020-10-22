@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,8 @@ import com.example.aismobile.Config;
 import com.example.aismobile.Data.FinanceAccounting.PaymentSupplier;
 import com.example.aismobile.Data.FinanceAccounting.PaymentSupplierDetail;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,12 +46,12 @@ import java.util.Map;
 public class DetailPaymentSuppliersActivity extends AppCompatActivity {
 
     private ViewGroup.LayoutParams params;
-    private PaymentSupplier budgeting;
+    private PaymentSupplier paymentSupplier;
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
-    private List<PaymentSupplierDetail> budgetingDetails;
+    private List<PaymentSupplierDetail> paymentSupplierDetails;
     private ProgressDialog progressDialog;
 
     private double toDouble;
@@ -82,13 +87,26 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
     private TextView textModifiedDate;
     private TextView textGrandTotal;
 
+    private int code = 0, approval = 0, akses1 = 0, akses2 = 0, akses3 = 0;
+    private ArrayAdapter<String> adapterApproval;
+    private LinearLayout layoutApproval;
+    private TextView btnApprove1;
+    private TextView btnApprove2;
+    private TextView btnApprove3;
+    private TextView btnSaveApprove;
+    private EditText editCommand;
+    private FloatingActionButton fabRefresh;
+    private SharedPrefManager sharedPrefManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_payment_suppliers);
 
         Bundle bundle = getIntent().getExtras();
-        budgeting = bundle.getParcelable("detail");
+        paymentSupplier = bundle.getParcelable("detail");
+        code = bundle.getInt("code");
+        sharedPrefManager = new SharedPrefManager(this);
 
         formatter = new DecimalFormat("#,###");
 
@@ -98,11 +116,118 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         context = getApplicationContext();
-        budgetingDetails = new ArrayList<>();
+        paymentSupplierDetails = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
+
+        layoutApproval = (LinearLayout) findViewById(R.id.layoutApproval);
+        if (code > 0){
+            params = layoutApproval.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutApproval.setLayoutParams(params);
+            loadAccess();
+        }
+        btnApprove1 = (TextView) findViewById(R.id.btnApprove1);
+        btnApprove2 = (TextView) findViewById(R.id.btnApprove2);
+        btnApprove3 = (TextView) findViewById(R.id.btnApprove3);
+        btnSaveApprove = (TextView) findViewById(R.id.btnSaveApprove);
+        editCommand = (EditText) findViewById(R.id.editCommand);
+        fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
+
+        btnApprove1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 1){
+                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 1;
+                    recyclerView.setAdapter(null);
+                    adapter = new MyRecyclerViewAdapter(paymentSupplierDetails, context);
+                    recyclerView.setAdapter(adapter);
+                } else approval = 0;
+            }
+        });
+        btnApprove2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 2){
+                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 2;
+                    recyclerView.setAdapter(null);
+                    adapter = new MyRecyclerViewAdapter(paymentSupplierDetails, context);
+                    recyclerView.setAdapter(adapter);
+                } else approval = 0;
+            }
+        });
+        btnApprove3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 3){
+                    btnApprove3.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 3;
+                    recyclerView.setAdapter(null);
+                    adapter = new MyRecyclerViewAdapter(paymentSupplierDetails, context);
+                    recyclerView.setAdapter(adapter);
+                } else approval = 0;
+            }
+        });
+        btnSaveApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (approval == 1 && akses1 > 0){
+                    if (paymentSupplier.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                            paymentSupplier.getDone().toLowerCase().contains("Ya".toLowerCase()))
+                        Toast.makeText(DetailPaymentSuppliersActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
+                    else{
+                        for (int i = 0; i< paymentSupplierDetails.size(); i++)
+                            updateApproval(String.valueOf(paymentSupplierDetails.get(i).getBudget_supplier_detail_id()),
+                                    ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                        updateApprovalId();
+                    }
+                } else if (approval == 2 && akses2 > 0){
+                    if (paymentSupplier.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                            paymentSupplier.getDone().toLowerCase().contains("Ya".toLowerCase()) ||
+                            paymentSupplier.getApproval1().toLowerCase().contains("-".toLowerCase()))
+                        Toast.makeText(DetailPaymentSuppliersActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
+                    else{
+                        for (int i = 0; i< paymentSupplierDetails.size(); i++)
+                            updateApproval(String.valueOf(paymentSupplierDetails.get(i).getBudget_supplier_detail_id()),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
+                                    ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                        updateApprovalId();
+                    }
+                } else if (approval == 3 && akses3 > 0){
+                    if (paymentSupplier.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                            paymentSupplier.getDone().toLowerCase().contains("Ya".toLowerCase()) ||
+                            paymentSupplier.getApproval1().toLowerCase().contains("-".toLowerCase()) ||
+                            paymentSupplier.getApproval2().toLowerCase().contains("-".toLowerCase()))
+                        Toast.makeText(DetailPaymentSuppliersActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
+                    else{
+                        for (int i = 0; i< paymentSupplierDetails.size(); i++)
+                            updateApproval(String.valueOf(paymentSupplierDetails.get(i).getBudget_supplier_detail_id()),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
+                                    ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
+                        updateApprovalId();
+                    }
+                } else Toast.makeText(DetailPaymentSuppliersActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
+            }
+        });
+        fabRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadDetail();
+                changeColor();
+                approval = 0;
+            }
+        });
 
         textPsNumber = (TextView) findViewById(R.id.textPsNumber);
         textStartDate = (TextView) findViewById(R.id.textStartDate);
@@ -125,25 +250,25 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
         textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
         textGrandTotal = (TextView) findViewById(R.id.textGrandTotal);
 
-        textPsNumber.setText(budgeting.getBudget_supplier_number());
-        textStartDate.setText(budgeting.getStart_date());
-        textEndDate.setText(budgeting.getEnd_date());
-        textCheckedBy.setText(budgeting.getChecked_by());
-        textCheckedDate.setText(budgeting.getChecked_date());
-        textApproval1.setText(budgeting.getApproval1());
-        textApproval1Date.setText(budgeting.getApproval_date1());
-        textComment1.setText(budgeting.getApproval_comment1());
-        textApproval2.setText(budgeting.getApproval2());
-        textApproval2Date.setText(budgeting.getApproval_date2());
-        textComment2.setText(budgeting.getApproval_comment2());
-        textApproval3.setText(budgeting.getApproval3());
-        textApproval3Date.setText(budgeting.getApproval_date3());
-        textComment3.setText(budgeting.getApproval_comment3());
-        textCatatan.setText(budgeting.getNotes());
-        textCreatedBy.setText(budgeting.getCreated_by());
-        textCreatedDate.setText(budgeting.getCreated_date());
-        textModifiedBy.setText(budgeting.getModified_by());
-        textModifiedDate.setText(budgeting.getModified_date());
+        textPsNumber.setText(paymentSupplier.getBudget_supplier_number());
+        textStartDate.setText(paymentSupplier.getStart_date());
+        textEndDate.setText(paymentSupplier.getEnd_date());
+        textCheckedBy.setText(paymentSupplier.getChecked_by());
+        textCheckedDate.setText(paymentSupplier.getChecked_date());
+        textApproval1.setText(paymentSupplier.getApproval1());
+        textApproval1Date.setText(paymentSupplier.getApproval_date1());
+        textComment1.setText(paymentSupplier.getApproval_comment1());
+        textApproval2.setText(paymentSupplier.getApproval2());
+        textApproval2Date.setText(paymentSupplier.getApproval_date2());
+        textComment2.setText(paymentSupplier.getApproval_comment2());
+        textApproval3.setText(paymentSupplier.getApproval3());
+        textApproval3Date.setText(paymentSupplier.getApproval_date3());
+        textComment3.setText(paymentSupplier.getApproval_comment3());
+        textCatatan.setText(paymentSupplier.getNotes());
+        textCreatedBy.setText(paymentSupplier.getCreated_by());
+        textCreatedDate.setText(paymentSupplier.getCreated_date());
+        textModifiedBy.setText(paymentSupplier.getModified_by());
+        textModifiedDate.setText(paymentSupplier.getModified_date());
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
         menuDetail = (TextView) findViewById(R.id.menuDetail);
@@ -190,6 +315,119 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
         loadDetail();
     }
 
+    private void loadAccess() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_APPROVAL_ALLOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    akses1 = jsonObject.getInt("access1");
+                    akses2 = jsonObject.getInt("access2");
+                    akses3 = jsonObject.getInt("access3");
+                } catch (JSONException e) {
+                    Toast.makeText(DetailPaymentSuppliersActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailPaymentSuppliersActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("code", "14");
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailPaymentSuppliersActivity.this).add(request);
+    }
+
+    public void changeColor(){
+        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
+        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
+        btnApprove3.setTextColor(getResources().getColor(R.color.colorWhite));
+    }
+
+    public void updateApproval(final String id, final String approve1, final String approve2, final String approve3){
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_APPROVAL_PAYMENT_SUPPLIER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                    } else {
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", id);
+                param.put("approve1", approve1);
+                param.put("approve2", approve2);
+                param.put("approve3", approve3);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailPaymentSuppliersActivity.this).add(request);
+    }
+
+    public void updateApprovalId(){
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_ID_APPROVAL_PAYMENT_SUPPLIER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Toast.makeText(DetailPaymentSuppliersActivity.this, "Success update data", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(DetailPaymentSuppliersActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    Toast.makeText(DetailPaymentSuppliersActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailPaymentSuppliersActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", "" + paymentSupplier.getBudget_supplier_id());
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("command", editCommand.getText().toString() + " ");
+                param.put("code", "" + approval);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailPaymentSuppliersActivity.this).add(request);
+    }
+
     private void hiddenLayout(){
         menuDetail.setBackgroundColor(getResources().getColor(R.color.colorAsukaRed));
         menuDetail.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -205,6 +443,8 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
 
     public void loadDetail(){
         progressDialog.show();
+        recyclerView.setAdapter(null);
+        paymentSupplierDetails.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_PAYMENT_SUPPLIER_DETAIL_LIST, new Response.Listener<String>() {
             @Override
@@ -216,11 +456,11 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
                         grandTotal = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            budgetingDetails.add(new PaymentSupplierDetail(jsonArray.getJSONObject(i)));
+                            paymentSupplierDetails.add(new PaymentSupplierDetail(jsonArray.getJSONObject(i)));
                             grandTotal += jsonArray.getJSONObject(i).getDouble("amount");
                         }
                         textGrandTotal.setText("Rp. " + formatter.format((long) grandTotal));
-                        adapter = new MyRecyclerViewAdapter(budgetingDetails, context);
+                        adapter = new MyRecyclerViewAdapter(paymentSupplierDetails, context);
                         recyclerView.setAdapter(adapter);
                     } else {
                         Toast.makeText(DetailPaymentSuppliersActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
@@ -243,7 +483,7 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
-                param.put("psId", "" + budgeting.getBudget_supplier_id());
+                param.put("psId", "" + paymentSupplier.getBudget_supplier_id());
                 return param;
             }
         };
@@ -285,6 +525,35 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.layout.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
+
+            if (approval == 1 && code == 1){
+                params =  holder.editApproval1.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                holder.editApproval1.setLayoutParams(params);
+                params =  holder.textApproval1.getLayoutParams();
+                params.height = 0;
+                holder.textApproval1.setLayoutParams(params);
+            } else if (approval == 2 && code == 1) {
+                params =  holder.editApproval2.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                holder.editApproval2.setLayoutParams(params);
+                params =  holder.textApproval2.getLayoutParams();
+                params.height = 0;
+                holder.textApproval2.setLayoutParams(params);
+            } else if (approval == 3 && code == 1){
+                params =  holder.editApproval3.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                holder.editApproval3.setLayoutParams(params);
+                params =  holder.textApproval3.getLayoutParams();
+                params.height = 0;
+                holder.textApproval3.setLayoutParams(params);
+            }
+
+            String[] approve = {"Approved", "Reject", "-"};
+            adapterApproval = new ArrayAdapter<String>(DetailPaymentSuppliersActivity.this, android.R.layout.simple_spinner_dropdown_item, approve);
+            holder.editApproval1.setAdapter(adapterApproval);
+            holder.editApproval2.setAdapter(adapterApproval);
+            holder.editApproval3.setAdapter(adapterApproval);
         }
 
         @Override
@@ -303,6 +572,9 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
             public final TextView textApproval1;
             public final TextView textApproval2;
             public final TextView textApproval3;
+            public final Spinner editApproval1;
+            public final Spinner editApproval2;
+            public final Spinner editApproval3;
 
             public final LinearLayout layout;
 
@@ -319,6 +591,9 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
                 textApproval1 = (TextView) itemView.findViewById(R.id.textApproval1);
                 textApproval2 = (TextView) itemView.findViewById(R.id.textApproval2);
                 textApproval3 = (TextView) itemView.findViewById(R.id.textApproval3);
+                editApproval1 = (Spinner) itemView.findViewById(R.id.editApproval1);
+                editApproval2 = (Spinner) itemView.findViewById(R.id.editApproval2);
+                editApproval3 = (Spinner) itemView.findViewById(R.id.editApproval3);
 
                 layout = (LinearLayout) itemView.findViewById(R.id.layout);
             }

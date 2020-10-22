@@ -37,6 +37,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
 import com.example.aismobile.Data.Personalia.Allowance;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -51,6 +52,8 @@ import java.util.List;
 import java.util.Map;
 
 public class TunjanganFragment extends Fragment {
+
+    public SharedPrefManager sharedPrefManager;
 
     private TextView menuPotonganKaryawan;
     private TextView menuTunjanganKaryawan;
@@ -118,6 +121,8 @@ public class TunjanganFragment extends Fragment {
         progressDialog.setTitle("Loading data");
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
+
+        sharedPrefManager = new SharedPrefManager(getContext());
 
         allowances = new ArrayList<>();
 
@@ -754,5 +759,49 @@ public class TunjanganFragment extends Fragment {
                 ptLayoutList = (LinearLayout) view.findViewById(R.id.ptLayoutList);
             }
         }
+    }
+
+    private void loadAccess(final String id, final Allowance allowance) {
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_VIEW_ACCESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Intent intent = new Intent(getActivity(), TunjanganDetailActivity.class);
+                        intent.putExtra("detail", allowance);
+                        getContext().startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "You don't have access", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", "" + sharedPrefManager.getUserId());
+                param.put("feature", "" + "allowance");
+                param.put("access", "" + "allowance:view");
+                param.put("id", "" + id);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(getActivity()).add(request);
     }
 }

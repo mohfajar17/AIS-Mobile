@@ -14,7 +14,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Finance.CustomerReceives.CustomerReceiveDetailActivity"></activity>
+        <activity android:name=".Dashboard.Advance.DashAdvanceActivity" />
+        <activity android:name=".Dashboard.Expense.DashExpenseActivity" />
+        <activity android:name=".Dashboard.BankTransaction.DashBankTransactionActivity" />
+        <activity android:name=".Dashboard.PaymentSupplier.DashPaymentSupplierActivity" />
+        <activity android:name=".Dashboard.Budgeting.DashBudgetingActivity" />
+        <activity android:name=".Dashboard.StockAdjustment.DashStockAdjustmentActivity" />
+        <activity android:name=".Dashboard.MaterialReturn.DashMaterialReturnActivity" />
+        <activity android:name=".Dashboard.CashOnDelivery.DashCashOnDeliveryActivity" />
+        <activity android:name=".Dashboard.WorkOrder.DashWorkOrderActivity" />
+        <activity android:name=".Dashboard.PurchaseOrder.DashPurchaseOrderActivity" />
+        <activity android:name=".Dashboard.TunjanganPerjalanan.DashTunjanganPerjalananActivity" />
+        <activity android:name=".Dashboard.TunjanganLokasi.DashTunjanganLokasiActivity" />
+        <activity android:name=".Dashboard.CashProjectReport.DashCashProjectReportActivity" />
+        <activity android:name=".Dashboard.ProposedBudget.DashProposedBudgetActivity" />
+        <activity android:name=".Dashboard.Spkl.DashSpklActivity" />
+        <activity android:name=".Dashboard.WorkRequest.DashWorkRequestActivity" />
+        <activity android:name=".Dashboard.MaterialRequest.DashMaterialRequestActivity" />
+        <activity android:name=".Finance.CustomerReceives.CustomerReceiveDetailActivity" />
         <activity android:name=".Personalia.Report.ReportDetailActivity" />
         <activity android:name=".Purchasing.KontrakPerjanjian.KontrakPerjanjianDetailActivity" />
         <activity android:name=".Crm.Event.EventsDetailActivity" />
@@ -104,7 +121,7 @@
         <activity android:name=".News.NewsDetailActivity" />
         <activity android:name=".Project.JobOrder.JobOrderDetailActivity" />
         <activity android:name=".News.NewsActivity" />
-        <activity android:name=".DashboardActivity" />
+        <activity android:name=".Dashboard.DashboardActivity" />
         <activity
             android:name=".Safety.SafetyActivity"
             android:label="Safety"

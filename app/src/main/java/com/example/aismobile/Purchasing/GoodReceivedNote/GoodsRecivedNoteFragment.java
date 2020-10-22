@@ -35,6 +35,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
 import com.example.aismobile.Data.Purchasing.GoodReceivedNote;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -47,6 +48,8 @@ import java.util.List;
 import java.util.Map;
 
 public class GoodsRecivedNoteFragment extends Fragment {
+
+    public SharedPrefManager sharedPrefManager;
 
     public TextView grnTextPaging;
     public EditText grnEditSearch;
@@ -97,6 +100,8 @@ public class GoodsRecivedNoteFragment extends Fragment {
         progressDialog.setTitle("Loading data");
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
+
+        sharedPrefManager = new SharedPrefManager(getContext());
 
         goodReceivedNotes = new ArrayList<>();
 
@@ -448,9 +453,7 @@ public class GoodsRecivedNoteFragment extends Fragment {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), DetailGoodRecivedNoteActivity.class);
-                    intent.putExtra("detail", mValues.get(position));
-                    holder.itemView.getContext().startActivity(intent);
+                    loadAccess("" + mValues.get(position).getGrn_id(), mValues.get(position));
                 }
             });
         }
@@ -558,5 +561,49 @@ public class GoodsRecivedNoteFragment extends Fragment {
                 grnLayoutList = (LinearLayout) view.findViewById(R.id.grnLayoutList);
             }
         }
+    }
+
+    private void loadAccess(final String id, final GoodReceivedNote goodReceivedNote) {
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_VIEW_ACCESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Intent intent = new Intent(getActivity(), DetailGoodRecivedNoteActivity.class);
+                        intent.putExtra("detail", goodReceivedNote);
+                        getContext().startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "You don't have access", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", "" + sharedPrefManager.getUserId());
+                param.put("feature", "" + "good-received-note");
+                param.put("access", "" + "good-received-note:view");
+                param.put("id", "" + id);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(getActivity()).add(request);
     }
 }

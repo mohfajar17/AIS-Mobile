@@ -12,8 +12,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,8 @@ import com.example.aismobile.Config;
 import com.example.aismobile.Data.FinanceAccounting.BankTransaction;
 import com.example.aismobile.Data.FinanceAccounting.BankTransactionDetail;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +46,7 @@ import java.util.Map;
 
 public class DetailBankTransactionActivity extends AppCompatActivity {
 
+    private ViewGroup.LayoutParams params;
     private BankTransaction bankTransaction;
     private Context context;
     private RecyclerView recyclerView;
@@ -82,6 +88,17 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
     private double totalPenyesuaian;
     private NumberFormat formatter;
 
+    private int code = 0, approval = 0, akses1 = 0, akses2 = 0;
+    private ArrayAdapter<String> adapterApproval;
+    private LinearLayout layoutApproval;
+    private TextView btnApprove1;
+    private TextView btnApprove2;
+    private TextView btnApprove3;
+    private TextView btnSaveApprove;
+    private EditText editCommand;
+    private FloatingActionButton fabRefresh;
+    private SharedPrefManager sharedPrefManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +106,8 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         bankTransaction = bundle.getParcelable("detail");
+        code = bundle.getInt("code");
+        sharedPrefManager = new SharedPrefManager(this);
 
         formatter = new DecimalFormat("#,###");
 
@@ -103,6 +122,86 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
+
+        layoutApproval = (LinearLayout) findViewById(R.id.layoutApproval);
+        if (code > 0){
+            params = layoutApproval.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutApproval.setLayoutParams(params);
+            loadAccess();
+        }
+        btnApprove1 = (TextView) findViewById(R.id.btnApprove1);
+        btnApprove2 = (TextView) findViewById(R.id.btnApprove2);
+        btnApprove3 = (TextView) findViewById(R.id.btnApprove3);
+        btnSaveApprove = (TextView) findViewById(R.id.btnSaveApprove);
+        editCommand = (EditText) findViewById(R.id.editCommand);
+        fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
+
+        btnApprove1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 1){
+                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 1;
+                } else approval = 0;
+            }
+        });
+        btnApprove2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 2){
+                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 2;
+                } else approval = 0;
+            }
+        });
+        btnApprove3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeColor();
+                if (approval != 3){
+                    btnApprove3.setTextColor(getResources().getColor(R.color.colorBlack));
+                    approval = 3;
+                } else approval = 0;
+            }
+        });
+        btnSaveApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (approval == 1 && akses1 > 0){
+                    if (bankTransaction.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                            bankTransaction.getReconciled().toLowerCase().contains("Ya".toLowerCase()))
+                        Toast.makeText(DetailBankTransactionActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
+                    else{
+                        for (int i = 0; i<bankTransactionDetails.size(); i++)
+                            updateApproval(String.valueOf(bankTransactionDetails.get(i).getBank_transaction_detail_id()));
+                        updateApprovalId();
+                    }
+                } else if (approval == 2 && akses2 > 0){
+                    if (bankTransaction.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                            bankTransaction.getReconciled().toLowerCase().contains("Ya".toLowerCase()) ||
+                            bankTransaction.getApproval1().toLowerCase().contains("-".toLowerCase()))
+                        Toast.makeText(DetailBankTransactionActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
+                    else{
+                        for (int i = 0; i<bankTransactionDetails.size(); i++)
+                            updateApproval(String.valueOf(bankTransactionDetails.get(i).getBank_transaction_detail_id()));
+                        updateApprovalId();
+                    }
+                } else if (approval == 3){
+                    updateApprovalId();
+                } else Toast.makeText(DetailBankTransactionActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
+            }
+        });
+        fabRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadDetail();
+                changeColor();
+                approval = 0;
+            }
+        });
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
         downloadAtachment = (ImageView) findViewById(R.id.downloadAtachment);
@@ -175,8 +274,119 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
         loadDetail();
     }
 
+    private void loadAccess() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_APPROVAL_ALLOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    akses1 = jsonObject.getInt("access1");
+                    akses2 = jsonObject.getInt("access2");
+                } catch (JSONException e) {
+                    Toast.makeText(DetailBankTransactionActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailBankTransactionActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("code", "15");
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailBankTransactionActivity.this).add(request);
+    }
+
+    public void changeColor(){
+        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
+        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
+        btnApprove3.setTextColor(getResources().getColor(R.color.colorWhite));
+    }
+
+    public void updateApproval(final String id){
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_APPROVAL_BANK_TRANSACTION, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                    } else {
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", id);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailBankTransactionActivity.this).add(request);
+    }
+
+    public void updateApprovalId(){
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_ID_APPROVAL_BANK_TRANSACTION, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Toast.makeText(DetailBankTransactionActivity.this, "Success update data", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(DetailBankTransactionActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    Toast.makeText(DetailBankTransactionActivity.this, "", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DetailBankTransactionActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("id", "" + bankTransaction.getBank_transaction_id());
+                param.put("user", sharedPrefManager.getUserId());
+                param.put("command", editCommand.getText().toString() + " ");
+                param.put("code", "" + approval);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DetailBankTransactionActivity.this).add(request);
+    }
+
     public void loadDetail(){
         progressDialog.show();
+        recyclerView.setAdapter(null);
+        bankTransactionDetails.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_BANK_TRANSACTION_DETAIL_LIST, new Response.Listener<String>() {
             @Override

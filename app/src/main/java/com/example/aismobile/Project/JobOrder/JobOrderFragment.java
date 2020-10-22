@@ -564,9 +564,7 @@ public class JobOrderFragment extends Fragment {
                     }
 
                     if (canView == 1){
-                        Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-                        intent.putExtra("detailJO", mValues.get(position));
-                        holder.itemView.getContext().startActivity(intent);
+                        loadAccess("" + mValues.get(position).getJob_order_id(), mValues.get(position));
                     } else Toast.makeText(getActivity(), "You don't have access to view Job Order", Toast.LENGTH_LONG).show();
                 }
             });
@@ -683,5 +681,49 @@ public class JobOrderFragment extends Fragment {
                 layoutJobOrderColor = (LinearLayout) view.findViewById(R.id.layoutJobOrderColor);
             }
         }
+    }
+
+    private void loadAccess(final String id, final JobOrder jobOrder) {
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_VIEW_ACCESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status=jsonObject.getInt("status");
+                    if(status==1){
+                        Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
+                        intent.putExtra("detail", jobOrder);
+                        getContext().startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "You don't have access", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", "" + sharedPrefManager.getUserId());
+                param.put("feature", "" + "job-order");
+                param.put("access", "" + "job-order:view");
+                param.put("id", "" + id);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(getActivity()).add(request);
     }
 }

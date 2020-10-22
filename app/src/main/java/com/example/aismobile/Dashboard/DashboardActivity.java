@@ -37,6 +37,7 @@ import com.example.aismobile.Dashboard.WorkOrder.DashWorkOrderActivity;
 import com.example.aismobile.Dashboard.WorkRequest.DashWorkRequestActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,6 +99,8 @@ public class DashboardActivity extends AppCompatActivity {
     private TextView textBankTransaction;
     private TextView textExpense;
     private TextView textCashAdvance;
+
+    private FloatingActionButton fabRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -305,6 +308,14 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         loadDetail();
+
+        fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
+        fabRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadDetail();
+            }
+        });
     }
 
     public void loadDetail(){

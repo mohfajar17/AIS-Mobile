@@ -122,7 +122,7 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_job_order_detail);
 
         Bundle bundle = getIntent().getExtras();
-        jobOrder = bundle.getParcelable("detailJO");
+        jobOrder = bundle.getParcelable("detail");
 
         menuJoDetail = (TextView) findViewById(R.id.menuJoDetail);
         menuJoMr = (TextView) findViewById(R.id.menuJoMr);

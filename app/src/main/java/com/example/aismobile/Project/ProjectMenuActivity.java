@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
 
@@ -181,32 +182,39 @@ public class ProjectMenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    if(status==1){
-                        JSONObject jsonData = jsonObject.getJSONObject("data");
-                        if (Integer.valueOf(jsonData.getString("job_order")) == 1)
-                            access = access+"job_order, ";
-                        if (Integer.valueOf(jsonData.getString("job_progress_report")) == 1)
-                            access = access+"job_progress_report, ";
-                        if (Integer.valueOf(jsonData.getString("material_request")) == 1)
-                            access = access+"material_request, ";
-                        if (Integer.valueOf(jsonData.getString("resources_request")) == 1)
-                            access = access+"resources_request, ";
-                        if (Integer.valueOf(jsonData.getString("work_order")) == 1)
-                            access = access+"work_order, ";
-                        if (Integer.valueOf(jsonData.getString("pickup")) == 1)
-                            access = access+"pickup, ";
-                        if (Integer.valueOf(jsonData.getString("spkl")) == 1)
-                            access = access+"spkl, ";
-                        if (Integer.valueOf(jsonData.getString("cash_advance")) == 1)
-                            access = access+"cash_advance, ";
-                        if (Integer.valueOf(jsonData.getString("respons_advance")) == 1)
-                            access = access+"respons_advance, ";
-                        if (Integer.valueOf(jsonData.getString("employee_allowance")) == 1)
-                            access = access+"employee_allowance, ";
-                        if (Integer.valueOf(jsonData.getString("employee_allowance_temp")) == 1)
-                            access = access+"employee_allowance_temp, ";
+                    if (jsonObject.getInt("is_mobile") > 1){
+                        Intent logout = new Intent(ProjectMenuActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
                     } else {
-                        access = access+"";
+                        if(status==1){
+                            JSONObject jsonData = jsonObject.getJSONObject("data");
+                            if (Integer.valueOf(jsonData.getString("job_order")) == 1)
+                                access = access+"job_order, ";
+                            if (Integer.valueOf(jsonData.getString("job_progress_report")) == 1)
+                                access = access+"job_progress_report, ";
+                            if (Integer.valueOf(jsonData.getString("material_request")) == 1)
+                                access = access+"material_request, ";
+                            if (Integer.valueOf(jsonData.getString("resources_request")) == 1)
+                                access = access+"resources_request, ";
+                            if (Integer.valueOf(jsonData.getString("work_order")) == 1)
+                                access = access+"work_order, ";
+                            if (Integer.valueOf(jsonData.getString("pickup")) == 1)
+                                access = access+"pickup, ";
+                            if (Integer.valueOf(jsonData.getString("spkl")) == 1)
+                                access = access+"spkl, ";
+                            if (Integer.valueOf(jsonData.getString("cash_advance")) == 1)
+                                access = access+"cash_advance, ";
+                            if (Integer.valueOf(jsonData.getString("respons_advance")) == 1)
+                                access = access+"respons_advance, ";
+                            if (Integer.valueOf(jsonData.getString("employee_allowance")) == 1)
+                                access = access+"employee_allowance, ";
+                            if (Integer.valueOf(jsonData.getString("employee_allowance_temp")) == 1)
+                                access = access+"employee_allowance_temp, ";
+                        } else {
+                            access = access+"";
+                        }
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {

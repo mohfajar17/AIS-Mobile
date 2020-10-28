@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
 
@@ -131,22 +132,29 @@ public class InventoryMenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    if(status==1){
-                        JSONObject jsonData = jsonObject.getJSONObject("data");
-                        if (Integer.valueOf(jsonData.getString("item")) == 1)
-                            access = access+"item, ";
-                        if (Integer.valueOf(jsonData.getString("asset")) == 1)
-                            access = access+"asset, ";
-                        if (Integer.valueOf(jsonData.getString("asset_rental")) == 1)
-                            access = access+"aset_rental, ";
-                        if (Integer.valueOf(jsonData.getString("stock_adjustment")) == 1)
-                            access = access+"stock_adjustment, ";
-                        if (Integer.valueOf(jsonData.getString("master_item_price")) == 1)
-                            access = access+"master_item_price, ";
-                        if (Integer.valueOf(jsonData.getString("material_return")) == 1)
-                            access = access+"material_return, ";
+                    if (jsonObject.getInt("is_mobile") > 1){
+                        Intent logout = new Intent(InventoryMenuActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
                     } else {
-                        access = access+"";
+                        if(status==1){
+                            JSONObject jsonData = jsonObject.getJSONObject("data");
+                            if (Integer.valueOf(jsonData.getString("item")) == 1)
+                                access = access+"item, ";
+                            if (Integer.valueOf(jsonData.getString("asset")) == 1)
+                                access = access+"asset, ";
+                            if (Integer.valueOf(jsonData.getString("asset_rental")) == 1)
+                                access = access+"aset_rental, ";
+                            if (Integer.valueOf(jsonData.getString("stock_adjustment")) == 1)
+                                access = access+"stock_adjustment, ";
+                            if (Integer.valueOf(jsonData.getString("master_item_price")) == 1)
+                                access = access+"master_item_price, ";
+                            if (Integer.valueOf(jsonData.getString("material_return")) == 1)
+                                access = access+"material_return, ";
+                        } else {
+                            access = access+"";
+                        }
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {

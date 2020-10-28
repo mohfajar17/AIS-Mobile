@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
 
@@ -109,16 +110,23 @@ public class ContactMenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    if(status==1){
-                        JSONObject jsonData = jsonObject.getJSONObject("data");
-                        if (Integer.valueOf(jsonData.getString("contact")) == 1)
-                            access = access+"contact, ";
-                        if (Integer.valueOf(jsonData.getString("supplier")) == 1)
-                            access = access+"supplier, ";
-                        if (Integer.valueOf(jsonData.getString("company")) == 1)
-                            access = access+"company, ";
+                    if (jsonObject.getInt("is_mobile") > 1){
+                        Intent logout = new Intent(ContactMenuActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
                     } else {
-                        access = access+"";
+                        if(status==1){
+                            JSONObject jsonData = jsonObject.getJSONObject("data");
+                            if (Integer.valueOf(jsonData.getString("contact")) == 1)
+                                access = access+"contact, ";
+                            if (Integer.valueOf(jsonData.getString("supplier")) == 1)
+                                access = access+"supplier, ";
+                            if (Integer.valueOf(jsonData.getString("company")) == 1)
+                                access = access+"company, ";
+                        } else {
+                            access = access+"";
+                        }
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {

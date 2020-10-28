@@ -119,6 +119,8 @@ public class ProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        getMobileIsActive(sharedPrefManager.getUserId());
     }
 
     @Override
@@ -126,5 +128,39 @@ public class ProfileActivity extends AppCompatActivity {
         Intent bukaActivity = new Intent(ProfileActivity.this, MainActivity.class);
         startActivity(bukaActivity);
         finish();
+    }
+
+    private void getMobileIsActive(final String userId) {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_MOBILE_IS_ACTIVE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int akses = jsonObject.getInt("is_mobile");
+                    if (akses > 1){
+                        Intent logout = new Intent(ProfileActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(ProfileActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", userId);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(ProfileActivity.this).add(request);
     }
 }

@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         buttonDetailInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getMobileIsActive(sharedPrefManager.getUserId());
                 ViewGroup.LayoutParams params = layoutDetailInfo.getLayoutParams();
                 if (params.height == 0)
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -354,6 +355,41 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 
         HomeCollection.date_collection_arr=new ArrayList<HomeCollection>();
         getHoliday();
+        getMobileIsActive(sharedPrefManager.getUserId());
+    }
+
+    private void getMobileIsActive(final String userId) {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_MOBILE_IS_ACTIVE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int akses = jsonObject.getInt("is_mobile");
+                    if (akses > 1){
+                        Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(MainActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", userId);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(MainActivity.this).add(request);
     }
 
     private void setCalendar(){

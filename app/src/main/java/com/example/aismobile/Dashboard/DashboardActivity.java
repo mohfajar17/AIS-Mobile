@@ -35,6 +35,7 @@ import com.example.aismobile.Dashboard.TunjanganLokasi.DashTunjanganLokasiActivi
 import com.example.aismobile.Dashboard.TunjanganPerjalanan.DashTunjanganPerjalananActivity;
 import com.example.aismobile.Dashboard.WorkOrder.DashWorkOrderActivity;
 import com.example.aismobile.Dashboard.WorkRequest.DashWorkRequestActivity;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,6 +49,7 @@ import java.util.Map;
 
 public class DashboardActivity extends AppCompatActivity {
 
+    private SharedPrefManager sharedPrefManager;
     private ProgressDialog progressDialog;
 
     private LinearLayout dashboardProject;
@@ -106,6 +108,8 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        sharedPrefManager = new SharedPrefManager(this);
 
         textMaterialRequest = (TextView) findViewById(R.id.textMaterialRequest);
         textWorkRequest = (TextView) findViewById(R.id.textWorkRequest);
@@ -307,15 +311,51 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        loadDetail();
-
         fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
         fabRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadDetail();
+                getMobileIsActive(sharedPrefManager.getUserId());
             }
         });
+
+        loadDetail();
+        getMobileIsActive(sharedPrefManager.getUserId());
+    }
+
+    private void getMobileIsActive(final String userId) {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_MOBILE_IS_ACTIVE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int akses = jsonObject.getInt("is_mobile");
+                    if (akses > 1){
+                        Intent logout = new Intent(DashboardActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(DashboardActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", userId);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(DashboardActivity.this).add(request);
     }
 
     public void loadDetail(){

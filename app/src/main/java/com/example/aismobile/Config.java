@@ -62,6 +62,7 @@ public class Config {
 
     public static final String DATA_URL_AIS = DATA_URL + "apiAis.php?apicall=";
     public static final String DATA_URL_LOGIN = DATA_URL_AIS +"login";
+    public static final String DATA_URL_MOBILE_IS_ACTIVE = DATA_URL_AIS +"loginIsMobile";
     public static final String DATA_URL_APPROVAL_ALLOW = DATA_URL_AIS +"getApprovalAllow";
     public static final String DATA_URL_VIEW_ACCESS = DATA_URL_AIS +"checkViewAccess";
     public static final String DATA_URL_USER_ACCESS = DATA_URL_AIS +"accessAllowModul";

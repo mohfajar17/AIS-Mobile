@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
 
@@ -91,14 +92,21 @@ public class MarketingMenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    if(status==1){
-                        JSONObject jsonData = jsonObject.getJSONObject("data");
-                        if (Integer.valueOf(jsonData.getString("sales_quotation")) == 1)
-                            access = access+"sales_quotation, ";
-                        if (Integer.valueOf(jsonData.getString("sales_order")) == 1)
-                            access = access+"sales_order, ";
+                    if (jsonObject.getInt("is_mobile") > 1){
+                        Intent logout = new Intent(MarketingMenuActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
                     } else {
-                        access = access+"";
+                        if(status==1){
+                            JSONObject jsonData = jsonObject.getJSONObject("data");
+                            if (Integer.valueOf(jsonData.getString("sales_quotation")) == 1)
+                                access = access+"sales_quotation, ";
+                            if (Integer.valueOf(jsonData.getString("sales_order")) == 1)
+                                access = access+"sales_order, ";
+                        } else {
+                            access = access+"";
+                        }
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {

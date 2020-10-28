@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
 
@@ -101,16 +102,23 @@ public class SafetyMenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    if(status==1){
-                        JSONObject jsonData = jsonObject.getJSONObject("data");
-                        if (Integer.valueOf(jsonData.getString("work_accident")) == 1)
-                            access = access+"work_accident, ";
-                        if (Integer.valueOf(jsonData.getString("genba_safety")) == 1)
-                            access = access+"genba_safety, ";
-                        if (Integer.valueOf(jsonData.getString("safety_file_report")) == 1)
-                            access = access+"safety_file_report, ";
+                    if (jsonObject.getInt("is_mobile") > 1){
+                        Intent logout = new Intent(SafetyMenuActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
                     } else {
-                        access = access+"";
+                        if(status==1){
+                            JSONObject jsonData = jsonObject.getJSONObject("data");
+                            if (Integer.valueOf(jsonData.getString("work_accident")) == 1)
+                                access = access+"work_accident, ";
+                            if (Integer.valueOf(jsonData.getString("genba_safety")) == 1)
+                                access = access+"genba_safety, ";
+                            if (Integer.valueOf(jsonData.getString("safety_file_report")) == 1)
+                                access = access+"safety_file_report, ";
+                        } else {
+                            access = access+"";
+                        }
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {

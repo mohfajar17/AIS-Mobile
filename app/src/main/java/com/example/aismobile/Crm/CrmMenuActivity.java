@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
 
@@ -151,28 +152,35 @@ public class CrmMenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    if(status==1){
-                        JSONObject jsonData = jsonObject.getJSONObject("data");
-                        if (Integer.valueOf(jsonData.getString("customer_feedback")) == 1)
-                            access = access+"customer_feedback, ";
-                        if (Integer.valueOf(jsonData.getString("question")) == 1)
-                            access = access+"question, ";
-                        if (Integer.valueOf(jsonData.getString("kuesioner")) == 1)
-                            access = access+"kuesioner, ";
-                        if (Integer.valueOf(jsonData.getString("grafik_kuesioner")) == 1)
-                            access = access+"grafik_kuesioner, ";
-                        if (Integer.valueOf(jsonData.getString("sales_quotation")) == 1)
-                            access = access+"sales_quotation, ";
-                        if (Integer.valueOf(jsonData.getString("lead")) == 1)
-                            access = access+"lead, ";
-                        if (Integer.valueOf(jsonData.getString("followup")) == 1)
-                            access = access+"followup, ";
-                        if (Integer.valueOf(jsonData.getString("event")) == 1)
-                            access = access+"event, ";
-                        if (Integer.valueOf(jsonData.getString("schedule_visits")) == 1)
-                            access = access+"schedule_visits, ";
+                    if (jsonObject.getInt("is_mobile") > 1) {
+                        Intent logout = new Intent(CrmMenuActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
                     } else {
-                        access = access+"";
+                        if(status==1){
+                            JSONObject jsonData = jsonObject.getJSONObject("data");
+                            if (Integer.valueOf(jsonData.getString("customer_feedback")) == 1)
+                                access = access+"customer_feedback, ";
+                            if (Integer.valueOf(jsonData.getString("question")) == 1)
+                                access = access+"question, ";
+                            if (Integer.valueOf(jsonData.getString("kuesioner")) == 1)
+                                access = access+"kuesioner, ";
+                            if (Integer.valueOf(jsonData.getString("grafik_kuesioner")) == 1)
+                                access = access+"grafik_kuesioner, ";
+                            if (Integer.valueOf(jsonData.getString("sales_quotation")) == 1)
+                                access = access+"sales_quotation, ";
+                            if (Integer.valueOf(jsonData.getString("lead")) == 1)
+                                access = access+"lead, ";
+                            if (Integer.valueOf(jsonData.getString("followup")) == 1)
+                                access = access+"followup, ";
+                            if (Integer.valueOf(jsonData.getString("event")) == 1)
+                                access = access+"event, ";
+                            if (Integer.valueOf(jsonData.getString("schedule_visits")) == 1)
+                                access = access+"schedule_visits, ";
+                        } else {
+                            access = access+"";
+                        }
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {

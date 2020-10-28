@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
 
@@ -141,24 +142,31 @@ public class PurchasingMenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    if(status==1){
-                        JSONObject jsonData = jsonObject.getJSONObject("data");
-                        if (Integer.valueOf(jsonData.getString("purchase_order")) == 1)
-                            access = access+"purchase_order, ";
-                        if (Integer.valueOf(jsonData.getString("purchase_service")) == 1)
-                            access = access+"purchase_service, ";
-                        if (Integer.valueOf(jsonData.getString("cash_on_delivery")) == 1)
-                            access = access+"cash_on_delivery, ";
-                        if (Integer.valueOf(jsonData.getString("contract_agreement")) == 1)
-                            access = access+"contract_agreement, ";
-                        if (Integer.valueOf(jsonData.getString("good_received_note")) == 1)
-                            access = access+"good_received_note, ";
-                        if (Integer.valueOf(jsonData.getString("work_handover")) == 1)
-                            access = access+"work_handover, ";
-                        if (Integer.valueOf(jsonData.getString("services_receipt")) == 1)
-                            access = access+"services_receipt, ";
+                    if (jsonObject.getInt("is_mobile") > 1){
+                        Intent logout = new Intent(PurchasingMenuActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
                     } else {
-                        access = access+"";
+                        if(status==1){
+                            JSONObject jsonData = jsonObject.getJSONObject("data");
+                            if (Integer.valueOf(jsonData.getString("purchase_order")) == 1)
+                                access = access+"purchase_order, ";
+                            if (Integer.valueOf(jsonData.getString("purchase_service")) == 1)
+                                access = access+"purchase_service, ";
+                            if (Integer.valueOf(jsonData.getString("cash_on_delivery")) == 1)
+                                access = access+"cash_on_delivery, ";
+                            if (Integer.valueOf(jsonData.getString("contract_agreement")) == 1)
+                                access = access+"contract_agreement, ";
+                            if (Integer.valueOf(jsonData.getString("good_received_note")) == 1)
+                                access = access+"good_received_note, ";
+                            if (Integer.valueOf(jsonData.getString("work_handover")) == 1)
+                                access = access+"work_handover, ";
+                            if (Integer.valueOf(jsonData.getString("services_receipt")) == 1)
+                                access = access+"services_receipt, ";
+                        } else {
+                            access = access+"";
+                        }
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {

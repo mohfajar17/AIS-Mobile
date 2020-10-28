@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.aismobile.Config;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
 import com.example.aismobile.SharedPrefManager;
 
@@ -207,34 +208,41 @@ public class FinanceMenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     int status = jsonObject.getInt("status");
-                    if(status==1){
-                        JSONObject jsonData = jsonObject.getJSONObject("data");
-                        if (Integer.valueOf(jsonData.getString("supplier_invoice")) == 1)
-                            access = access+"supplier_invoice, ";
-                        if (Integer.valueOf(jsonData.getString("sales_invoice")) == 1)
-                            access = access+"sales_invoice, ";
-                        if (Integer.valueOf(jsonData.getString("bank_transaction")) == 1)
-                            access = access+"bank_transaction, ";
-                        if (Integer.valueOf(jsonData.getString("expenses")) == 1)
-                            access = access+"expenses, ";
-                        if (Integer.valueOf(jsonData.getString("advanced")) == 1)
-                            access = access+"advanced, ";
-                        if (Integer.valueOf(jsonData.getString("budgeting")) == 1)
-                            access = access+"budgeting, ";
-                        if (Integer.valueOf(jsonData.getString("payment_supplier")) == 1)
-                            access = access+"payment_supplier, ";
-                        if (Integer.valueOf(jsonData.getString("installment")) == 1)
-                            access = access+"installment, ";
-                        if (Integer.valueOf(jsonData.getString("bank_account")) == 1)
-                            access = access+"bank_account, ";
-                        if (Integer.valueOf(jsonData.getString("tax_report")) == 1)
-                            access = access+"tax_report, ";
-                        if (Integer.valueOf(jsonData.getString("chart_of_account")) == 1)
-                            access = access+"chart_of_account, ";
-                        if (Integer.valueOf(jsonData.getString("employee_salary")) == 1)
-                            access = access+"employee_salary, ";
+                    if (jsonObject.getInt("is_mobile") > 1){
+                        Intent logout = new Intent(FinanceMenuActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
                     } else {
-                        access = access+"";
+                        if(status==1){
+                            JSONObject jsonData = jsonObject.getJSONObject("data");
+                            if (Integer.valueOf(jsonData.getString("supplier_invoice")) == 1)
+                                access = access+"supplier_invoice, ";
+                            if (Integer.valueOf(jsonData.getString("sales_invoice")) == 1)
+                                access = access+"sales_invoice, ";
+                            if (Integer.valueOf(jsonData.getString("bank_transaction")) == 1)
+                                access = access+"bank_transaction, ";
+                            if (Integer.valueOf(jsonData.getString("expenses")) == 1)
+                                access = access+"expenses, ";
+                            if (Integer.valueOf(jsonData.getString("advanced")) == 1)
+                                access = access+"advanced, ";
+                            if (Integer.valueOf(jsonData.getString("budgeting")) == 1)
+                                access = access+"budgeting, ";
+                            if (Integer.valueOf(jsonData.getString("payment_supplier")) == 1)
+                                access = access+"payment_supplier, ";
+                            if (Integer.valueOf(jsonData.getString("installment")) == 1)
+                                access = access+"installment, ";
+                            if (Integer.valueOf(jsonData.getString("bank_account")) == 1)
+                                access = access+"bank_account, ";
+//                        if (Integer.valueOf(jsonData.getString("tax_report")) == 1)
+//                            access = access+"tax_report, ";
+                            if (Integer.valueOf(jsonData.getString("chart_of_account")) == 1)
+                                access = access+"chart_of_account, ";
+                            if (Integer.valueOf(jsonData.getString("employee_salary")) == 1)
+                                access = access+"employee_salary, ";
+                        } else {
+                            access = access+"";
+                        }
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {

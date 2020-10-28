@@ -1,6 +1,7 @@
 package com.example.aismobile.Crm;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -8,7 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.aismobile.Config;
 import com.example.aismobile.Crm.CustomerFeedback.CustomerFeedbackFragment;
 import com.example.aismobile.Crm.Event.EventsFragment;
 import com.example.aismobile.Crm.Followup.FollowupsCustomerFragment;
@@ -26,7 +35,9 @@ import com.example.aismobile.Data.CRM.Lead;
 import com.example.aismobile.Data.CRM.Monitoring;
 import com.example.aismobile.Data.CRM.Question;
 import com.example.aismobile.Data.CRM.ScheduleVisit;
+import com.example.aismobile.LoginActivity;
 import com.example.aismobile.R;
+import com.example.aismobile.SharedPrefManager;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +47,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CrmActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         MonitoringFragment.OnListFragmentInteractionListener,
@@ -51,6 +68,7 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
     FragmentTransaction fragmentTransaction;
     String access = "";
     private Dialog myDialog;
+    private SharedPrefManager sharedPrefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +79,7 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
         setSupportActionBar(toolbar);
 
         myDialog = new Dialog(this);
+        sharedPrefManager = new SharedPrefManager(this);
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_crm);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -92,6 +111,8 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
     }
 
     private void swapFragment(int id) {
+        getMobileIsActive(sharedPrefManager.getUserId());
+
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (id == R.id.nav_customerfeedback && access.toLowerCase().contains("customer_feedback".toLowerCase())) {
             CustomerFeedbackFragment mainFragment = CustomerFeedbackFragment.newInstance();
@@ -122,6 +143,40 @@ public class CrmActivity extends AppCompatActivity implements NavigationView.OnN
         }
         fragmentTransaction.disallowAddToBackStack();
         fragmentTransaction.commit();
+    }
+
+    private void getMobileIsActive(final String userId) {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_MOBILE_IS_ACTIVE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int akses = jsonObject.getInt("is_mobile");
+                    if (akses > 1){
+                        Intent logout = new Intent(CrmActivity.this, LoginActivity.class);
+                        startActivity(logout);
+                        sharedPrefManager.logout();
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(CrmActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", userId);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(CrmActivity.this).add(request);
     }
 
     @Override

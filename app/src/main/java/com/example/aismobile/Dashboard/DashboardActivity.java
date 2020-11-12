@@ -169,6 +169,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutMaterialRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashMaterialRequestActivity.class);
                 startActivity(intent);
             }
@@ -176,6 +177,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutWorkRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashWorkRequestActivity.class);
                 startActivity(intent);
             }
@@ -183,6 +185,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutSpkl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashSpklActivity.class);
                 startActivity(intent);
             }
@@ -190,6 +193,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutProposedBudget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashProposedBudgetActivity.class);
                 startActivity(intent);
             }
@@ -197,6 +201,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutCashProjectReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashCashProjectReportActivity.class);
                 startActivity(intent);
             }
@@ -204,6 +209,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutTunjanganLokasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashTunjanganLokasiActivity.class);
                 startActivity(intent);
             }
@@ -211,6 +217,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutTunjanganPerjalanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashTunjanganPerjalananActivity.class);
                 startActivity(intent);
             }
@@ -218,6 +225,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutPurchaseOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashPurchaseOrderActivity.class);
                 startActivity(intent);
             }
@@ -225,6 +233,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutWorkOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashWorkOrderActivity.class);
                 startActivity(intent);
             }
@@ -232,6 +241,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutCashOnDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashCashOnDeliveryActivity.class);
                 startActivity(intent);
             }
@@ -239,6 +249,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutStockAdjustment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashStockAdjustmentActivity.class);
                 startActivity(intent);
             }
@@ -246,6 +257,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutMaterialReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashMaterialReturnActivity.class);
                 startActivity(intent);
             }
@@ -253,6 +265,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutBudgeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashBudgetingActivity.class);
                 startActivity(intent);
             }
@@ -260,6 +273,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutPaymentSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashPaymentSupplierActivity.class);
                 startActivity(intent);
             }
@@ -267,6 +281,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutBankTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashBankTransactionActivity.class);
                 startActivity(intent);
             }
@@ -274,6 +289,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashExpenseActivity.class);
                 startActivity(intent);
             }
@@ -281,6 +297,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutCashAdvance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashAdvanceActivity.class);
                 startActivity(intent);
             }
@@ -322,6 +339,14 @@ public class DashboardActivity extends AppCompatActivity {
 
         loadDetail();
         getMobileIsActive(sharedPrefManager.getUserId());
+    }
+
+    @Override
+    public void onResume() {
+        loadDetail();
+        getMobileIsActive(sharedPrefManager.getUserId());
+
+        super.onResume();
     }
 
     private void getMobileIsActive(final String userId) {

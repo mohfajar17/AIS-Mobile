@@ -87,7 +87,16 @@ public class DashStockAdjustmentActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        stockAdjustments.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -208,6 +217,7 @@ public class DashStockAdjustmentActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashStockAdjustmentActivity.this, DetailStockActivity.class);
                         intent.putExtra("detail", materialRequest);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashStockAdjustmentActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

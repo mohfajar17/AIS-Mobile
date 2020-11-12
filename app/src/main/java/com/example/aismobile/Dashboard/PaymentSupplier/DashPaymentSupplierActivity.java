@@ -87,7 +87,16 @@ public class DashPaymentSupplierActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        paymentSuppliers.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -217,6 +226,7 @@ public class DashPaymentSupplierActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashPaymentSupplierActivity.this, DetailPaymentSuppliersActivity.class);
                         intent.putExtra("detail", materialRequest);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashPaymentSupplierActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

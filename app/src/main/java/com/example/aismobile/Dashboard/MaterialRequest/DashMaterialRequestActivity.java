@@ -87,7 +87,16 @@ public class DashMaterialRequestActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        materialRequests.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -227,6 +236,7 @@ public class DashMaterialRequestActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashMaterialRequestActivity.this, DetailMaterialRequestActivity.class);
                         intent.putExtra("detail", materialRequest);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashMaterialRequestActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

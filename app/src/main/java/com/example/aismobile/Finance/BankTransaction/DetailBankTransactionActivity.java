@@ -39,7 +39,10 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,8 +144,8 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 1){
-                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 1 && textApproval1.getText().toString().matches("-")){
+                    btnApprove1.setBackgroundResource(R.drawable.circle_red);
                     approval = 1;
                 } else approval = 0;
             }
@@ -151,8 +154,8 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 2){
-                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 2 && textApproval1.getText().toString().matches("-")){
+                    btnApprove2.setBackgroundResource(R.drawable.circle_red);
                     approval = 2;
                 } else approval = 0;
             }
@@ -161,8 +164,8 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 3){
-                    btnApprove3.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 3 && textCheckedBy.getText().toString().matches("-")){
+                    btnApprove3.setBackgroundResource(R.drawable.circle_red);
                     approval = 3;
                 } else approval = 0;
             }
@@ -170,6 +173,8 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
         btnSaveApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date dateObj = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0){
                     if (bankTransaction.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
                             bankTransaction.getReconciled().toLowerCase().contains("Ya".toLowerCase()))
@@ -178,6 +183,9 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
                         for (int i = 0; i<bankTransactionDetails.size(); i++)
                             updateApproval(String.valueOf(bankTransactionDetails.get(i).getBank_transaction_detail_id()));
                         updateApprovalId();
+                        textApproval1.setText(sharedPrefManager.getUserDisplayName());
+                        textApproval1Date.setText(dateFormater.format(dateObj));
+                        textComment1.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 2 && akses2 > 0){
                     if (bankTransaction.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
@@ -188,10 +196,17 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
                         for (int i = 0; i<bankTransactionDetails.size(); i++)
                             updateApproval(String.valueOf(bankTransactionDetails.get(i).getBank_transaction_detail_id()));
                         updateApprovalId();
+                        textApproval2.setText(sharedPrefManager.getUserDisplayName());
+                        textApproval2Date.setText(dateFormater.format(dateObj));
+                        textComment2.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 3){
                     updateApprovalId();
+                    textCheckedBy.setText(sharedPrefManager.getUserDisplayName());
+                    textCheckedDate.setText(dateFormater.format(dateObj));
+                    textCheckedComment.setText(editCommand.getText().toString());
                 } else Toast.makeText(DetailBankTransactionActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
+                changeColor();
             }
         });
         fabRefresh.setOnClickListener(new View.OnClickListener() {
@@ -306,9 +321,22 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
     }
 
     public void changeColor(){
-        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove3.setTextColor(getResources().getColor(R.color.colorWhite));
+        if (textApproval1.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            if (textCheckedBy.getText().toString().matches("-"))
+                btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
+        } else if (textApproval2.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            if (textCheckedBy.getText().toString().matches("-"))
+                btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
+        } else {
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+        }
     }
 
     public void updateApproval(final String id){
@@ -385,8 +413,6 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
 
     public void loadDetail(){
         progressDialog.show();
-        recyclerView.setAdapter(null);
-        bankTransactionDetails.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_BANK_TRANSACTION_DETAIL_LIST, new Response.Listener<String>() {
             @Override
@@ -395,6 +421,9 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        recyclerView.setAdapter(null);
+                        bankTransactionDetails.clear();
+
                         grandTotal = 0;
                         totalPenyesuaian = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");

@@ -89,7 +89,16 @@ public class DashBankTransactionActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        bankTransactions.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -225,6 +234,7 @@ public class DashBankTransactionActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashBankTransactionActivity.this, DetailBankTransactionActivity.class);
                         intent.putExtra("detail", materialRequest);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashBankTransactionActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

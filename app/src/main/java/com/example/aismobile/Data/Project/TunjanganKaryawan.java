@@ -346,4 +346,36 @@ public class TunjanganKaryawan implements Parcelable {
     public String getEmployee_grade_name() {
         return employee_grade_name;
     }
+
+    public void setApproval1_by(String approval1_by) {
+        this.approval1_by = approval1_by;
+    }
+
+    public void setApproval_date1(String approval_date1) {
+        this.approval_date1 = approval_date1;
+    }
+
+    public void setApproval_comment1(String approval_comment1) {
+        this.approval_comment1 = approval_comment1;
+    }
+
+    public void setApproval2_by(String approval2_by) {
+        this.approval2_by = approval2_by;
+    }
+
+    public void setApproval_date2(String approval_date2) {
+        this.approval_date2 = approval_date2;
+    }
+
+    public void setApproval_comment2(String approval_comment2) {
+        this.approval_comment2 = approval_comment2;
+    }
+
+    public void setVerified_by(String verified_by) {
+        this.verified_by = verified_by;
+    }
+
+    public void setVerified_date(String verified_date) {
+        this.verified_date = verified_date;
+    }
 }

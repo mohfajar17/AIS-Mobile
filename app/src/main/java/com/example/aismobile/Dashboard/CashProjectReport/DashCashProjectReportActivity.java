@@ -42,7 +42,7 @@ public class DashCashProjectReportActivity extends AppCompatActivity {
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
-    private List<CashProjectReport> materialRequests;
+    private List<CashProjectReport> cashProjectReports;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private ProgressDialog progressDialog;
 
@@ -64,7 +64,7 @@ public class DashCashProjectReportActivity extends AppCompatActivity {
         sharedPrefManager = new SharedPrefManager(this);
 
         context = getApplicationContext();
-        materialRequests = new ArrayList<>();
+        cashProjectReports = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
@@ -82,12 +82,21 @@ public class DashCashProjectReportActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 recyclerView.setAdapter(null);
-                materialRequests.clear();
+                cashProjectReports.clear();
                 loadDetail();
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        cashProjectReports.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -102,9 +111,9 @@ public class DashCashProjectReportActivity extends AppCompatActivity {
                     if(status==1){
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
-                            materialRequests.add(new CashProjectReport(jsonArray.getJSONObject(i)));
+                            cashProjectReports.add(new CashProjectReport(jsonArray.getJSONObject(i)));
                         }
-                        adapter = new MyRecyclerViewAdapter(materialRequests, context);
+                        adapter = new MyRecyclerViewAdapter(cashProjectReports, context);
                         recyclerView.setAdapter(adapter);
                     } else {
                         Toast.makeText(DashCashProjectReportActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
@@ -220,6 +229,7 @@ public class DashCashProjectReportActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashCashProjectReportActivity.this, DetailCashProjectActivity.class);
                         intent.putExtra("detail", cashProjectReport);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashCashProjectReportActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

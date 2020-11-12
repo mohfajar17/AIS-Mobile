@@ -87,7 +87,16 @@ public class DashWorkRequestActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        workOrders.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -217,6 +226,7 @@ public class DashWorkRequestActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashWorkRequestActivity.this, DetailWorkReqActivity.class);
                         intent.putExtra("detail", workOrder);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashWorkRequestActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

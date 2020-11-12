@@ -87,7 +87,16 @@ public class DashCashOnDeliveryActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        cashOnDeliveries.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -234,6 +243,7 @@ public class DashCashOnDeliveryActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashCashOnDeliveryActivity.this, DetailCashOnDeliveryActivity.class);
                         intent.putExtra("detail", materialRequest);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashCashOnDeliveryActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

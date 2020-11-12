@@ -26,6 +26,9 @@ import com.example.aismobile.SharedPrefManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,21 +93,30 @@ public class DetailCashAdvanceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
                 if (approval != 1){
-                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                    btnApprove1.setBackgroundResource(R.drawable.circle_red);
                     approval = 1;
-                } else approval = 0;
+                } else {
+                    btnApprove1.setBackgroundResource(R.drawable.circle_green);
+                    approval = 0;
+                }
             }
         });
         btnSaveApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date dateObj = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0){
                     if (cashAdvance.getStatus().toLowerCase().contains("Paid".toLowerCase()) ||
                             cashAdvance.getStatus().toLowerCase().contains("Cleared".toLowerCase()))
                         Toast.makeText(DetailCashAdvanceActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else{
                         updateApprovalId();
-                        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
+                        btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+                        textApprovedBy.setText(sharedPrefManager.getUserDisplayName());
+                        textApprovedDate.setText(dateFormater.format(dateObj));
+                        textApprovedComment.setText(editCommand.getText().toString());
+                        textApprovedStatus.setText("Approved");
                     }
                 } else Toast.makeText(DetailCashAdvanceActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
             }
@@ -193,6 +205,7 @@ public class DetailCashAdvanceActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
                         Toast.makeText(DetailCashAdvanceActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailCashAdvanceActivity.this, "Filed load data", Toast.LENGTH_LONG).show();

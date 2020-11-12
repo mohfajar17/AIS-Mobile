@@ -38,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 public class JobOrderDetailActivity extends AppCompatActivity {
 
     private double toDouble;
+    private double toDoubleNew;
     private double totalPengeluaran = 0;
 
     private TextView menuJoDetail;
@@ -412,6 +413,8 @@ public class JobOrderDetailActivity extends AppCompatActivity {
                     int status=jsonObject.getInt("status");
                     if(status==1){
                         JSONObject json = jsonObject.getJSONObject("data");
+
+                        DecimalFormat df = new DecimalFormat("#.#");
                         double doubles;
                         totalPengeluaran = 0;
                         NumberFormat formatter = new DecimalFormat("#,###");
@@ -438,37 +441,98 @@ public class JobOrderDetailActivity extends AppCompatActivity {
                         if (json.getDouble("mr")+json.getDouble("pr") > Double.valueOf(jobOrder.getMaterial_amount()) && Double.valueOf(jobOrder.getMaterial_amount()) > 0)
                             detailMateriPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
                         else detailMateriPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (Double.valueOf(jobOrder.getMaterial_amount()) > 0){
+                            toDoubleNew = (Double.valueOf(jobOrder.getMaterial_amount()) - (json.getDouble("mr")+json.getDouble("pr"))) / Double.valueOf(jobOrder.getMaterial_amount()) * 100;
+                            detailMateriPr.setText(df.format(toDoubleNew) + "%");
+                        } else detailMateriPr.setText("0%");
+
                         if (json.getDouble("tr") > Double.valueOf(jobOrder.getTools_amount()) && Double.valueOf(jobOrder.getTools_amount()) > 0)
                             detailToolPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
                         else detailToolPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (Double.valueOf(jobOrder.getTools_amount()) > 0){
+                            toDoubleNew = (Double.valueOf(jobOrder.getTools_amount()) - json.getDouble("tr")) / Double.valueOf(jobOrder.getTools_amount()) * 100;
+                            detailToolPr.setText(df.format(toDoubleNew) + "%");
+                        } else detailToolPr.setText("0%");
+
                         if (json.getDouble("manPower") > Double.valueOf(jobOrder.getMan_power_amount()) && Double.valueOf(jobOrder.getMan_power_amount()) > 0)
                             detailMpcPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
                         else detailMpcPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (Double.valueOf(jobOrder.getMan_power_amount()) > 0){
+                            toDoubleNew = (Double.valueOf(jobOrder.getMan_power_amount()) - json.getDouble("manPower")) / Double.valueOf(jobOrder.getMan_power_amount()) * 100;
+                            detailMpcPr.setText(df.format(toDoubleNew) + "%");
+                        } else detailMpcPr.setText("0%");
+
                         if (json.getDouble("cod") > Double.valueOf(jobOrder.getCod_amount()) && Double.valueOf(jobOrder.getCod_amount()) > 0)
                             detailCodPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
                         else detailCodPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (Double.valueOf(jobOrder.getCod_amount()) > 0){
+                            toDoubleNew = (Double.valueOf(jobOrder.getCod_amount()) - json.getDouble("cod")) / Double.valueOf(jobOrder.getCod_amount()) * 100;
+                            detailCodPr.setText(df.format(toDoubleNew) + "%");
+                        } else detailCodPr.setText("0%");
+
                         if (json.getDouble("wo") > Double.valueOf(jobOrder.getWo_amount()) && Double.valueOf(jobOrder.getWo_amount()) > 0)
                             detailWoPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
                         else detailWoPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (Double.valueOf(jobOrder.getWo_amount()) > 0){
+                            toDoubleNew = (Double.valueOf(jobOrder.getWo_amount()) - json.getDouble("wo")) / Double.valueOf(jobOrder.getWo_amount()) * 100;
+                            detailWoPr.setText(df.format(toDoubleNew) + "%");
+                        } else detailWoPr.setText("0%");
+
                         if (json.getDouble("matret") > Double.valueOf(jobOrder.getMaterial_return_amount()) && Double.valueOf(jobOrder.getMaterial_return_amount()) > 0)
                             detailMrPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
                         else detailMrPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (Double.valueOf(jobOrder.getMaterial_return_amount()) > 0){
+                            toDoubleNew = (Double.valueOf(jobOrder.getMaterial_return_amount()) - json.getDouble("matret")) / Double.valueOf(jobOrder.getMaterial_return_amount()) * 100;
+                            detailMrPr.setText(df.format(toDoubleNew) + "%");
+                        } else detailMrPr.setText("0%");
+
                         if (json.getDouble("pbHalf") > Double.valueOf(jobOrder.getPb_amount()) && Double.valueOf(jobOrder.getPb_amount()) > 0)
                             detailPbPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
                         else detailPbPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (Double.valueOf(jobOrder.getPb_amount()) > 0){
+                            toDoubleNew = (Double.valueOf(jobOrder.getPb_amount()) - json.getDouble("pbHalf")) / Double.valueOf(jobOrder.getPb_amount()) * 100;
+                            detailPbPr.setText(df.format(toDoubleNew) + "%");
+                        } else detailPbPr.setText("0%");
+
                         if (json.getDouble("cpr") > Double.valueOf(jobOrder.getCpr_amount()) && Double.valueOf(jobOrder.getCpr_amount()) > 0)
                             detailCprPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
                         else detailCprPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (Double.valueOf(jobOrder.getCpr_amount()) > 0){
+                            toDoubleNew = (Double.valueOf(jobOrder.getCpr_amount()) - json.getDouble("cpr")) / Double.valueOf(jobOrder.getCpr_amount()) * 100;
+                            detailCprPr.setText(df.format(toDoubleNew) + "%");
+                        } else detailCprPr.setText("0%");
+
                         if (json.getDouble("expenses") > Double.valueOf(jobOrder.getExpenses_amount()) && Double.valueOf(jobOrder.getExpenses_amount()) > 0)
                             detailExpensesPr.setBackgroundColor(getResources().getColor(R.color.colorRed));
                         else detailExpensesPr.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                        if (Double.valueOf(jobOrder.getExpenses_amount()) > 0){
+                            toDoubleNew = (Double.valueOf(jobOrder.getExpenses_amount()) - json.getDouble("expenses")) / Double.valueOf(jobOrder.getExpenses_amount()) * 100;
+                            detailExpensesPr.setText(df.format(toDoubleNew) + "%");
+                        } else detailExpensesPr.setText("0%");
+
+                        df = new DecimalFormat("#.##");
 
                         toDouble = Double.valueOf(jobOrder.getAmount()) - totalPengeluaran;
-                        detailLabaRugi.setText("Rp. " + formatter.format((long) toDouble) + " ");
+                        toDoubleNew = (Double.valueOf(jobOrder.getAmount()) - totalPengeluaran) / Double.valueOf(jobOrder.getAmount()) * 100;
+                        detailLabaRugi.setText("(" + df.format(toDoubleNew) + "%)  Rp. " + formatter.format((long) toDouble) + " ");
+                        if (toDoubleNew < 0)
+                            detailLabaRugi.setTextColor(getResources().getColor(R.color.colorRed));
+                        else detailLabaRugi.setTextColor(getResources().getColor(R.color.colorAsukaGreen));
+
                         toDouble = Double.valueOf(jobOrder.getBudgeting_amount()) - totalPengeluaran;
-                        detailSisaBudget.setText("Rp. " + formatter.format((long) toDouble) + " ");
+                        toDoubleNew = (Double.valueOf(jobOrder.getBudgeting_amount()) - totalPengeluaran) / Double.valueOf(jobOrder.getBudgeting_amount()) * 100;
+                        detailSisaBudget.setText("(" + df.format(toDoubleNew) + "%)  Rp. " + formatter.format((long) toDouble) + " ");
+                        if (toDoubleNew < 0)
+                            detailSisaBudget.setTextColor(getResources().getColor(R.color.colorRed));
+                        else detailSisaBudget.setTextColor(getResources().getColor(R.color.colorAsukaGreen));
+
                         toDouble = json.getDouble("invoice") - totalPengeluaran;
-                        detailLabaRugiBerjalan.setText("Rp. " + formatter.format((long) toDouble) + " ");
+                        toDoubleNew = (json.getDouble("invoice") - totalPengeluaran) / json.getDouble("invoice") * 100;
+                        detailLabaRugiBerjalan.setText("(" + df.format(toDoubleNew) + "%)  Rp. " + formatter.format((long) toDouble) + " ");
+                        if (toDoubleNew < 0)
+                            detailLabaRugiBerjalan.setTextColor(getResources().getColor(R.color.colorRed));
+                        else detailLabaRugiBerjalan.setTextColor(getResources().getColor(R.color.colorAsukaGreen));
+
                         toDouble = json.getDouble("payment");
                         detailCustomerPayment.setText("Rp. " + formatter.format((long) toDouble));
                         toDouble = json.getDouble("invoice");

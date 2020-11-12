@@ -39,7 +39,10 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,8 +137,8 @@ public class DetailExpensesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 1){
-                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 1 && textApproval1.getText().toString().matches("-")){
+                    btnApprove1.setBackgroundResource(R.drawable.circle_red);
                     approval = 1;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(expenseDetails, context);
@@ -147,8 +150,8 @@ public class DetailExpensesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 2){
-                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 2 && textApproval2.getText().toString().matches("-")){
+                    btnApprove2.setBackgroundResource(R.drawable.circle_red);
                     approval = 2;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(expenseDetails, context);
@@ -160,8 +163,8 @@ public class DetailExpensesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 3){
-                    btnApprove3.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 3 && textCheckedBy.getText().toString().matches("-")){
+                    btnApprove3.setBackgroundResource(R.drawable.circle_red);
                     approval = 3;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(expenseDetails, context);
@@ -172,6 +175,8 @@ public class DetailExpensesActivity extends AppCompatActivity {
         btnSaveApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date dateObj = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0){
                     if (expense.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
                             expense.getDone().toLowerCase().contains("Ya".toLowerCase()))
@@ -183,6 +188,9 @@ public class DetailExpensesActivity extends AppCompatActivity {
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApprove2)).getText().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textCheck)).getText().toString());
                         updateApprovalId();
+                        textApproval1.setText(sharedPrefManager.getUserDisplayName());
+                        textApproval1Date.setText(dateFormater.format(dateObj));
+                        textComment1.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 2 && akses2 > 0){
                     if (expense.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
@@ -196,6 +204,9 @@ public class DetailExpensesActivity extends AppCompatActivity {
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textCheck)).getText().toString());
                         updateApprovalId();
+                        textApproval2.setText(sharedPrefManager.getUserDisplayName());
+                        textApproval2Date.setText(dateFormater.format(dateObj));
+                        textComment2.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 3){
                     for (int i = 0; i<expenseDetails.size(); i++)
@@ -204,6 +215,9 @@ public class DetailExpensesActivity extends AppCompatActivity {
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApprove2)).getText().toString(),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
                     updateApprovalId();
+                    textCheckedBy.setText(sharedPrefManager.getUserDisplayName());
+                    textCheckedDate.setText(dateFormater.format(dateObj));
+                    textCheckedComment.setText(editCommand.getText().toString());
                 } else Toast.makeText(DetailExpensesActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
             }
         });
@@ -309,9 +323,22 @@ public class DetailExpensesActivity extends AppCompatActivity {
     }
 
     public void changeColor(){
-        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove3.setTextColor(getResources().getColor(R.color.colorWhite));
+        if (textApproval1.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            if (textCheckedBy.getText().toString().matches("-"))
+                btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
+        } else if (textApproval2.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            if (textCheckedBy.getText().toString().matches("-"))
+                btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
+        } else {
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+        }
     }
 
     public void updateApproval(final String id, final String approve1, final String approve2, final String approve3){
@@ -357,6 +384,7 @@ public class DetailExpensesActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        loadDetail();
                         Toast.makeText(DetailExpensesActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailExpensesActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
@@ -391,8 +419,6 @@ public class DetailExpensesActivity extends AppCompatActivity {
 
     public void loadDetail(){
         progressDialog.show();
-        recyclerView.setAdapter(null);
-        expenseDetails.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_EXPENSE_DETAIL_LIST, new Response.Listener<String>() {
             @Override
@@ -402,6 +428,9 @@ public class DetailExpensesActivity extends AppCompatActivity {
                     int status=jsonObject.getInt("status");
                     grandTotal = 0;
                     if(status==1){
+                        recyclerView.setAdapter(null);
+                        expenseDetails.clear();
+
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             expenseDetails.add(new ExpenseDetail(jsonArray.getJSONObject(i)));
@@ -411,6 +440,9 @@ public class DetailExpensesActivity extends AppCompatActivity {
 
                         adapter = new MyRecyclerViewAdapter(expenseDetails, context);
                         recyclerView.setAdapter(adapter);
+
+                        changeColor();
+                        approval = 0;
                     } else {
                         Toast.makeText(DetailExpensesActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }

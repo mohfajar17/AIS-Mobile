@@ -88,7 +88,16 @@ public class DashSpklActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        spkls.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -239,6 +248,7 @@ public class DashSpklActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashSpklActivity.this, DetailSpklActivity.class);
                         intent.putExtra("detail", materialRequest);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashSpklActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

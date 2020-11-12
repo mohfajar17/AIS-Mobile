@@ -788,7 +788,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="3.5"
-                                    android:gravity="center"
+                                    android:gravity="right"
                                     android:textStyle="bold"
                                     android:text="Budget"
                                     android:textColor="@color/colorBlack"/>
@@ -797,7 +797,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="3.5"
-                                    android:gravity="center"
+                                    android:gravity="right"
                                     android:textStyle="bold"
                                     android:text="Pengeluaran"
                                     android:textColor="@color/colorBlack"/>
@@ -805,7 +805,7 @@
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+                                    android:layout_weight="1.5"
                                     android:layout_marginLeft="10dp" />
                             </LinearLayout>
 
@@ -844,7 +844,8 @@
                                         android:id="@+id/detailMateriPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
@@ -892,7 +893,8 @@
                                         android:id="@+id/detailToolPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
@@ -940,7 +942,8 @@
                                         android:id="@+id/detailMpcPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
@@ -988,7 +991,8 @@
                                         android:id="@+id/detailCodPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
@@ -1036,7 +1040,8 @@
                                         android:id="@+id/detailWoPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
@@ -1084,7 +1089,8 @@
                                         android:id="@+id/detailMrPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
@@ -1132,7 +1138,8 @@
                                         android:id="@+id/detailPbPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
@@ -1180,7 +1187,8 @@
                                         android:id="@+id/detailCprPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
@@ -1228,7 +1236,8 @@
                                         android:id="@+id/detailExpensesPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 
@@ -1278,7 +1287,8 @@
                                         android:id="@+id/detailTotalBudgetPr"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_weight="1.5"
                                         android:layout_marginLeft="10dp"/>
                                 </LinearLayout>
 

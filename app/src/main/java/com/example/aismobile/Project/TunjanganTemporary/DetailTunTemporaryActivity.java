@@ -30,6 +30,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -123,8 +126,8 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 1){
-                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 1 && tunjanganTemporary.getApproval1_by().matches("-")){
+                    btnApprove1.setBackgroundResource(R.drawable.circle_red);
                     approval = 1;
                 } else approval = 0;
                 openApproval();
@@ -134,8 +137,8 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 2){
-                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 2 && tunjanganTemporary.getApproval2_by().matches("-")){
+                    btnApprove2.setBackgroundResource(R.drawable.circle_red);
                     approval = 2;
                 } else approval = 0;
                 openApproval();
@@ -145,8 +148,8 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 3){
-                    btnApprove3.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 3 && tunjanganTemporary.getVerified_by().matches("-")){
+                    btnApprove3.setBackgroundResource(R.drawable.circle_red);
                     approval = 3;
                 } else approval = 0;
                 openApproval();
@@ -155,20 +158,25 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
         btnSaveApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date dateObj = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0 && approve1 > 0){
                     updateApproval(String.valueOf(tunjanganTemporary.getEmployee_allowance_id()),
                             editApproval1.getSelectedItem().toString(),
                             textListApproval2.getText().toString());
-                    updateApprovalId();
+                    updateApprovalId(1);
                     textListApproval1.setText(editApproval1.getSelectedItem().toString());
+                    textApproval1.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else if (approval == 2 && akses2 > 0 && approve2 > 0){
                     updateApproval(String.valueOf(tunjanganTemporary.getEmployee_allowance_id()),
                             textListApproval1.getText().toString(),
                             editApproval2.getSelectedItem().toString());
-                    updateApprovalId();
+                    updateApprovalId(2);
                     textListApproval2.setText(editApproval2.getSelectedItem().toString());
+                    textApproval2.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else if (approval == 3){
-                    updateApprovalId();
+                    updateApprovalId(3);
+                    textVerifiedBy.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else Toast.makeText(DetailTunTemporaryActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
             }
         });
@@ -277,6 +285,8 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
                 menuHistory.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
+
+        changeColor();
     }
 
     private void loadAccessApproval() {
@@ -392,9 +402,23 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
     }
 
     public void changeColor(){
-        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove3.setTextColor(getResources().getColor(R.color.colorWhite));
+        if (tunjanganTemporary.getApproval1_by().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (tunjanganTemporary.getApproval2_by().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (tunjanganTemporary.getVerified_by().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else {
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        }
     }
 
     public void updateApproval(final String id, final String approve1, final String approve2){
@@ -429,7 +453,7 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
         Volley.newRequestQueue(DetailTunTemporaryActivity.this).add(request);
     }
 
-    public void updateApprovalId(){
+    public void updateApprovalId(final int code_update){
         progressDialog.show();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.URL_UPDATE_ID_APPROVAL_TUN_TEMPORARY, new Response.Listener<String>() {
@@ -439,6 +463,13 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        if (code_update == 1)
+                            tunjanganTemporary.setApproval1_by(sharedPrefManager.getUserDisplayName());
+                        else if (code_update == 2)
+                            tunjanganTemporary.setApproval2_by(sharedPrefManager.getUserDisplayName());
+                        else if (code_update == 3)
+                            tunjanganTemporary.setVerified_by(sharedPrefManager.getUserDisplayName());
+                        changeColor();
                         Toast.makeText(DetailTunTemporaryActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailTunTemporaryActivity.this, "Filed load data", Toast.LENGTH_LONG).show();

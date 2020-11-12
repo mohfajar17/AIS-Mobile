@@ -559,8 +559,9 @@ public class JobOrderFragment extends Fragment {
                     }
 
                     if (mValues.get(position).getDepartment_id().toLowerCase().contains("Office Pasuruan".toLowerCase())){
-                        if (Integer.valueOf(sharedPrefManager.getEmployeeId())==149 || Integer.valueOf(sharedPrefManager.getEmployeeId())==289)
-                            canView = 1;
+                        if (!sharedPrefManager.getEmployeeId().equals("null"))
+                            if (Integer.valueOf(sharedPrefManager.getEmployeeId())==149 || Integer.valueOf(sharedPrefManager.getEmployeeId())==289)
+                                canView = 1;
                     }
 
                     if (canView == 1){

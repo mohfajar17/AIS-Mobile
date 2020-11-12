@@ -38,7 +38,10 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,8 +143,8 @@ public class DetailBudgetingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 1){
-                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 1 && textApproval1.getText().toString().matches("-")){
+                    btnApprove1.setBackgroundResource(R.drawable.circle_red);
                     approval = 1;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(budgetingDetails, context);
@@ -153,8 +156,8 @@ public class DetailBudgetingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 2){
-                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 2 && textApproval2.getText().toString().matches("-")){
+                    btnApprove2.setBackgroundResource(R.drawable.circle_red);
                     approval = 2;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(budgetingDetails, context);
@@ -166,8 +169,8 @@ public class DetailBudgetingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 3){
-                    btnApprove3.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 3 && textApproval3.getText().toString().matches("-")){
+                    btnApprove3.setBackgroundResource(R.drawable.circle_red);
                     approval = 3;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(budgetingDetails, context);
@@ -178,6 +181,8 @@ public class DetailBudgetingActivity extends AppCompatActivity {
         btnSaveApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date dateObj = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0){
                     if (budgeting.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
                             budgeting.getDone().toLowerCase().contains("Ya".toLowerCase()))
@@ -189,6 +194,9 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
                         updateApprovalId();
+                        textApproval1.setText(sharedPrefManager.getUserDisplayName());
+                        textApproval1Date.setText(dateFormater.format(dateObj));
+                        textComment1.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 2 && akses2 > 0){
                     if (budgeting.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
@@ -202,6 +210,9 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
                         updateApprovalId();
+                        textApproval2.setText(sharedPrefManager.getUserDisplayName());
+                        textApproval2Date.setText(dateFormater.format(dateObj));
+                        textComment2.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 3 && akses3 > 0){
                     if (budgeting.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
@@ -216,6 +227,9 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
                         updateApprovalId();
+                        textApproval3.setText(sharedPrefManager.getUserDisplayName());
+                        textApproval3Date.setText(dateFormater.format(dateObj));
+                        textComment3.setText(editCommand.getText().toString());
                     }
                 } else Toast.makeText(DetailBudgetingActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
             }
@@ -348,9 +362,23 @@ public class DetailBudgetingActivity extends AppCompatActivity {
     }
 
     public void changeColor(){
-        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove3.setTextColor(getResources().getColor(R.color.colorWhite));
+        if (textApproval1.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (textApproval2.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (textApproval3.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else {
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        }
     }
 
     public void updateApproval(final String id, final String approve1, final String approve2, final String approve3){
@@ -396,6 +424,7 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        loadDetail();
                         Toast.makeText(DetailBudgetingActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailBudgetingActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
@@ -443,8 +472,6 @@ public class DetailBudgetingActivity extends AppCompatActivity {
 
     public void loadDetail(){
         progressDialog.show();
-        recyclerView.setAdapter(null);
-        budgetingDetails.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_BUDGETING_DETAIL_LIST, new Response.Listener<String>() {
             @Override
@@ -453,6 +480,8 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        recyclerView.setAdapter(null);
+                        budgetingDetails.clear();
                         grandTotal = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
@@ -460,8 +489,12 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                             grandTotal += jsonArray.getJSONObject(i).getDouble("amount");
                         }
                         textGrandTotal.setText("Rp. " + formatter.format((long) grandTotal));
+
                         adapter = new MyRecyclerViewAdapter(budgetingDetails, context);
                         recyclerView.setAdapter(adapter);
+
+                        changeColor();
+                        approval = 0;
                     } else {
                         Toast.makeText(DetailBudgetingActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }

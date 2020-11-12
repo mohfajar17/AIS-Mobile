@@ -108,10 +108,10 @@ public class DetailMaterialActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (approval == 0){
-                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                    btnApprove1.setBackgroundResource(R.drawable.circle_red);
                     approval = 1;
                 } else {
-                    btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
+                    btnApprove1.setBackgroundResource(R.drawable.circle_green);
                     approval = 0;
                 }
             }
@@ -230,6 +230,7 @@ public class DetailMaterialActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        onBackPressed();
                         Toast.makeText(DetailMaterialActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailMaterialActivity.this, "Filed update data", Toast.LENGTH_LONG).show();

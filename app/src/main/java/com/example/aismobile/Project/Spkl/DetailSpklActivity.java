@@ -36,7 +36,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -124,8 +127,8 @@ public class DetailSpklActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 1){
-                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 1 && spkls.getApproval1_by().matches("-")){
+                    btnApprove1.setBackgroundResource(R.drawable.circle_red);
                     approval = 1;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(spklDetails, context);
@@ -137,8 +140,8 @@ public class DetailSpklActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 2){
-                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 2 && spkls.getApproval2_by().matches("-")){
+                    btnApprove2.setBackgroundResource(R.drawable.circle_red);
                     approval = 2;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(spklDetails, context);
@@ -150,8 +153,8 @@ public class DetailSpklActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 3){
-                    btnApprove3.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 3 && spkls.getVerified_by().matches("-")){
+                    btnApprove3.setBackgroundResource(R.drawable.circle_red);
                     approval = 3;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(spklDetails, context);
@@ -162,20 +165,25 @@ public class DetailSpklActivity extends AppCompatActivity {
         btnSaveApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date dateObj = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0 && approve1 > 0){
                     for (int i = 0; i<spklDetails.size(); i++)
                         updateApproval(String.valueOf(spklDetails.get(i).getOtwo_detail_id()),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.spklTextApproval2)).getText().toString());
                     updateApprovalId();
+                    detailSpklApproval1.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n");
                 } else if (approval == 2 && akses2 > 0 && approve2 > 0){
                     for (int i = 0; i<spklDetails.size(); i++)
                         updateApproval(String.valueOf(spklDetails.get(i).getOtwo_detail_id()),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.spklTextApproval1)).getText().toString(),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString());
                     updateApprovalId();
+                    detailSpklApproval2.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj));
                 } else if (approval == 3){
                     updateApprovalId();
+                    detailSpklVerifiedBy.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj));
                 } else Toast.makeText(DetailSpklActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
             }
         });
@@ -229,8 +237,6 @@ public class DetailSpklActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
-                changeColor();
-                approval = 0;
             }
         });
 
@@ -330,9 +336,23 @@ public class DetailSpklActivity extends AppCompatActivity {
     }
 
     public void changeColor(){
-        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove3.setTextColor(getResources().getColor(R.color.colorWhite));
+        if (spkls.getApproval1_by().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (spkls.getApproval2_by().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (spkls.getVerified_by().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else {
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        }
     }
 
     public void updateApproval(final String id, final String approve1, final String approve2){
@@ -343,6 +363,7 @@ public class DetailSpklActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        loadSpklDetail();
                     } else {
                     }
                 } catch (JSONException e) {
@@ -378,6 +399,9 @@ public class DetailSpklActivity extends AppCompatActivity {
                     int status=jsonObject.getInt("status");
                     if(status==1){
                         Toast.makeText(DetailSpklActivity.this, "Success update data", Toast.LENGTH_LONG).show();
+
+                        approval = 0;
+                        changeColor();
                     } else {
                         Toast.makeText(DetailSpklActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }
@@ -410,8 +434,6 @@ public class DetailSpklActivity extends AppCompatActivity {
 
     public void loadSpklDetail(){
         progressDialog.show();
-        recyclerView.setAdapter(null);
-        spklDetails.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DETAIL_SPKL_LIST, new Response.Listener<String>() {
             @Override
@@ -420,6 +442,9 @@ public class DetailSpklActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        recyclerView.setAdapter(null);
+                        spklDetails.clear();
+
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             spklDetails.add(new SpklDetail(jsonArray.getJSONObject(i)));

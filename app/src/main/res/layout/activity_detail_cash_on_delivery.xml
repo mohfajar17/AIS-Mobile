@@ -872,7 +872,6 @@
                             android:layout_weight="1"
                             android:layout_marginRight="5dp"
                             android:background="@drawable/circle_green"
-                            android:padding="10dp"
                             android:gravity="center"
                             android:text="PO APPROVAL 1"
                             android:textStyle="bold"
@@ -885,7 +884,6 @@
                             android:layout_weight="1"
                             android:layout_marginLeft="5dp"
                             android:background="@drawable/circle_green"
-                            android:padding="10dp"
                             android:gravity="center"
                             android:text="PERSETUJUAN"
                             android:textStyle="bold"
@@ -1233,7 +1231,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabRefresh"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_refresh"
         android:layout_margin="17dp" />

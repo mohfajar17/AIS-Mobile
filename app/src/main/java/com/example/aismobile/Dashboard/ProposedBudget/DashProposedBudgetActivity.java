@@ -87,7 +87,16 @@ public class DashProposedBudgetActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        proposedBudgets.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -232,6 +241,7 @@ public class DashProposedBudgetActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashProposedBudgetActivity.this, DetailProposedBudgetActivity.class);
                         intent.putExtra("detail", proposedBudget);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashProposedBudgetActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

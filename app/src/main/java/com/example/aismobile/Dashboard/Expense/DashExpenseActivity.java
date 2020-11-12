@@ -89,7 +89,16 @@ public class DashExpenseActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        expenses.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -228,6 +237,7 @@ public class DashExpenseActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashExpenseActivity.this, DetailExpensesActivity.class);
                         intent.putExtra("detail", expense);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashExpenseActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

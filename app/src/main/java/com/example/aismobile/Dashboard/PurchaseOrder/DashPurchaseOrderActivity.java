@@ -87,7 +87,16 @@ public class DashPurchaseOrderActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        purchaseOrders.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -240,6 +249,7 @@ public class DashPurchaseOrderActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashPurchaseOrderActivity.this, DetailPurchaseOrderActivity.class);
                         intent.putExtra("detail", purchaseOrder);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashPurchaseOrderActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

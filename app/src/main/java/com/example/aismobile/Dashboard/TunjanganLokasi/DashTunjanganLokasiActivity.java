@@ -87,7 +87,16 @@ public class DashTunjanganLokasiActivity extends AppCompatActivity {
             }
         });
 
+//        loadDetail();
+    }
+
+    @Override
+    public void onResume() {
+        recyclerView.setAdapter(null);
+        tunjanganKaryawans.clear();
         loadDetail();
+
+        super.onResume();
     }
 
     public void loadDetail(){
@@ -226,6 +235,7 @@ public class DashTunjanganLokasiActivity extends AppCompatActivity {
                         Intent intent = new Intent(DashTunjanganLokasiActivity.this, DetailTunjanganKaryawanActivity.class);
                         intent.putExtra("detail", tunjanganKaryawan);
                         intent.putExtra("code", 1);
+                        onPause();
                         startActivity(intent);
                     } else {
                         Toast.makeText(DashTunjanganLokasiActivity.this, "You don't have access", Toast.LENGTH_LONG).show();

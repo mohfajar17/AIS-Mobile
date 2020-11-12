@@ -40,7 +40,10 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -153,8 +156,8 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 1){
-                    btnApprove1.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 1 && textApproval1.getText().toString().matches("-")){
+                    btnApprove1.setBackgroundResource(R.drawable.circle_red);
                     approval = 1;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(purchaseServiceDetails, context);
@@ -166,8 +169,8 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 2){
-                    btnApprove2.setTextColor(getResources().getColor(R.color.colorBlack));
+                if (approval != 2 && textPersetujuan.getText().toString().matches("-")){
+                    btnApprove2.setBackgroundResource(R.drawable.circle_red);
                     approval = 2;
                     recyclerView.setAdapter(null);
                     adapter = new MyRecyclerViewAdapter(purchaseServiceDetails, context);
@@ -178,6 +181,8 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
         btnSaveApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date dateObj = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0){
                     if (purchaseService.getChecked_by().toLowerCase().contains("-".toLowerCase()))
                         Toast.makeText(DetailWorkOrdderActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
@@ -186,9 +191,13 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
                             updateApproval(String.valueOf(purchaseServiceDetails.get(i).getWork_order_detail_id()),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString());
                         updateApprovalId();
+                        textApproval1.setText(sharedPrefManager.getUserDisplayName());
+                        textApproval1Date.setText(dateFormater.format(dateObj));
+                        textPoComment.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 2){
                     updateApprovalId();
+                    textPersetujuan.setText(sharedPrefManager.getUserDisplayName());
                 } else Toast.makeText(DetailWorkOrdderActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
             }
         });
@@ -373,8 +382,16 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
     }
 
     public void changeColor(){
-        btnApprove1.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnApprove2.setTextColor(getResources().getColor(R.color.colorWhite));
+        if (textPersetujuan.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+        } else if (textApproval1.getText().toString().matches("-")){
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+        } else {
+            btnApprove1.setBackgroundResource(R.drawable.circle_green);
+            btnApprove2.setBackgroundResource(R.drawable.circle_green);
+        }
     }
 
     public void updateApproval(final String id, final String approve1){
@@ -423,6 +440,7 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(response);
                         int status=jsonObject.getInt("status");
                         if(status==1){
+                            loadDetail();
                             Toast.makeText(DetailWorkOrdderActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(DetailWorkOrdderActivity.this, "Filed update data", Toast.LENGTH_LONG).show();
@@ -474,8 +492,6 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
 
     public void loadDetail(){
         progressDialog.show();
-        recyclerView.setAdapter(null);
-        purchaseServiceDetails.clear();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_PURCHASE_SERVICE_DETAIL_LIST, new Response.Listener<String>() {
             @Override
@@ -484,6 +500,9 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        recyclerView.setAdapter(null);
+                        purchaseServiceDetails.clear();
+
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             purchaseServiceDetails.add(new PurchaseServiceDetail(jsonArray.getJSONObject(i)));
@@ -501,6 +520,9 @@ public class DetailWorkOrdderActivity extends AppCompatActivity {
 
                         adapter = new MyRecyclerViewAdapter(purchaseServiceDetails, context);
                         recyclerView.setAdapter(adapter);
+
+                        changeColor();
+                        approval = 0;
                     } else {
                         Toast.makeText(DetailWorkOrdderActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }

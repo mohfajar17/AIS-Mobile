@@ -99,13 +99,7 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
     private TextView textPajak;
     private TextView textGrandTotal;
 
-    private double total;
-    private double budget;
-    private double discount;
-    private double efisiensi;
-    private double dpp;
-    private double pajak;
-    private double grandTotal;
+    private double total, budget, discount, efisiensi, efisiensiPerc, dpp, pajak, grandTotal;
 
     private int code = 0, approval = 0, approvalAssignId = 0, user = 0, akses1 = 0;
     private ArrayAdapter<String> adapterApproval;
@@ -117,6 +111,8 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
     private FloatingActionButton fabRefresh;
     private SharedPrefManager sharedPrefManager;
 
+    private NumberFormat formatter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +122,7 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
         purchaseOrder = bundle.getParcelable("detail");
         code = bundle.getInt("code");
         sharedPrefManager = new SharedPrefManager(this);
+        formatter = new DecimalFormat("#,###");
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
@@ -197,7 +194,6 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
                     }
                 } else if (approval == 2){
                     updateApprovalId();
-                    textPersetujuan.setText(sharedPrefManager.getUserDisplayName());
                 } else Toast.makeText(DetailPurchaseOrderActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
             }
         });
@@ -315,6 +311,7 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
             }
         });
 
+        changeColor();
         loadDetail();
         loadApprovalAssign();
     }
@@ -383,15 +380,12 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
 
     public void changeColor(){
         if (textPersetujuan.getText().toString().matches("-")){
-            btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
-        } else if (textApproval1.getText().toString().matches("-")){
-            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+        } else btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+
+        if (textApproval1.getText().toString().matches("-")){
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
-        } else {
-            btnApprove1.setBackgroundResource(R.drawable.circle_green);
-            btnApprove2.setBackgroundResource(R.drawable.circle_green);
-        }
+        } else btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
     }
 
     public void updateApproval(final String id, final String approve1){
@@ -441,6 +435,7 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
                         int status=jsonObject.getInt("status");
                         if(status==1){
                             loadDetail();
+                            textPersetujuan.setText(sharedPrefManager.getUserDisplayName());
                             Toast.makeText(DetailPurchaseOrderActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(DetailPurchaseOrderActivity.this, "Filed update data", Toast.LENGTH_LONG).show();
@@ -506,16 +501,35 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
                         for(int i=0;i<jsonArray.length();i++){
                             purchaseOrderDetails.add(new PurchaseOrderDetail(jsonArray.getJSONObject(i)));
 
-                            total += (jsonArray.getJSONObject(i).getDouble("quantity")*jsonArray.getJSONObject(i).getDouble("unit_price_buy"))-jsonArray.getJSONObject(i).getDouble("discount");
-                            budget += jsonArray.getJSONObject(i).getDouble("quantity")*jsonArray.getJSONObject(i).getDouble("max_budget");
-                            discount += jsonArray.getJSONObject(i).getDouble("discount");
+                            if (!jsonArray.getJSONObject(i).getString("po_app1").toLowerCase().contains("Reject".toLowerCase())) {
+                                total += (jsonArray.getJSONObject(i).getDouble("quantity") * jsonArray.getJSONObject(i).getDouble("unit_price_buy")) - jsonArray.getJSONObject(i).getDouble("discount");
+                                budget += jsonArray.getJSONObject(i).getDouble("quantity") * jsonArray.getJSONObject(i).getDouble("max_budget");
+                                discount += jsonArray.getJSONObject(i).getDouble("discount");
+                            }
                         }
-                        efisiensi = budget - total;
-                        if (efisiensi < 0)
+
+                        efisiensi = budget - (total - discount);
+                        if (efisiensi > 0) {
+                            efisiensiPerc = ((budget - (total - discount)) / budget) * 100;
+                        } else {
                             efisiensi = 0;
+                            efisiensiPerc = 0;
+                        }
+
                         dpp = total;
                         pajak = total*Double.valueOf(purchaseOrder.getTax_type_rate())/100;
                         grandTotal = dpp+pajak;
+
+                        textTotal.setText("Rp. " + formatter.format((long) total));
+                        textBudget.setText("Rp. " + formatter.format((long) budget));
+                        textDiscount.setText("Rp. " + formatter.format((long) discount));
+                        textEfisiensi.setText("Rp. " + formatter.format((long) efisiensi) + " (" + new DecimalFormat("##.##").format(efisiensiPerc) + "%)");
+                        textDPP.setText("Rp. " + formatter.format((long) dpp));
+                        textPajak.setText("Rp. " + formatter.format((long) pajak));
+                        textGrandTotal.setText("Rp. " + formatter.format((long) grandTotal));
+
+                        if (efisiensi > 0)
+                            textEfisiensi.setTextColor(getResources().getColor(R.color.colorAsukaGreen));
 
                         adapter = new MyRecyclerViewAdapter(purchaseOrderDetails, context);
                         recyclerView.setAdapter(adapter);
@@ -573,11 +587,13 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
             holder.textNo.setText("" + nomor);
             holder.textItem.setText(mValues.get(position).getItem_name());
             holder.textSpecification.setText(mValues.get(position).getItem_specification());
+            holder.textRemark.setText(mValues.get(position).getNotes());
+            holder.textJobOrder.setText(mValues.get(position).getJob_order_number() + "\n" + mValues.get(position).getJob_order_description());
+            holder.textStatus.setText(mValues.get(position).getStatus());
             holder.textQty.setText(mValues.get(position).getQuantity() + " " + mValues.get(position).getUnit_abbr());
             holder.textApproval1.setText(mValues.get(position).getPo_app1());
 
             double toDouble;
-            NumberFormat formatter = new DecimalFormat("#,###");
             toDouble = Double.valueOf(mValues.get(position).getMax_budget());
             holder.textBudget.setText("Rp. " + formatter.format((long) toDouble));
             toDouble = Double.valueOf(mValues.get(position).getDiscount());
@@ -590,16 +606,6 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.layout.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
-
-            if (mValues.size() == position+1){
-                textTotal.setText("Rp. " + formatter.format((long) total));
-                textBudget.setText("Rp. " + formatter.format((long) budget));
-                textDiscount.setText("Rp. " + formatter.format((long) discount));
-                textEfisiensi.setText("Rp. " + formatter.format((long) efisiensi));
-                textDPP.setText("Rp. " + formatter.format((long) dpp));
-                textPajak.setText("Rp. " + formatter.format((long) pajak));
-                textGrandTotal.setText("Rp. " + formatter.format((long) grandTotal));
-            }
 
             if (approval == 1 && code == 1){
                 params =  holder.editApproval1.getLayoutParams();
@@ -625,6 +631,9 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
             public final TextView textNo;
             public final TextView textItem;
             public final TextView textSpecification;
+            public final TextView textRemark;
+            public final TextView textJobOrder;
+            public final TextView textStatus;
             public final TextView textQty;
             public final TextView textPrice;
             public final TextView textDiscount;
@@ -642,6 +651,9 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
                 textNo = (TextView) itemView.findViewById(R.id.textNo);
                 textItem = (TextView) itemView.findViewById(R.id.textItem);
                 textSpecification = (TextView) itemView.findViewById(R.id.textSpecification);
+                textRemark = (TextView) itemView.findViewById(R.id.textRemark);
+                textJobOrder = (TextView) itemView.findViewById(R.id.textJobOrder);
+                textStatus = (TextView) itemView.findViewById(R.id.textStatus);
                 textQty = (TextView) itemView.findViewById(R.id.textQty);
                 textPrice = (TextView) itemView.findViewById(R.id.textPrice);
                 textDiscount = (TextView) itemView.findViewById(R.id.textDiscount);

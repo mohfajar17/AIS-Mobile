@@ -123,7 +123,7 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_job_order_detail);
 
         Bundle bundle = getIntent().getExtras();
-        jobOrder = bundle.getParcelable("detail");
+        jobOrder = bundle.getParcelable("detailJO");
 
         menuJoDetail = (TextView) findViewById(R.id.menuJoDetail);
         menuJoMr = (TextView) findViewById(R.id.menuJoMr);
@@ -200,34 +200,34 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         detailTotalBudgetPr = (TextView) findViewById(R.id.detailTotalBudgetPr);
 
         NumberFormat formatter = new DecimalFormat("#,###");
-        int total = 0;
+        long total = 0;
         toDouble = Double.valueOf(jobOrder.getMaterial_amount());
-        detailMateriB.setText("Rp. " + formatter.format((int) toDouble));
-        total += (int) toDouble;
+        detailMateriB.setText("Rp. " + formatter.format((long) toDouble));
+        total += (long) toDouble;
         toDouble = Double.valueOf(jobOrder.getTools_amount());
-        detailToolB.setText("Rp. " +  formatter.format((int) toDouble));
-        total += (int) toDouble;
+        detailToolB.setText("Rp. " +  formatter.format((long) toDouble));
+        total += (long) toDouble;
         toDouble = Double.valueOf(jobOrder.getMan_power_amount());
-        detailMpcB.setText("Rp. " +  formatter.format((int) toDouble));
-        total += (int) toDouble;
+        detailMpcB.setText("Rp. " +  formatter.format((long) toDouble));
+        total += (long) toDouble;
         toDouble = Double.valueOf(jobOrder.getCod_amount());
-        detailCodB.setText("Rp. " +  formatter.format((int) toDouble));
-        total += (int) toDouble;
+        detailCodB.setText("Rp. " +  formatter.format((long) toDouble));
+        total += (long) toDouble;
         toDouble = Double.valueOf(jobOrder.getWo_amount());
-        detailWoB.setText("Rp. " +  formatter.format((int) toDouble));
-        total += (int) toDouble;
+        detailWoB.setText("Rp. " +  formatter.format((long) toDouble));
+        total += (long) toDouble;
         toDouble = Double.valueOf(jobOrder.getMaterial_return_amount());
-        detailMrB.setText("Rp. " +  formatter.format((int) toDouble));
-        total += (int) toDouble;
+        detailMrB.setText("Rp. " +  formatter.format((long) toDouble));
+        total += (long) toDouble;
         toDouble = Double.valueOf(jobOrder.getPb_amount());
-        detailPbB.setText("Rp. " +  formatter.format((int) toDouble));
-        total += (int) toDouble;
+        detailPbB.setText("Rp. " +  formatter.format((long) toDouble));
+        total += (long) toDouble;
         toDouble = Double.valueOf(jobOrder.getCpr_amount());
-        detailCprB.setText("Rp. " +  formatter.format((int) toDouble));
-        total += (int) toDouble;
+        detailCprB.setText("Rp. " +  formatter.format((long) toDouble));
+        total += (long) toDouble;
         toDouble = Double.valueOf(jobOrder.getExpenses_amount());
-        detailExpensesB.setText("Rp. " +  formatter.format((int) toDouble));
-        total += (int) toDouble;
+        detailExpensesB.setText("Rp. " +  formatter.format((long) toDouble));
+        total += (long) toDouble;
         detailTotalBudgetB.setText("Rp. " +  formatter.format(total));
 
         jodJobOrder.setText(jobOrder.getJob_order_number());
@@ -248,11 +248,11 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         detailDiubahTgl.setText(jobOrder.getModified_date());
 
         toDouble = Double.valueOf(jobOrder.getAmount());
-        detailNilai.setText("Rp. "+ formatter.format((int) toDouble));
+        detailNilai.setText("Rp. "+ formatter.format((long) toDouble));
         toDouble = Double.valueOf(jobOrder.getBudgeting_amount());
-        detailBudgetAmount.setText("Rp. "+ formatter.format((int) toDouble));
+        detailBudgetAmount.setText("Rp. "+ formatter.format((long) toDouble));
         toDouble = Double.valueOf(jobOrder.getAmount());
-        detailNilaiKontrak.setText("Rp. "+ formatter.format((int) toDouble));
+        detailNilaiKontrak.setText("Rp. "+ formatter.format((long) toDouble));
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -514,21 +514,25 @@ public class JobOrderDetailActivity extends AppCompatActivity {
 
                         toDouble = Double.valueOf(jobOrder.getAmount()) - totalPengeluaran;
                         toDoubleNew = (Double.valueOf(jobOrder.getAmount()) - totalPengeluaran) / Double.valueOf(jobOrder.getAmount()) * 100;
-                        detailLabaRugi.setText("(" + df.format(toDoubleNew) + "%)  Rp. " + formatter.format((long) toDouble) + " ");
+                        detailLabaRugi.setText("Rp. " + formatter.format((long) toDouble) + " (" + df.format(toDoubleNew) + "%)");
                         if (toDoubleNew < 0)
                             detailLabaRugi.setTextColor(getResources().getColor(R.color.colorRed));
                         else detailLabaRugi.setTextColor(getResources().getColor(R.color.colorAsukaGreen));
 
                         toDouble = Double.valueOf(jobOrder.getBudgeting_amount()) - totalPengeluaran;
                         toDoubleNew = (Double.valueOf(jobOrder.getBudgeting_amount()) - totalPengeluaran) / Double.valueOf(jobOrder.getBudgeting_amount()) * 100;
-                        detailSisaBudget.setText("(" + df.format(toDoubleNew) + "%)  Rp. " + formatter.format((long) toDouble) + " ");
+                        detailSisaBudget.setText("Rp. " + formatter.format((long) toDouble) + " (" + df.format(toDoubleNew) + "%)");
                         if (toDoubleNew < 0)
                             detailSisaBudget.setTextColor(getResources().getColor(R.color.colorRed));
                         else detailSisaBudget.setTextColor(getResources().getColor(R.color.colorAsukaGreen));
 
+//                        toDouble = json.getDouble("invoice") - totalPengeluaran;
+//                        toDoubleNew = (json.getDouble("invoice") - totalPengeluaran) / json.getDouble("invoice") * 100;
                         toDouble = json.getDouble("invoice") - totalPengeluaran;
-                        toDoubleNew = (json.getDouble("invoice") - totalPengeluaran) / json.getDouble("invoice") * 100;
-                        detailLabaRugiBerjalan.setText("(" + df.format(toDoubleNew) + "%)  Rp. " + formatter.format((long) toDouble) + " ");
+                        if (json.getInt("invoice") != 0)
+                            toDoubleNew = (json.getDouble("invoice") - totalPengeluaran) / json.getDouble("invoice") * 100;
+                        else toDoubleNew = -100;
+                        detailLabaRugiBerjalan.setText( "Rp. " + formatter.format((long) toDouble) + " (" + df.format(toDoubleNew) + "%)");
                         if (toDoubleNew < 0)
                             detailLabaRugiBerjalan.setTextColor(getResources().getColor(R.color.colorRed));
                         else detailLabaRugiBerjalan.setTextColor(getResources().getColor(R.color.colorAsukaGreen));

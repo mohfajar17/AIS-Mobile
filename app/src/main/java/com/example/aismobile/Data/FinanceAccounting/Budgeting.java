@@ -222,4 +222,16 @@ public class Budgeting implements Parcelable {
     public String getModified_date() {
         return modified_date;
     }
+
+    public void setApproval1(String approval1) {
+        this.approval1 = approval1;
+    }
+
+    public void setApproval2(String approval2) {
+        this.approval2 = approval2;
+    }
+
+    public void setApproval3(String approval3) {
+        this.approval3 = approval3;
+    }
 }

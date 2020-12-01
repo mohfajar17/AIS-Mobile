@@ -268,4 +268,16 @@ public class BankTransaction implements Parcelable {
     public String getBank_transaction_file_name() {
         return bank_transaction_file_name;
     }
+
+    public void setChecked_by(String checked_by) {
+        this.checked_by = checked_by;
+    }
+
+    public void setApproval1(String approval1) {
+        this.approval1 = approval1;
+    }
+
+    public void setApproval2(String approval2) {
+        this.approval2 = approval2;
+    }
 }

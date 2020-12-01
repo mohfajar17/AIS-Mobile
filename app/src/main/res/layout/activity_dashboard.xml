@@ -20,13 +20,13 @@
             <LinearLayout
                 android:id="@+id/menuDashboard"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:background="@color/colorWhite"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="60dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/icon_dashboard"/>
 
@@ -36,7 +36,7 @@
                     android:layout_marginLeft="15dp"
                     android:textSize="24dp"
                     android:textColor="@color/colorBlack"
-                    android:text="Dashboard"/>
+                    android:text="Approval"/>
             </LinearLayout>
 
             <RelativeLayout

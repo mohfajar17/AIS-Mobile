@@ -263,4 +263,16 @@ public class Spkl implements Parcelable {
     public String getOvertime_file_type() {
         return overtime_file_type;
     }
+
+    public void setApproval1_by(String approval1_by) {
+        this.approval1_by = approval1_by;
+    }
+
+    public void setApproval2_by(String approval2_by) {
+        this.approval2_by = approval2_by;
+    }
+
+    public void setVerified_by(String verified_by) {
+        this.verified_by = verified_by;
+    }
 }

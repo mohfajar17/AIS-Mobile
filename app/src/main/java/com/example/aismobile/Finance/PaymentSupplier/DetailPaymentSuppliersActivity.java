@@ -90,7 +90,7 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
     private TextView textModifiedDate;
     private TextView textGrandTotal;
 
-    private int code = 0, approval = 0, akses1 = 0, akses2 = 0, akses3 = 0;
+    private int code = 0, approval = 0, akses1 = 0, akses2 = 0, akses3 = 0, loadApproval = 0;
     private ArrayAdapter<String> adapterApproval;
     private LinearLayout layoutApproval;
     private TextView btnApprove1;
@@ -182,50 +182,59 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Date dateObj = Calendar.getInstance().getTime();
-                SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat dateFormater = new SimpleDateFormat("dd-MM-yyyy");
                 if (approval == 1 && akses1 > 0){
-                    if (paymentSupplier.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                    if (paymentSupplier.getChecked_by().matches("-") ||
                             paymentSupplier.getDone().toLowerCase().contains("Ya".toLowerCase()))
                         Toast.makeText(DetailPaymentSuppliersActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else{
-                        for (int i = 0; i< paymentSupplierDetails.size(); i++)
+                        for (int i = 0; i< paymentSupplierDetails.size(); i++) {
+                            if (i == paymentSupplierDetails.size()-1)
+                                loadApproval = 1;
                             updateApproval(String.valueOf(paymentSupplierDetails.get(i).getBudget_supplier_detail_id()),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                        }
                         updateApprovalId();
                         textApproval1.setText(sharedPrefManager.getUserDisplayName());
                         textApproval1Date.setText(dateFormater.format(dateObj));
                         textComment1.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 2 && akses2 > 0){
-                    if (paymentSupplier.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                    if (paymentSupplier.getChecked_by().matches("-") ||
                             paymentSupplier.getDone().toLowerCase().contains("Ya".toLowerCase()) ||
-                            paymentSupplier.getApproval1().toLowerCase().contains("-".toLowerCase()))
+                            paymentSupplier.getApproval1().matches("-"))
                         Toast.makeText(DetailPaymentSuppliersActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else{
-                        for (int i = 0; i< paymentSupplierDetails.size(); i++)
+                        for (int i = 0; i< paymentSupplierDetails.size(); i++) {
+                            if (i == paymentSupplierDetails.size()-1)
+                                loadApproval = 1;
                             updateApproval(String.valueOf(paymentSupplierDetails.get(i).getBudget_supplier_detail_id()),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                        }
                         updateApprovalId();
                         textApproval2.setText(sharedPrefManager.getUserDisplayName());
                         textApproval2Date.setText(dateFormater.format(dateObj));
                         textComment2.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 3 && akses3 > 0){
-                    if (paymentSupplier.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                    if (paymentSupplier.getChecked_by().matches("-") ||
                             paymentSupplier.getDone().toLowerCase().contains("Ya".toLowerCase()) ||
-                            paymentSupplier.getApproval1().toLowerCase().contains("-".toLowerCase()) ||
-                            paymentSupplier.getApproval2().toLowerCase().contains("-".toLowerCase()))
+                            paymentSupplier.getApproval1().matches("-") ||
+                            paymentSupplier.getApproval2().matches("-"))
                         Toast.makeText(DetailPaymentSuppliersActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else{
-                        for (int i = 0; i< paymentSupplierDetails.size(); i++)
+                        for (int i = 0; i< paymentSupplierDetails.size(); i++) {
+                            if (i == paymentSupplierDetails.size()-1)
+                                loadApproval = 1;
                             updateApproval(String.valueOf(paymentSupplierDetails.get(i).getBudget_supplier_detail_id()),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
+                        }
                         updateApprovalId();
                         textApproval3.setText(sharedPrefManager.getUserDisplayName());
                         textApproval3Date.setText(dateFormater.format(dateObj));
@@ -326,6 +335,7 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
             }
         });
 
+        changeColor();
         loadDetail();
     }
 
@@ -374,6 +384,12 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
             btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (!textApproval1.getText().toString().matches("-") &&
+                !textApproval2.getText().toString().matches("-") &&
+                !textApproval3.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
         } else {
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
@@ -389,6 +405,10 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        if (loadApproval == 1) {
+                            loadDetail();
+                            loadApproval = 0;
+                        }
                     } else {
                     }
                 } catch (JSONException e) {
@@ -424,7 +444,12 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
-                        loadDetail();
+                        if (approval == 1)
+                            paymentSupplier.setApproval1(sharedPrefManager.getUserDisplayName());
+                        else if (approval == 2)
+                            paymentSupplier.setApproval2(sharedPrefManager.getUserDisplayName());
+                        else if (approval == 3)
+                            paymentSupplier.setApproval3(sharedPrefManager.getUserDisplayName());
                         Toast.makeText(DetailPaymentSuppliersActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailPaymentSuppliersActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
@@ -494,7 +519,6 @@ public class DetailPaymentSuppliersActivity extends AppCompatActivity {
                         recyclerView.setAdapter(adapter);
 
                         changeColor();
-                        approval = 0;
                     } else {
                         Toast.makeText(DetailPaymentSuppliersActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }

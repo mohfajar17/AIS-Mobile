@@ -11,6 +11,10 @@ public class PurchaseOrderDetail implements Parcelable {
     private String material_request_detail_id;
     private String item_name;
     private String item_specification;
+    private String notes;
+    private String job_order_number;
+    private String job_order_description;
+    private String status;
     private String quantity;
     private String unit_abbr;
     private String unit_price_buy;
@@ -22,6 +26,10 @@ public class PurchaseOrderDetail implements Parcelable {
         material_request_detail_id = in.readString();
         item_name = in.readString();
         item_specification = in.readString();
+        notes = in.readString();
+        job_order_number = in.readString();
+        job_order_description = in.readString();
+        status = in.readString();
         quantity = in.readString();
         unit_abbr = in.readString();
         unit_price_buy = in.readString();
@@ -35,6 +43,10 @@ public class PurchaseOrderDetail implements Parcelable {
             this.material_request_detail_id = jsonObject.getString("material_request_detail_id");
             this.item_name = jsonObject.getString("item_name");
             this.item_specification = jsonObject.getString("item_specification");
+            this.notes = jsonObject.getString("notes");
+            this.job_order_number = jsonObject.getString("job_order_number");
+            this.job_order_description = jsonObject.getString("job_order_description");
+            this.status = jsonObject.getString("status");
             this.quantity = jsonObject.getString("quantity");
             this.unit_abbr = jsonObject.getString("unit_abbr");
             this.unit_price_buy = jsonObject.getString("unit_price_buy");
@@ -68,6 +80,10 @@ public class PurchaseOrderDetail implements Parcelable {
         dest.writeString(material_request_detail_id);
         dest.writeString(item_name);
         dest.writeString(item_specification);
+        dest.writeString(notes);
+        dest.writeString(job_order_number);
+        dest.writeString(job_order_description);
+        dest.writeString(status);
         dest.writeString(quantity);
         dest.writeString(unit_abbr);
         dest.writeString(unit_price_buy);
@@ -110,5 +126,21 @@ public class PurchaseOrderDetail implements Parcelable {
 
     public String getPo_app1() {
         return po_app1;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getJob_order_number() {
+        return job_order_number;
+    }
+
+    public String getJob_order_description() {
+        return job_order_description;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

@@ -175,21 +175,6 @@ public class CustomerInvoiceDetailActivity extends AppCompatActivity {
         textMaterialIncomeType = (TextView) findViewById(R.id.textMaterialIncomeType);
         textServiceIncomeType = (TextView) findViewById(R.id.textServiceIncomeType);
 
-        double commercialValue = Double.valueOf(customerInvoice.getService_amount());
-        textCommercialValue.setText("Rp. " + formatter.format((long) commercialValue));
-        double discount = Double.valueOf(customerInvoice.getService_discount());
-        textDiscount.setText("Rp. " + formatter.format((long) discount));
-        double totalAfterDiscount = Double.valueOf(customerInvoice.getService_amount()) - Double.valueOf(customerInvoice.getService_discount());
-        textTotalAfterDiscount.setText("Rp. " + formatter.format((long) totalAfterDiscount));
-        double ppn = Double.valueOf(customerInvoice.getService_amount()) * 10 / 100;
-        textPPN10.setText("Rp. " + formatter.format((long) ppn));
-        double pph = Double.valueOf(customerInvoice.getService_amount()) * Double.valueOf(customerInvoice.getTax_type_rate()) / 100;
-        textPPHJasaFinal.setText("Rp. " + formatter.format((long) pph));
-        double gtWithoutWHT = totalAfterDiscount + ppn;
-        textGrandTotalNoWHT.setText("Rp. " + formatter.format((long) gtWithoutWHT));
-        double gtWHT = totalAfterDiscount + ppn - pph;
-        textGrandTotalWHT.setText("Rp. " + formatter.format((long) gtWHT));
-
         textWorkCompletion.setText(customerInvoice.getSales_order_invoice_number());
         textJobOrder.setText(customerInvoice.getJob_order_id());
         textSalesQuotation.setText(customerInvoice.getSales_quotation_id());
@@ -324,10 +309,26 @@ public class CustomerInvoiceDetailActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        double commercialValue = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             cashOnDeliveryDetails.add(new CustomerInvoiceDetail(jsonArray.getJSONObject(i)));
+                            commercialValue += jsonArray.getJSONObject(i).getDouble("amount");
                         }
+
+                        textCommercialValue.setText("Rp. " + formatter.format((long) commercialValue));
+                        double discount = Double.valueOf(customerInvoice.getService_discount());
+                        textDiscount.setText("Rp. " + formatter.format((long) discount));
+                        double totalAfterDiscount = commercialValue - Double.valueOf(customerInvoice.getService_discount());
+                        textTotalAfterDiscount.setText("Rp. " + formatter.format((long) totalAfterDiscount));
+                        double ppn = commercialValue * 10 / 100;
+                        textPPN10.setText("Rp. " + formatter.format((long) ppn));
+                        double pph = commercialValue * Double.valueOf(customerInvoice.getTax_type_rate()) / 100;
+                        textPPHJasaFinal.setText("Rp. " + formatter.format((long) pph));
+                        double gtWithoutWHT = totalAfterDiscount + ppn;
+                        textGrandTotalNoWHT.setText("Rp. " + formatter.format((long) gtWithoutWHT));
+                        double gtWHT = totalAfterDiscount + ppn - pph;
+                        textGrandTotalWHT.setText("Rp. " + formatter.format((long) gtWHT));
 
                         adapter = new MyRecyclerViewAdapter(cashOnDeliveryDetails, context);
                         recyclerView.setAdapter(adapter);

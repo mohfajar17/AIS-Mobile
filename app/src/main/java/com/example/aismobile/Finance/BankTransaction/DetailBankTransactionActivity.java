@@ -154,7 +154,7 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeColor();
-                if (approval != 2 && textApproval1.getText().toString().matches("-")){
+                if (approval != 2 && textApproval2.getText().toString().matches("-")){
                     btnApprove2.setBackgroundResource(R.drawable.circle_red);
                     approval = 2;
                 } else approval = 0;
@@ -176,7 +176,7 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
                 Date dateObj = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0){
-                    if (bankTransaction.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                    if (bankTransaction.getChecked_by().matches("-") ||
                             bankTransaction.getReconciled().toLowerCase().contains("Ya".toLowerCase()))
                         Toast.makeText(DetailBankTransactionActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else{
@@ -188,9 +188,9 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
                         textComment1.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 2 && akses2 > 0){
-                    if (bankTransaction.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                    if (bankTransaction.getChecked_by().matches("-") ||
                             bankTransaction.getReconciled().toLowerCase().contains("Ya".toLowerCase()) ||
-                            bankTransaction.getApproval1().toLowerCase().contains("-".toLowerCase()))
+                            bankTransaction.getApproval1().matches("-"))
                         Toast.makeText(DetailBankTransactionActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else{
                         for (int i = 0; i<bankTransactionDetails.size(); i++)
@@ -286,6 +286,7 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
             }
         });
 
+        changeColor();
         loadDetail();
     }
 
@@ -330,6 +331,13 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
         } else if (textApproval2.getText().toString().matches("-")){
             btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
+            if (textCheckedBy.getText().toString().matches("-"))
+                btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
+        } else if (!textApproval1.getText().toString().matches("-") &&
+                !textApproval2.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
             if (textCheckedBy.getText().toString().matches("-"))
                 btnApprove3.setBackgroundResource(R.drawable.circle_green);
             else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
@@ -379,6 +387,12 @@ public class DetailBankTransactionActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        if (approval == 1)
+                            bankTransaction.setApproval1(sharedPrefManager.getUserDisplayName());
+                        else if (approval == 2)
+                            bankTransaction.setApproval2(sharedPrefManager.getUserDisplayName());
+                        else if (approval == 3)
+                            bankTransaction.setChecked_by(sharedPrefManager.getUserDisplayName());
                         Toast.makeText(DetailBankTransactionActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailBankTransactionActivity.this, "Filed load data", Toast.LENGTH_LONG).show();

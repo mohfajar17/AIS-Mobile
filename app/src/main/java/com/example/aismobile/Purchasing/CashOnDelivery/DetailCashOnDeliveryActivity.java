@@ -99,13 +99,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
     private TextView textPajak;
     private TextView textGrandTotal;
 
-    private double total;
-    private double budget;
-    private double discount;
-    private double efisiensi;
-    private double dpp;
-    private double pajak;
-    private double grandTotal;
+    private double total, budget, discount, efisiensi, efisiensiPerc, dpp, pajak, grandTotal;
 
     private int code = 0, approval = 0, approvalAssignId = 0, user = 0, akses1 = 0;
     private ArrayAdapter<String> adapterApproval;
@@ -117,6 +111,8 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
     private FloatingActionButton fabRefresh;
     private SharedPrefManager sharedPrefManager;
 
+    private NumberFormat formatter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +122,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
         cashOnDelivery = bundle.getParcelable("detail");
         code = bundle.getInt("code");
         sharedPrefManager = new SharedPrefManager(this);
+        formatter = new DecimalFormat("#,###");
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data");
@@ -315,6 +312,7 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
             }
         });
 
+        changeColor();
         loadDetail();
         loadApprovalAssign();
     }
@@ -384,15 +382,12 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
 
     public void changeColor(){
         if (textPersetujuan.getText().toString().matches("-")){
-            btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
-        } else if (textApproval1.getText().toString().matches("-")){
-            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+        } else btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+
+        if (textApproval1.getText().toString().matches("-")){
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
-        } else {
-            btnApprove1.setBackgroundResource(R.drawable.circle_green);
-            btnApprove2.setBackgroundResource(R.drawable.circle_green);
-        }
+        } else btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
     }
 
     public void updateApproval(final String id, final String approve1){
@@ -507,14 +502,35 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
                         for(int i=0;i<jsonArray.length();i++){
                             cashOnDeliveryDetails.add(new CashOnDeliveryDetail(jsonArray.getJSONObject(i)));
 
-                            total += (jsonArray.getJSONObject(i).getDouble("quantity")*jsonArray.getJSONObject(i).getDouble("unit_price"))-jsonArray.getJSONObject(i).getDouble("discount");
-                            budget += jsonArray.getJSONObject(i).getDouble("quantity")*jsonArray.getJSONObject(i).getDouble("max_budget");
-                            discount += jsonArray.getJSONObject(i).getDouble("discount");
+                            if (!jsonArray.getJSONObject(i).getString("cod_app1").toLowerCase().contains("Reject".toLowerCase())) {
+                                total += (jsonArray.getJSONObject(i).getDouble("quantity") * jsonArray.getJSONObject(i).getDouble("unit_price")) - jsonArray.getJSONObject(i).getDouble("discount");
+                                budget += jsonArray.getJSONObject(i).getDouble("quantity") * jsonArray.getJSONObject(i).getDouble("max_budget");
+                                discount += jsonArray.getJSONObject(i).getDouble("discount");
+                            }
                         }
-                        efisiensi = budget - total;
+
+                        efisiensi = budget - (total - discount);
+                        if (efisiensi > 0) {
+                            efisiensiPerc = ((budget - (total - discount)) / budget) * 100;
+                        } else {
+                            efisiensi = 0;
+                            efisiensiPerc = 0;
+                        }
+
                         dpp = total;
                         pajak = total*Double.valueOf(cashOnDelivery.getTax_type_rate())/100;
                         grandTotal = dpp+pajak;
+
+                        textTotal.setText("Rp. " + formatter.format((long) total));
+                        textBudget.setText("Rp. " + formatter.format((long) budget));
+                        textDiscount.setText("Rp. " + formatter.format((long) discount));
+                        textEfisiensi.setText("Rp. " + formatter.format((long) efisiensi) + " (" + new DecimalFormat("##.##").format(efisiensiPerc) + "%)");
+                        textDPP.setText("Rp. " + formatter.format((long) dpp));
+                        textPajak.setText("Rp. " + formatter.format((long) pajak));
+                        textGrandTotal.setText("Rp. " + formatter.format((long) grandTotal));
+
+                        if (efisiensi > 0)
+                            textEfisiensi.setTextColor(getResources().getColor(R.color.colorAsukaGreen));
 
                         adapter = new MyRecyclerViewAdapter(cashOnDeliveryDetails, context);
                         recyclerView.setAdapter(adapter);
@@ -575,7 +591,6 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
             holder.textApproval1.setText(mValues.get(position).getCod_app1());
 
             double toDouble;
-            NumberFormat formatter = new DecimalFormat("#,###");
             toDouble = Double.valueOf(mValues.get(position).getMax_budget());
             holder.textBudget.setText("Rp. " + formatter.format((long) toDouble));
             toDouble = Double.valueOf(mValues.get(position).getDiscount());
@@ -588,16 +603,6 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
             if (position%2==0)
                 holder.layout.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.layout.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
-
-            if (mValues.size() == position+1){
-                textTotal.setText("Rp. " + formatter.format((long) total));
-                textBudget.setText("Rp. " + formatter.format((long) budget));
-                textDiscount.setText("Rp. " + formatter.format((long) discount));
-                textEfisiensi.setText("Rp. " + formatter.format((long) efisiensi));
-                textDPP.setText("Rp. " + formatter.format((long) dpp));
-                textPajak.setText("Rp. " + formatter.format((long) pajak));
-                textGrandTotal.setText("Rp. " + formatter.format((long) grandTotal));
-            }
 
             if (approval == 1 && code == 1){
                 params =  holder.editApproval1.getLayoutParams();

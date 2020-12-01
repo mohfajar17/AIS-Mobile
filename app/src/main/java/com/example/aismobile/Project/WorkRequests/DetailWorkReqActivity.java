@@ -178,27 +178,45 @@ public class DetailWorkReqActivity extends AppCompatActivity {
                 Date dateObj = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0 && approve1 > 0){
-                    for (int i = 0; i<workOrderDetails.size(); i++)
-                        updateApproval(String.valueOf(workOrderDetails.get(i).getWork_order_detail_id()),
+                    progressDialog.show();
+                    workOrder.setApproval1(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=workOrderDetails.size(); i++) {
+                        if (i==workOrderDetails.size()){
+                            loadDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(workOrderDetails.get(i).getWork_order_detail_id()),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                    }
                     updateApprovalId();
                     textApproval1.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else if (approval == 2 && akses2 > 0 && approve2 > 0){
-                    for (int i = 0; i<workOrderDetails.size(); i++)
-                        updateApproval(String.valueOf(workOrderDetails.get(i).getWork_order_detail_id()),
+                    progressDialog.show();
+                    workOrder.setApproval2(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=workOrderDetails.size(); i++) {
+                        if (i==workOrderDetails.size()){
+                            loadDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(workOrderDetails.get(i).getWork_order_detail_id()),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                    }
                     updateApprovalId();
                     textApproval2.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else if (approval == 3 && akses3 > 0 && approve3 > 0){
-                    for (int i = 0; i<workOrderDetails.size(); i++)
-                        updateApproval(String.valueOf(workOrderDetails.get(i).getWork_order_detail_id()),
+                    progressDialog.show();
+                    workOrder.setApproval3(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=workOrderDetails.size(); i++) {
+                        if (i==workOrderDetails.size()){
+                            loadDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(workOrderDetails.get(i).getWork_order_detail_id()),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
+                    }
                     updateApprovalId();
                     textApproval3.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else Toast.makeText(DetailWorkReqActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
@@ -371,6 +389,12 @@ public class DetailWorkReqActivity extends AppCompatActivity {
             btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (!workOrder.getApproval3().matches("-") &&
+                !workOrder.getApproval2().matches("-") &&
+                !workOrder.getApproval3().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
         } else {
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
@@ -399,7 +423,6 @@ public class DetailWorkReqActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
-                        loadDetail();
                     } else {
                     }
                 } catch (JSONException e) {
@@ -468,8 +491,6 @@ public class DetailWorkReqActivity extends AppCompatActivity {
     }
 
     public void loadDetail(){
-        progressDialog.show();
-
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_WORK_ORDER_DETAIL_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -479,6 +500,7 @@ public class DetailWorkReqActivity extends AppCompatActivity {
                     if(status==1){
                         recyclerView.setAdapter(null);
                         workOrderDetails.clear();
+                        totalNilai = 0;
 
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
@@ -495,9 +517,7 @@ public class DetailWorkReqActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(DetailWorkReqActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }
-                    progressDialog.dismiss();
                 } catch (JSONException e) {
-                    progressDialog.dismiss();
                     Toast.makeText(DetailWorkReqActivity.this, "", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
@@ -507,7 +527,6 @@ public class DetailWorkReqActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Toast.makeText(DetailWorkReqActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
             }
         }){
             @Override

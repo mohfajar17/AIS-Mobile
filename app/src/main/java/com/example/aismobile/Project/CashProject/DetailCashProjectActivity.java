@@ -190,28 +190,47 @@ public class DetailCashProjectActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Date dateObj = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                if (approval == 1 && akses1 > 0 && approve1 > 0){
-                    for (int i = 0; i<cashProjectReportDetails.size(); i++)
-                        updateApproval(String.valueOf(cashProjectReportDetails.get(i).getResponsbility_advance_detail()),
-                                ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
-                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
-                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                if (approval == 1 && akses1 > 0 && approve1 > 0) {
+                    progressDialog.show();
+                    cashProjectReport.setApproval1(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=cashProjectReportDetails.size(); i++) {
+                        if (i == cashProjectReportDetails.size()) {
+                            loadDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(cashProjectReportDetails.get(i).getResponsbility_advance_detail()),
+                                    ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                    }
                     updateApprovalId();
                     textApproval1.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else if (approval == 2 && akses2 > 0 && approve2 > 0){
-                    for (int i = 0; i<cashProjectReportDetails.size(); i++)
-                        updateApproval(String.valueOf(cashProjectReportDetails.get(i).getResponsbility_advance_detail()),
-                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
-                                ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
-                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                    progressDialog.show();
+                    cashProjectReport.setApproval2(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=cashProjectReportDetails.size(); i++){
+                        if (i == cashProjectReportDetails.size()) {
+                            loadDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(cashProjectReportDetails.get(i).getResponsbility_advance_detail()),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
+                                    ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                    }
                     updateApprovalId();
                     textApproval2.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else if (approval == 3 && akses3 > 0 && approve3 > 0){
-                    for (int i = 0; i<cashProjectReportDetails.size(); i++)
-                        updateApproval(String.valueOf(cashProjectReportDetails.get(i).getResponsbility_advance_detail()),
-                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
-                                ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
-                                ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
+                    progressDialog.show();
+                    cashProjectReport.setApproval3(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=cashProjectReportDetails.size(); i++){
+                        if (i == cashProjectReportDetails.size()) {
+                            loadDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(cashProjectReportDetails.get(i).getResponsbility_advance_detail()),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
+                                    ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
+                                    ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
+                    }
+
                     updateApprovalId();
                     textApproval3.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else Toast.makeText(DetailCashProjectActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
@@ -395,6 +414,12 @@ public class DetailCashProjectActivity extends AppCompatActivity {
             btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (!cashProjectReport.getApproval3().matches("-") &&
+                !cashProjectReport.getApproval2().matches("-") &&
+                !cashProjectReport.getApproval3().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
         } else {
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
@@ -410,7 +435,6 @@ public class DetailCashProjectActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
-                        loadDetail();
                     } else {
                     }
                 } catch (JSONException e) {
@@ -492,8 +516,6 @@ public class DetailCashProjectActivity extends AppCompatActivity {
     }
 
     public void loadDetail(){
-        progressDialog.show();
-
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_CASH_PROJECT_DETAIL_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -503,6 +525,10 @@ public class DetailCashProjectActivity extends AppCompatActivity {
                     if(status==1){
                         recyclerView.setAdapter(null);
                         cashProjectReportDetails.clear();
+                        total = 0;
+                        totalApproved = 0;
+                        totalpb = 0;
+                        totalResidual = 0;
 
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
@@ -523,7 +549,7 @@ public class DetailCashProjectActivity extends AppCompatActivity {
                                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                                         totalpb = jsonArray.getJSONObject(0).getDouble("total");
 
-                                        if (totalpb > totalApproved)
+                                        if (totalpb > 0)
                                             totalResidual = totalpb - totalApproved;
                                         else totalResidual = 0;
 
@@ -549,7 +575,7 @@ public class DetailCashProjectActivity extends AppCompatActivity {
                         };
                         Volley.newRequestQueue(DetailCashProjectActivity.this).add(request);
 
-                        if (totalpb > totalApproved)
+                        if (totalpb > 0)
                             totalResidual = totalpb - totalApproved;
                         else totalResidual = 0;
                         textTotal.setText("Rp. " + formatter.format((long) total));
@@ -565,9 +591,7 @@ public class DetailCashProjectActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(DetailCashProjectActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }
-                    progressDialog.dismiss();
                 } catch (JSONException e) {
-                    progressDialog.dismiss();
                     Toast.makeText(DetailCashProjectActivity.this, "", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
@@ -577,7 +601,6 @@ public class DetailCashProjectActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Toast.makeText(DetailCashProjectActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
             }
         }){
             @Override

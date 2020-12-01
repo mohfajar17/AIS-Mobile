@@ -197,29 +197,47 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
                 Date dateObj = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0 && approve1 > 0){
-                    for (int i = 0; i<proposedBudgetDetails.size(); i++)
-                        updateApproval(String.valueOf(proposedBudgetDetails.get(i).getCash_advance_detail_id()),
+                    progressDialog.show();
+                    proposedBudget.setApproval1(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=proposedBudgetDetails.size(); i++) {
+                        if (i==proposedBudgetDetails.size()){
+                            loadDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(proposedBudgetDetails.get(i).getCash_advance_detail_id()),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                    }
                     updateApprovalId();
                     textApproval1.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else if (approval == 2 && akses2 > 0 && approve2 > 0){
-                    for (int i = 0; i<proposedBudgetDetails.size(); i++)
-                        updateApproval(String.valueOf(proposedBudgetDetails.get(i).getCash_advance_detail_id()),
+                    progressDialog.show();
+                    proposedBudget.setApproval2(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=proposedBudgetDetails.size(); i++) {
+                        if (i==proposedBudgetDetails.size()){
+                            loadDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(proposedBudgetDetails.get(i).getCash_advance_detail_id()),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                    }
                     updateApprovalId();
-                    textApproval1.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
+                    textApproval2.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else if (approval == 3 && akses3 > 0 && approve3 > 0){
-                    for (int i = 0; i<proposedBudgetDetails.size(); i++)
-                        updateApproval(String.valueOf(proposedBudgetDetails.get(i).getCash_advance_detail_id()),
+                    progressDialog.show();
+                    proposedBudget.setApproval3(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=proposedBudgetDetails.size(); i++) {
+                        if (i==proposedBudgetDetails.size()){
+                            loadDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(proposedBudgetDetails.get(i).getCash_advance_detail_id()),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
+                    }
                     updateApprovalId();
-                    textApproval1.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
+                    textApproval3.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else Toast.makeText(DetailProposedBudgetActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
             }
         });
@@ -414,6 +432,12 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
             btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (!proposedBudget.getApproval3().matches("-") &&
+                !proposedBudget.getApproval2().matches("-") &&
+                !proposedBudget.getApproval3().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
         } else {
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
@@ -511,8 +535,6 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
     }
 
     public void loadDetail(){
-        progressDialog.show();
-
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_PROPOSE_BUDGET_DETAIL_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -522,6 +544,9 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
                     if(status==1){
                         recyclerView.setAdapter(null);
                         proposedBudgetDetails.clear();
+                        total = 0;
+                        totalApproved = 0;
+                        totalTransfered = 0;
 
                         total += Double.valueOf(proposedBudget.getRest_value());
                         totalApproved += Double.valueOf(proposedBudget.getRest_value());
@@ -548,9 +573,7 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(DetailProposedBudgetActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }
-                    progressDialog.dismiss();
                 } catch (JSONException e) {
-                    progressDialog.dismiss();
                     Toast.makeText(DetailProposedBudgetActivity.this, "", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
@@ -560,7 +583,6 @@ public class DetailProposedBudgetActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Toast.makeText(DetailProposedBudgetActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
             }
         }){
             @Override

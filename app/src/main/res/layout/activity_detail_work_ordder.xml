@@ -451,6 +451,34 @@
                                 android:src="@color/colorWhite"/>
 
                             <TextView
+                                android:layout_width="250dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="Remark"
+                                android:padding="10dp"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"/>
+
+                            <ImageView
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:src="@color/colorWhite"/>
+
+                            <TextView
+                                android:layout_width="300dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="Job Order"
+                                android:padding="10dp"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"/>
+
+                            <ImageView
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:src="@color/colorWhite"/>
+
+                            <TextView
                                 android:layout_width="120dp"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
@@ -558,7 +586,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="765dp"
+                                android:layout_width="1317dp"
                                 android:layout_height="match_parent"
                                 android:gravity="right|top"
                                 android:text="Total : "
@@ -599,7 +627,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="765dp"
+                                android:layout_width="1317dp"
                                 android:layout_height="match_parent"
                                 android:gravity="right|top"
                                 android:text="Budget : "
@@ -640,7 +668,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="765dp"
+                                android:layout_width="1317dp"
                                 android:layout_height="match_parent"
                                 android:gravity="right|top"
                                 android:text="Discount : "
@@ -681,7 +709,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="765dp"
+                                android:layout_width="1317dp"
                                 android:layout_height="match_parent"
                                 android:gravity="right|top"
                                 android:text="Efisiensi : "
@@ -722,7 +750,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="765dp"
+                                android:layout_width="1317dp"
                                 android:layout_height="match_parent"
                                 android:gravity="right|top"
                                 android:text="DPP : "
@@ -763,7 +791,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="765dp"
+                                android:layout_width="1317dp"
                                 android:layout_height="match_parent"
                                 android:gravity="right|top"
                                 android:text="Pajak : "
@@ -804,7 +832,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="765dp"
+                                android:layout_width="1317dp"
                                 android:layout_height="match_parent"
                                 android:gravity="right|top"
                                 android:text="GrandTotal : "

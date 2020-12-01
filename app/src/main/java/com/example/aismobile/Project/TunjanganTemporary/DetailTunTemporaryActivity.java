@@ -176,7 +176,8 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
                     textApproval2.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
                 } else if (approval == 3){
                     updateApprovalId(3);
-                    textVerifiedBy.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n" + editCommand.getText().toString());
+                    textVerifiedBy.setText(sharedPrefManager.getUserDisplayName());
+                    textVerifiedDate.setText(dateFormater.format(dateObj));
                 } else Toast.makeText(DetailTunTemporaryActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
             }
         });
@@ -405,19 +406,21 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
         if (tunjanganTemporary.getApproval1_by().matches("-")){
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
-            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            if (tunjanganTemporary.getVerified_by().matches("-"))
+                btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
         } else if (tunjanganTemporary.getApproval2_by().matches("-")){
             btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
-            btnApprove3.setBackgroundResource(R.drawable.circle_green);
-        } else if (tunjanganTemporary.getVerified_by().matches("-")){
+            if (tunjanganTemporary.getVerified_by().matches("-"))
+                btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
+        } else {
             btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
-            btnApprove3.setBackgroundResource(R.drawable.circle_green);
-        } else {
-            btnApprove1.setBackgroundResource(R.drawable.circle_green);
-            btnApprove2.setBackgroundResource(R.drawable.circle_green);
-            btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            if (tunjanganTemporary.getVerified_by().matches("-"))
+                btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
         }
     }
 
@@ -470,6 +473,8 @@ public class DetailTunTemporaryActivity extends AppCompatActivity {
                         else if (code_update == 3)
                             tunjanganTemporary.setVerified_by(sharedPrefManager.getUserDisplayName());
                         changeColor();
+                        loadAccess();
+                        loadAccessApproval();
                         Toast.makeText(DetailTunTemporaryActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailTunTemporaryActivity.this, "Filed load data", Toast.LENGTH_LONG).show();

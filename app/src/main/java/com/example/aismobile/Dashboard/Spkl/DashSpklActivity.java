@@ -171,18 +171,9 @@ public class DashSpklActivity extends AppCompatActivity {
                 holder.pskLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.pskLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
-            holder.pskBtnEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mValues.get(position).getApproval1_by().isEmpty()){
-                        Intent intent = new Intent(DashSpklActivity.this, UpdateSpklActivity.class);
-                        intent.putExtra("detail", mValues.get(position));
-                        holder.itemView.getContext().startActivity(intent);
-                    } else {
-                        Toast.makeText(DashSpklActivity.this, "Overtime Workorder has been Approval I", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+            ViewGroup.LayoutParams params = holder.pskBtnEdit.getLayoutParams();
+            params.height = 0;
+            holder.pskBtnEdit.setLayoutParams(params);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

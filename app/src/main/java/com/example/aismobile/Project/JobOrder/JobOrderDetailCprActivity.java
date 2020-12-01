@@ -51,7 +51,6 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
     private MyRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoCpr> joCprs;
-    private List<JoCprRest> joCprRests;
     private ProgressDialog progressDialog;
     private MyNewRecyclerViewAdapter newAdapter;
 
@@ -89,7 +88,6 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
 
         context = getApplicationContext();
         joCprs = new ArrayList<>();
-        joCprRests = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewAll);
         recylerViewLayoutManager = new LinearLayoutManager(context);
@@ -329,8 +327,6 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
 
             recylerViewLayoutManager = new LinearLayoutManager(context);
             holder.recyclerViewList.setLayoutManager(recylerViewLayoutManager);
-
-            totalCpr = 0;
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DETAIL_JO_CPR_REST_LIST, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -338,6 +334,10 @@ public class JobOrderDetailCprActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(response);
                         int status=jsonObject.getInt("status");
                         if(status==1){
+                            totalCpr = 0;
+                            List<JoCprRest> joCprRests;
+                            joCprRests = new ArrayList<>();
+
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
                             for(int i=0;i<jsonArray.length();i++){
                                 joCprRests.add(new JoCprRest(jsonArray.getJSONObject(i)));

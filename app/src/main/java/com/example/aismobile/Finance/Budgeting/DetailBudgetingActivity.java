@@ -90,7 +90,7 @@ public class DetailBudgetingActivity extends AppCompatActivity {
     private double grandTotal;
     private NumberFormat formatter;
 
-    private int code = 0, approval = 0, akses1 = 0, akses2 = 0, akses3 = 0;
+    private int code = 0, approval = 0, akses1 = 0, akses2 = 0, akses3 = 0, loadApproval = 0;
     private ArrayAdapter<String> adapterApproval;
     private LinearLayout layoutApproval;
     private TextView btnApprove1;
@@ -184,48 +184,57 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                 Date dateObj = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0){
-                    if (budgeting.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                    if (budgeting.getChecked_by().matches("-") ||
                             budgeting.getDone().toLowerCase().contains("Ya".toLowerCase()))
                         Toast.makeText(DetailBudgetingActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else {
-                        for (int i = 0; i<budgetingDetails.size(); i++)
+                        for (int i = 0; i<budgetingDetails.size(); i++) {
+                            if (i == budgetingDetails.size()-1)
+                                loadApproval = 1;
                             updateApproval(String.valueOf(budgetingDetails.get(i).getBudget_detail_id()),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                        }
                         updateApprovalId();
                         textApproval1.setText(sharedPrefManager.getUserDisplayName());
                         textApproval1Date.setText(dateFormater.format(dateObj));
                         textComment1.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 2 && akses2 > 0){
-                    if (budgeting.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                    if (budgeting.getChecked_by().matches("-") ||
                             budgeting.getDone().toLowerCase().contains("Ya".toLowerCase()) ||
-                            budgeting.getApproval1().toLowerCase().contains("-".toLowerCase()))
+                            budgeting.getApproval1().matches("-"))
                         Toast.makeText(DetailBudgetingActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else {
-                        for (int i = 0; i<budgetingDetails.size(); i++)
+                        for (int i = 0; i<budgetingDetails.size(); i++) {
+                            if (i == budgetingDetails.size()-1)
+                                loadApproval = 1;
                             updateApproval(String.valueOf(budgetingDetails.get(i).getBudget_detail_id()),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval3)).getText().toString());
+                        }
                         updateApprovalId();
                         textApproval2.setText(sharedPrefManager.getUserDisplayName());
                         textApproval2Date.setText(dateFormater.format(dateObj));
                         textComment2.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 3 && akses3 > 0){
-                    if (budgeting.getChecked_by().toLowerCase().contains("-".toLowerCase()) ||
+                    if (budgeting.getChecked_by().matches("-") ||
                             budgeting.getDone().toLowerCase().contains("Ya".toLowerCase()) ||
-                            budgeting.getApproval1().toLowerCase().contains("-".toLowerCase()) ||
-                            budgeting.getApproval2().toLowerCase().contains("-".toLowerCase()))
+                            budgeting.getApproval1().matches("-") ||
+                            budgeting.getApproval2().matches("-"))
                         Toast.makeText(DetailBudgetingActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else {
-                        for (int i = 0; i<budgetingDetails.size(); i++)
+                        for (int i = 0; i<budgetingDetails.size(); i++) {
+                            if (i == budgetingDetails.size()-1)
+                                loadApproval = 1;
                             updateApproval(String.valueOf(budgetingDetails.get(i).getBudget_detail_id()),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval1)).getText().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApproval2)).getText().toString(),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
+                        }
                         updateApprovalId();
                         textApproval3.setText(sharedPrefManager.getUserDisplayName());
                         textApproval3Date.setText(dateFormater.format(dateObj));
@@ -374,6 +383,12 @@ public class DetailBudgetingActivity extends AppCompatActivity {
             btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (!textApproval1.getText().toString().matches("-") &&
+                !textApproval2.getText().toString().matches("-") &&
+                !textApproval3.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
         } else {
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
@@ -389,6 +404,10 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        if (loadApproval == 1) {
+                            loadDetail();
+                            loadApproval = 0;
+                        }
                     } else {
                     }
                 } catch (JSONException e) {
@@ -424,7 +443,12 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
-                        loadDetail();
+                        if (approval == 1)
+                            budgeting.setApproval1(sharedPrefManager.getUserDisplayName());
+                        else if (approval == 2)
+                            budgeting.setApproval2(sharedPrefManager.getUserDisplayName());
+                        else if (approval == 3)
+                            budgeting.setApproval3(sharedPrefManager.getUserDisplayName());
                         Toast.makeText(DetailBudgetingActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailBudgetingActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
@@ -494,7 +518,6 @@ public class DetailBudgetingActivity extends AppCompatActivity {
                         recyclerView.setAdapter(adapter);
 
                         changeColor();
-                        approval = 0;
                     } else {
                         Toast.makeText(DetailBudgetingActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }

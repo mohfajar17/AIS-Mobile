@@ -168,20 +168,33 @@ public class DetailSpklActivity extends AppCompatActivity {
                 Date dateObj = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0 && approve1 > 0){
-                    for (int i = 0; i<spklDetails.size(); i++)
-                        updateApproval(String.valueOf(spklDetails.get(i).getOtwo_detail_id()),
+                    progressDialog.show();
+                    spkls.setApproval1_by(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=spklDetails.size(); i++) {
+                        if (i==spklDetails.size()){
+                            loadSpklDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(spklDetails.get(i).getOtwo_detail_id()),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.spklTextApproval2)).getText().toString());
+                    }
                     updateApprovalId();
-                    detailSpklApproval1.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj) + "\n");
+                    detailSpklApproval1.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj));
                 } else if (approval == 2 && akses2 > 0 && approve2 > 0){
-                    for (int i = 0; i<spklDetails.size(); i++)
-                        updateApproval(String.valueOf(spklDetails.get(i).getOtwo_detail_id()),
+                    progressDialog.show();
+                    spkls.setApproval2_by(sharedPrefManager.getUserDisplayName());
+                    for (int i = 0; i<=spklDetails.size(); i++) {
+                        if (i==spklDetails.size()){
+                            loadSpklDetail();
+                            progressDialog.dismiss();
+                        } else updateApproval(String.valueOf(spklDetails.get(i).getOtwo_detail_id()),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.spklTextApproval1)).getText().toString(),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString());
+                    }
                     updateApprovalId();
                     detailSpklApproval2.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj));
                 } else if (approval == 3){
+                    spkls.setVerified_by(sharedPrefManager.getUserDisplayName());
                     updateApprovalId();
                     detailSpklVerifiedBy.setText(sharedPrefManager.getUserDisplayName() + "\n" + dateFormater.format(dateObj));
                 } else Toast.makeText(DetailSpklActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
@@ -348,6 +361,12 @@ public class DetailSpklActivity extends AppCompatActivity {
             btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
             btnApprove3.setBackgroundResource(R.drawable.circle_green);
+        } else if (!spkls.getApproval1_by().matches("-") &&
+                !spkls.getApproval2_by().matches("-") &&
+                !spkls.getVerified_by().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
         } else {
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
@@ -363,7 +382,6 @@ public class DetailSpklActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
-                        loadSpklDetail();
                     } else {
                     }
                 } catch (JSONException e) {
@@ -433,8 +451,6 @@ public class DetailSpklActivity extends AppCompatActivity {
     }
 
     public void loadSpklDetail(){
-        progressDialog.show();
-
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DETAIL_SPKL_LIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -454,9 +470,7 @@ public class DetailSpklActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(DetailSpklActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }
-                    progressDialog.dismiss();
                 } catch (JSONException e) {
-                    progressDialog.dismiss();
                     Toast.makeText(DetailSpklActivity.this, "", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
@@ -466,7 +480,6 @@ public class DetailSpklActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Toast.makeText(DetailSpklActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
             }
         }){
             @Override

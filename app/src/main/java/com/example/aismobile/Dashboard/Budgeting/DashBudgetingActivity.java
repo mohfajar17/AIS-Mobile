@@ -173,10 +173,6 @@ public class DashBudgetingActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     loadAccess("" + mValues.get(position).getBudget_id(), mValues.get(position));
-                    Intent intent = new Intent(DashBudgetingActivity.this, DetailBudgetingActivity.class);
-                    intent.putExtra("detail", mValues.get(position));
-                    intent.putExtra("code", 1);
-                    startActivity(intent);
                 }
             });
         }

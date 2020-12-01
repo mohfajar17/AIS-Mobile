@@ -30,7 +30,6 @@ import com.example.aismobile.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -46,13 +45,13 @@ import java.util.concurrent.TimeUnit;
 
 public class JobOrderDetailPbActivity extends AppCompatActivity {
 
+    private ProgressDialog progressDialog;
     private Context context;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<JoPb> joPbs;
-    private List<JoPbRest> joPbRests;
-    private ProgressDialog progressDialog;
+//    private List<JoPbRest> joPbRests;
     private MyNewRecyclerViewAdapter newAdapter;
 
     private Context contextHalf;
@@ -60,6 +59,8 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
     private MyHalfRecyclerViewAdapter adapterHalf;
     private RecyclerView.LayoutManager recylerViewLayoutManagerHalf;
     private List<JoPb> joPbHalfs;
+//    private List<JoPbRest> joPbRestHalfs;
+    private MyNewRecyclerViewAdapter newAdapterHalf;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -84,6 +85,8 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
 
     private JobOrder jobOrder;
 
+    double totalHalf = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +99,7 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
 
         context = getApplicationContext();
         joPbs = new ArrayList<>();
-        joPbRests = new ArrayList<>();
+//        joPbRests = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewAll);
         recylerViewLayoutManager = new LinearLayoutManager(context);
@@ -104,6 +107,7 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
 
         contextHalf = getApplicationContext();
         joPbHalfs = new ArrayList<>();
+//        joPbRestHalfs = new ArrayList<>();
 
         recyclerViewHalf = (RecyclerView) findViewById(R.id.recyclerViewDetail);
         recylerViewLayoutManagerHalf = new LinearLayoutManager(contextHalf);
@@ -279,14 +283,14 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
-                        double toDouble = 0;
+                        totalHalf = 0;
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for(int i=0;i<jsonArray.length();i++){
                             joPbHalfs.add(new JoPb(jsonArray.getJSONObject(i)));
-                            toDouble += jsonArray.getJSONObject(i).getDouble("rest_value");
+                            totalHalf += jsonArray.getJSONObject(i).getDouble("rest_value");
                         }
                         NumberFormat formatter = new DecimalFormat("#,###");
-                        totalJobOrderTemp.setText("Rp. " + formatter.format((long) toDouble) + " ");
+                        totalJobOrderTemp.setText("Rp. " + formatter.format((long) totalHalf) + " ");
                         adapterHalf = new MyHalfRecyclerViewAdapter(joPbHalfs, contextHalf);
                         recyclerViewHalf.setAdapter(adapterHalf);
                     }
@@ -396,6 +400,9 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(response);
                         int status=jsonObject.getInt("status");
                         if(status==1){
+                            List<JoPbRest> joPbRests;
+                            joPbRests = new ArrayList<>();
+
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
                             for(int i=0;i<jsonArray.length();i++){
                                 joPbRests.add(new JoPbRest(jsonArray.getJSONObject(i)));
@@ -543,6 +550,52 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
             double restValue = Double.valueOf(mValues.get(position).getRest_value());
             NumberFormat formatter = new DecimalFormat("#,###");
             holder.joTextSubTotal.setText("Rp. "+ formatter.format(Long.valueOf((int) restValue)));
+
+            recylerViewLayoutManagerHalf = new LinearLayoutManager(context);
+            holder.recyclerViewList.setLayoutManager(recylerViewLayoutManagerHalf);
+
+            StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_DETAIL_JO_PB_REST_LIST, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        int status=jsonObject.getInt("status");
+                        if(status==1){
+                            List<JoPbRest> joPbRestHalfs;
+                            joPbRestHalfs = new ArrayList<>();
+
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for(int i=0;i<jsonArray.length();i++){
+                                joPbRestHalfs.add(new JoPbRest(jsonArray.getJSONObject(i)));
+                                totalHalf += jsonArray.getJSONObject(i).getDouble("quantity")*jsonArray.getJSONObject(i).getDouble("unit_price");
+                            }
+                            NumberFormat formatter = new DecimalFormat("#,###");
+                            totalJobOrderTemp.setText("Rp. "+ formatter.format(Long.valueOf((int) totalHalf)));
+                            newAdapterHalf = new MyNewRecyclerViewAdapter(joPbRestHalfs, context);
+                            holder.recyclerViewList.setAdapter(newAdapterHalf);
+                        } else {
+                            Toast.makeText(JobOrderDetailPbActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(JobOrderDetailPbActivity.this, "", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                    Toast.makeText(JobOrderDetailPbActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> param=new HashMap<>();
+                    param.put("jobOrder", "" + mValues.get(position).getCash_advance_id());
+                    return param;
+                }
+            };
+            Volley.newRequestQueue(JobOrderDetailPbActivity.this).add(request);
         }
 
         @Override
@@ -556,6 +609,7 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
             public final TextView joTextPbNumber;
             public final TextView joTextItem;
             public final TextView joTextSubTotal;
+            public final RecyclerView recyclerViewList;
 
             public final LinearLayout layoutJo;
 
@@ -567,6 +621,7 @@ public class JobOrderDetailPbActivity extends AppCompatActivity {
                 joTextPbNumber = (TextView) itemView.findViewById(R.id.joTextPbNumber);
                 joTextItem = (TextView) itemView.findViewById(R.id.joTextItem);
                 joTextSubTotal = (TextView) itemView.findViewById(R.id.joTextSubTotal);
+                recyclerViewList = (RecyclerView) itemView.findViewById(R.id.recyclerViewList);
 
                 layoutJo = (LinearLayout) itemView.findViewById(R.id.layoutJo);
             }

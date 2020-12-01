@@ -84,7 +84,7 @@ public class DetailExpensesActivity extends AppCompatActivity {
 
     private double grandTotal;
 
-    private int code = 0, approval = 0, akses1 = 0, akses2 = 0;
+    private int code = 0, approval = 0, akses1 = 0, akses2 = 0, loadAgain = 0;
     private ArrayAdapter<String> adapterApproval;
     private ArrayAdapter<String> adapterChecked;
     private LinearLayout layoutApproval;
@@ -182,11 +182,15 @@ public class DetailExpensesActivity extends AppCompatActivity {
                             expense.getDone().toLowerCase().contains("Ya".toLowerCase()))
                         Toast.makeText(DetailExpensesActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else{
-                        for (int i = 0; i<expenseDetails.size(); i++)
+                        for (int i = 0; i<expenseDetails.size(); i++) {
+                            if (i == expenseDetails.size()-1)
+                                loadAgain = 1;
+
                             updateApproval(String.valueOf(expenseDetails.get(i).getExpenses_detail_id()),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval1)).getSelectedItem().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApprove2)).getText().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textCheck)).getText().toString());
+                        }
                         updateApprovalId();
                         textApproval1.setText(sharedPrefManager.getUserDisplayName());
                         textApproval1Date.setText(dateFormater.format(dateObj));
@@ -198,27 +202,36 @@ public class DetailExpensesActivity extends AppCompatActivity {
                             expense.getApproval1().toLowerCase().contains("-".toLowerCase()))
                         Toast.makeText(DetailExpensesActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
                     else{
-                        for (int i = 0; i<expenseDetails.size(); i++)
+                        for (int i = 0; i<expenseDetails.size(); i++) {
+                            if (i == expenseDetails.size()-1)
+                                loadAgain = 1;
+
                             updateApproval(String.valueOf(expenseDetails.get(i).getExpenses_detail_id()),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApprove1)).getText().toString(),
                                     ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval2)).getSelectedItem().toString(),
                                     ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textCheck)).getText().toString());
+                        }
                         updateApprovalId();
                         textApproval2.setText(sharedPrefManager.getUserDisplayName());
                         textApproval2Date.setText(dateFormater.format(dateObj));
                         textComment2.setText(editCommand.getText().toString());
                     }
                 } else if (approval == 3){
-                    for (int i = 0; i<expenseDetails.size(); i++)
+                    for (int i = 0; i<expenseDetails.size(); i++) {
+                        if (i == expenseDetails.size()-1)
+                            loadAgain = 1;
+
                         updateApproval(String.valueOf(expenseDetails.get(i).getExpenses_detail_id()),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApprove1)).getText().toString(),
                                 ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.textApprove2)).getText().toString(),
                                 ((Spinner) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.editApproval3)).getSelectedItem().toString());
+                    }
                     updateApprovalId();
                     textCheckedBy.setText(sharedPrefManager.getUserDisplayName());
                     textCheckedDate.setText(dateFormater.format(dateObj));
                     textCheckedComment.setText(editCommand.getText().toString());
                 } else Toast.makeText(DetailExpensesActivity.this, "You don't have access to approve", Toast.LENGTH_LONG).show();
+                changeColor();
             }
         });
         fabRefresh.setOnClickListener(new View.OnClickListener() {
@@ -288,6 +301,7 @@ public class DetailExpensesActivity extends AppCompatActivity {
             }
         });
 
+        changeColor();
         loadDetail();
     }
 
@@ -335,6 +349,13 @@ public class DetailExpensesActivity extends AppCompatActivity {
             if (textCheckedBy.getText().toString().matches("-"))
                 btnApprove3.setBackgroundResource(R.drawable.circle_green);
             else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
+        } else if (!textApproval1.getText().toString().matches("-") &&
+                !textApproval2.getText().toString().matches("-")){
+            btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+            btnApprove2.setBackgroundResource(R.drawable.circle_blue_new);
+            if (textCheckedBy.getText().toString().matches("-"))
+                btnApprove3.setBackgroundResource(R.drawable.circle_green);
+            else btnApprove3.setBackgroundResource(R.drawable.circle_blue_new);
         } else {
             btnApprove1.setBackgroundResource(R.drawable.circle_green);
             btnApprove2.setBackgroundResource(R.drawable.circle_green);
@@ -349,6 +370,10 @@ public class DetailExpensesActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        if (loadAgain == 1) {
+                            loadDetail();
+                            loadAgain = 0;
+                        }
                     } else {
                     }
                 } catch (JSONException e) {
@@ -384,7 +409,12 @@ public class DetailExpensesActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
-                        loadDetail();
+                        if (approval == 1)
+                            expense.setApproval1(sharedPrefManager.getUserDisplayName());
+                        else if (approval == 2)
+                            expense.setApproval2(sharedPrefManager.getUserDisplayName());
+                        else if (approval == 3)
+                            expense.setChecked_by(sharedPrefManager.getUserDisplayName());
                         Toast.makeText(DetailExpensesActivity.this, "Success update data", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(DetailExpensesActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
@@ -442,7 +472,6 @@ public class DetailExpensesActivity extends AppCompatActivity {
                         recyclerView.setAdapter(adapter);
 
                         changeColor();
-                        approval = 0;
                     } else {
                         Toast.makeText(DetailExpensesActivity.this, "Filed load data", Toast.LENGTH_LONG).show();
                     }

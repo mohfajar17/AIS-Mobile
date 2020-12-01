@@ -126,7 +126,7 @@ public class DetailStockActivity extends AppCompatActivity {
         btnApprove1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (approval != 1){
+                if (approval != 1 && textApprovalBy.getText().toString().matches("-")){
                     btnApprove1.setBackgroundResource(R.drawable.circle_red);
                     approval = 1;
                     recyclerView.setAdapter(null);
@@ -148,7 +148,7 @@ public class DetailStockActivity extends AppCompatActivity {
                     adapter = new MyRecyclerViewAdapter(stockDetails, context);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    btnApprove1.setBackgroundResource(R.drawable.circle_green);
+                    btnApprove2.setBackgroundResource(R.drawable.circle_green);
                     approval = 0;
                 }
             }
@@ -159,14 +159,15 @@ public class DetailStockActivity extends AppCompatActivity {
                 Date dateObj = Calendar.getInstance().getTime();
                 SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (approval == 1 && akses1 > 0){
-                    if (stockAdjustment.getApproval_by().toLowerCase().contains("-".toLowerCase()))
-                        Toast.makeText(DetailStockActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
-                    else {
+//                    if (stockAdjustment.getApproval_by().toLowerCase().contains("-".toLowerCase()))
+//                        Toast.makeText(DetailStockActivity.this, "You are not able to approve because it has not been Checking", Toast.LENGTH_LONG).show();
+//                    else {
                         updateApprovalId();
                         textApprovalBy.setText(sharedPrefManager.getUserDisplayName());
                         textApprovalDate.setText(dateFormater.format(dateObj));
                         textApprovalNotes.setText(editCommand.getText().toString());
-                    }
+                        btnApprove1.setBackgroundResource(R.drawable.circle_blue_new);
+//                    }
                 } else if (approval == 2){
                     for (int i = 0; i<stockDetails.size(); i++)
                         updateApproval(String.valueOf(stockDetails.get(i).getStock_adjustment_detail_id()),

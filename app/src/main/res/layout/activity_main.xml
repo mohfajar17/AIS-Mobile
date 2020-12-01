@@ -597,7 +597,7 @@
                         android:layout_marginLeft="15dp"
                         android:textSize="24dp"
                         android:textColor="@color/colorBlack"
-                        android:text="Dashboard"/>
+                        android:text="Approval"/>
                 </LinearLayout>
             </LinearLayout>
 

@@ -695,7 +695,7 @@ public class JobOrderFragment extends Fragment {
                     int status=jsonObject.getInt("status");
                     if(status==1){
                         Intent intent = new Intent(getActivity(), JobOrderDetailActivity.class);
-                        intent.putExtra("detail", jobOrder);
+                        intent.putExtra("detailJO", jobOrder);
                         getContext().startActivity(intent);
                     } else {
                         Toast.makeText(getActivity(), "You don't have access", Toast.LENGTH_LONG).show();

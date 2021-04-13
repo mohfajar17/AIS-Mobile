@@ -151,7 +151,7 @@ public class CheckClockDetailActivity extends AppCompatActivity {
                     loadData();
                     loadAll = false;
                     params = layoutPaging.getLayoutParams();
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                     layoutPaging.setLayoutParams(params);
                     btnShowList.setText("Show All");
                 }

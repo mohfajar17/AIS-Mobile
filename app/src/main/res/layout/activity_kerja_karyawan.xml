@@ -485,7 +485,7 @@
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
                     android:text="Salary"
-                    android:textColor="@color/colorWhite"/>
+                    android:textColor="@color/colorWhite" />
             </RelativeLayout>
 
             <RelativeLayout

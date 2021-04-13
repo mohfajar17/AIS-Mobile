@@ -110,6 +110,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -136,7 +137,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="-"
-                                    android:textColor="@color/colorAsukaRed" />
+                                    android:textColor="@color/colorAsukaBlue" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -163,7 +164,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="-"
-                                    android:textColor="@color/colorAsukaRed" />
+                                    android:textColor="@color/colorAsukaBlue" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -203,7 +204,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="-"
-                                    android:textColor="@color/colorAsukaRed" />
+                                    android:textColor="@color/colorAsukaBlue" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -230,7 +231,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="-"
-                                    android:textColor="@color/colorAsukaRed" />
+                                    android:textColor="@color/colorAsukaBlue" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -270,7 +271,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="-"
-                                    android:textColor="@color/colorAsukaRed" />
+                                    android:textColor="@color/colorAsukaBlue" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -301,7 +302,7 @@
                         <com.github.mikephil.charting.charts.BarChart
                             android:id="@+id/barChart"
                             android:layout_width="match_parent"
-                            android:layout_height="268dp"
+                            android:layout_height="278dp"
                             android:layout_above="@+id/seekBar1" />
 
                         <Button
@@ -313,6 +314,243 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Data Detail" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutDashbordToday"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:background="@color/colorWhite">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Data Today"
+                            android:gravity="center"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorAsukaBlue" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@color/colorLightGray"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_customer_invoice"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Customer Invoice (Year)"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack" />
+
+                                <TextView
+                                    android:id="@+id/textViewCustomerInvoiceYear"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="-"
+                                    android:textColor="@color/colorAsukaBlue" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_customer_invoice"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Customer Invoice (Month)"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack" />
+
+                                <TextView
+                                    android:id="@+id/textViewPurchaseCI"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="-"
+                                    android:textColor="@color/colorAsukaBlue" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@color/colorLightGray"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_purchase_order"
+                                    android:tint="@color/colorBlack"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Purchase Order"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack" />
+
+                                <TextView
+                                    android:id="@+id/textViewPurchasePO"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="-"
+                                    android:textColor="@color/colorAsukaRed" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_work_order"
+                                    android:tint="@color/colorBlack"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Work Order"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack" />
+
+                                <TextView
+                                    android:id="@+id/textViewPurchaseWO"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="-"
+                                    android:textColor="@color/colorAsukaRed" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@color/colorLightGray"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_cash_on_delivery"
+                                    android:tint="@color/colorBlack"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cash On Delivery"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack" />
+
+                                <TextView
+                                    android:id="@+id/textViewPurchaseCOD"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="-"
+                                    android:textColor="@color/colorAsukaRed" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <Button
+                                    android:id="@+id/buttonChartToday"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Grafik Today" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutDashbordChartToday"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:paddingTop="5dp"
+                        android:background="@color/colorWhite">
+
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/barChartToday"
+                            android:layout_width="match_parent"
+                            android:layout_height="313dp"
+                            android:layout_above="@+id/seekBar1" />
+
+                        <Button
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="-5dp"
+                            android:id="@+id/buttonDetailChartToday"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Today Data Detail" />
                     </LinearLayout>
 
                     <RelativeLayout

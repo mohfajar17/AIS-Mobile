@@ -1,11 +1,14 @@
 package com.example.aismobile.Project.Spkl;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +59,7 @@ public class DetailSpklActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private ImageView buttonBack;
+    private ImageView downloadAttachment;
     private TextView menuSpklDetail;
     private TextView menuSpklHistory;
     private TextView textSpklNumber;
@@ -210,6 +214,7 @@ public class DetailSpklActivity extends AppCompatActivity {
         });
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
+        downloadAttachment = (ImageView) findViewById(R.id.downloadAttachment);
         menuSpklDetail = (TextView) findViewById(R.id.menuSpklDetail);
         menuSpklHistory = (TextView) findViewById(R.id.menuSpklHistory);
         textSpklNumber = (TextView) findViewById(R.id.textSpklNumber);
@@ -283,6 +288,18 @@ public class DetailSpklActivity extends AppCompatActivity {
                 menuSpklHistory.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
+
+        if (!spkls.getOvertime_file_name().matches("null")){
+            downloadAttachment.setColorFilter(ContextCompat.getColor(context, R.color.colorAsukaRed));
+            downloadAttachment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/overtimeWorkorder/" + spkls.getOvertime_file_name());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
 
         loadSpklDetail();
     }

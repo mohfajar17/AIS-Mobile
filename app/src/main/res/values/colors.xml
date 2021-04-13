@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#D02634</color>
-<!--    <color name="colorPrimaryDark">#971C26</color>-->
+    <color name="colorPrimaryDarknes">#971C26</color>
     <color name="colorPrimaryDark">#ee4043</color>
     <color name="colorAccent">#f7d4d7</color>
 
@@ -21,4 +21,10 @@
     <color name="colorAsukaBlue">#3051a0</color>
     <color name="colorAsukaRed">#ee4043</color>
     <color name="colorAsukaGreen">#319f31</color>
+
+    <color name="colorDiagram1">#1d6ab8</color>
+    <color name="colorDiagram2">#a063bf</color>
+    <color name="colorDiagram3">#f1569b</color>
+    <color name="colorDiagram4">#ff6e5d</color>
+    <color name="colorDiagram5">#ffa600</color>
 </resources>

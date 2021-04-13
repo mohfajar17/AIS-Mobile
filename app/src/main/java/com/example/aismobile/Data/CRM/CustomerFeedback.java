@@ -29,6 +29,9 @@ public class CustomerFeedback implements Parcelable {
     private String analyze_description;
     private String answer_description;
     private String preventive_description;
+    private String archive1;
+    private String archive2;
+    private String archive3;
 
     public CustomerFeedback(int feedback_id, String feedback_number, String feedback_date, String feedback_subject,
                             String company_name, String contact_id, String contact_personal, String marketing_aspect_id,
@@ -67,6 +70,9 @@ public class CustomerFeedback implements Parcelable {
         analyze_description = in.readString();
         answer_description = in.readString();
         preventive_description = in.readString();
+        archive1 = in.readString();
+        archive2 = in.readString();
+        archive3 = in.readString();
     }
 
     public CustomerFeedback(JSONObject jsonObject){
@@ -92,6 +98,9 @@ public class CustomerFeedback implements Parcelable {
             this.analyze_description = jsonObject.getString("analyze_description");
             this.answer_description = jsonObject.getString("answer_description");
             this.preventive_description = jsonObject.getString("preventive_description");
+            this.archive1 = jsonObject.getString("archive1");
+            this.archive2 = jsonObject.getString("archive2");
+            this.archive3 = jsonObject.getString("archive3");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -137,6 +146,9 @@ public class CustomerFeedback implements Parcelable {
         dest.writeString(analyze_description);
         dest.writeString(answer_description);
         dest.writeString(preventive_description);
+        dest.writeString(archive1);
+        dest.writeString(archive2);
+        dest.writeString(archive3);
     }
 
     public int getFeedback_id() {
@@ -221,5 +233,17 @@ public class CustomerFeedback implements Parcelable {
 
     public String getPreventive_description() {
         return preventive_description;
+    }
+
+    public String getArchive1() {
+        return archive1;
+    }
+
+    public String getArchive2() {
+        return archive2;
+    }
+
+    public String getArchive3() {
+        return archive3;
     }
 }

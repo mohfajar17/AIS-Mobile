@@ -1,6 +1,7 @@
 package com.example.aismobile.Purchasing.CashOnDelivery;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -303,14 +304,17 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
                 menuHistory.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
-        downloadAtachment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/cashOnDelivery/"+ cashOnDelivery.getCod_file_name());
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
+        if (!cashOnDelivery.getCod_file_name().matches("null")){
+            downloadAtachment.setColorFilter(ContextCompat.getColor(context, R.color.colorAsukaRed));
+            downloadAtachment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/cashOnDelivery/"+ cashOnDelivery.getCod_file_name());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
 
         changeColor();
         loadDetail();
@@ -496,6 +500,8 @@ public class DetailCashOnDeliveryActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        total = 0; budget = 0; discount = 0; efisiensi = 0; efisiensiPerc = 0; dpp = 0; pajak = 0; grandTotal = 0;
+
                         recyclerView.setAdapter(null);
                         cashOnDeliveryDetails.clear();
                         JSONArray jsonArray = jsonObject.getJSONArray("data");

@@ -1,6 +1,7 @@
 package com.example.aismobile.Purchasing.PurchaseOrder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,6 +70,8 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
     private LinearLayout layoutHistory;
 
     private ImageView downloadAtachment;
+    private TextView textJobOrder;
+    private TextView textKeteranganJobOrder;
     private TextView textJenisPembelian;
     private TextView textContract;
     private TextView textSupplier;
@@ -215,6 +218,8 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
         textGrandTotal = (TextView) findViewById(R.id.textGrandTotal);
 
         downloadAtachment = (ImageView) findViewById(R.id.downloadAtachment);
+        textJobOrder = (TextView) findViewById(R.id.textJobOrder);
+        textKeteranganJobOrder = (TextView) findViewById(R.id.textKeteranganJobOrder);
         textJenisPembelian = (TextView) findViewById(R.id.textJenisPembelian);
         textContract = (TextView) findViewById(R.id.textContract);
         textSupplier = (TextView) findViewById(R.id.textSupplier);
@@ -238,6 +243,8 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
         textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
 
         textJenisPembelian.setText(purchaseOrder.getPurchase_order_type_id());
+        textJobOrder.setText(purchaseOrder.getJob_order_number());
+        textKeteranganJobOrder.setText(purchaseOrder.getJob_order_description());
         textContract.setText(purchaseOrder.getContract_agreement_id());
         textSupplier.setText(purchaseOrder.getSupplier_id());
         textNomorPenawaran.setText(purchaseOrder.getPurchase_quotation_number());
@@ -302,14 +309,17 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
                 menuHistory.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
-        downloadAtachment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/purchaseQuotation/"+ purchaseOrder.getPurchase_file_name());
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
+        if (!purchaseOrder.getPurchase_file_name().matches("null")){
+            downloadAtachment.setColorFilter(ContextCompat.getColor(context, R.color.colorAsukaRed));
+            downloadAtachment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/purchaseQuotation/"+ purchaseOrder.getPurchase_file_name());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
 
         changeColor();
         loadDetail();
@@ -495,6 +505,7 @@ public class DetailPurchaseOrderActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     int status=jsonObject.getInt("status");
                     if(status==1){
+                        total = 0; budget = 0; discount = 0; efisiensi = 0; efisiensiPerc = 0; dpp = 0; pajak = 0; grandTotal = 0;
                         recyclerView.setAdapter(null);
                         purchaseOrderDetails.clear();
                         JSONArray jsonArray = jsonObject.getJSONArray("data");

@@ -433,12 +433,12 @@ public class MonitoringFragment extends Fragment {
                 holder.mLayoutList.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             else holder.mLayoutList.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
 
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    loadAccess("" + mValues.get(position).getSales_quotation_id(), mValues.get(position));
-                }
-            });
+//            holder.mView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    loadAccess("" + mValues.get(position).getSales_quotation_id(), mValues.get(position));
+//                }
+//            });
         }
 
         @Override
@@ -530,7 +530,7 @@ public class MonitoringFragment extends Fragment {
         }
     }
 
-    private void loadAccess(final String id, final Monitoring salesQuotation) {
+    private void loadAccess(final String id, final Monitoring monitoring) {
         progressDialog.show();
 
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_VIEW_ACCESS, new Response.Listener<String>() {
@@ -541,7 +541,7 @@ public class MonitoringFragment extends Fragment {
                     int status=jsonObject.getInt("status");
                     if(status==1){
                         Intent intent = new Intent(getActivity(), DetailSalesQuotationsActivity.class);
-                        intent.putExtra("detail", salesQuotation);
+                        intent.putExtra("detail", monitoring);
                         getContext().startActivity(intent);
                     } else {
                         Toast.makeText(getActivity(), "You don't have access", Toast.LENGTH_LONG).show();

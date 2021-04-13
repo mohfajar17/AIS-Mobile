@@ -2,8 +2,6 @@ package com.example.aismobile.Marketing.SalesQuotation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,7 @@ import java.text.NumberFormat;
 public class DetailSalesQuotationsActivity extends AppCompatActivity {
 
     private ViewGroup.LayoutParams params;
-    private SalesQuotation cashOnDelivery;
+    private SalesQuotation salesQuotation;
 
     private ImageView buttonBack;
     private TextView menuDetail;
@@ -63,7 +61,7 @@ public class DetailSalesQuotationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_sales_quotations);
 
         Bundle bundle = getIntent().getExtras();
-        cashOnDelivery = bundle.getParcelable("detail");
+        salesQuotation = bundle.getParcelable("detail");
         formatter = new DecimalFormat("#,###");
 
         textDepartemen = (TextView) findViewById(R.id.textDepartemen);
@@ -89,30 +87,30 @@ public class DetailSalesQuotationsActivity extends AppCompatActivity {
         textModifiedBy = (TextView) findViewById(R.id.textModifiedBy);
         textModifiedDate = (TextView) findViewById(R.id.textModifiedDate);
 
-        textDepartemen.setText("Departemen : "+ cashOnDelivery.getDepartment_name());
-        textKeterangan.setText("Keterangan : "+ cashOnDelivery.getDescription());
-        textSQNumber.setText(cashOnDelivery.getSales_quotation_number());
-        textSQDate.setText(cashOnDelivery.getSq_date());
-        textCompletionDate.setText(cashOnDelivery.getCompletion_date());
-        textPoNumber.setText(cashOnDelivery.getClient_po_number());
-        textSqCategory.setText(cashOnDelivery.getSales_quotation_category());
-        textPaymentDescription.setText(cashOnDelivery.getPayment_desc());
-        todouble = Double.valueOf(cashOnDelivery.getAmount());
+        textDepartemen.setText("Departemen : "+ salesQuotation.getDepartment_name());
+        textKeterangan.setText("Keterangan : "+ salesQuotation.getDescription());
+        textSQNumber.setText(salesQuotation.getSales_quotation_number());
+        textSQDate.setText(salesQuotation.getSq_date());
+        textCompletionDate.setText(salesQuotation.getCompletion_date());
+        textPoNumber.setText(salesQuotation.getClient_po_number());
+        textSqCategory.setText(salesQuotation.getSales_quotation_category());
+        textPaymentDescription.setText(salesQuotation.getPayment_desc());
+        todouble = Double.valueOf(salesQuotation.getAmount());
         textNilai.setText("Rp. "+ formatter.format(Long.valueOf((int) todouble)));
-        todouble = Double.valueOf(cashOnDelivery.getWo_amount());
+        todouble = Double.valueOf(salesQuotation.getWo_amount());
         textWoAmount.setText("Rp. "+ formatter.format(Long.valueOf((int) todouble)));
-        textSupervisor.setText(cashOnDelivery.getSupervisor());
-        textPersetujuan.setText(cashOnDelivery.getApproval_assign_id());
-        textKontak.setText(cashOnDelivery.getContact_id());
-        textJobOrder.setText(cashOnDelivery.getJob_order_number());
-        textKeteranganJo.setText(cashOnDelivery.getJob_order_description());
-        textTglAwalJo.setText(cashOnDelivery.getBegin_date());
-        textTglAkhirJo.setText(cashOnDelivery.getEnd_date());
-        textCatatan.setText(cashOnDelivery.getNotes());
-        textCreatedBy.setText(cashOnDelivery.getCreated_by());
-        textCreatedDate.setText(cashOnDelivery.getCreated_date());
-        textModifiedBy.setText(cashOnDelivery.getModified_by());
-        textModifiedDate.setText(cashOnDelivery.getModified_date());
+        textSupervisor.setText(salesQuotation.getSupervisor());
+        textPersetujuan.setText(salesQuotation.getApproval_assign_id());
+        textKontak.setText(salesQuotation.getContact_id());
+        textJobOrder.setText(salesQuotation.getJob_order_number());
+        textKeteranganJo.setText(salesQuotation.getJob_order_description());
+        textTglAwalJo.setText(salesQuotation.getBegin_date());
+        textTglAkhirJo.setText(salesQuotation.getEnd_date());
+        textCatatan.setText(salesQuotation.getNotes());
+        textCreatedBy.setText(salesQuotation.getCreated_by());
+        textCreatedDate.setText(salesQuotation.getCreated_date());
+        textModifiedBy.setText(salesQuotation.getModified_by());
+        textModifiedDate.setText(salesQuotation.getModified_date());
 
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
         menuDetail = (TextView) findViewById(R.id.menuDetail);

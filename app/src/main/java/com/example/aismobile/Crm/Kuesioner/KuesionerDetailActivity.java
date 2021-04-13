@@ -1,6 +1,7 @@
 package com.example.aismobile.Crm.Kuesioner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -153,14 +154,17 @@ public class KuesionerDetailActivity extends AppCompatActivity {
                 menuHistory.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
-        downloadAtachment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/survey/"+ cashOnDelivery.getSurvey_attachment());
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
+        if (!cashOnDelivery.getSurvey_attachment().matches("null")){
+            downloadAtachment.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAsukaRed));
+            downloadAtachment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/survey/"+ cashOnDelivery.getSurvey_attachment());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
 
         loadDetail();
     }

@@ -1,6 +1,7 @@
 package com.example.aismobile.Finance.Expenses;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -292,14 +293,18 @@ public class DetailExpensesActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        downloadAtachment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/expenses/"+ expense.getExpenses_file_name());
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
+
+        if (!expense.getExpenses_file_name().matches("null")){
+            downloadAtachment.setColorFilter(ContextCompat.getColor(context, R.color.colorAsukaRed));
+            downloadAtachment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/expenses/"+ expense.getExpenses_file_name());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
 
         changeColor();
         loadDetail();

@@ -300,7 +300,7 @@ public class GolonganGajiFragment extends Fragment {
                 params.height = 0;
                 kShowFilter.setLayoutParams(params);
                 params = kLayoutFilter.getLayoutParams();
-                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;;
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 kLayoutFilter.setLayoutParams(params);
             }
         });

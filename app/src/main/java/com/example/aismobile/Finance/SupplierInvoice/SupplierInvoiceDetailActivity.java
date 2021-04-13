@@ -1,6 +1,7 @@
 package com.example.aismobile.Finance.SupplierInvoice;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -233,14 +234,18 @@ public class SupplierInvoiceDetailActivity extends AppCompatActivity {
                 menuHistory.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
-        downloadAtachment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/supplierInvoice/"+ supplierInvoice.getSupplier_invoice_file_name());
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
+
+        if (!supplierInvoice.getSupplier_invoice_file_name().matches("null")){
+            downloadAtachment.setColorFilter(ContextCompat.getColor(context, R.color.colorAsukaRed));
+            downloadAtachment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/supplierInvoice/" + supplierInvoice.getSupplier_invoice_file_name());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
 
         loadDetail();
     }

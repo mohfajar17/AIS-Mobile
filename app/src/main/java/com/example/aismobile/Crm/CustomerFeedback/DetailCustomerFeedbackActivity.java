@@ -1,6 +1,7 @@
 package com.example.aismobile.Crm.CustomerFeedback;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.media.Image;
@@ -89,30 +90,39 @@ public class DetailCustomerFeedbackActivity extends AppCompatActivity {
         textAnswerDesc.setText(customerFeedback.getAnswer_description());
         textPreventiveAct.setText(customerFeedback.getPreventive_description());
 
-        downloadAtachment1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/customerComplaint/customer_complaint_"+customerFeedback.getFeedback_id()+"_1.pdf");
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
-        downloadAtachment2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/customerComplaint/customer_complaint_"+customerFeedback.getFeedback_id()+"_2.pdf");
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
-        downloadAtachment3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/customerComplaint/customer_complaint_"+customerFeedback.getFeedback_id()+"_3.pdf");
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
+        if (!customerFeedback.getArchive1().matches("null")){
+            downloadAtachment1.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAsukaRed));
+            downloadAtachment1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/customerComplaint/"+customerFeedback.getArchive1());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
+        if (!customerFeedback.getArchive2().matches("null")){
+            downloadAtachment2.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAsukaRed));
+            downloadAtachment2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/customerComplaint/"+customerFeedback.getArchive2());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
+        if (!customerFeedback.getArchive3().matches("null")){
+            downloadAtachment3.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAsukaRed));
+            downloadAtachment3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/customerComplaint/"+customerFeedback.getArchive3());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

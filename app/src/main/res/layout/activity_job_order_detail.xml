@@ -777,7 +777,7 @@
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="500dp"
+                                android:layout_width="700dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/bubble"
                                 android:gravity="left|center"
@@ -815,7 +815,7 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
                                     android:background="@drawable/bubble"
                                     android:gravity="left|center"
@@ -864,7 +864,7 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
                                     android:background="@drawable/bubble"
                                     android:gravity="left|center"
@@ -913,7 +913,7 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
                                     android:background="@drawable/bubble"
                                     android:gravity="left|center"
@@ -962,7 +962,7 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
                                     android:background="@drawable/bubble"
                                     android:gravity="left|center"
@@ -1011,7 +1011,7 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
                                     android:background="@drawable/bubble"
                                     android:gravity="left|center"
@@ -1060,7 +1060,7 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
                                     android:background="@drawable/bubble"
                                     android:gravity="left|center"
@@ -1109,7 +1109,7 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
                                     android:background="@drawable/bubble"
                                     android:gravity="left|center"
@@ -1158,7 +1158,7 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
                                     android:background="@drawable/bubble"
                                     android:gravity="left|center"
@@ -1207,7 +1207,7 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
                                     android:background="@drawable/bubble"
                                     android:gravity="left|center"
@@ -1256,9 +1256,9 @@
                                 android:layout_height="wrap_content" >
 
                                 <LinearLayout
-                                    android:layout_width="500dp"
+                                    android:layout_width="700dp"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/bubble_sub"
+                                    android:background="@drawable/bubble"
                                     android:gravity="left|center"
                                     android:paddingLeft="170dp"
                                     android:orientation="horizontal">
@@ -1271,7 +1271,7 @@
                                         android:gravity="right"
                                         android:text="Rp. "
                                         android:textStyle="bold|italic"
-                                        android:textColor="@color/colorWhite"/>
+                                        android:textColor="@color/colorAsukaBlue"/>
 
                                     <TextView
                                         android:id="@+id/detailTotalBudgetP"
@@ -1281,7 +1281,7 @@
                                         android:gravity="right"
                                         android:textStyle="bold|italic"
                                         android:text="Rp. "
-                                        android:textColor="@color/colorWhite"/>
+                                        android:textColor="@color/colorBlack"/>
 
                                     <TextView
                                         android:id="@+id/detailTotalBudgetPr"
@@ -1295,11 +1295,11 @@
                                 <TextView
                                     android:layout_width="160dp"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/bubble"
+                                    android:background="@drawable/bubble_sub"
                                     android:padding="10dp"
                                     android:textStyle="bold|italic"
                                     android:text="Total Budget"
-                                    android:textColor="@color/colorBlack"/>
+                                    android:textColor="@color/colorWhite"/>
                             </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>

@@ -20,6 +20,7 @@ public class ScheduleVisit implements Parcelable {
     private String created_date;
     private String modified_by;
     private String modified_date;
+    private String visits_attachment;
 
     public ScheduleVisit(int schedule_visits_id, String visits_number, String visits_date, String lead_id,
                          String company_id, String done){
@@ -44,6 +45,7 @@ public class ScheduleVisit implements Parcelable {
         created_date = in.readString();
         modified_by = in.readString();
         modified_date = in.readString();
+        visits_attachment = in.readString();
     }
 
     public ScheduleVisit(JSONObject jsonObject){
@@ -60,6 +62,7 @@ public class ScheduleVisit implements Parcelable {
             this.created_date = jsonObject.getString("created_date");
             this.modified_by = jsonObject.getString("modified_by");
             this.modified_date = jsonObject.getString("modified_date");
+            this.visits_attachment = jsonObject.getString("visits_attachment");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -96,6 +99,7 @@ public class ScheduleVisit implements Parcelable {
         dest.writeString(created_date);
         dest.writeString(modified_by);
         dest.writeString(modified_date);
+        dest.writeString(visits_attachment);
     }
 
     public int getSchedule_visits_id() {
@@ -144,5 +148,9 @@ public class ScheduleVisit implements Parcelable {
 
     public String getModified_date() {
         return modified_date;
+    }
+
+    public String getVisits_attachment() {
+        return visits_attachment;
     }
 }

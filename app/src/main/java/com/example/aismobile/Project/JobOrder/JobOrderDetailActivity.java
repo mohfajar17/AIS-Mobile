@@ -1,6 +1,7 @@
 package com.example.aismobile.Project.JobOrder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.media.Image;
@@ -40,6 +41,7 @@ public class JobOrderDetailActivity extends AppCompatActivity {
     private double toDouble;
     private double toDoubleNew;
     private double totalPengeluaran = 0;
+    private long total = 0;
 
     private TextView menuJoDetail;
     private TextView menuJoMr;
@@ -200,7 +202,6 @@ public class JobOrderDetailActivity extends AppCompatActivity {
         detailTotalBudgetPr = (TextView) findViewById(R.id.detailTotalBudgetPr);
 
         NumberFormat formatter = new DecimalFormat("#,###");
-        long total = 0;
         toDouble = Double.valueOf(jobOrder.getMaterial_amount());
         detailMateriB.setText("Rp. " + formatter.format((long) toDouble));
         total += (long) toDouble;
@@ -266,22 +267,28 @@ public class JobOrderDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        downloadSalesQuotation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/salesQuotation/"+jobOrder.getSales_file_name());
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
-        downloadPOClient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/salesQuotation/"+jobOrder.getClient_po_file_name());
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
+        if (!jobOrder.getSales_file_name().matches("null")){
+            downloadSalesQuotation.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAsukaRed));
+            downloadSalesQuotation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/salesQuotation/"+jobOrder.getSales_file_name());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
+        if (!jobOrder.getClient_po_file_name().matches("null")){
+            downloadPOClient.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAsukaRed));
+            downloadPOClient.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://ais.asukaindonesia.co.id/protected/attachments/salesQuotation/"+jobOrder.getClient_po_file_name());
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                }
+            });
+        }
 
         menuJoMr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -437,6 +444,9 @@ public class JobOrderDetailActivity extends AppCompatActivity {
                         doubles = json.getDouble("expenses"); totalPengeluaran+=doubles;
                         detailExpensesP.setText("Rp. " + formatter.format((long) doubles));
                         detailTotalBudgetP.setText("Rp. " + formatter.format((long) totalPengeluaran));
+                        if ((long) totalPengeluaran > total)
+                            detailTotalBudgetP.setTextColor(getResources().getColor(R.color.colorAsukaRed));
+                        else detailTotalBudgetP.setTextColor(getResources().getColor(R.color.colorAsukaGreen));
 
                         if (json.getDouble("mr")+json.getDouble("pr") > Double.valueOf(jobOrder.getMaterial_amount()) && Double.valueOf(jobOrder.getMaterial_amount()) > 0)
                             detailMateriPr.setBackgroundColor(getResources().getColor(R.color.colorRed));

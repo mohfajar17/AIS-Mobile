@@ -1,10 +1,10 @@
 package com.example.aismobile;
 
 public class Config {
-    public static final String DATA_URL = "http://192.168.43.183/ais_web_service/";   //IP thetering hp
+//    public static final String DATA_URL = "http://192.168.43.183/ais_web_service/";   //IP thetering hp
 //    public static final String DATA_URL = "http://192.168.88.212/ais_web_service/";   //IP asuka lt 3
 //    public static final String DATA_URL = "http://192.168.0.109/ais_web_service/";   //IP home wifi
-//    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/";   //IP server
+    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/";   //IP server
 
     public static final String DATA_URL_APPROVAL = DATA_URL + "apiAisApproval.php?apicall=";
     public static final String URL_APPROVAL_TOTAL = DATA_URL_APPROVAL +"getTotalSum";

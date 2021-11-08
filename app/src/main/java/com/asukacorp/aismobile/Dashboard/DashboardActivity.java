@@ -23,6 +23,7 @@ import com.asukacorp.aismobile.Dashboard.BankTransaction.DashBankTransactionActi
 import com.asukacorp.aismobile.Dashboard.Budgeting.DashBudgetingActivity;
 import com.asukacorp.aismobile.Dashboard.CashOnDelivery.DashCashOnDeliveryActivity;
 import com.asukacorp.aismobile.Dashboard.CashProjectReport.DashCashProjectReportActivity;
+import com.asukacorp.aismobile.Dashboard.Cuti.DashCutiActivity;
 import com.asukacorp.aismobile.Dashboard.Expense.DashExpenseActivity;
 import com.asukacorp.aismobile.Dashboard.MaterialRequest.DashMaterialRequestActivity;
 import com.asukacorp.aismobile.Dashboard.MaterialReturn.DashMaterialReturnActivity;
@@ -65,6 +66,7 @@ public class DashboardActivity extends AppCompatActivity {
     private LinearLayout layoutSpkl;
     private LinearLayout layoutProposedBudget;
     private LinearLayout layoutCashProjectReport;
+    private LinearLayout layoutCutiKaryawan;
     private LinearLayout layoutTunjanganLokasi;
     private LinearLayout layoutTunjanganPerjalanan;
     private LinearLayout layoutPurchaseOrder;
@@ -88,6 +90,7 @@ public class DashboardActivity extends AppCompatActivity {
     private TextView textSPKL;
     private TextView textProposedBudget;
     private TextView textCashProjectReport;
+    private TextView textCutiKaryawan;
     private TextView textTunjanganLokasi;
     private TextView textTunjanganPerjalananDinas;
     private TextView textPurchaseOrder;
@@ -115,6 +118,7 @@ public class DashboardActivity extends AppCompatActivity {
         textSPKL = (TextView) findViewById(R.id.textSPKL);
         textProposedBudget = (TextView) findViewById(R.id.textProposedBudget);
         textCashProjectReport = (TextView) findViewById(R.id.textCashProjectReport);
+        textCutiKaryawan = (TextView) findViewById(R.id.textCutiKaryawan);
         textTunjanganLokasi = (TextView) findViewById(R.id.textTunjanganLokasi);
         textTunjanganPerjalananDinas = (TextView) findViewById(R.id.textTunjanganPerjalananDinas);
         textPurchaseOrder = (TextView) findViewById(R.id.textPurchaseOrder);
@@ -152,6 +156,7 @@ public class DashboardActivity extends AppCompatActivity {
         layoutSpkl = (LinearLayout) findViewById(R.id.layoutSpkl);
         layoutProposedBudget = (LinearLayout) findViewById(R.id.layoutProposedBudget);
         layoutCashProjectReport = (LinearLayout) findViewById(R.id.layoutCashProjectReport);
+        layoutCutiKaryawan = (LinearLayout) findViewById(R.id.layoutCutiKaryawan);
         layoutTunjanganLokasi = (LinearLayout) findViewById(R.id.layoutTunjanganLokasi);
         layoutTunjanganPerjalanan = (LinearLayout) findViewById(R.id.layoutTunjanganPerjalanan);
         layoutPurchaseOrder = (LinearLayout) findViewById(R.id.layoutPurchaseOrder);
@@ -202,6 +207,14 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 onPause();
                 Intent intent = new Intent(DashboardActivity.this, DashCashProjectReportActivity.class);
+                startActivity(intent);
+            }
+        });
+        layoutCutiKaryawan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPause();
+                Intent intent = new Intent(DashboardActivity.this, DashCutiActivity.class);
                 startActivity(intent);
             }
         });
@@ -396,6 +409,7 @@ public class DashboardActivity extends AppCompatActivity {
                     textSPKL.setText(jsonObject.getString("Spkl"));
                     textProposedBudget.setText(jsonObject.getString("ProposedBudget"));
                     textCashProjectReport.setText(jsonObject.getString("CashProjectReport"));
+                    textCutiKaryawan.setText(jsonObject.getString("CutiKaryawan"));
                     textTunjanganLokasi.setText(jsonObject.getString("TunjanganKaryawan"));
                     textTunjanganPerjalananDinas.setText(jsonObject.getString("TunjanganTemporary"));
                     textPurchaseOrder.setText(jsonObject.getString("PurchaseOrder"));
@@ -410,7 +424,7 @@ public class DashboardActivity extends AppCompatActivity {
                     textCashAdvance.setText(jsonObject.getString("CashAdvance"));
 
                     int jml = 0;
-                    jml = jsonObject.getInt("MaterialRequisition") + jsonObject.getInt("WorkOrder") + jsonObject.getInt("Spkl") + jsonObject.getInt("ProposedBudget") + jsonObject.getInt("CashProjectReport") + jsonObject.getInt("TunjanganKaryawan") + jsonObject.getInt("TunjanganTemporary");
+                    jml = jsonObject.getInt("MaterialRequisition") + jsonObject.getInt("WorkOrder") + jsonObject.getInt("Spkl") + jsonObject.getInt("ProposedBudget") + jsonObject.getInt("CashProjectReport") + jsonObject.getInt("CutiKaryawan") + jsonObject.getInt("TunjanganKaryawan") + jsonObject.getInt("TunjanganTemporary");
                     textJmlProject.setText("" + jml);
                     jml = jsonObject.getInt("PurchaseOrder") + jsonObject.getInt("PurchaseService") + jsonObject.getInt("CashOnDelivery");
                     textJmlPurchsing.setText("" + jml);

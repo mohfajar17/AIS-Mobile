@@ -257,8 +257,54 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddJO"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
+        android:layout_height="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="12dp"
         android:src="@drawable/ic_add"
-        android:layout_margin="17dp" />
+        android:layout_gravity="end|bottom"
+        app:backgroundTint="@color/colorAccent"
+        app:fabCustomSize="60dp"
+        app:fabSize="auto"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_add"
+        android:layout_gravity="end|bottom"
+        app:backgroundTint="@color/colorAccent"
+        app:fabCustomSize="60dp"
+        app:fabSize="auto"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="12dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_image"
+        android:tint="@color/colorWhite"
+        android:layout_gravity="end|bottom"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabCustomSize="55dp"
+        app:fabSize="auto"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="12dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_edit"
+        android:tint="@color/colorWhite"
+        android:layout_gravity="end|bottom"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabCustomSize="55dp"
+        app:fabSize="auto"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

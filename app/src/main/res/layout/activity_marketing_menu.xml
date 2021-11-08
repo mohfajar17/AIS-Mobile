@@ -56,4 +56,18 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:src="@color/colorAsukaRed"/>
+
+    <TextView
+        android:id="@+id/textViewJoPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Job Order Picture"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
 </LinearLayout>

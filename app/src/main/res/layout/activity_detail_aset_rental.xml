@@ -293,14 +293,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -319,14 +319,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -345,14 +345,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -371,14 +371,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -397,14 +397,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -423,14 +423,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -449,14 +449,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -475,14 +475,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -501,14 +501,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -527,14 +527,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -553,14 +553,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"

@@ -35,6 +35,7 @@ import com.asukacorp.aismobile.Kalender.HwAdapter;
 import com.asukacorp.aismobile.News.NewsActivity;
 import com.asukacorp.aismobile.Personalia.PersonaliaMenuActivity;
 import com.asukacorp.aismobile.Profile.ProfileActivity;
+import com.asukacorp.aismobile.Marketing.JoPictures.AddPicturesActivity;
 import com.asukacorp.aismobile.Project.ProjectMenuActivity;
 import com.asukacorp.aismobile.Marketing.MarketingMenuActivity;
 import com.asukacorp.aismobile.Crm.CrmMenuActivity;
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     private LinearLayout menuPurchasing;
     private LinearLayout menuSafety;
     private LinearLayout menuNews;
+    private LinearLayout menuNewFuture;
 
     private LinearLayout layoutDashbord;
     private LinearLayout layoutDashbordToday;
@@ -167,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         menuPurchasing = (LinearLayout) findViewById(R.id.menuPurchasing);
         menuSafety = (LinearLayout) findViewById(R.id.menuSafety);
         menuNews = (LinearLayout) findViewById(R.id.menuNews);
+        menuNewFuture = (LinearLayout) findViewById(R.id.menuNewFuture);
         barChart = (BarChart) findViewById(R.id.barChart);
         barChartToday = (BarChart) findViewById(R.id.barChartToday);
         buttonChart = (Button) findViewById(R.id.buttonChart);
@@ -337,6 +340,21 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 startActivityForResult(bukaMenuActivity,1);
             }
         });
+
+        if (sharedPrefManager.getEmployeeId().matches("3700")){
+            ViewGroup.LayoutParams params;
+            params = menuNewFuture.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            menuNewFuture.setLayoutParams(params);
+
+            menuNewFuture.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent bukaMenuActivity = new Intent(MainActivity.this, AddPicturesActivity.class);
+                    startActivityForResult(bukaMenuActivity,1);
+                }
+            });
+        }
 
         if (sharedPrefManager.getAccessModul().toLowerCase().contains("dashboard".toLowerCase())){
             ViewGroup.LayoutParams params;

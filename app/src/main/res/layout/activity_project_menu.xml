@@ -156,6 +156,20 @@
         android:src="@color/colorAsukaBlue"/>
 
     <TextView
+        android:id="@+id/textViewCutiKaryawan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cuti Karyawan"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorAsukaRed"/>
+
+    <TextView
         android:id="@+id/textViewTunjanganKaryawan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

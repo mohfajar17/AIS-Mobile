@@ -12,5 +12,9 @@
             android:id="@+id/nav_sales_order"
             android:icon="@drawable/sub_menu_1"
             android:title="Sales Order" />
+        <item
+            android:id="@+id/nav_job_order_picture"
+            android:icon="@drawable/sub_menu_1"
+            android:title="Job Order Picture" />
     </group>
 </menu>

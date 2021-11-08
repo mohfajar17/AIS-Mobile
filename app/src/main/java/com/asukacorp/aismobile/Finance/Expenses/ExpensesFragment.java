@@ -72,12 +72,11 @@ public class ExpensesFragment extends Fragment {
     public OnListFragmentInteractionListener mListener;
     public ExpensesFragment.MyRecyclerViewAdapter adapter;
     public ArrayAdapter<String> spinnerAdapter;
-    public String[] ESpinnerSearch = {"Semua Data", "Nomor Customer Invoice", "Sales Order Invoice Description",
-            "Job Order", "Sales Quotation",
-            "Work Completion", "Due Date", "Client PO Number", "Status", "Payment Late", "Grand Total"};
-    public String[] ESpinnerSort = {"-- Sort By --", "Berdasarkan Nomor Customer Invoice", "Berdasarkan Sales Order Invoice Description",
-            "Berdasarkan Job Order", "Berdasarkan Sales Quotation", "Berdasarkan Work Completion", "Berdasarkan Due Date",
-            "Berdasarkan Client PO Number", "Berdasarkan Status", "Berdasarkan Payment Late", "Berdasarkan Grand Total"};
+    public String[] ESpinnerSearch = {"Semua Data", "Expenses Number", "Expenses Description", "Checked By",
+            "Approval 1", "Approval 2", "Cash Advance", "Expenses Date", "Total Amount", "Rekening Bank", "Done"};
+    public String[] ESpinnerSort = {"-- Sort By --", "Berdasarkan Expenses Number", "Berdasarkan Expenses Description",
+            "Berdasarkan Checked By", "Berdasarkan Approval 1", "Berdasarkan Approval 2", "Berdasarkan Cash Advance",
+            "Berdasarkan Expenses Date", "Berdasarkan Total Amount", "Berdasarkan Rekening Bank", "Berdasarkan Done"};
     public String[] EADSpinnerSort = {"ASC", "DESC"};
     public boolean loadAll = false;
     public List<Expense> expenses;

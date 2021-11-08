@@ -219,6 +219,38 @@
                         android:src="@color/colorLightGray"/>
 
                     <LinearLayout
+                        android:id="@+id/layoutCutiKaryawan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center|left"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16dp"
+                            android:text="Cuti Karyawan"/>
+
+                        <TextView
+                            android:id="@+id/textCutiKaryawan"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circle"
+                            android:gravity="center"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16dp"
+                            android:text="0"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:src="@color/colorLightGray"/>
+
+                    <LinearLayout
                         android:id="@+id/layoutTunjanganLokasi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

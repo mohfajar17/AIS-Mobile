@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/srTextNomor"
-        android:layout_width="130dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:gravity="top|left"
         android:text="-"
@@ -37,7 +37,7 @@
 
     <TextView
         android:id="@+id/srTextCOD"
-        android:layout_width="130dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:gravity="top|left"
         android:text="-"

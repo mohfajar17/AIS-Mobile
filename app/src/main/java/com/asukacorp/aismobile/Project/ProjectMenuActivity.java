@@ -40,6 +40,7 @@ public class ProjectMenuActivity extends AppCompatActivity {
     private TextView textViewSpkl;
     private TextView textViewProposed;
     private TextView textViewCashProject;
+    private TextView textViewCutiKaryawan;
     private TextView textViewTunjanganKaryawan;
     private TextView textViewTunjanganTemporary;
 
@@ -71,6 +72,7 @@ public class ProjectMenuActivity extends AppCompatActivity {
         textViewSpkl = (TextView) findViewById(R.id.textViewSpkl);
         textViewProposed = (TextView) findViewById(R.id.textViewProposed);
         textViewCashProject = (TextView) findViewById(R.id.textViewCashProject);
+        textViewCutiKaryawan = (TextView) findViewById(R.id.textViewCutiKaryawan);
         textViewTunjanganKaryawan = (TextView) findViewById(R.id.textViewTunjanganKaryawan);
         textViewTunjanganTemporary = (TextView) findViewById(R.id.textViewTunjanganTemporary);
 
@@ -146,11 +148,19 @@ public class ProjectMenuActivity extends AppCompatActivity {
                 } else ShowPopup("Cash Project Report");
             }
         });
+        textViewCutiKaryawan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (access.toLowerCase().contains("employee_leave".toLowerCase())){
+                    bukaActivity("9");
+                } else ShowPopup("Cuti Karyawan");
+            }
+        });
         textViewTunjanganKaryawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("employee_allowance".toLowerCase())){
-                    bukaActivity("9");
+                    bukaActivity("10");
                 } else ShowPopup("Tunjangan Karyawan");
             }
         });
@@ -158,7 +168,7 @@ public class ProjectMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (access.toLowerCase().contains("employee_allowance_temp".toLowerCase())){
-                    bukaActivity("10");
+                    bukaActivity("11");
                 } else ShowPopup("Tunjangan Temporary");
             }
         });
@@ -212,6 +222,7 @@ public class ProjectMenuActivity extends AppCompatActivity {
                                 access = access+"employee_allowance, ";
                             if (Integer.valueOf(jsonData.getString("employee_allowance_temp")) == 1)
                                 access = access+"employee_allowance_temp, ";
+                            access = access+"employee_leave, ";
                         } else {
                             access = access+"";
                         }

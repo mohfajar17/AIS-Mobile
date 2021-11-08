@@ -33,6 +33,7 @@ public class MarketingMenuActivity extends AppCompatActivity {
 
     private TextView textViewSalesQuot;
     private TextView textViewSalesOrder;
+    private TextView textViewJoPicture;
 
     private Dialog myDialog;
     private String access = "";
@@ -55,6 +56,7 @@ public class MarketingMenuActivity extends AppCompatActivity {
 
         textViewSalesQuot = (TextView) findViewById(R.id.textViewSalesQuot);
         textViewSalesOrder = (TextView) findViewById(R.id.textViewSalesOrder);
+        textViewJoPicture = (TextView) findViewById(R.id.textViewJoPicture);
 
         textViewSalesQuot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +72,14 @@ public class MarketingMenuActivity extends AppCompatActivity {
                 if (access.toLowerCase().contains("sales_order".toLowerCase())){
                     bukaActivity("1");
                 } else ShowPopup("Sales Order");
+            }
+        });
+        textViewJoPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if (access.toLowerCase().contains("sales_order".toLowerCase())){
+                    bukaActivity("2");
+//                } else ShowPopup("Sales Order");
             }
         });
 
@@ -104,6 +114,7 @@ public class MarketingMenuActivity extends AppCompatActivity {
                                 access = access+"sales_quotation, ";
                             if (Integer.valueOf(jsonData.getString("sales_order")) == 1)
                                 access = access+"sales_order, ";
+//                            access = access+"job_order-picture:create, ";
                         } else {
                             access = access+"";
                         }

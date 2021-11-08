@@ -270,6 +270,22 @@
                     android:src="@color/colorWhite" />
 
                 <TextView
+                    android:id="@+id/menuJoDoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Doc "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
                     android:id="@+id/menuJoNotes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

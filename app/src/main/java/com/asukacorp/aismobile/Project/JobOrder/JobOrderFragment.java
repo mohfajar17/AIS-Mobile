@@ -34,6 +34,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asukacorp.aismobile.Config;
 import com.asukacorp.aismobile.Data.Project.JobOrder;
+import com.asukacorp.aismobile.Marketing.JoPictures.AddPicturesActivity;
 import com.asukacorp.aismobile.R;
 import com.asukacorp.aismobile.SharedPrefManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -58,7 +59,7 @@ public class JobOrderFragment extends Fragment {
     public EditText editTextSearchJO;
     public ImageView imageSearchJO;
     public RecyclerView recyclerView;
-    public FloatingActionButton fabAddJO;
+    public FloatingActionButton fab0, fab1, fab2;
     public Spinner spinnerSearchJO;
     public Spinner spinnerSortJO;
     public Spinner spinnerSortADJO;
@@ -83,6 +84,7 @@ public class JobOrderFragment extends Fragment {
     public int counter = 0;
     public ViewGroup.LayoutParams params;
     public boolean filter = false;
+    public boolean flag = true;
 
     public JobOrderFragment() {
     }
@@ -125,7 +127,35 @@ public class JobOrderFragment extends Fragment {
             recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), mColumnCount));
         }
 
-        fabAddJO = (FloatingActionButton) view.findViewById(R.id.fabAddJO);
+        fab0 = (FloatingActionButton) view.findViewById(R.id.fab0);
+        fab1 = (FloatingActionButton) view.findViewById(R.id.fab1);
+        fab2 = (FloatingActionButton) view.findViewById(R.id.fab2);
+
+        fab0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag) {
+                    fab1.show();
+                    fab2.show();
+                    fab1.animate().translationY(-(fab0.getCustomSize()+20));
+                    fab2.animate().translationY(-(fab0.getCustomSize()+fab1.getCustomSize()+40));
+
+                    fab0.setImageResource(R.drawable.ic_close);
+                    flag = false;
+
+                }else {
+                    fab1.hide();
+                    fab2.hide();
+                    fab1.animate().translationY(0);
+                    fab2.animate().translationY(0);
+
+                    fab0.setImageResource(R.drawable.ic_add);
+                    flag = true;
+
+                }
+            }
+        });
+
         editTextSearchJO = (EditText) view.findViewById(R.id.editTextSearchJO);
         textViewList = (TextView) view.findViewById(R.id.textViewList);
         imageSearchJO = (ImageView) view.findViewById(R.id.imageSearchJO);
@@ -217,7 +247,14 @@ public class JobOrderFragment extends Fragment {
             }
         });
 
-        fabAddJO.setOnClickListener(new View.OnClickListener() {
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AddPicturesActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
+        fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), BuatJobOrderActivity.class);

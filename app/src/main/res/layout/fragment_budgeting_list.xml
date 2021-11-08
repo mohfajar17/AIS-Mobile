@@ -9,11 +9,11 @@
 
     <TextView
         android:id="@+id/bTextNumber"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
-        android:text="-"
         android:padding="5dp"
+        android:text="-"
         android:textColor="@android:color/black" />
 
     <ImageView

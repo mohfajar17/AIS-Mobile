@@ -18,9 +18,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asukacorp.aismobile.Config;
+import com.asukacorp.aismobile.Data.Marketing.JoPicture;
 import com.asukacorp.aismobile.Data.Marketing.SalesOrder;
 import com.asukacorp.aismobile.Data.Marketing.SalesQuotation;
 import com.asukacorp.aismobile.LoginActivity;
+import com.asukacorp.aismobile.Marketing.JoPictures.JoPictureFragment;
 import com.asukacorp.aismobile.Marketing.SalesOrder.SalesOrderFragment;
 import com.asukacorp.aismobile.Marketing.SalesQuotation.SalesQuotationsFragment;
 import com.asukacorp.aismobile.R;
@@ -43,7 +45,8 @@ import java.util.Map;
 
 public class MarketingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         SalesQuotationsFragment.OnListFragmentInteractionListener,
-        SalesOrderFragment.OnListFragmentInteractionListener {
+        SalesOrderFragment.OnListFragmentInteractionListener,
+        JoPictureFragment.OnListFragmentInteractionListener {
 
     FragmentTransaction fragmentTransaction;
     String access = "";
@@ -75,6 +78,8 @@ public class MarketingActivity extends AppCompatActivity implements NavigationVi
             swapFragment(R.id.nav_sales_quotation);
         else if (menu == 1)
             swapFragment(R.id.nav_sales_order);
+        else if (menu == 2)
+            swapFragment(R.id.nav_job_order_picture);
         else swapFragment(R.id.nav_sales_quotation);
     }
 
@@ -87,6 +92,9 @@ public class MarketingActivity extends AppCompatActivity implements NavigationVi
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_sales_order && access.toLowerCase().contains("sales_order".toLowerCase())) {
             SalesOrderFragment mainFragment = SalesOrderFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_job_order_picture) {
+            JoPictureFragment mainFragment = JoPictureFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else {
             ShowPopup();
@@ -170,6 +178,11 @@ public class MarketingActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onListFragmentInteraction(SalesOrder item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(JoPicture item) {
 
     }
 }

@@ -64,6 +64,7 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
     private TextView menuJoExpenses;
     private TextView menuJoInvoice;
     private TextView menuJoMatRet;
+    private TextView menuJoDoc;
     private TextView menuJoNotes;
     private TextView menuJoHistory;
 
@@ -104,6 +105,7 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
         menuJoExpenses = (TextView) findViewById(R.id.menuJoExpenses);
         menuJoInvoice = (TextView) findViewById(R.id.menuJoInvoice);
         menuJoMatRet = (TextView) findViewById(R.id.menuJoMatRet);
+        menuJoDoc = (TextView) findViewById(R.id.menuJoDoc);
         menuJoNotes = (TextView) findViewById(R.id.menuJoNotes);
         menuJoHistory = (TextView) findViewById(R.id.menuJoHistory);
 
@@ -127,7 +129,7 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
             long diff = endDateValue.getTime() - startDateValue.getTime();
             if (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)<0)
                 jodDay.setText("0 Days Remaining");
-            else jodDay.setText(""+ TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)+" Days Remaining");
+            else jodDay.setText(""+ (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + 1) +" Days Remaining");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -226,6 +228,15 @@ public class JobOrderDetailMrActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(JobOrderDetailMrActivity.this, JobOrderDetailMatRetActivity.class);
+                intent.putExtra("detailJO", jobOrder);
+                startActivityForResult(intent,1);
+                finish();
+            }
+        });
+        menuJoDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JobOrderDetailMrActivity.this, JobOrderDetailPictureActivity.class);
                 intent.putExtra("detailJO", jobOrder);
                 startActivityForResult(intent,1);
                 finish();

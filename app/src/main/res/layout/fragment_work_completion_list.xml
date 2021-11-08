@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/pwcTextWorkCompletion"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
         android:text="-"
@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/pwcTextJobOrder"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:gravity="top|center"
         android:text="-"
@@ -93,7 +93,7 @@
 
     <TextView
         android:id="@+id/pwcTextDiterima"
-        android:layout_width="130dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|left"
         android:text="-"
@@ -107,7 +107,7 @@
 
     <TextView
         android:id="@+id/pwcTextDibuat"
-        android:layout_width="130dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:gravity="top|left"
         android:text="-"

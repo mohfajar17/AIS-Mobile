@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnSystemUiV
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     error.printStackTrace();
-                    Toast.makeText(LoginActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Network is broken, please check your network", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                 }
             }){

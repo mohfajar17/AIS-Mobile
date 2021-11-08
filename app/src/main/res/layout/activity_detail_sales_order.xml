@@ -196,7 +196,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="150dp"
+                            android:layout_width="160dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="Job Order"
@@ -443,7 +443,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="401dp"
+                            android:layout_width="411dp"
                             android:layout_height="match_parent"
                             android:gravity="right"
                             android:text="Sub Total : "

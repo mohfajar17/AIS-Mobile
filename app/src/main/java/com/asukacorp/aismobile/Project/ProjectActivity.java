@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asukacorp.aismobile.Config;
 import com.asukacorp.aismobile.Data.Project.CashProjectReport;
+import com.asukacorp.aismobile.Data.Project.Cuti;
 import com.asukacorp.aismobile.Data.Project.JobOrder;
 import com.asukacorp.aismobile.Data.Project.MaterialRequest;
 import com.asukacorp.aismobile.Data.Project.Pickup;
@@ -32,6 +33,7 @@ import com.asukacorp.aismobile.Data.Project.WorkOrder;
 import com.asukacorp.aismobile.LoginActivity;
 import com.asukacorp.aismobile.OnFragmentInteractionListener;
 import com.asukacorp.aismobile.Project.CashProject.CashProjectFragment;
+import com.asukacorp.aismobile.Project.CutiProject.CutiProjectFragment;
 import com.asukacorp.aismobile.Project.JobOrder.JobOrderFragment;
 import com.asukacorp.aismobile.Project.MaterialRequest.MaterialReqFragment;
 import com.asukacorp.aismobile.Project.Pengambilan.PengambilanFragment;
@@ -70,6 +72,7 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
         SpklFragment.OnListFragmentInteractionListener,
         ProposedBudgetFragment.OnListFragmentInteractionListener,
         CashProjectFragment.OnListFragmentInteractionListener,
+        CutiProjectFragment.OnListFragmentInteractionListener,
         TunKaryawanFragment.OnListFragmentInteractionListener,
         TunTemporaryFragment.OnListFragmentInteractionListener,
         ToolsReqFragment.OnListFragmentInteractionListener {
@@ -120,8 +123,10 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
         else if (menu == 8)
             swapFragment(R.id.nav_cash_project_report);
         else if (menu == 9)
-            swapFragment(R.id.nav_tunjangan_karyawan);
+            swapFragment(R.id.nav_cuti_karyawan);
         else if (menu == 10)
+            swapFragment(R.id.nav_tunjangan_karyawan);
+        else if (menu == 11)
             swapFragment(R.id.nav_tunjangan_temporary);
         else swapFragment(R.id.nav_customerinvoice);
     }
@@ -156,6 +161,9 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_cash_project_report && access.toLowerCase().contains("respons_advance".toLowerCase())) {
             CashProjectFragment mainFragment = CashProjectFragment.newInstance();
+            fragmentTransaction.replace(R.id.containerFragment, mainFragment);
+        } else if (id == R.id.nav_cuti_karyawan && access.toLowerCase().contains("employee_leave".toLowerCase())) {
+            CutiProjectFragment mainFragment = CutiProjectFragment.newInstance();
             fragmentTransaction.replace(R.id.containerFragment, mainFragment);
         } else if (id == R.id.nav_tunjangan_karyawan && access.toLowerCase().contains("employee_allowance".toLowerCase())) {
             TunKaryawanFragment mainFragment = TunKaryawanFragment.newInstance();
@@ -294,6 +302,11 @@ public class ProjectActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onListFragmentInteraction(ResourcesRequest item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Cuti item) {
 
     }
 }

@@ -327,7 +327,7 @@ public class DetailSpklActivity extends AppCompatActivity {
                 Map<String, String> param=new HashMap<>();
                 param.put("user", sharedPrefManager.getUserId());
                 param.put("id", "" + spkls.getOvertime_workorder_id());
-                param.put("code", "1");
+                param.put("code", "3");
                 return param;
             }
         };

@@ -270,6 +270,22 @@
                     android:src="@color/colorWhite" />
 
                 <TextView
+                    android:id="@+id/menuJoDoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorRed"
+                    android:textStyle="bold"
+                    android:text=" Doc "/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:src="@color/colorWhite" />
+
+                <TextView
                     android:id="@+id/menuJoNotes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -320,14 +336,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="170dp"
+                    android:paddingLeft="180dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="160dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -346,14 +362,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="170dp"
+                    android:paddingLeft="180dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="160dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -372,14 +388,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="170dp"
+                    android:paddingLeft="180dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="160dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -398,14 +414,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="170dp"
+                    android:paddingLeft="180dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="160dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -424,14 +440,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="170dp"
+                    android:paddingLeft="180dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="160dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -450,14 +466,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="170dp"
+                    android:paddingLeft="180dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="160dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -476,14 +492,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="170dp"
+                    android:paddingLeft="180dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="160dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -502,7 +518,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="170dp"
+                    android:paddingLeft="180dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="10dp"
                     android:gravity="right"
@@ -511,7 +527,7 @@
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="160dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -530,7 +546,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="170dp"
+                    android:paddingLeft="180dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="10dp"
                     android:gravity="right"
@@ -539,7 +555,7 @@
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:layout_width="160dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"

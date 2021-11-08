@@ -41,6 +41,10 @@
             android:icon="@drawable/sub_menu_2"
             android:title="Cash Project Report" />
         <item
+            android:id="@+id/nav_cuti_karyawan"
+            android:icon="@drawable/sub_menu_3"
+            android:title="Cuti Karyawan" />
+        <item
             android:id="@+id/nav_tunjangan_karyawan"
             android:icon="@drawable/sub_menu_3"
             android:title="Tunjangan Karyawan" />

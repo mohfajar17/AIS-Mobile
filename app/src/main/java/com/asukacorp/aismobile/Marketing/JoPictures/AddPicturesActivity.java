@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asukacorp.aismobile.Config;
+import com.asukacorp.aismobile.Data.Project.JobOrder;
 import com.asukacorp.aismobile.R;
 import com.asukacorp.aismobile.SharedPrefManager;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -53,11 +54,15 @@ public class AddPicturesActivity extends AppCompatActivity {
     private int filePic = 0;
 
     private SharedPrefManager sharedPrefManager;
+    private JobOrder jobOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pictures);
+
+        Bundle bundle = getIntent().getExtras();
+        jobOrder = bundle.getParcelable("detailJO");
 
         progressDialog = new ProgressDialog(AddPicturesActivity.this);
         progressDialog.setTitle("Loading");
@@ -85,7 +90,7 @@ public class AddPicturesActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editJopJo.getSelectedItemPosition() > 0 || filePic > 0){
+                if (filePic > 0){
                     BitmapDrawable drawable = (BitmapDrawable) editJopBrowse.getDrawable();
                     Bitmap bm = drawable.getBitmap();
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -121,7 +126,8 @@ public class AddPicturesActivity extends AppCompatActivity {
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                                 String[] jobCode = new String[jsonArray.length()+1];
                                 jobCodeId = new String[jsonArray.length()+1];
-                                jobCode[0] = "-- Pilih Job Code --";
+                                jobCode[0] = jobOrder.getJob_order_number() + " | " + jobOrder.getJob_order_description();
+                                jobCodeId[0] = "" + jobOrder.getJob_order_id();
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     jobCode[i + 1] = jsonArray.getJSONObject(i).getString("job_order_number") + " | " + jsonArray.getJSONObject(i).getString("job_order_description");
                                     jobCodeId[i + 1] = jsonArray.getJSONObject(i).getString("job_order_id");

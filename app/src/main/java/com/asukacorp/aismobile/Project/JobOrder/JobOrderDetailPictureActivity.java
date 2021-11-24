@@ -130,6 +130,7 @@ public class JobOrderDetailPictureActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (accessCreatePic > 0){
                     Intent intent = new Intent(JobOrderDetailPictureActivity.this, AddPicturesActivity.class);
+                    intent.putExtra("detailJO", jobOrder);
                     startActivityForResult(intent,1);
                 } else Toast.makeText(JobOrderDetailPictureActivity.this, "You don't have access!", Toast.LENGTH_LONG).show();
             }

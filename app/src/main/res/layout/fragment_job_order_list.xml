@@ -106,16 +106,24 @@
         android:src="@color/colorGray"/>
 
     <LinearLayout
-        android:id="@+id/JOEdit"
-        android:layout_width="60dp"
+        android:layout_width="120dp"
         android:gravity="top|center"
         android:layout_height="match_parent"
         android:padding="5dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="20dp"
+            android:id="@+id/JOEdit"
+            android:layout_width="30dp"
             android:layout_height="20dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/ic_edit_black"/>
+
+        <ImageView
+            android:id="@+id/JOAddPicture"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_image"/>
     </LinearLayout>
 </LinearLayout>

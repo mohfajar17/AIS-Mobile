@@ -134,25 +134,27 @@ public class JobOrderFragment extends Fragment {
         fab0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (flag) {
-                    fab1.show();
-                    fab2.show();
-                    fab1.animate().translationY(-(fab0.getCustomSize()+20));
-                    fab2.animate().translationY(-(fab0.getCustomSize()+fab1.getCustomSize()+40));
+                fab2.performClick();
 
-                    fab0.setImageResource(R.drawable.ic_close);
-                    flag = false;
-
-                }else {
-                    fab1.hide();
-                    fab2.hide();
-                    fab1.animate().translationY(0);
-                    fab2.animate().translationY(0);
-
-                    fab0.setImageResource(R.drawable.ic_add);
-                    flag = true;
-
-                }
+//                if (flag) {
+//                    fab1.show();
+//                    fab2.show();
+//                    fab1.animate().translationY(-(fab0.getCustomSize()+20));
+//                    fab2.animate().translationY(-(fab0.getCustomSize()+fab1.getCustomSize()+40));
+//
+//                    fab0.setImageResource(R.drawable.ic_close);
+//                    flag = false;
+//
+//                }else {
+//                    fab1.hide();
+//                    fab2.hide();
+//                    fab1.animate().translationY(0);
+//                    fab2.animate().translationY(0);
+//
+//                    fab0.setImageResource(R.drawable.ic_add);
+//                    flag = true;
+//
+//                }
             }
         });
 
@@ -552,6 +554,15 @@ public class JobOrderFragment extends Fragment {
                 }
             });
 
+            holder.JOAddPicture.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), AddPicturesActivity.class);
+                    intent.putExtra("detailJO", mValues.get(position));
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            });
+
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -699,7 +710,8 @@ public class JobOrderFragment extends Fragment {
             public final TextView JOKeterangan;
             public final TextView JONilai;
             public final TextView JOStatus;
-            public final LinearLayout JOEdit;
+            public final ImageView JOEdit;
+            public final ImageView JOAddPicture;
             public final LinearLayout layoutJobOrderColor;
 
             public ViewHolder(View view) {
@@ -713,7 +725,8 @@ public class JobOrderFragment extends Fragment {
                 JOKeterangan = (TextView) view.findViewById(R.id.JOKeterangan);
                 JONilai = (TextView) view.findViewById(R.id.JONilai);
                 JOStatus = (TextView) view.findViewById(R.id.JOStatus);
-                JOEdit = (LinearLayout) view.findViewById(R.id.JOEdit);
+                JOEdit = (ImageView) view.findViewById(R.id.JOEdit);
+                JOAddPicture = (ImageView) view.findViewById(R.id.JOAddPicture);
                 layoutJobOrderColor = (LinearLayout) view.findViewById(R.id.layoutJobOrderColor);
             }
         }

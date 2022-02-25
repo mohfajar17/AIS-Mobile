@@ -30,12 +30,12 @@
                 android:id="@+id/textNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:padding="10dp"
                 android:gravity="left|center"
+                android:padding="10dp"
+                android:text="Approval Expense"
                 android:textColor="@color/colorWhite"
-                android:textStyle="bold"
-                android:text="Approval Purchase Order"/>
+                android:textSize="18dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <HorizontalScrollView
@@ -55,7 +55,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="130dp"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="10dp"

@@ -78,6 +78,7 @@ public class Config {
     public static final String DATA_URL_SALES_QUOTATION = DATA_URL_AIS +"getSalesQuot";
     public static final String DATA_URL_INVENTORY = DATA_URL_AIS +"getInventory";
     public static final String DATA_URL_PURCHASE_PO_WO_COD = DATA_URL_AIS +"getPurchaseToday";
+    public static final String DATA_URL_TARGET = DATA_URL_AIS +"getGrafikData3";
     public static final String DATA_URL_EDIT_ACCOUNT = DATA_URL_AIS +"editAccount";
     public static final String DATA_URL_EDIT_PERSONAL = DATA_URL_AIS +"editPersonalData";
     public static final String DATA_URL_CALENDAR = DATA_URL_AIS +"getHoliday";

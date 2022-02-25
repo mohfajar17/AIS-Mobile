@@ -94,6 +94,11 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     private TextView textViewPurchaseCOD;
     private TextView textViewPurchaseCI;
     private TextView textViewCustomerInvoiceYear;
+    private TextView textViewTargetSales;
+    private TextView textViewTargetOmzet;
+    private TextView textViewTargetProfitJOEksternal;
+    private TextView textViewTargetOverJOInternal;
+    private TextView textViewAsetInvestasi;
 
     private LinearLayout menuDashboard;
     private LinearLayout menuFinance;
@@ -111,18 +116,23 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     private LinearLayout menuNewFuture;
 
     private LinearLayout layoutDashbord;
-    private LinearLayout layoutDashbordToday;
     private LinearLayout layoutDashbordChart;
+    private LinearLayout layoutDashbordToday;
     private LinearLayout layoutDashbordChartToday;
+    private LinearLayout layoutDashbordTarget;
+    private LinearLayout layoutDashbordChartTarget;
 
     private Button buttonChart;
     private Button buttonChartToday;
     private Button buttonDetailChart;
     private Button buttonDetailChartToday;
+    private Button buttonChartTarget;
+    private Button buttonDetailChartTarget;
     private BarChart barChart;
     private BarChart barChartToday;
+    private BarChart barChartTarget;
 
-    private long ci, si, ba, sq, ip, purchaseCI, purchasePO, purchaseWO, purchaseCOD, purchaseCIY;
+    private long ci, si, ba, sq, ip, purchaseCI, purchasePO, purchaseWO, purchaseCOD, purchaseCIY, targetSales, targetOmzet, targetJOEks, targetJOIn, targetInves;
     private int count=0;
 
     public GregorianCalendar cal_month, cal_month_copy;
@@ -156,6 +166,11 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         textViewPurchaseCOD = (TextView) findViewById(R.id.textViewPurchaseCOD);
         textViewPurchaseCI = (TextView) findViewById(R.id.textViewPurchaseCI);
         textViewCustomerInvoiceYear = (TextView) findViewById(R.id.textViewCustomerInvoiceYear);
+        textViewTargetSales = (TextView) findViewById(R.id.textViewTargetSales);
+        textViewTargetOmzet = (TextView) findViewById(R.id.textViewTargetOmzet);
+        textViewTargetProfitJOEksternal = (TextView) findViewById(R.id.textViewTargetProfitJOEksternal);
+        textViewTargetOverJOInternal = (TextView) findViewById(R.id.textViewTargetOverJOInternal);
+        textViewAsetInvestasi = (TextView) findViewById(R.id.textViewAsetInvestasi);
         menuDashboard = (LinearLayout) findViewById(R.id.menuDashboard);
         menuFinance = (LinearLayout) findViewById(R.id.menuFinance);
         menuInventory = (LinearLayout) findViewById(R.id.menuInventory);
@@ -172,14 +187,19 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         menuNewFuture = (LinearLayout) findViewById(R.id.menuNewFuture);
         barChart = (BarChart) findViewById(R.id.barChart);
         barChartToday = (BarChart) findViewById(R.id.barChartToday);
+        barChartTarget = (BarChart) findViewById(R.id.barChartTarget);
         buttonChart = (Button) findViewById(R.id.buttonChart);
         buttonChartToday = (Button) findViewById(R.id.buttonChartToday);
         buttonDetailChart = (Button) findViewById(R.id.buttonDetailChart);
         buttonDetailChartToday = (Button) findViewById(R.id.buttonDetailChartToday);
+        buttonChartTarget = (Button) findViewById(R.id.buttonChartTarget);
+        buttonDetailChartTarget = (Button) findViewById(R.id.buttonDetailChartTarget);
         layoutDashbord = (LinearLayout) findViewById(R.id.layoutDashbord);
-        layoutDashbordToday = (LinearLayout) findViewById(R.id.layoutDashbordToday);
         layoutDashbordChart = (LinearLayout) findViewById(R.id.layoutDashbordChart);
+        layoutDashbordToday = (LinearLayout) findViewById(R.id.layoutDashbordToday);
         layoutDashbordChartToday = (LinearLayout) findViewById(R.id.layoutDashbordChartToday);
+        layoutDashbordTarget = (LinearLayout) findViewById(R.id.layoutDashbordTarget);
+        layoutDashbordChartTarget = (LinearLayout) findViewById(R.id.layoutDashbordChartTarget);
 
         if (sharedPrefManager.getFileName().equals("")){
             if (sharedPrefManager.getGender().equals("1"))
@@ -198,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         getDataSalesQuotation();
         getDataInventoryPrice();
         getDataPurchasing();
+        getDataTarget();
 
         imageAkun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -364,6 +385,9 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             params = layoutDashbordToday.getLayoutParams();
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             layoutDashbordToday.setLayoutParams(params);
+            params = layoutDashbordTarget.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutDashbordTarget.setLayoutParams(params);
         }
 
         buttonChart.setOnClickListener(new View.OnClickListener() {
@@ -415,6 +439,32 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                 params = layoutDashbordChartToday.getLayoutParams();
                 params.height = 0;
                 layoutDashbordChartToday.setLayoutParams(params);
+            }
+        });
+
+        buttonChartTarget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewGroup.LayoutParams params;
+                params = layoutDashbordChartTarget.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                layoutDashbordChartTarget.setLayoutParams(params);
+                params = layoutDashbordTarget.getLayoutParams();
+                params.height = 0;
+                layoutDashbordTarget.setLayoutParams(params);
+            }
+        });
+
+        buttonDetailChartTarget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewGroup.LayoutParams params;
+                params = layoutDashbordTarget.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                layoutDashbordTarget.setLayoutParams(params);
+                params = layoutDashbordChartTarget.getLayoutParams();
+                params.height = 0;
+                layoutDashbordChartTarget.setLayoutParams(params);
             }
         });
 
@@ -540,6 +590,42 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                                 }
                                 setCalendar();
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }){
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void getDataTarget(){
+        StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_TARGET,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            textViewTargetSales.setText("Rp. "+formatMoney(jsonObject.getLong("dataTargetSales")));
+                            textViewTargetOmzet.setText("Rp. "+formatMoney(jsonObject.getLong("dataTargetOmzet")));
+                            textViewTargetProfitJOEksternal.setText("Rp. "+formatMoney(jsonObject.getLong("dataTargetProfitJOEksternal")));
+                            textViewTargetOverJOInternal.setText("Rp. "+formatMoney(jsonObject.getLong("dataTargetOverJOInternal")));
+                            textViewAsetInvestasi.setText("Rp. "+formatMoney(jsonObject.getLong("dataAsetInvestasi")));
+
+                            targetSales = jsonObject.getLong("dataTargetSales");
+                            targetOmzet = jsonObject.getLong("dataTargetOmzet");
+                            targetJOEks = jsonObject.getLong("dataTargetProfitJOEksternal");
+                            targetJOIn = jsonObject.getLong("dataTargetOverJOInternal");
+                            targetInves = jsonObject.getLong("dataAsetInvestasi");
+
+                            setChartTarget();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -694,7 +780,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
                             int status = jsonObject.getInt("status");
                             if (status == 1) {
                                 JSONObject jsonData = jsonObject.getJSONObject("data");
-                                si = jsonData.getLong("amount")-jsonData.getLong("discount")+jsonData.getLong("ppn")+jsonData.getLong("adjustment_value");
+                                si = jsonData.getLong("amount")-jsonData.getLong("discount")+jsonData.getLong("ppn")+jsonData.getLong("adjustment_value")-jsonData.getLong("pph");
                                 textViewSupplierInvoice.setText("Rp. "+formatMoney(si));
                                 count++;
                                 if (count==5)
@@ -1068,6 +1154,150 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         barChartToday.getXAxis().setAxisMaximum(startYear + barChartToday.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
         barChartToday.groupBars(startYear, groupSpace, barSpace);
         barChartToday.invalidate();
+    }
+
+    private void setChartTarget(){
+        barChartTarget.setOnChartValueSelectedListener(this);
+        barChartTarget.getDescription().setEnabled(false);
+        barChartTarget.setPinchZoom(false);
+        barChartTarget.setDrawBarShadow(false);
+        barChartTarget.setDrawGridBackground(false);
+
+        Legend l = barChartTarget.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(true);
+        l.setYOffset(0f);
+        l.setXOffset(10f);
+        l.setYEntrySpace(0f);
+        l.setTextSize(8f);
+
+        XAxis xAxis = barChartTarget.getXAxis();
+        xAxis.setGranularity(1f);
+        xAxis.setCenterAxisLabels(true);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf((int) value);
+            }
+        });
+        xAxis.setDrawGridLines(false);
+        xAxis.setDrawAxisLine(false);
+
+        YAxis yAxisleft = barChartTarget.getAxisLeft();
+        yAxisleft.setValueFormatter(new LargeValueFormatter());
+        yAxisleft.setDrawGridLines(false);
+        yAxisleft.setSpaceTop(35f);
+        yAxisleft.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        yAxisleft.setDrawAxisLine(false);
+
+        YAxis yAxisright = barChartTarget.getAxisRight();
+        yAxisright.setDrawGridLines(false);
+        yAxisright.setDrawAxisLine(false);
+
+        barChartTarget.getAxisRight().setEnabled(false);
+
+        setDataTarget();
+    }
+
+    private void setDataTarget(){
+        float groupSpace = 0.08f;
+        float barSpace = 0.03f; // x4 DataSet
+        float barWidth = 0.2f; // x4 DataSet
+        // (0.2 + 0.03) * 4 + 0.08 = 1.00 -> interval per "group"
+
+        int groupCount = 1;
+        int startYear = Calendar.getInstance().get(Calendar.YEAR);
+
+        ArrayList<BarEntry> values0 = new ArrayList<>();
+        ArrayList<BarEntry> values1 = new ArrayList<>();
+        ArrayList<BarEntry> values2 = new ArrayList<>();
+        ArrayList<BarEntry> values3 = new ArrayList<>();
+        ArrayList<BarEntry> values4 = new ArrayList<>();
+        ArrayList<BarEntry> values5 = new ArrayList<>();
+        ArrayList<BarEntry> values6 = new ArrayList<>();
+        ArrayList<BarEntry> values7 = new ArrayList<>();
+        ArrayList<BarEntry> values8 = new ArrayList<>();
+        ArrayList<BarEntry> values9 = new ArrayList<>();
+
+        values0.add(new BarEntry(startYear, (float) targetSales));
+        values1.add(new BarEntry(startYear, (float) targetOmzet));
+        values2.add(new BarEntry(startYear, (float) targetJOEks));
+        values3.add(new BarEntry(startYear, (float) targetJOIn));
+        values4.add(new BarEntry(startYear, (float) targetInves));
+        values5.add(new BarEntry(startYear, (float) targetSales));
+        values6.add(new BarEntry(startYear, (float) targetOmzet));
+        values7.add(new BarEntry(startYear, (float) targetJOEks));
+        values8.add(new BarEntry(startYear, (float) targetJOIn));
+        values9.add(new BarEntry(startYear, (float) targetInves));
+
+        BarDataSet set0, set1, set2, set3, set4, set5, set6, set7, set8, set9;
+
+        if (barChartTarget.getData() != null && barChartTarget.getData().getDataSetCount() > 0) {
+
+            set0 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(0);
+            set1 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(1);
+            set2 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(2);
+            set3 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(3);
+            set4 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(4);
+//            set5 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(5);
+//            set6 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(6);
+//            set7 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(7);
+//            set8 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(8);
+//            set9 = (BarDataSet) barChartTarget.getData().getDataSetByIndex(9);
+            set0.setValues(values0);
+            set1.setValues(values1);
+            set2.setValues(values2);
+            set3.setValues(values3);
+            set4.setValues(values4);
+//            set5.setValues(values5);
+//            set6.setValues(values6);
+//            set7.setValues(values7);
+//            set8.setValues(values8);
+//            set9.setValues(values9);
+            barChartTarget.getData().notifyDataChanged();
+            barChartTarget.notifyDataSetChanged();
+
+        } else {
+            // create 5 DataSets
+            set0 = new BarDataSet(values0, "Target Sales");
+            set0.setColor(getResources().getColor(R.color.colorDiagram1));
+            set1 = new BarDataSet(values1, "Target Omzet");
+            set1.setColor(getResources().getColor(R.color.colorDiagram2));
+            set2 = new BarDataSet(values2, "Target Profit JO Eksternal");
+            set2.setColor(getResources().getColor(R.color.colorDiagram3));
+            set3 = new BarDataSet(values3, "Target Over JO Internal");
+            set3.setColor(getResources().getColor(R.color.colorDiagram4));
+            set4 = new BarDataSet(values4, "Aset Investasi");
+            set4.setColor(getResources().getColor(R.color.colorDiagram5));
+//            set5 = new BarDataSet(values5, "Target Sales");
+//            set5.setColor(getResources().getColor(R.color.colorDiagram1));
+//            set6 = new BarDataSet(values6, "Target Omzet");
+//            set6.setColor(getResources().getColor(R.color.colorDiagram2));
+//            set7 = new BarDataSet(values7, "Target Profit JO Eksternal");
+//            set7.setColor(getResources().getColor(R.color.colorDiagram3));
+//            set8 = new BarDataSet(values8, "Target Over JO Internal");
+//            set8.setColor(getResources().getColor(R.color.colorDiagram4));
+//            set9 = new BarDataSet(values9, "Aset Investasi");
+//            set0.setColor(getResources().getColor(R.color.colorDiagram5));
+
+            BarData data = new BarData(set0, set1, set2, set3, set4/*, set5, set6, set7, set8, set9*/);
+            data.setValueFormatter(new LargeValueFormatter());
+
+            barChartTarget.setData(data);
+        }
+
+        // specify the width each bar should have
+        barChartTarget.getBarData().setBarWidth(barWidth);
+
+        // restrict the x-axis range
+        barChartTarget.getXAxis().setAxisMinimum(startYear);
+
+        // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
+        barChartTarget.getXAxis().setAxisMaximum(startYear + barChartTarget.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
+        barChartTarget.groupBars(startYear, groupSpace, barSpace);
+        barChartTarget.invalidate();
     }
 
     public void ShowPopup(String massage) {
